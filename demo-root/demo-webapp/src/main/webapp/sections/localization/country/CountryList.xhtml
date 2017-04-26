@@ -1,0 +1,150 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f = "http://java.sun.com/jsf/core"
+xmlns:h = "http://java.sun.com/jsf/html"
+xmlns:rich = "http://richfaces.org/rich"
+xmlns:a4j = "http://richfaces.org/a4j"
+xmlns:c="http://java.sun.com/jstl/core"
+xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+template="/templates/template.xhtml">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton generator -->
+<!-- -->
+
+<ui:define name="content">
+
+<h:form id="countryListForm">
+<a4j:jsFunction name="load"
+action="#{countryListController.load}"
+render="countryPanelGroup"
+oncomplete="$('#processingPanel').modal('hide')"/>
+<script>window.onload = function(){$('#processingPanel').modal('show');load();}</script>
+<h2>
+#{i18n.countryList}
+</h2>
+<h:panelGroup id="countryPanelGroup">
+<a4j:region>
+
+<ui:fragment rendered="#{empty countryListView.countryList}">
+#{i18n.noDataFound}<br/>
+</ui:fragment>
+
+<ui:fragment rendered="#{not empty countryListView.countryList}">
+<div style="overflow-x:scroll">
+
+<rich:dataTable rows="10"
+id="countryList" var="country" name="datatable"
+value="#{countryListView.countryList}" rowClasses="datatableRow, datatableRowLight">
+
+<f:facet name="header">
+<rich:columnGroup>
+<rich:column>
+<div id="dropList" class="dropList">
+<a4j:commandLink title="#{i18n.deleteSelection}" action="#{countryListController.deleteList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="countryPanelGroup">
+<span class="glyphicon glyphicon-trash"/>
+</a4j:commandLink>
+</div>
+</rich:column>
+
+<rich:column>
+<a4j:commandLink action="#{countryListController.resetCountryFilter}" render="countryList, countryScroller">
+<h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
+</a4j:commandLink>
+</rich:column>
+
+<rich:column>
+<h:inputText id="countryCodeFilter"
+value="#{countryListView.countryFilter.code}"
+styleClass="dataTableFilter">
+<a4j:ajax event="keyup" render="countryList, countryScroller"
+oncomplete="setCaretToEnd(event);" >
+<a4j:attachQueue requestDelay="500" />
+</a4j:ajax>
+</h:inputText>
+</rich:column>
+
+<rich:column>
+<h:inputText id="countryLabelFilter"
+value="#{countryListView.countryFilter.label}"
+styleClass="dataTableFilter">
+<a4j:ajax event="keyup" render="countryList, countryScroller"
+oncomplete="setCaretToEnd(event);" >
+<a4j:attachQueue requestDelay="500" />
+</a4j:ajax>
+</h:inputText>
+</rich:column>
+
+</rich:columnGroup>
+</f:facet>
+<rich:column>
+<f:facet name="header">
+<h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
+<script>$(function(){displaySelectUnselectAll();});</script>
+</f:facet>
+<h:selectBooleanCheckbox rendered="#{country.canDelete}" id="selectUnselect" value="#{country.selected}" onclick="selectUnselect('countryListForm:countryList:selectUnselectAll')"/>
+</rich:column>
+
+<rich:column>
+<f:facet name="header">
+<h:outputText value="Actions" />
+</f:facet>
+<h:panelGrid columns="2">
+<h:link outcome="/sections/localization/country/CountryDetails.jsf">
+<h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
+<f:param name="id" value="#{country.id}" />
+</h:link>
+<a4j:commandLink rendered="#{country.canDelete}" action="#{countryListController.delete(country.id)}"
+onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="countryPanelGroup">
+<h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
+</a4j:commandLink>
+</h:panelGrid>
+</rich:column>
+
+<rich:column sortBy="#{country.code}"
+filterType="custom" filterExpression="#{fn:containsIgnoreCase(country.code, countryListView.countryFilter.code)}">
+<f:facet name="header">
+<h:outputText value="#{i18n.countryCode}" />
+</f:facet>
+<h:outputText value="#{country.code}"/>
+</rich:column>
+
+<rich:column sortBy="#{country.label}"
+filterType="custom" filterExpression="#{fn:containsIgnoreCase(country.label, countryListView.countryFilter.label)}">
+<f:facet name="header">
+<h:outputText value="#{i18n.countryLabel}" />
+</f:facet>
+<h:outputText value="#{country.label}"/>
+</rich:column>
+
+</rich:dataTable>
+
+</div>
+
+<div class="scroller">
+<rich:dataScroller id="countryScroller" maxPages="5" renderIfSinglePage="false" for="countryList"/>
+</div>
+
+</ui:fragment>
+
+<a4j:commandButton value="#{i18n.create}" action="#{countryListController.createCountry}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#countryModal').modal('show')}" render="countryDetailPanelGroup"/>
+
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+</a4j:region>
+
+</h:panelGroup>
+
+<div class="modal modal-default" id="countryModal" tabindex="-1" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<ui:include src="/sections/localization/country/CountryModal.xhtml"/>
+</div>
+</div>
+</div>
+</h:form>
+</ui:define>
+</ui:composition>

@@ -1,0 +1,156 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui = "http://java.sun.com/jsf/facelets"
+xmlns:f = "http://java.sun.com/jsf/core"
+xmlns:h = "http://java.sun.com/jsf/html"
+xmlns:rich = "http://richfaces.org/rich"
+xmlns:a4j = "http://richfaces.org/a4j"
+xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+template="/templates/template.xhtml">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton-generator -->
+<!-- -->
+
+<f:metadata>
+<f:viewParam name="id" value="#{regionDetailView.selectedRegion.id}" />
+<f:viewAction action="#{regionDetailController.loadCityList}" />
+</f:metadata>
+<ui:define name="content">
+
+<h:form id="cityListForm">
+
+<ui:include src="/sections/localization/region/RegionDetailsMenu.xhtml"/>
+
+<h2>
+#{i18n.cityList}
+</h2>
+<h:panelGroup id="cityPanelGroup">
+
+<a4j:region>
+
+<ui:fragment rendered="#{empty regionDetailView.cityList}">
+#{i18n.noDataFound}<br/>
+</ui:fragment>
+
+<ui:fragment rendered="#{not empty regionDetailView.cityList}">
+
+<div style="overflow-x:scroll">
+
+<rich:dataTable rows="10"
+id="cityList" var="city" name="datatable"
+value="#{regionDetailView.cityList}" headerClass="datatableHeader" rowClasses="datatableRow, datatableRowLight">
+
+<f:facet name="header">
+<rich:columnGroup>
+<rich:column>
+<div id="dropList" class="dropList">
+<a4j:commandLink title="#{i18n.deleteSelection}" action="#{regionDetailController.deleteCityList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="cityPanelGroup">
+<span class="glyphicon glyphicon-trash"/>
+</a4j:commandLink>
+</div>
+</rich:column>
+
+<rich:column>
+<a4j:commandLink action="#{regionDetailController.resetCityFilter}" reRender="cityList, cityScroller">
+<h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
+</a4j:commandLink>
+</rich:column>
+
+<rich:column>
+<h:inputText id="cityCodeFilter"
+value="#{regionDetailView.cityFilter.code}"
+styleClass="dataTableFilter">
+<a4j:ajax event="keyup" render="cityList, cityScroller"
+oncomplete="setCaretToEnd(event);" >
+<a4j:attachQueue requestDelay="500" />
+</a4j:ajax>
+</h:inputText>
+</rich:column>
+
+<rich:column>
+<h:inputText id="cityLabelFilter"
+value="#{regionDetailView.cityFilter.label}"
+styleClass="dataTableFilter">
+<a4j:ajax event="keyup" render="cityList, cityScroller"
+oncomplete="setCaretToEnd(event);" >
+<a4j:attachQueue requestDelay="500" />
+</a4j:ajax>
+</h:inputText>
+</rich:column>
+
+</rich:columnGroup>
+</f:facet>
+<rich:column>
+<f:facet name="header">
+<h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
+<script>$(function(){displaySelectUnselectAll();});</script>
+</f:facet>
+<h:selectBooleanCheckbox  rendered="#{city.canDelete}" id="selectUnselect" value="#{city.selected}" onclick="selectUnselect('cityListForm:cityList:selectUnselectAll')"/>
+</rich:column>
+
+<rich:column>
+<f:facet name="header">
+<h:outputText value="Actions" />
+</f:facet>
+<h:panelGrid columns="2">
+<a4j:commandLink action="#{regionDetailController.editCity(city.id)}" oncomplete="$('#cityModal').modal('show')" render="cityDetailPanelGroup">
+<h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
+</a4j:commandLink>
+<a4j:commandLink action="#{regionDetailController.deleteCity(city.id)}"
+rendered="#{city.canDelete}"
+onclick="if (!confirm('#{i18n.confirmDelete}')) return false" execute="@this" render="cityPanelGroup">
+<h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
+</a4j:commandLink>
+</h:panelGrid>
+</rich:column>
+
+<rich:column sortBy="#{city.code}"
+filterType="custom" filterExpression="#{fn:containsIgnoreCase(city.code, regionDetailView.cityFilter.code)}">
+<f:facet name="header">
+<h:outputText value="#{i18n.cityCode}" />
+</f:facet>
+<h:outputText value="#{city.code}"/>
+</rich:column>
+
+<rich:column sortBy="#{city.label}"
+filterType="custom" filterExpression="#{fn:containsIgnoreCase(city.label, regionDetailView.cityFilter.label)}">
+<f:facet name="header">
+<h:outputText value="#{i18n.cityLabel}" />
+</f:facet>
+<h:outputText value="#{city.label}"/>
+</rich:column>
+
+</rich:dataTable>
+
+</div>
+
+<div class="scroller">
+<rich:dataScroller id="cityScroller" maxPages="5" renderIfSinglePage="false" for="cityList"/>
+</div>
+
+</ui:fragment>
+
+<a4j:commandButton value="#{i18n.create}" action="#{regionDetailController.createCity}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#cityModal').modal('show')" execute="@this" render="cityDetailPanelGroup"/>
+
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+
+</a4j:region>
+
+</h:panelGroup>
+
+<div class="modal modal-default" id="cityModal" tabindex="-1" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<ui:include src="/sections/localization/region/CityModal.xhtml"/>
+</div>
+</div>
+</div>
+
+</h:form>
+<script>$('#cityListMenu').addClass('active');</script>
+</ui:define>
+</ui:composition>

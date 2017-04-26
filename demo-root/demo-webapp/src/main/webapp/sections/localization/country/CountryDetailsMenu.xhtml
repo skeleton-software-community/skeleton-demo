@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:rich="http://richfaces.org/rich"
+xmlns:a4j="http://richfaces.org/a4j"
+xmlns:c="http://java.sun.com/jstl/core">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton-generator -->
+<!-- -->
+
+<ul class="nav nav-pills">
+<li role="presentation" id="countryDetailsMenu">
+<h:link outcome="/sections/localization/country/CountryDetails.jsf">
+<f:param name="id" value="#{countryDetailView.selectedCountry.id}" />
+#{i18n.countryDetail}
+</h:link>
+</li>
+<li role="presentation" id="regionListMenu">
+<h:link outcome="/sections/localization/country/RegionList.jsf">
+<f:param name="id" value="#{countryDetailView.selectedCountry.id}" />
+#{i18n.regionList}
+</h:link>
+</li>
+</ul>
+</ui:composition>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata:project xmlns:metadata="http://generator.sklsft.org/schema/model/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://generator.sklsft.org/schema/model/metadata skeleton-metadata-2.1.xsd">
+    <domainName>org.sklsft</domainName>
+    <projectName>demo</projectName>
+    <skeletonType>SPRING_HIBERNATE_RICHFACES_4</skeletonType>
+    <databaseEngine>POSTGRESQL</databaseEngine>
+    <databaseName>demo</databaseName>
+    <databaseDNS>localhost</databaseDNS>
+    <databasePort>5432</databasePort>
+    <databaseUserName>postgres</databaseUserName>
+    <databasePassword>postgres</databasePassword>
+    <audited>false</audited>
+	<packages>
+		<package name="LOCALIZATION">
+			<tables>
+				<table name="COUNTRY" cardinality="1" listRendering="Countries"
+					detailRendering="Country details" comboxable="true" createEnabled="true"
+					updateEnabled="true" deleteEnabled="true">
+					<columns>
+						<column name="CODE" dataType="STRING" nullable="false"
+							editable="true" rendering="ISO Code">
+						</column>
+						<column name="LABEL" dataType="STRING" nullable="false"
+							editable="true" rendering="Label">
+						</column>
+					</columns>
+				</table>
+				<table name="REGION" cardinality="2" listRendering="Regions/States/Provinces"
+					detailRendering="Region details" comboxable="false" createEnabled="true"
+					updateEnabled="true" deleteEnabled="true">
+					<columns>
+						<column name="COUNTRY_ID" dataType="LONG"
+							referenceTableName="COUNTRY" referenceTableRelation="MANY_TO_ONE"
+							nullable="false" editable="true" rendering="Country">
+						</column>
+						<column name="CODE" dataType="STRING" nullable="false"
+							editable="true" rendering="Code">
+						</column>
+						<column name="LABEL" dataType="STRING" nullable="false"
+							editable="true" rendering="Label">
+						</column>
+					</columns>
+				</table>
+				<table name="CITY" cardinality="2" listRendering="Cities"
+					detailRendering="City details" comboxable="false" createEnabled="true"
+					updateEnabled="true" deleteEnabled="true">
+					<columns>
+						<column name="REGION_ID" dataType="LONG"
+							referenceTableName="REGION" referenceTableRelation="MANY_TO_ONE"
+							nullable="false" editable="true" rendering="Region">
+						</column>
+						<column name="CODE" dataType="STRING" nullable="false"
+							editable="true" rendering="Code">
+						</column>
+						<column name="LABEL" dataType="STRING" nullable="false"
+							editable="true" rendering="Label">
+						</column>
+					</columns>
+				</table>
+			</tables>
+		</package>
+	</packages>
+</metadata:project>
