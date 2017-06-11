@@ -11,7 +11,7 @@ import org.sklsft.demo.repository.dao.interfaces.localization.base.CityBaseDao;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-public interface CityDao extends CityBaseDao {	
+public interface CityDao extends CityBaseDao {
 
 /* Specific Code Start */
 	List<City> loadListEagerly(CityFilter filter);

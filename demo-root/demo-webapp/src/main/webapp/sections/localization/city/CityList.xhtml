@@ -16,11 +16,12 @@ template="/templates/template.xhtml">
 
 <ui:define name="content">
 
-<f:metadata>
-	<f:viewAction action="#{cityListController.load}" />
-</f:metadata>
-
 <h:form id="cityListForm">
+<a4j:jsFunction name="load"
+action="#{cityListController.load}"
+render="cityPanelGroup"
+oncomplete="$('#processingPanel').modal('hide')"/>
+<script>window.onload = function(){$('#processingPanel').modal('show');load();}</script>
 <h2>
 #{i18n.cityList}
 </h2>
@@ -35,7 +36,7 @@ template="/templates/template.xhtml">
 <div style="overflow-x:scroll">
 
 <rich:dataTable rows="10"
-id="cityList" var="city"
+id="cityList" var="city" name="datatable"
 value="#{cityListView.cityList}" rowClasses="datatableRow, datatableRowLight">
 
 <f:facet name="header">
@@ -59,7 +60,7 @@ onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="
 <h:inputText id="cityRegionCountryCodeFilter"
 value="#{cityListView.cityFilter.regionCountryCode}"
 styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="cityList, cityScroller" listener="#{cityListController.refresh}"
+<a4j:ajax event="keyup" render="cityList, cityScroller"
 oncomplete="setCaretToEnd(event);" >
 <a4j:attachQueue requestDelay="500" />
 </a4j:ajax>
@@ -70,7 +71,7 @@ oncomplete="setCaretToEnd(event);" >
 <h:inputText id="cityRegionCodeFilter"
 value="#{cityListView.cityFilter.regionCode}"
 styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="cityList, cityScroller" listener="#{cityListController.refresh}"
+<a4j:ajax event="keyup" render="cityList, cityScroller"
 oncomplete="setCaretToEnd(event);" >
 <a4j:attachQueue requestDelay="500" />
 </a4j:ajax>
@@ -81,7 +82,7 @@ oncomplete="setCaretToEnd(event);" >
 <h:inputText id="cityCodeFilter"
 value="#{cityListView.cityFilter.code}"
 styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="cityList, cityScroller" listener="#{cityListController.refresh}"
+<a4j:ajax event="keyup" render="cityList, cityScroller"
 oncomplete="setCaretToEnd(event);" >
 <a4j:attachQueue requestDelay="500" />
 </a4j:ajax>
@@ -92,7 +93,7 @@ oncomplete="setCaretToEnd(event);" >
 <h:inputText id="cityLabelFilter"
 value="#{cityListView.cityFilter.label}"
 styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="cityList, cityScroller" listener="#{cityListController.refresh}"
+<a4j:ajax event="keyup" render="cityList, cityScroller"
 oncomplete="setCaretToEnd(event);" >
 <a4j:attachQueue requestDelay="500" />
 </a4j:ajax>
@@ -124,28 +125,32 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="cityPanelG
 </h:panelGrid>
 </rich:column>
 
-<rich:column sortBy="#{city.regionCountryCode}">
+<rich:column sortBy="#{city.regionCountryCode}"
+filterType="custom" filterExpression="#{fn:containsIgnoreCase(city.regionCountryCode, cityListView.cityFilter.regionCountryCode)}">
 <f:facet name="header">
 <h:outputText value="#{i18n.cityRegionCountryCode}" />
 </f:facet>
 <h:outputText value="#{city.regionCountryCode}"/>
 </rich:column>
 
-<rich:column sortBy="#{city.regionCode}">
+<rich:column sortBy="#{city.regionCode}"
+filterType="custom" filterExpression="#{fn:containsIgnoreCase(city.regionCode, cityListView.cityFilter.regionCode)}">
 <f:facet name="header">
 <h:outputText value="#{i18n.cityRegionCode}" />
 </f:facet>
 <h:outputText value="#{city.regionCode}"/>
 </rich:column>
 
-<rich:column sortBy="#{city.code}">
+<rich:column sortBy="#{city.code}"
+filterType="custom" filterExpression="#{fn:containsIgnoreCase(city.code, cityListView.cityFilter.code)}">
 <f:facet name="header">
 <h:outputText value="#{i18n.cityCode}" />
 </f:facet>
 <h:outputText value="#{city.code}"/>
 </rich:column>
 
-<rich:column sortBy="#{city.label}">
+<rich:column sortBy="#{city.label}"
+filterType="custom" filterExpression="#{fn:containsIgnoreCase(city.label, cityListView.cityFilter.label)}">
 <f:facet name="header">
 <h:outputText value="#{i18n.cityLabel}" />
 </f:facet>

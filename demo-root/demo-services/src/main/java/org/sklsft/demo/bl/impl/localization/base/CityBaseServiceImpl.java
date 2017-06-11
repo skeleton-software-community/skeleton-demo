@@ -94,7 +94,7 @@ return this.cityFullViewMapper.mapFrom(new CityFullView(),city);
  */
 @Override
 @Transactional(readOnly=true)
-public CityFullView find(String regionCountryCode,String regionCode,String code) {
+public CityFullView find(String regionCountryCode, String regionCode, String code) {
 City city = cityDao.find(regionCountryCode, regionCode, code);
 cityRightsManager.checkCanAccess(city);
 return this.cityFullViewMapper.mapFrom(new CityFullView(), city);

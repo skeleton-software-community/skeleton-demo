@@ -49,9 +49,7 @@ return regionBasicView;
 @Override
 public Region mapTo(RegionBasicView regionBasicView, Region region) {
 region = super.mapTo(regionBasicView, region);
-region.setCountry(countryDao.find(
-regionBasicView.getCountryCode()
-));
+region.setCountry(countryDao.find(regionBasicView.getCountryCode()));
 return region;
 }
 

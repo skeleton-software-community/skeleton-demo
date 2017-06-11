@@ -50,10 +50,7 @@ return cityBasicView;
 @Override
 public City mapTo(CityBasicView cityBasicView, City city) {
 city = super.mapTo(cityBasicView, city);
-city.setRegion(regionDao.find(
-cityBasicView.getRegionCountryCode()
-,cityBasicView.getRegionCode()
-));
+city.setRegion(regionDao.find(cityBasicView.getRegionCountryCode(), cityBasicView.getRegionCode()));
 return city;
 }
 

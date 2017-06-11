@@ -69,7 +69,7 @@ return criteria.list();
  * exists object
  */
 @Override
-public boolean exists(String countryCode,String code) {
+public boolean exists(String countryCode, String code) {
 if (countryCode == null && code == null) {
 return false;
 }
@@ -85,7 +85,7 @@ return region != null;
  * find object
  */
 @Override
-public Region find(String countryCode,String code) {
+public Region find(String countryCode, String code) {
 if (countryCode == null && code == null) {
 return null;
 }

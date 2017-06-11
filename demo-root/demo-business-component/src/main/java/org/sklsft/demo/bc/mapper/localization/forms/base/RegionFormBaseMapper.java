@@ -40,9 +40,7 @@ return regionForm;
 @Override
 public Region mapTo(RegionForm regionForm, Region region) {
 region = super.mapTo(regionForm, region);
-region.setCountry(countryDao.find(
-regionForm.getCountryCode()
-));
+region.setCountry(countryDao.find(regionForm.getCountryCode()));
 return region;
 }
 

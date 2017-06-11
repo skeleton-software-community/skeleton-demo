@@ -31,7 +31,7 @@ RegionFullView load(Long id);
 /**
  * find object
  */
-RegionFullView find(String countryCode,String code);
+RegionFullView find(String countryCode, String code);
 
 /**
  * create object

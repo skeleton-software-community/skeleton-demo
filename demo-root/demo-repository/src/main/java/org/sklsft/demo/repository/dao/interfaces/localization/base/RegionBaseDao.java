@@ -23,11 +23,11 @@ List<Region> loadListEagerlyFromCountry (Long countryId);
 /**
  * exists object
  */
-boolean exists(String countryCode,String code);
+boolean exists(String countryCode, String code);
 
 /**
  * find object
  */
-Region find(String countryCode,String code);
+Region find(String countryCode, String code);
 
 }

@@ -11,7 +11,7 @@ import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-public interface CityService extends CityBaseService {	
+public interface CityService extends CityBaseService {
 
 /* Specific Code Start */
 	

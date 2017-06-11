@@ -35,7 +35,6 @@ criteria.setFetchMode("region.country",FetchMode.JOIN);
 return criteria.list();
 }
 
-
 /**
  * load object list from region
  */
@@ -72,7 +71,7 @@ return criteria.list();
  * exists object
  */
 @Override
-public boolean exists(String regionCountryCode,String regionCode,String code) {
+public boolean exists(String regionCountryCode, String regionCode, String code) {
 if (regionCountryCode == null && regionCode == null && code == null) {
 return false;
 }
@@ -90,7 +89,7 @@ return city != null;
  * find object
  */
 @Override
-public City find(String regionCountryCode,String regionCode,String code) {
+public City find(String regionCountryCode, String regionCode, String code) {
 if (regionCountryCode == null && regionCode == null && code == null) {
 return null;
 }

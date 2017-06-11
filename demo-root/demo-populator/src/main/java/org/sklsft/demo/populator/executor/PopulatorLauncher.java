@@ -8,8 +8,8 @@ import java.util.Set;
 import javax.sql.DataSource;
 
 import org.sklsft.generator.bash.prompt.PopulatorPrompter;
-import org.sklsft.generator.bl.services.impl.BackupPostExecutionChecker;
-import org.sklsft.generator.bl.services.impl.BackupPreExecutionChecker;
+import org.sklsft.generator.bc.checker.BackupPostExecutionChecker;
+import org.sklsft.generator.bc.checker.BackupPreExecutionChecker;
 import org.sklsft.generator.bl.services.impl.Populator;
 import org.sklsft.generator.bl.services.interfaces.ProjectLoader;
 import org.sklsft.generator.bl.services.interfaces.ProjectMetaDataService;
@@ -23,7 +23,7 @@ import org.sklsft.generator.repository.metadata.interfaces.ProjectMetaDataDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 public class PopulatorLauncher {
 
@@ -54,10 +54,10 @@ public class PopulatorLauncher {
 		
 		Set<String> tables = extractTables(args);
 		
-		try(FileSystemXmlApplicationContext appContext = new FileSystemXmlApplicationContext("classpath:applicationContext-demo-populator.xml",
-																								"classpath:applicationContext-demo-services.xml",
-																								"classpath:applicationContext-demo-business-component.xml",
-																								"classpath:applicationContext-demo-repository.xml",
+		try(FileSystemXmlApplicationContext appContext = new FileSystemXmlApplicationContext("classpath:applicationContext-${project.projectName}-populator.xml",
+																								"classpath:applicationContext-${project.projectName}-services.xml",
+																								"classpath:applicationContext-${project.projectName}-business-component.xml",
+																								"classpath:applicationContext-${project.projectName}-repository.xml",
 																								sourcePath + File.separator + DATASOURCE_CONTEXT_FILE);){
 			logger.info("Context loaded");
 			
@@ -84,7 +84,7 @@ public class PopulatorLauncher {
 				OutputDataSourceProvider outputDataSourceProvider = appContext.getBean(OutputDataSourceProvider.class);
 				DataSource dataSource = outputDataSourceProvider.getDataSource(databaseName);
 				
-				AnnotationSessionFactoryBean sessionFactory = appContext.getBean(AnnotationSessionFactoryBean.class);
+				LocalSessionFactoryBean sessionFactory = appContext.getBean(LocalSessionFactoryBean.class);
 				sessionFactory.setDataSource(dataSource);
 				
 				InputDataSourceProvider inputDataSourceProvider = appContext.getBean(InputDataSourceProvider.class);

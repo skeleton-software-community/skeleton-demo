@@ -41,10 +41,7 @@ return cityForm;
 @Override
 public City mapTo(CityForm cityForm, City city) {
 city = super.mapTo(cityForm, city);
-city.setRegion(regionDao.find(
-cityForm.getRegionCountryCode()
-,cityForm.getRegionCode()
-));
+city.setRegion(regionDao.find(cityForm.getRegionCountryCode(), cityForm.getRegionCode()));
 return city;
 }
 

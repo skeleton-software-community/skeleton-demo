@@ -23,11 +23,11 @@ List<City> loadListEagerlyFromRegion (Long regionId);
 /**
  * exists object
  */
-boolean exists(String regionCountryCode,String regionCode,String code);
+boolean exists(String regionCountryCode, String regionCode, String code);
 
 /**
  * find object
  */
-City find(String regionCountryCode,String regionCode,String code);
+City find(String regionCountryCode, String regionCode, String code);
 
 }
