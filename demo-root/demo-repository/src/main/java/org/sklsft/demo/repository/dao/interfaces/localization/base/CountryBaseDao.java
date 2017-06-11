@@ -14,6 +14,11 @@ public interface CountryBaseDao extends BaseDao<Country, Long> {
 boolean exists(String code);
 
 /**
+ * find object or null
+ */
+Country findOrNull(String code);
+
+/**
  * find object
  */
 Country find(String code);

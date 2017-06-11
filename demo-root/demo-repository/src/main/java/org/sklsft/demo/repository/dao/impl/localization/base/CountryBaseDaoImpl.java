@@ -47,6 +47,17 @@ return country != null;
 }
 
 /**
+ * find object or null
+ */
+@Override
+public Country findOrNull(String code) {
+Country country = (Country)this.sessionFactory.getCurrentSession().createCriteria(Country.class)
+.add(Restrictions.eq("code",code))
+.uniqueResult();
+return country;
+}
+
+/**
  * find object
  */
 @Override
@@ -54,9 +65,7 @@ public Country find(String code) {
 if (code == null) {
 return null;
 }
-Country country = (Country)this.sessionFactory.getCurrentSession().createCriteria(Country.class)
-.add(Restrictions.eq("code",code))
-.uniqueResult();
+Country country = findOrNull(code);
 if (country == null) {
 throw new ObjectNotFoundException("Country.notFound");
 } else {

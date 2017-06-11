@@ -51,11 +51,11 @@ protected CountryProcessor countryProcessor;
 @Transactional(readOnly=true)
 public List<String> getOptions() {
 List<Country> countryList = countryDao.loadList();
-List<String> countryLabelList = new ArrayList<>(countryList.size());
+List<String> countryCodeList = new ArrayList<>(countryList.size());
 for (Country country : countryList) {
-countryLabelList.add(country.getLabel());
+countryCodeList.add(country.getCode());
 }
-return countryLabelList;
+return countryCodeList;
 }
 
 /**

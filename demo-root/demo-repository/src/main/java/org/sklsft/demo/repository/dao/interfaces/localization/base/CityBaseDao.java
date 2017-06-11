@@ -26,6 +26,11 @@ List<City> loadListEagerlyFromRegion (Long regionId);
 boolean exists(String regionCountryCode, String regionCode, String code);
 
 /**
+ * find object or null
+ */
+City findOrNull(String regionCountryCode, String regionCode, String code);
+
+/**
  * find object
  */
 City find(String regionCountryCode, String regionCode, String code);

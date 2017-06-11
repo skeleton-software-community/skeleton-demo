@@ -86,13 +86,10 @@ return city != null;
 }
 
 /**
- * find object
+ * find object or null
  */
 @Override
-public City find(String regionCountryCode, String regionCode, String code) {
-if (regionCountryCode == null && regionCode == null && code == null) {
-return null;
-}
+public City findOrNull(String regionCountryCode, String regionCode, String code) {
 City city = (City)this.sessionFactory.getCurrentSession().createCriteria(City.class)
 .createAlias("region","Region")
 .createAlias("region.country","RegionCountry")
@@ -100,6 +97,18 @@ City city = (City)this.sessionFactory.getCurrentSession().createCriteria(City.cl
 .add(Restrictions.eq("Region.code",regionCode))
 .add(Restrictions.eq("code",code))
 .uniqueResult();
+return city;
+}
+
+/**
+ * find object
+ */
+@Override
+public City find(String regionCountryCode, String regionCode, String code) {
+if (regionCountryCode == null && regionCode == null && code == null) {
+return null;
+}
+City city = findOrNull(regionCountryCode, regionCode, code);
 if (city == null) {
 throw new ObjectNotFoundException("City.notFound");
 } else {

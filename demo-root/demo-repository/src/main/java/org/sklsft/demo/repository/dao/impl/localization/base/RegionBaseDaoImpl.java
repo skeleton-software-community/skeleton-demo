@@ -82,6 +82,19 @@ return region != null;
 }
 
 /**
+ * find object or null
+ */
+@Override
+public Region findOrNull(String countryCode, String code) {
+Region region = (Region)this.sessionFactory.getCurrentSession().createCriteria(Region.class)
+.createAlias("country","Country")
+.add(Restrictions.eq("Country.code",countryCode))
+.add(Restrictions.eq("code",code))
+.uniqueResult();
+return region;
+}
+
+/**
  * find object
  */
 @Override
@@ -89,11 +102,7 @@ public Region find(String countryCode, String code) {
 if (countryCode == null && code == null) {
 return null;
 }
-Region region = (Region)this.sessionFactory.getCurrentSession().createCriteria(Region.class)
-.createAlias("country","Country")
-.add(Restrictions.eq("Country.code",countryCode))
-.add(Restrictions.eq("code",code))
-.uniqueResult();
+Region region = findOrNull(countryCode, code);
 if (region == null) {
 throw new ObjectNotFoundException("Region.notFound");
 } else {
