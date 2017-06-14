@@ -3,7 +3,7 @@ package org.sklsft.demo.mvc.filter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
+import org.sklsft.commons.text.StringUtils;
 import org.springframework.stereotype.Component;
 
 @Component

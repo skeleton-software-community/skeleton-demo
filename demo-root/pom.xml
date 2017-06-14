@@ -67,12 +67,6 @@
 				<artifactId>demo-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-		
-			<dependency>
-				<groupId>org.sklsft.demo</groupId>
-				<artifactId>demo-util</artifactId>
-				<version>${project.version}</version>
-			</dependency>
 			
 			<dependency>
 				<groupId>org.sklsft.demo</groupId>
