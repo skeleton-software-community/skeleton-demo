@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.sklsft.demo.api.interfaces.localization.base.CountryBaseService;
+import org.sklsft.demo.api.model.localization.filters.CountryFilter;
 import org.sklsft.demo.api.model.localization.forms.CountryForm;
 import org.sklsft.demo.api.model.localization.views.basic.CountryBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CountryFullView;
@@ -66,6 +67,21 @@ return countryCodeList;
 public List<CountryBasicView> loadList() {
 countryRightsManager.checkCanAccess();
 List<Country> countryList = countryDao.loadListEagerly();
+List<CountryBasicView> result = new ArrayList<>(countryList.size());
+for (Country country : countryList) {
+result.add(this.countryBasicViewMapper.mapFrom(new CountryBasicView(),country));
+}
+return result;
+}
+
+/**
+ * load filtered object list
+ */
+@Override
+@Transactional(readOnly=true)
+public List<CountryBasicView> loadList(CountryFilter filter) {
+countryRightsManager.checkCanAccess();
+List<Country> countryList = countryDao.loadListEagerly(filter);
 List<CountryBasicView> result = new ArrayList<>(countryList.size());
 for (Country country : countryList) {
 result.add(this.countryBasicViewMapper.mapFrom(new CountryBasicView(),country));

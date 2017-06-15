@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.sklsft.demo.api.interfaces.localization.base.RegionBaseService;
+import org.sklsft.demo.api.model.localization.filters.RegionFilter;
 import org.sklsft.demo.api.model.localization.forms.RegionForm;
 import org.sklsft.demo.api.model.localization.views.basic.RegionBasicView;
 import org.sklsft.demo.api.model.localization.views.full.RegionFullView;
@@ -56,6 +57,21 @@ protected RegionProcessor regionProcessor;
 public List<RegionBasicView> loadList() {
 regionRightsManager.checkCanAccess();
 List<Region> regionList = regionDao.loadListEagerly();
+List<RegionBasicView> result = new ArrayList<>(regionList.size());
+for (Region region : regionList) {
+result.add(this.regionBasicViewMapper.mapFrom(new RegionBasicView(),region));
+}
+return result;
+}
+
+/**
+ * load filtered object list
+ */
+@Override
+@Transactional(readOnly=true)
+public List<RegionBasicView> loadList(RegionFilter filter) {
+regionRightsManager.checkCanAccess();
+List<Region> regionList = regionDao.loadListEagerly(filter);
 List<RegionBasicView> result = new ArrayList<>(regionList.size());
 for (Region region : regionList) {
 result.add(this.regionBasicViewMapper.mapFrom(new RegionBasicView(),region));

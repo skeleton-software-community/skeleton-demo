@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.sklsft.demo.api.interfaces.localization.base.CityBaseService;
+import org.sklsft.demo.api.model.localization.filters.CityFilter;
 import org.sklsft.demo.api.model.localization.forms.CityForm;
 import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CityFullView;
@@ -56,6 +57,21 @@ protected CityProcessor cityProcessor;
 public List<CityBasicView> loadList() {
 cityRightsManager.checkCanAccess();
 List<City> cityList = cityDao.loadListEagerly();
+List<CityBasicView> result = new ArrayList<>(cityList.size());
+for (City city : cityList) {
+result.add(this.cityBasicViewMapper.mapFrom(new CityBasicView(),city));
+}
+return result;
+}
+
+/**
+ * load filtered object list
+ */
+@Override
+@Transactional(readOnly=true)
+public List<CityBasicView> loadList(CityFilter filter) {
+cityRightsManager.checkCanAccess();
+List<City> cityList = cityDao.loadListEagerly(filter);
 List<CityBasicView> result = new ArrayList<>(cityList.size());
 for (City city : cityList) {
 result.add(this.cityBasicViewMapper.mapFrom(new CityBasicView(),city));

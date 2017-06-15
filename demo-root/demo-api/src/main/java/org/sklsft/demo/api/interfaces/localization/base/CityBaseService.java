@@ -2,6 +2,7 @@ package org.sklsft.demo.api.interfaces.localization.base;
 
 import java.util.List;
 
+import org.sklsft.demo.api.model.localization.filters.CityFilter;
 import org.sklsft.demo.api.model.localization.forms.CityForm;
 import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CityFullView;
@@ -17,6 +18,11 @@ public interface CityBaseService {
  * load object list
  */
 List<CityBasicView> loadList();
+
+/**
+ * load filtered object list
+ */
+List<CityBasicView> loadList(CityFilter filter);
 
 /**
  * load object list from region

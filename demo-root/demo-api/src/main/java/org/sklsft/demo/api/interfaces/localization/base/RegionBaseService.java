@@ -2,6 +2,7 @@ package org.sklsft.demo.api.interfaces.localization.base;
 
 import java.util.List;
 
+import org.sklsft.demo.api.model.localization.filters.RegionFilter;
 import org.sklsft.demo.api.model.localization.forms.RegionForm;
 import org.sklsft.demo.api.model.localization.views.basic.RegionBasicView;
 import org.sklsft.demo.api.model.localization.views.full.RegionFullView;
@@ -17,6 +18,11 @@ public interface RegionBaseService {
  * load object list
  */
 List<RegionBasicView> loadList();
+
+/**
+ * load filtered object list
+ */
+List<RegionBasicView> loadList(RegionFilter filter);
 
 /**
  * load object list from country
