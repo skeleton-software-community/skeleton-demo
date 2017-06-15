@@ -1,5 +1,8 @@
 package org.sklsft.demo.repository.dao.interfaces.localization.base;
+import java.util.List;
+
 import org.sklsft.commons.model.patterns.BaseDao;
+import org.sklsft.demo.api.model.localization.filters.CountryFilter;
 import org.sklsft.demo.model.localization.Country;
 /**
  * auto generated base dao interface file
@@ -7,6 +10,11 @@ import org.sklsft.demo.model.localization.Country;
  * <br/>processed by skeleton-generator
  */
 public interface CountryBaseDao extends BaseDao<Country, Long> {
+
+/**
+ * load filtered object list eagerly
+ */
+List<Country> loadListEagerly(CountryFilter filter);
 
 /**
  * exists object

@@ -2,6 +2,7 @@ package org.sklsft.demo.repository.dao.interfaces.localization.base;
 import java.util.List;
 
 import org.sklsft.commons.model.patterns.BaseDao;
+import org.sklsft.demo.api.model.localization.filters.CityFilter;
 import org.sklsft.demo.model.localization.City;
 /**
  * auto generated base dao interface file
@@ -9,6 +10,11 @@ import org.sklsft.demo.model.localization.City;
  * <br/>processed by skeleton-generator
  */
 public interface CityBaseDao extends BaseDao<City, Long> {
+
+/**
+ * load filtered object list eagerly
+ */
+List<City> loadListEagerly(CityFilter filter);
 
 /**
  * load object list from region

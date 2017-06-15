@@ -1,12 +1,16 @@
 package org.sklsft.demo.repository.dao.impl.localization.base;
 
+import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
+
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
+import org.sklsft.demo.api.model.localization.filters.RegionFilter;
 import org.sklsft.demo.model.localization.Region;
 import org.sklsft.demo.repository.dao.interfaces.localization.base.RegionBaseDao;
 
@@ -31,6 +35,20 @@ super(Region.class);
 public List<Region> loadListEagerly() {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
 criteria.setFetchMode("country",FetchMode.JOIN);
+return criteria.list();
+}
+
+/**
+ * load filtered object list eagerly
+ */
+@Override
+@SuppressWarnings("unchecked")
+public List<Region> loadListEagerly(RegionFilter filter) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
+Criteria countryCriteria = criteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
+addStringContainsRestriction(countryCriteria, "{alias}.code", filter.getCountryCode());
+addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
 return criteria.list();
 }
 
@@ -74,8 +92,8 @@ if (countryCode == null && code == null) {
 return false;
 }
 Region region = (Region)this.sessionFactory.getCurrentSession().createCriteria(Region.class)
-.createAlias("country","Country")
-.add(Restrictions.eq("Country.code",countryCode))
+.createAlias("country","country")
+.add(Restrictions.eq("country.code",countryCode))
 .add(Restrictions.eq("code",code))
 .uniqueResult();
 return region != null;
@@ -87,8 +105,8 @@ return region != null;
 @Override
 public Region findOrNull(String countryCode, String code) {
 Region region = (Region)this.sessionFactory.getCurrentSession().createCriteria(Region.class)
-.createAlias("country","Country")
-.add(Restrictions.eq("Country.code",countryCode))
+.createAlias("country","country")
+.add(Restrictions.eq("country.code",countryCode))
 .add(Restrictions.eq("code",code))
 .uniqueResult();
 return region;

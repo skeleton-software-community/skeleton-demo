@@ -1,5 +1,6 @@
 package org.sklsft.demo.mvc.controller.localization.list;
 
+import org.sklsft.demo.api.model.localization.filters.CityFilter;
 import org.sklsft.demo.mvc.controller.localization.list.base.CityBaseListController;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,12 @@ public class CityListController extends  CityBaseListController {
 	 * refresh object list
 	 */
 	public void refresh() {
-	this.cityListView.setCityList(this.cityService.loadList(this.cityListView.getCityFilter()));
+		this.cityListView.setCityList(this.cityService.loadList(this.cityListView.getCityFilter()));
+	}
+	
+	public void resetCityFilter() {
+		this.cityListView.setCityFilter(new CityFilter());
+		refresh();
 	}
 	
 /* Specific Code End */

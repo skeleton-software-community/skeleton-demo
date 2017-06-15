@@ -1,11 +1,14 @@
 package org.sklsft.demo.repository.dao.impl.localization.base;
 
+import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
+
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
+import org.sklsft.demo.api.model.localization.filters.CountryFilter;
 import org.sklsft.demo.model.localization.Country;
 import org.sklsft.demo.repository.dao.interfaces.localization.base.CountryBaseDao;
 
@@ -29,6 +32,18 @@ super(Country.class);
 @SuppressWarnings("unchecked")
 public List<Country> loadListEagerly() {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Country.class);
+return criteria.list();
+}
+
+/**
+ * load filtered object list eagerly
+ */
+@Override
+@SuppressWarnings("unchecked")
+public List<Country> loadListEagerly(CountryFilter filter) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Country.class);
+addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
 return criteria.list();
 }
 
