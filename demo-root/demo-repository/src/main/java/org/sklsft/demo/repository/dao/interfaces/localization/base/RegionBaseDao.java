@@ -1,8 +1,9 @@
 package org.sklsft.demo.repository.dao.interfaces.localization.base;
+import java.util.Date;
 import java.util.List;
-
 import org.sklsft.commons.model.patterns.BaseDao;
 import org.sklsft.demo.api.model.localization.filters.RegionFilter;
+import org.sklsft.demo.api.model.localization.orderings.RegionOrdering;
 import org.sklsft.demo.model.localization.Region;
 /**
  * auto generated base dao interface file
@@ -12,9 +13,14 @@ import org.sklsft.demo.model.localization.Region;
 public interface RegionBaseDao extends BaseDao<Region, Long> {
 
 /**
- * load filtered object list eagerly
+ * count filtered object list
  */
-List<Region> loadListEagerly(RegionFilter filter);
+Long count(RegionFilter filter);
+
+/**
+ * scroll filtered object list
+ */
+List<Region> scroll(RegionFilter filter, RegionOrdering ordering, Long firstResult, Long maxResults);
 
 /**
  * load object list from country
@@ -22,7 +28,7 @@ List<Region> loadListEagerly(RegionFilter filter);
 List<Region> loadListFromCountry (Long countryId);
 
 /**
- * load object list eagerly from list of country
+ * load object list eagerly from country
  */
 List<Region> loadListEagerlyFromCountry (Long countryId);
 

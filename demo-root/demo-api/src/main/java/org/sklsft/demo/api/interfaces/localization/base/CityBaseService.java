@@ -1,7 +1,7 @@
 package org.sklsft.demo.api.interfaces.localization.base;
 
+import java.util.Date;
 import java.util.List;
-
 import org.sklsft.demo.api.model.localization.filters.CityFilter;
 import org.sklsft.demo.api.model.localization.forms.CityForm;
 import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;

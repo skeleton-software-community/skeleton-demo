@@ -21,11 +21,12 @@ public class CityListController extends  CityBaseListController {
 	 * refresh object list
 	 */
 	public void refresh() {
-		this.cityListView.setCityList(this.cityService.loadList(this.cityListView.getCityFilter()));
+		this.cityListView.setScrollView(cityService.scroll(this.cityListView.getScrollForm()));
+		this.cityListView.getScrollForm().setPage(this.cityListView.getScrollView().getCurrentPage());
 	}
 	
 	public void resetCityFilter() {
-		this.cityListView.setCityFilter(new CityFilter());
+		this.cityListView.getScrollForm().setFilter(new CityFilter());
 		refresh();
 	}
 	

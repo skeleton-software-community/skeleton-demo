@@ -1,16 +1,21 @@
 package org.sklsft.demo.repository.dao.impl.localization.base;
 
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
-
+import java.util.Date;
 import java.util.List;
-
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.localization.filters.CountryFilter;
+import org.sklsft.demo.api.model.localization.orderings.CountryOrdering;
 import org.sklsft.demo.model.localization.Country;
 import org.sklsft.demo.repository.dao.interfaces.localization.base.CountryBaseDao;
+import org.springframework.stereotype.Repository;
+import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.*;
+import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
 
 /**
  * auto generated base dao class file
@@ -36,14 +41,29 @@ return criteria.list();
 }
 
 /**
- * load filtered object list eagerly
+ * count filtered object list
  */
 @Override
-@SuppressWarnings("unchecked")
-public List<Country> loadListEagerly(CountryFilter filter) {
+public Long count(CountryFilter filter) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Country.class).setProjection(Projections.rowCount());
+addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+return (Long) criteria.uniqueResult();
+}
+
+/**
+ * scroll filtered object list
+ */
+public List<Country> scroll(CountryFilter filter, CountryOrdering ordering, Long firstResult, Long maxResults) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Country.class);
 addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
 addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+if (firstResult != null){
+criteria.setFirstResult(firstResult.intValue());
+}
+if (maxResults != null){
+criteria.setMaxResults(maxResults.intValue());
+}
 return criteria.list();
 }
 

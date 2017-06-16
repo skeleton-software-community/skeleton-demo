@@ -1,18 +1,22 @@
 package org.sklsft.demo.repository.dao.impl.localization.base;
 
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
-
+import java.util.Date;
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.localization.filters.CityFilter;
+import org.sklsft.demo.api.model.localization.orderings.CityOrdering;
 import org.sklsft.demo.model.localization.City;
 import org.sklsft.demo.repository.dao.interfaces.localization.base.CityBaseDao;
+import org.springframework.stereotype.Repository;
+import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.*;
+import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
 
 /**
  * auto generated base dao class file
@@ -36,22 +40,6 @@ public List<City> loadListEagerly() {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class);
 criteria.setFetchMode("region",FetchMode.JOIN);
 criteria.setFetchMode("region.country",FetchMode.JOIN);
-return criteria.list();
-}
-
-/**
- * load filtered object list eagerly
- */
-@Override
-@SuppressWarnings("unchecked")
-public List<City> loadListEagerly(CityFilter filter) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class);
-Criteria regionCriteria = criteria.createCriteria("region", JoinType.LEFT_OUTER_JOIN);
-Criteria regionCountryCriteria = regionCriteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
-addStringContainsRestriction(regionCountryCriteria, "{alias}.code", filter.getRegionCountryCode());
-addStringContainsRestriction(regionCriteria, "{alias}.code", filter.getRegionCode());
-addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
 return criteria.list();
 }
 
@@ -84,6 +72,41 @@ criteria.add(Restrictions.eq("region.id", regionId));
 }
 criteria.setFetchMode("region",FetchMode.JOIN);
 criteria.setFetchMode("region.country",FetchMode.JOIN);
+return criteria.list();
+}
+
+/**
+ * count filtered object list
+ */
+@Override
+public Long count(CityFilter filter) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class).setProjection(Projections.rowCount());
+Criteria regionCriteria = criteria.createCriteria("region", JoinType.LEFT_OUTER_JOIN);
+Criteria regionCountryCriteria = regionCriteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
+addStringContainsRestriction(regionCountryCriteria, "{alias}.code", filter.getRegionCountryCode());
+addStringContainsRestriction(regionCriteria, "{alias}.code", filter.getRegionCode());
+addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+return (Long) criteria.uniqueResult();
+}
+
+/**
+ * scroll filtered object list
+ */
+public List<City> scroll(CityFilter filter, CityOrdering ordering, Long firstResult, Long maxResults) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class);
+Criteria regionCriteria = criteria.createCriteria("region", JoinType.LEFT_OUTER_JOIN);
+Criteria regionCountryCriteria = regionCriteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
+addStringContainsRestriction(regionCountryCriteria, "{alias}.code", filter.getRegionCountryCode());
+addStringContainsRestriction(regionCriteria, "{alias}.code", filter.getRegionCode());
+addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+if (firstResult != null){
+criteria.setFirstResult(firstResult.intValue());
+}
+if (maxResults != null){
+criteria.setMaxResults(maxResults.intValue());
+}
 return criteria.list();
 }
 

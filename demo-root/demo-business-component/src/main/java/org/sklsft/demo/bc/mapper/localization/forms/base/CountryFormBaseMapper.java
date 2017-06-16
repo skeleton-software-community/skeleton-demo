@@ -1,5 +1,7 @@
 package org.sklsft.demo.bc.mapper.localization.forms.base;
 
+import javax.inject.Inject;
+import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.mapper.impl.BasicMapperImpl;
 import org.sklsft.demo.api.model.localization.forms.CountryForm;
 import org.sklsft.demo.model.localization.Country;

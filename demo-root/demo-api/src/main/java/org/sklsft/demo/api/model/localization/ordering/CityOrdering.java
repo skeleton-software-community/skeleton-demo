@@ -1,24 +1,20 @@
-package org.sklsft.demo.api.model.localization.views.basic;
+package org.sklsft.demo.api.model.localization.ordering;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * auto generated view bean class file
- * <br/>basic representation of what is going to be considered as model in MVC patterns
+ * auto generated filter class file
+ * <br/>basic representation of filter used along with jsf datatable
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-public class CityBasicView implements Serializable {
+public class CityOrdering implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
 /*
  * properties
  */
-private Long id;
-private boolean selected;
-private boolean canDelete;
 private String regionCountryCode;
 private String regionCode;
 private String code;
@@ -27,30 +23,6 @@ private String label;
 /*
  * getters and setters
  */
-public Long getId() {
-return this.id;
-}
-
-public void setId(Long id) {
-this.id = id;
-}
-
-public boolean getSelected() {
-return this.selected;
-}
-
-public void setSelected(boolean selected) {
-this.selected = selected;
-}
-
-public boolean getCanDelete() {
-return this.canDelete;
-}
-
-public void setCanDelete(boolean canDelete) {
-this.canDelete = canDelete;
-}
-
 public String getRegionCountryCode() {
 return this.regionCountryCode;
 }

@@ -1,6 +1,7 @@
 package org.sklsft.demo.api.model.localization.views.basic;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * auto generated view bean class file

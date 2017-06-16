@@ -2,7 +2,6 @@ package org.sklsft.demo.mvc.model.localization.list;
 
 import java.io.Serializable;
 import java.util.List;
-
 import org.sklsft.demo.api.model.localization.filters.RegionFilter;
 import org.sklsft.demo.api.model.localization.views.basic.RegionBasicView;
 import org.sklsft.demo.api.model.localization.views.full.RegionFullView;

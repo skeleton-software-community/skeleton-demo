@@ -2,10 +2,8 @@ package org.sklsft.demo.mvc.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
-
 import org.sklsft.demo.api.interfaces.localization.CountryService;
 import org.sklsft.demo.mvc.model.CommonView;
 import org.springframework.context.annotation.Scope;

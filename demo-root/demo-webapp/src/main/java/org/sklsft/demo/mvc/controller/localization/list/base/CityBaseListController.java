@@ -2,14 +2,14 @@ package org.sklsft.demo.mvc.controller.localization.list.base;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import org.sklsft.commons.api.exception.rights.OperationDeniedException;
+import org.sklsft.commons.mvc.ajax.AjaxMethodTemplate;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
 import org.sklsft.demo.api.interfaces.localization.CityService;
 import org.sklsft.demo.api.model.localization.filters.CityFilter;
 import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;
+import org.sklsft.demo.api.model.localization.views.full.CityFullView;
 import org.sklsft.demo.mvc.controller.BaseController;
 import org.sklsft.demo.mvc.controller.CommonController;
 import org.sklsft.demo.mvc.model.localization.list.CityListView;

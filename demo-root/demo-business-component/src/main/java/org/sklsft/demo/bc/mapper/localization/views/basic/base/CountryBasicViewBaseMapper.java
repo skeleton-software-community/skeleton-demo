@@ -1,7 +1,7 @@
 package org.sklsft.demo.bc.mapper.localization.views.basic.base;
 
 import javax.inject.Inject;
-
+import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.mapper.impl.BasicMapperImpl;
 import org.sklsft.demo.api.model.localization.views.basic.CountryBasicView;
 import org.sklsft.demo.bc.rightsmanager.localization.CountryRightsManager;
