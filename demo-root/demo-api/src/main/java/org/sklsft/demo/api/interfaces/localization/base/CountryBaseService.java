@@ -1,9 +1,12 @@
 package org.sklsft.demo.api.interfaces.localization.base;
 
-import java.util.Date;
 import java.util.List;
+
+import org.sklsft.commons.api.model.ScrollForm;
+import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.demo.api.model.localization.filters.CountryFilter;
 import org.sklsft.demo.api.model.localization.forms.CountryForm;
+import org.sklsft.demo.api.model.localization.sortings.CountrySorting;
 import org.sklsft.demo.api.model.localization.views.basic.CountryBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CountryFullView;
 
@@ -25,9 +28,9 @@ List<String> getOptions();
 List<CountryBasicView> loadList();
 
 /**
- * load filtered object list
+ * scroll object list
  */
-List<CountryBasicView> loadList(CountryFilter filter);
+ScrollView<CountryBasicView> scroll(ScrollForm<CountryFilter, CountrySorting> form);
 
 /**
  * load object

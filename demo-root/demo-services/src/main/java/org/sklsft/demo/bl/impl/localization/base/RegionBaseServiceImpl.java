@@ -1,14 +1,16 @@
 package org.sklsft.demo.bl.impl.localization.base;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
+
 import javax.inject.Inject;
-import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
+
+import org.sklsft.commons.api.model.ScrollForm;
+import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.demo.api.interfaces.localization.base.RegionBaseService;
 import org.sklsft.demo.api.model.localization.filters.RegionFilter;
 import org.sklsft.demo.api.model.localization.forms.RegionForm;
+import org.sklsft.demo.api.model.localization.sortings.RegionSorting;
 import org.sklsft.demo.api.model.localization.views.basic.RegionBasicView;
 import org.sklsft.demo.api.model.localization.views.full.RegionFullView;
 import org.sklsft.demo.bc.mapper.localization.forms.RegionFormMapper;
@@ -66,21 +68,6 @@ return result;
 }
 
 /**
- * load filtered object list
- */
-@Override
-@Transactional(readOnly=true)
-public List<RegionBasicView> loadList(RegionFilter filter) {
-regionRightsManager.checkCanAccess();
-List<Region> regionList = regionDao.loadListEagerly(filter);
-List<RegionBasicView> result = new ArrayList<>(regionList.size());
-for (Region region : regionList) {
-result.add(this.regionBasicViewMapper.mapFrom(new RegionBasicView(),region));
-}
-return result;
-}
-
-/**
  * load object list from country
  */
 @Override
@@ -92,6 +79,27 @@ List<RegionBasicView> result = new ArrayList<>(regionList.size());
 for (Region region : regionList) {
 result.add(this.regionBasicViewMapper.mapFrom(new RegionBasicView(),region));
 }
+return result;
+}
+
+/**
+ * scroll object list
+ */
+@Override
+@Transactional(readOnly=true)
+public ScrollView<RegionBasicView> scroll(ScrollForm<RegionFilter, RegionSorting> form) {
+regionRightsManager.checkCanAccess();
+ScrollView<RegionBasicView> result = new ScrollView<>();
+result.setSize(regionDao.count());
+Long count = regionDao.count(form.getFilter());
+result.setNumberOfPages(count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L));
+result.setCurrentPage(Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, result.getNumberOfPages())));
+List<Region> list = regionDao.scroll(form.getFilter(), form.getSorting(),(result.getCurrentPage()-1)*form.getElementsPerPage(), form.getElementsPerPage());
+List<RegionBasicView> elements = new ArrayList<>(list.size());
+for (Region region : list) {
+elements.add(this.regionBasicViewMapper.mapFrom(new RegionBasicView(),region));
+}
+result.setElements(elements);
 return result;
 }
 

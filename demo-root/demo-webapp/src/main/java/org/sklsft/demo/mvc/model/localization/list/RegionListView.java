@@ -1,8 +1,11 @@
 package org.sklsft.demo.mvc.model.localization.list;
 
 import java.io.Serializable;
-import java.util.List;
+
+import org.sklsft.commons.api.model.ScrollForm;
+import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.demo.api.model.localization.filters.RegionFilter;
+import org.sklsft.demo.api.model.localization.sortings.RegionSorting;
 import org.sklsft.demo.api.model.localization.views.basic.RegionBasicView;
 import org.sklsft.demo.api.model.localization.views.full.RegionFullView;
 import org.springframework.context.annotation.Scope;
@@ -23,25 +26,25 @@ private static final long serialVersionUID = 1L;
 /*
  * properties
  */
-protected List<RegionBasicView> regionList;
-protected RegionFilter regionFilter = new RegionFilter();
+protected ScrollForm<RegionFilter, RegionSorting> scrollForm = new ScrollForm<>();
+protected ScrollView<RegionBasicView> scrollView = new ScrollView<>();
 protected RegionFullView selectedRegion;
 
 /*
  * getters and setters
  */
-public List<RegionBasicView> getRegionList() {
-return regionList;
+public ScrollView<RegionBasicView> getScrollView() {
+return scrollView;
 }
-public void setRegionList(List<RegionBasicView> regionList) {
-this.regionList = regionList;
+public void setScrollView(ScrollView<RegionBasicView> scrollView) {
+this.scrollView = scrollView;
 }
 
-public RegionFilter getRegionFilter() {
-return regionFilter;
+public ScrollForm<RegionFilter, RegionSorting> getScrollForm() {
+return scrollForm;
 }
-public void setRegionFilter(RegionFilter regionFilter) {
-this.regionFilter = regionFilter;
+public void setScrollForm(ScrollForm<RegionFilter, RegionSorting> scrollForm) {
+this.scrollForm = scrollForm;
 }
 
 public RegionFullView getSelectedRegion() {

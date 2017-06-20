@@ -1,21 +1,22 @@
 package org.sklsft.demo.repository.dao.impl.localization.base;
 
-import java.util.Date;
+import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
+
 import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
+import org.sklsft.commons.api.model.OrderType;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.localization.filters.RegionFilter;
-import org.sklsft.demo.api.model.localization.orderings.RegionOrdering;
+import org.sklsft.demo.api.model.localization.sortings.RegionSorting;
 import org.sklsft.demo.model.localization.Region;
 import org.sklsft.demo.repository.dao.interfaces.localization.base.RegionBaseDao;
-import org.springframework.stereotype.Repository;
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.*;
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
 
 /**
  * auto generated base dao class file
@@ -88,12 +89,33 @@ return (Long) criteria.uniqueResult();
 /**
  * scroll filtered object list
  */
-public List<Region> scroll(RegionFilter filter, RegionOrdering ordering, Long firstResult, Long maxResults) {
+public List<Region> scroll(RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
 Criteria countryCriteria = criteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
 addStringContainsRestriction(countryCriteria, "{alias}.code", filter.getCountryCode());
 addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
 addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+if (sorting.getCountryCodeOrderType() != null) {
+if (sorting.getCountryCodeOrderType().equals(OrderType.ASC)) {
+countryCriteria.addOrder(Order.asc("code"));
+} else {
+countryCriteria.addOrder(Order.desc("code"));
+}
+}
+if (sorting.getCodeOrderType() != null) {
+if (sorting.getCodeOrderType().equals(OrderType.ASC)) {
+criteria.addOrder(Order.asc("code"));
+} else {
+criteria.addOrder(Order.desc("code"));
+}
+}
+if (sorting.getLabelOrderType() != null) {
+if (sorting.getLabelOrderType().equals(OrderType.ASC)) {
+criteria.addOrder(Order.asc("label"));
+} else {
+criteria.addOrder(Order.desc("label"));
+}
+}
 if (firstResult != null){
 criteria.setFirstResult(firstResult.intValue());
 }

@@ -1,7 +1,6 @@
 package org.sklsft.demo.api.model.localization.filters;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * auto generated filter class file

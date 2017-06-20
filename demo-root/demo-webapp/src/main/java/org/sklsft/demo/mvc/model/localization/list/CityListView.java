@@ -1,11 +1,11 @@
 package org.sklsft.demo.mvc.model.localization.list;
 
 import java.io.Serializable;
-import java.util.List;
+
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.demo.api.model.localization.filters.CityFilter;
-import org.sklsft.demo.api.model.localization.ordering.CityOrdering;
+import org.sklsft.demo.api.model.localization.sortings.CitySorting;
 import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CityFullView;
 import org.springframework.context.annotation.Scope;
@@ -26,25 +26,25 @@ private static final long serialVersionUID = 1L;
 /*
  * properties
  */
-protected List<CityBasicView> cityList;
-protected CityFilter cityFilter = new CityFilter();
+protected ScrollForm<CityFilter, CitySorting> scrollForm = new ScrollForm<>();
+protected ScrollView<CityBasicView> scrollView = new ScrollView<>();
 protected CityFullView selectedCity;
 
 /*
  * getters and setters
  */
-public List<CityBasicView> getCityList() {
-return cityList;
+public ScrollView<CityBasicView> getScrollView() {
+return scrollView;
 }
-public void setCityList(List<CityBasicView> cityList) {
-this.cityList = cityList;
+public void setScrollView(ScrollView<CityBasicView> scrollView) {
+this.scrollView = scrollView;
 }
 
-public CityFilter getCityFilter() {
-return cityFilter;
+public ScrollForm<CityFilter, CitySorting> getScrollForm() {
+return scrollForm;
 }
-public void setCityFilter(CityFilter cityFilter) {
-this.cityFilter = cityFilter;
+public void setScrollForm(ScrollForm<CityFilter, CitySorting> scrollForm) {
+this.scrollForm = scrollForm;
 }
 
 public CityFullView getSelectedCity() {
@@ -55,22 +55,5 @@ this.selectedCity = selectedCity;
 }
 
 /* Specific Code Start */
-
-private ScrollForm<CityFilter, CityOrdering> scrollForm = new ScrollForm<>();
-private ScrollView<CityBasicView> scrollView = new ScrollView<>();
-
-public ScrollForm<CityFilter, CityOrdering> getScrollForm() {
-	return scrollForm;
-}
-public void setScrollForm(ScrollForm<CityFilter, CityOrdering> scrollForm) {
-	this.scrollForm = scrollForm;
-}
-public ScrollView<CityBasicView> getScrollView() {
-	return scrollView;
-}
-public void setScrollView(ScrollView<CityBasicView> scrollView) {
-	this.scrollView = scrollView;
-}
-
 /* Specific Code End */
 }

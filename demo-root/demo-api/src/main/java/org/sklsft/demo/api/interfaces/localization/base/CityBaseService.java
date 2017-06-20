@@ -1,9 +1,12 @@
 package org.sklsft.demo.api.interfaces.localization.base;
 
-import java.util.Date;
 import java.util.List;
+
+import org.sklsft.commons.api.model.ScrollForm;
+import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.demo.api.model.localization.filters.CityFilter;
 import org.sklsft.demo.api.model.localization.forms.CityForm;
+import org.sklsft.demo.api.model.localization.sortings.CitySorting;
 import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CityFullView;
 
@@ -20,14 +23,14 @@ public interface CityBaseService {
 List<CityBasicView> loadList();
 
 /**
- * load filtered object list
- */
-List<CityBasicView> loadList(CityFilter filter);
-
-/**
  * load object list from region
  */
 List<CityBasicView> loadListFromRegion (Long regionId);
+
+/**
+ * scroll object list
+ */
+ScrollView<CityBasicView> scroll(ScrollForm<CityFilter, CitySorting> form);
 
 /**
  * load object

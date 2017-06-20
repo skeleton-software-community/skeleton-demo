@@ -1,7 +1,7 @@
 package org.sklsft.demo.api.model.localization.forms;
 
 import java.io.Serializable;
-import java.util.Date;
+
 import javax.validation.constraints.NotNull;
 
 /**

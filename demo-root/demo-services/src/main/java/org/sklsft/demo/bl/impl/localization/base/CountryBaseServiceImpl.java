@@ -1,14 +1,16 @@
 package org.sklsft.demo.bl.impl.localization.base;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
+
 import javax.inject.Inject;
-import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
+
+import org.sklsft.commons.api.model.ScrollForm;
+import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.demo.api.interfaces.localization.base.CountryBaseService;
 import org.sklsft.demo.api.model.localization.filters.CountryFilter;
 import org.sklsft.demo.api.model.localization.forms.CountryForm;
+import org.sklsft.demo.api.model.localization.sortings.CountrySorting;
 import org.sklsft.demo.api.model.localization.views.basic.CountryBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CountryFullView;
 import org.sklsft.demo.bc.mapper.localization.forms.CountryFormMapper;
@@ -76,17 +78,23 @@ return result;
 }
 
 /**
- * load filtered object list
+ * scroll object list
  */
 @Override
 @Transactional(readOnly=true)
-public List<CountryBasicView> loadList(CountryFilter filter) {
+public ScrollView<CountryBasicView> scroll(ScrollForm<CountryFilter, CountrySorting> form) {
 countryRightsManager.checkCanAccess();
-List<Country> countryList = countryDao.loadListEagerly(filter);
-List<CountryBasicView> result = new ArrayList<>(countryList.size());
-for (Country country : countryList) {
-result.add(this.countryBasicViewMapper.mapFrom(new CountryBasicView(),country));
+ScrollView<CountryBasicView> result = new ScrollView<>();
+result.setSize(countryDao.count());
+Long count = countryDao.count(form.getFilter());
+result.setNumberOfPages(count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L));
+result.setCurrentPage(Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, result.getNumberOfPages())));
+List<Country> list = countryDao.scroll(form.getFilter(), form.getSorting(),(result.getCurrentPage()-1)*form.getElementsPerPage(), form.getElementsPerPage());
+List<CountryBasicView> elements = new ArrayList<>(list.size());
+for (Country country : list) {
+elements.add(this.countryBasicViewMapper.mapFrom(new CountryBasicView(),country));
 }
+result.setElements(elements);
 return result;
 }
 

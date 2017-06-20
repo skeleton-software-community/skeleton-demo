@@ -1,7 +1,7 @@
-package org.sklsft.demo.api.model.localization.orderings;
+package org.sklsft.demo.api.model.localization.sortings;
 
 import java.io.Serializable;
-import java.util.Date;
+
 import org.sklsft.commons.api.model.OrderType;
 
 /**
@@ -10,37 +10,19 @@ import org.sklsft.commons.api.model.OrderType;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-public class CityOrdering implements Serializable {
+public class CountrySorting implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
 /*
  * properties
  */
-private OrderType regionCountryCodeOrderType;
-private OrderType regionCodeOrderType;
 private OrderType codeOrderType;
 private OrderType labelOrderType;
 
 /*
  * getters and setters
  */
-public OrderType getRegionCountryCodeOrderType() {
-return this.regionCountryCodeOrderType;
-}
-
-public void setRegionCountryCodeOrderType(OrderType regionCountryCodeOrderType) {
-this.regionCountryCodeOrderType = regionCountryCodeOrderType;
-}
-
-public OrderType getRegionCodeOrderType() {
-return this.regionCodeOrderType;
-}
-
-public void setRegionCodeOrderType(OrderType regionCodeOrderType) {
-this.regionCodeOrderType = regionCodeOrderType;
-}
-
 public OrderType getCodeOrderType() {
 return this.codeOrderType;
 }

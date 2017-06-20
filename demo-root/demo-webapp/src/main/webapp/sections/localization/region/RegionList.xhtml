@@ -16,28 +16,26 @@ template="/templates/template.xhtml">
 
 <ui:define name="content">
 
+<f:metadata>
+<f:viewAction action="#{regionListController.load}"/>
+</f:metadata>
 <h:form id="regionListForm">
-<a4j:jsFunction name="load"
-action="#{regionListController.load}"
-render="regionPanelGroup"
-oncomplete="$('#processingPanel').modal('hide')"/>
-<script>window.onload = function(){$('#processingPanel').modal('show');load();}</script>
-<h2>
-#{i18n.regionList}
-</h2>
 <h:panelGroup id="regionPanelGroup">
+<h2>
+#{i18n.regionList} (#{regionListView.scrollView.size})
+</h2>
 <a4j:region>
 
-<ui:fragment rendered="#{empty regionListView.regionList}">
+<ui:fragment rendered="#{regionListView.scrollView.size == 0}">
 #{i18n.noDataFound}<br/>
 </ui:fragment>
 
-<ui:fragment rendered="#{not empty regionListView.regionList}">
+<ui:fragment rendered="#{regionListView.scrollView.size > 0}">
 <div style="overflow-x:scroll">
 
 <rich:dataTable rows="10"
 id="regionList" var="region" name="datatable"
-value="#{regionListView.regionList}" rowClasses="datatableRow, datatableRowLight">
+value="#{regionListView.scrollView.elements}" rowClasses="datatableRow, datatableRowLight">
 
 <f:facet name="header">
 <rich:columnGroup>
@@ -51,40 +49,40 @@ onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="
 </rich:column>
 
 <rich:column>
-<a4j:commandLink action="#{regionListController.resetRegionFilter}" render="regionList, regionScroller">
+<a4j:commandLink action="#{regionListController.reset}" render="regionPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
 </a4j:commandLink>
 </rich:column>
 
 <rich:column>
-<h:inputText id="regionCountryCodeFilter"
-value="#{regionListView.regionFilter.countryCode}"
+<h:inputText
+value="#{regionListView.scrollForm.filter.countryCode}"
 styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="regionList, regionScroller"
-oncomplete="setCaretToEnd(event);" >
-<a4j:attachQueue requestDelay="500" />
+<a4j:ajax event="keyup" render="regionPanelGroup" listener="#{regionListController.refresh}"
+oncomplete="setCaretToEnd(event);">
+<a4j:attachQueue requestDelay="500"/>
 </a4j:ajax>
 </h:inputText>
 </rich:column>
 
 <rich:column>
-<h:inputText id="regionCodeFilter"
-value="#{regionListView.regionFilter.code}"
+<h:inputText
+value="#{regionListView.scrollForm.filter.code}"
 styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="regionList, regionScroller"
-oncomplete="setCaretToEnd(event);" >
-<a4j:attachQueue requestDelay="500" />
+<a4j:ajax event="keyup" render="regionPanelGroup" listener="#{regionListController.refresh}"
+oncomplete="setCaretToEnd(event);">
+<a4j:attachQueue requestDelay="500"/>
 </a4j:ajax>
 </h:inputText>
 </rich:column>
 
 <rich:column>
-<h:inputText id="regionLabelFilter"
-value="#{regionListView.regionFilter.label}"
+<h:inputText
+value="#{regionListView.scrollForm.filter.label}"
 styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="regionList, regionScroller"
-oncomplete="setCaretToEnd(event);" >
-<a4j:attachQueue requestDelay="500" />
+<a4j:ajax event="keyup" render="regionPanelGroup" listener="#{regionListController.refresh}"
+oncomplete="setCaretToEnd(event);">
+<a4j:attachQueue requestDelay="500"/>
 </a4j:ajax>
 </h:inputText>
 </rich:column>
@@ -115,26 +113,38 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="regionPane
 </h:panelGrid>
 </rich:column>
 
-<rich:column sortBy="#{region.countryCode}"
-filterType="custom" filterExpression="#{fn:containsIgnoreCase(region.countryCode, regionListView.regionFilter.countryCode)}">
+<rich:column>
 <f:facet name="header">
-<h:outputText value="#{i18n.regionCountryCode}" />
+<ui:include src="/resources/components/datatable-header.xhtml">
+<ui:param name="label" value="#{i18n.regionCountryCode}"/>
+<ui:param name="orderType" value="#{regionListView.scrollForm.sorting.countryCodeOrderType}"/>
+<ui:param name="scrollController" value="#{regionListController}"/>
+<ui:param name="panelGroup" value="regionPanelGroup"/>
+</ui:include>
 </f:facet>
 <h:outputText value="#{region.countryCode}"/>
 </rich:column>
 
-<rich:column sortBy="#{region.code}"
-filterType="custom" filterExpression="#{fn:containsIgnoreCase(region.code, regionListView.regionFilter.code)}">
+<rich:column>
 <f:facet name="header">
-<h:outputText value="#{i18n.regionCode}" />
+<ui:include src="/resources/components/datatable-header.xhtml">
+<ui:param name="label" value="#{i18n.regionCode}"/>
+<ui:param name="orderType" value="#{regionListView.scrollForm.sorting.codeOrderType}"/>
+<ui:param name="scrollController" value="#{regionListController}"/>
+<ui:param name="panelGroup" value="regionPanelGroup"/>
+</ui:include>
 </f:facet>
 <h:outputText value="#{region.code}"/>
 </rich:column>
 
-<rich:column sortBy="#{region.label}"
-filterType="custom" filterExpression="#{fn:containsIgnoreCase(region.label, regionListView.regionFilter.label)}">
+<rich:column>
 <f:facet name="header">
-<h:outputText value="#{i18n.regionLabel}" />
+<ui:include src="/resources/components/datatable-header.xhtml">
+<ui:param name="label" value="#{i18n.regionLabel}"/>
+<ui:param name="orderType" value="#{regionListView.scrollForm.sorting.labelOrderType}"/>
+<ui:param name="scrollController" value="#{regionListController}"/>
+<ui:param name="panelGroup" value="regionPanelGroup"/>
+</ui:include>
 </f:facet>
 <h:outputText value="#{region.label}"/>
 </rich:column>
@@ -143,9 +153,12 @@ filterType="custom" filterExpression="#{fn:containsIgnoreCase(region.label, regi
 
 </div>
 
-<div class="scroller">
-<rich:dataScroller id="regionScroller" maxPages="5" renderIfSinglePage="false" for="regionList"/>
-</div>
+<ui:include src="/resources/components/scroller.xhtml">
+<ui:param name="scrollView" value="#{regionListView.scrollView}"/>
+<ui:param name="scrollForm" value="#{regionListView.scrollForm}"/>
+<ui:param name="scrollController" value="#{regionListController}"/>
+<ui:param name="panelGroup" value="regionPanelGroup"/>
+</ui:include>
 
 </ui:fragment>
 

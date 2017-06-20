@@ -1,7 +1,7 @@
-package org.sklsft.demo.api.model.localization.orderings;
+package org.sklsft.demo.api.model.localization.sortings;
 
 import java.io.Serializable;
-import java.util.Date;
+
 import org.sklsft.commons.api.model.OrderType;
 
 /**
@@ -10,7 +10,7 @@ import org.sklsft.commons.api.model.OrderType;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-public class RegionOrdering implements Serializable {
+public class RegionSorting implements Serializable {
 
 private static final long serialVersionUID = 1L;
 

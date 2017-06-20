@@ -2,14 +2,16 @@ package org.sklsft.demo.mvc.controller.localization.list.base;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import org.sklsft.commons.api.exception.rights.OperationDeniedException;
-import org.sklsft.commons.mvc.ajax.AjaxMethodTemplate;
+import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
 import org.sklsft.demo.api.interfaces.localization.CityService;
 import org.sklsft.demo.api.model.localization.filters.CityFilter;
+import org.sklsft.demo.api.model.localization.sortings.CitySorting;
 import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;
-import org.sklsft.demo.api.model.localization.views.full.CityFullView;
 import org.sklsft.demo.mvc.controller.BaseController;
 import org.sklsft.demo.mvc.controller.CommonController;
 import org.sklsft.demo.mvc.model.localization.list.CityListView;
@@ -49,15 +51,15 @@ this.cityListView = cityListView;
  * load object list
  */
 public void load() {
-this.resetCityFilter();
-this.refresh();
+this.reset();
 }
 
 /**
  * refresh object list
  */
 public void refresh() {
-this.cityListView.setCityList(this.cityService.loadList());
+cityListView.setScrollView(cityService.scroll(cityListView.getScrollForm()));
+cityListView.getScrollForm().setPage(cityListView.getScrollView().getCurrentPage());
 }
 
 /**
@@ -113,7 +115,7 @@ this.refresh();
 @AjaxMethod("City.deleteList")
 public void deleteList() {
 List<Long> ids = new ArrayList<>();
-for (CityBasicView city:cityListView.getCityList()) {
+for (CityBasicView city:cityListView.getScrollView().getElements()) {
 if (city.getSelected()) {
 ids.add(city.getId());
 }
@@ -123,10 +125,41 @@ this.refresh();
 }
 
 /**
- * reset object datatable filter
+ * reset filters and sortings
  */
-public void resetCityFilter() {
-this.cityListView.setCityFilter(new CityFilter());
+public void reset() {
+this.cityListView.setScrollForm(new ScrollForm<>());
+this.cityListView.getScrollForm().setFilter(new CityFilter());
+this.cityListView.getScrollForm().setSorting(new CitySorting());
+refresh();
 }
 
+/**
+ * move forward
+ */
+public void moveForward() {
+cityListView.getScrollForm().setPage(cityListView.getScrollForm().getPage()+1);
+refresh();
+}
+/**
+ * move last
+ */
+public void moveLast() {
+cityListView.getScrollForm().setPage(cityListView.getScrollView().getNumberOfPages());
+refresh();
+}
+/**
+ * move backward
+ */
+public void moveBackward() {
+cityListView.getScrollForm().setPage(cityListView.getScrollForm().getPage()-1);
+refresh();
+}
+/**
+ * move first
+ */
+public void moveFirst() {
+cityListView.getScrollForm().setPage(1L);
+refresh();
+}
 }

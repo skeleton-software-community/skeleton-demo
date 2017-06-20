@@ -1,6 +1,7 @@
 package org.sklsft.demo.bc.processor.localization.base;
 
 import javax.inject.Inject;
+
 import org.sklsft.commons.model.patterns.Processor;
 import org.sklsft.demo.model.localization.Country;
 import org.sklsft.demo.repository.dao.interfaces.localization.CountryDao;

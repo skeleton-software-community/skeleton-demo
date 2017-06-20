@@ -1,10 +1,10 @@
 package org.sklsft.demo.mvc.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;

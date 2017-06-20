@@ -1,8 +1,11 @@
 package org.sklsft.demo.mvc.model.localization.list;
 
 import java.io.Serializable;
-import java.util.List;
+
+import org.sklsft.commons.api.model.ScrollForm;
+import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.demo.api.model.localization.filters.CountryFilter;
+import org.sklsft.demo.api.model.localization.sortings.CountrySorting;
 import org.sklsft.demo.api.model.localization.views.basic.CountryBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CountryFullView;
 import org.springframework.context.annotation.Scope;
@@ -23,25 +26,25 @@ private static final long serialVersionUID = 1L;
 /*
  * properties
  */
-protected List<CountryBasicView> countryList;
-protected CountryFilter countryFilter = new CountryFilter();
+protected ScrollForm<CountryFilter, CountrySorting> scrollForm = new ScrollForm<>();
+protected ScrollView<CountryBasicView> scrollView = new ScrollView<>();
 protected CountryFullView selectedCountry;
 
 /*
  * getters and setters
  */
-public List<CountryBasicView> getCountryList() {
-return countryList;
+public ScrollView<CountryBasicView> getScrollView() {
+return scrollView;
 }
-public void setCountryList(List<CountryBasicView> countryList) {
-this.countryList = countryList;
+public void setScrollView(ScrollView<CountryBasicView> scrollView) {
+this.scrollView = scrollView;
 }
 
-public CountryFilter getCountryFilter() {
-return countryFilter;
+public ScrollForm<CountryFilter, CountrySorting> getScrollForm() {
+return scrollForm;
 }
-public void setCountryFilter(CountryFilter countryFilter) {
-this.countryFilter = countryFilter;
+public void setScrollForm(ScrollForm<CountryFilter, CountrySorting> scrollForm) {
+this.scrollForm = scrollForm;
 }
 
 public CountryFullView getSelectedCountry() {

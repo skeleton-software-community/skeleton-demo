@@ -2,6 +2,7 @@ package org.sklsft.demo.mvc.model.localization.detail;
 
 import java.io.Serializable;
 import java.util.List;
+
 import org.sklsft.commons.mvc.scopes.ViewScope;
 import org.sklsft.demo.api.model.localization.filters.CityFilter;
 import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;
@@ -9,7 +10,6 @@ import org.sklsft.demo.api.model.localization.views.full.CityFullView;
 import org.sklsft.demo.api.model.localization.views.full.RegionFullView;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
 
 /**
  * auto generated detail view class file

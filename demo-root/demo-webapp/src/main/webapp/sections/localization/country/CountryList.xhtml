@@ -16,28 +16,26 @@ template="/templates/template.xhtml">
 
 <ui:define name="content">
 
+<f:metadata>
+<f:viewAction action="#{countryListController.load}"/>
+</f:metadata>
 <h:form id="countryListForm">
-<a4j:jsFunction name="load"
-action="#{countryListController.load}"
-render="countryPanelGroup"
-oncomplete="$('#processingPanel').modal('hide')"/>
-<script>window.onload = function(){$('#processingPanel').modal('show');load();}</script>
-<h2>
-#{i18n.countryList}
-</h2>
 <h:panelGroup id="countryPanelGroup">
+<h2>
+#{i18n.countryList} (#{countryListView.scrollView.size})
+</h2>
 <a4j:region>
 
-<ui:fragment rendered="#{empty countryListView.countryList}">
+<ui:fragment rendered="#{countryListView.scrollView.size == 0}">
 #{i18n.noDataFound}<br/>
 </ui:fragment>
 
-<ui:fragment rendered="#{not empty countryListView.countryList}">
+<ui:fragment rendered="#{countryListView.scrollView.size > 0}">
 <div style="overflow-x:scroll">
 
 <rich:dataTable rows="10"
 id="countryList" var="country" name="datatable"
-value="#{countryListView.countryList}" rowClasses="datatableRow, datatableRowLight">
+value="#{countryListView.scrollView.elements}" rowClasses="datatableRow, datatableRowLight">
 
 <f:facet name="header">
 <rich:columnGroup>
@@ -51,29 +49,29 @@ onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="
 </rich:column>
 
 <rich:column>
-<a4j:commandLink action="#{countryListController.resetCountryFilter}" render="countryList, countryScroller">
+<a4j:commandLink action="#{countryListController.reset}" render="countryPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
 </a4j:commandLink>
 </rich:column>
 
 <rich:column>
-<h:inputText id="countryCodeFilter"
-value="#{countryListView.countryFilter.code}"
+<h:inputText
+value="#{countryListView.scrollForm.filter.code}"
 styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="countryList, countryScroller"
-oncomplete="setCaretToEnd(event);" >
-<a4j:attachQueue requestDelay="500" />
+<a4j:ajax event="keyup" render="countryPanelGroup" listener="#{countryListController.refresh}"
+oncomplete="setCaretToEnd(event);">
+<a4j:attachQueue requestDelay="500"/>
 </a4j:ajax>
 </h:inputText>
 </rich:column>
 
 <rich:column>
-<h:inputText id="countryLabelFilter"
-value="#{countryListView.countryFilter.label}"
+<h:inputText
+value="#{countryListView.scrollForm.filter.label}"
 styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="countryList, countryScroller"
-oncomplete="setCaretToEnd(event);" >
-<a4j:attachQueue requestDelay="500" />
+<a4j:ajax event="keyup" render="countryPanelGroup" listener="#{countryListController.refresh}"
+oncomplete="setCaretToEnd(event);">
+<a4j:attachQueue requestDelay="500"/>
 </a4j:ajax>
 </h:inputText>
 </rich:column>
@@ -104,18 +102,26 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="countryPan
 </h:panelGrid>
 </rich:column>
 
-<rich:column sortBy="#{country.code}"
-filterType="custom" filterExpression="#{fn:containsIgnoreCase(country.code, countryListView.countryFilter.code)}">
+<rich:column>
 <f:facet name="header">
-<h:outputText value="#{i18n.countryCode}" />
+<ui:include src="/resources/components/datatable-header.xhtml">
+<ui:param name="label" value="#{i18n.countryCode}"/>
+<ui:param name="orderType" value="#{countryListView.scrollForm.sorting.codeOrderType}"/>
+<ui:param name="scrollController" value="#{countryListController}"/>
+<ui:param name="panelGroup" value="countryPanelGroup"/>
+</ui:include>
 </f:facet>
 <h:outputText value="#{country.code}"/>
 </rich:column>
 
-<rich:column sortBy="#{country.label}"
-filterType="custom" filterExpression="#{fn:containsIgnoreCase(country.label, countryListView.countryFilter.label)}">
+<rich:column>
 <f:facet name="header">
-<h:outputText value="#{i18n.countryLabel}" />
+<ui:include src="/resources/components/datatable-header.xhtml">
+<ui:param name="label" value="#{i18n.countryLabel}"/>
+<ui:param name="orderType" value="#{countryListView.scrollForm.sorting.labelOrderType}"/>
+<ui:param name="scrollController" value="#{countryListController}"/>
+<ui:param name="panelGroup" value="countryPanelGroup"/>
+</ui:include>
 </f:facet>
 <h:outputText value="#{country.label}"/>
 </rich:column>
@@ -124,9 +130,12 @@ filterType="custom" filterExpression="#{fn:containsIgnoreCase(country.label, cou
 
 </div>
 
-<div class="scroller">
-<rich:dataScroller id="countryScroller" maxPages="5" renderIfSinglePage="false" for="countryList"/>
-</div>
+<ui:include src="/resources/components/scroller.xhtml">
+<ui:param name="scrollView" value="#{countryListView.scrollView}"/>
+<ui:param name="scrollForm" value="#{countryListView.scrollForm}"/>
+<ui:param name="scrollController" value="#{countryListController}"/>
+<ui:param name="panelGroup" value="countryPanelGroup"/>
+</ui:include>
 
 </ui:fragment>
 

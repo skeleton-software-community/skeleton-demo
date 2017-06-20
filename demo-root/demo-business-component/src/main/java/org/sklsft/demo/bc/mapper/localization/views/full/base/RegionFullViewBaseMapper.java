@@ -1,6 +1,7 @@
 package org.sklsft.demo.bc.mapper.localization.views.full.base;
 
 import javax.inject.Inject;
+
 import org.sklsft.commons.mapper.impl.FullViewMapper;
 import org.sklsft.demo.api.model.localization.forms.RegionForm;
 import org.sklsft.demo.api.model.localization.views.full.RegionFullView;

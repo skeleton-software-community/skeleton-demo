@@ -2,14 +2,17 @@ package org.sklsft.demo.mvc.controller.localization.list.base;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import org.sklsft.commons.api.exception.rights.OperationDeniedException;
+import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.mvc.ajax.AjaxMethodTemplate;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
 import org.sklsft.demo.api.interfaces.localization.CountryService;
 import org.sklsft.demo.api.model.localization.filters.CountryFilter;
+import org.sklsft.demo.api.model.localization.sortings.CountrySorting;
 import org.sklsft.demo.api.model.localization.views.basic.CountryBasicView;
-import org.sklsft.demo.api.model.localization.views.full.CountryFullView;
 import org.sklsft.demo.mvc.controller.BaseController;
 import org.sklsft.demo.mvc.controller.CommonController;
 import org.sklsft.demo.mvc.model.localization.list.CountryListView;
@@ -49,15 +52,15 @@ this.countryListView = countryListView;
  * load object list
  */
 public void load() {
-this.resetCountryFilter();
-this.refresh();
+this.reset();
 }
 
 /**
  * refresh object list
  */
 public void refresh() {
-this.countryListView.setCountryList(this.countryService.loadList());
+countryListView.setScrollView(countryService.scroll(countryListView.getScrollForm()));
+countryListView.getScrollForm().setPage(countryListView.getScrollView().getCurrentPage());
 }
 
 /**
@@ -117,7 +120,7 @@ this.refresh();
 @AjaxMethod("Country.deleteList")
 public void deleteList() {
 List<Long> ids = new ArrayList<>();
-for (CountryBasicView country:countryListView.getCountryList()) {
+for (CountryBasicView country:countryListView.getScrollView().getElements()) {
 if (country.getSelected()) {
 ids.add(country.getId());
 }
@@ -127,10 +130,41 @@ this.refresh();
 }
 
 /**
- * reset object datatable filter
+ * reset filters and sortings
  */
-public void resetCountryFilter() {
-this.countryListView.setCountryFilter(new CountryFilter());
+public void reset() {
+this.countryListView.setScrollForm(new ScrollForm<>());
+this.countryListView.getScrollForm().setFilter(new CountryFilter());
+this.countryListView.getScrollForm().setSorting(new CountrySorting());
+refresh();
 }
 
+/**
+ * move forward
+ */
+public void moveForward() {
+countryListView.getScrollForm().setPage(countryListView.getScrollForm().getPage()+1);
+refresh();
+}
+/**
+ * move last
+ */
+public void moveLast() {
+countryListView.getScrollForm().setPage(countryListView.getScrollView().getNumberOfPages());
+refresh();
+}
+/**
+ * move backward
+ */
+public void moveBackward() {
+countryListView.getScrollForm().setPage(countryListView.getScrollForm().getPage()-1);
+refresh();
+}
+/**
+ * move first
+ */
+public void moveFirst() {
+countryListView.getScrollForm().setPage(1L);
+refresh();
+}
 }

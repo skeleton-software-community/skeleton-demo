@@ -1,8 +1,5 @@
 package org.sklsft.demo.api.model.localization.views.full;
 
-import java.io.Serializable;
-import java.util.Date;
-import javax.validation.constraints.NotNull;
 import org.sklsft.commons.api.model.FullView;
 import org.sklsft.demo.api.model.localization.forms.CityForm;
 

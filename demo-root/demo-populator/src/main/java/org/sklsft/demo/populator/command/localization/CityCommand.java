@@ -1,7 +1,7 @@
 package org.sklsft.demo.populator.command.localization;
 
-import java.util.List;
 import javax.inject.Inject;
+
 import org.sklsft.commons.mapper.impl.ObjectArrayToBeanMapperImpl;
 import org.sklsft.commons.mapper.impl.StringArrayToBeanMapperImpl;
 import org.sklsft.commons.mapper.interfaces.ObjectArrayToBeanMapper;

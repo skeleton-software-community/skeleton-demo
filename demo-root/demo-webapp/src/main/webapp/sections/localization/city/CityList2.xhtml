@@ -16,12 +16,11 @@ template="/templates/template.xhtml">
 
 <ui:define name="content">
 
+<f:metadata>
+	<f:viewAction action="#{cityListController.load}" />
+</f:metadata>
+
 <h:form id="cityListForm">
-<a4j:jsFunction name="load"
-action="#{cityListController.load}"
-render="cityPanelGroup"
-oncomplete="$('#processingPanel').modal('hide')"/>
-<script>window.onload = function(){$('#processingPanel').modal('show');load();}</script>
 
 <h:panelGroup id="cityPanelGroup">
 
@@ -54,7 +53,7 @@ onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="
 </rich:column>
 
 <rich:column>
-<a4j:commandLink action="#{cityListController.resetCityFilter}" render="cityPanelGroup">
+<a4j:commandLink action="#{cityListController.reset}" render="cityPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
 </a4j:commandLink>
 </rich:column>
@@ -128,30 +127,50 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="cityPanelG
 </h:panelGrid>
 </rich:column>
 
-<rich:column sortBy="#{city.regionCountryCode}">
+<rich:column>
 <f:facet name="header">
 <h:outputText value="#{i18n.cityRegionCountryCode}" />
 </f:facet>
 <h:outputText value="#{city.regionCountryCode}"/>
 </rich:column>
 
-<rich:column sortBy="#{city.regionCode}">
+<rich:column>
 <f:facet name="header">
-<h:outputText value="#{i18n.cityRegionCode}" />
+<ui:include src="/resources/components/datatable-header.xhtml">
+<ui:param name="label" value="#{i18n.cityRegionCode}"/>
+<ui:param name="orderType" value="#{cityListView.scrollForm.sorting.regionCodeOrderType}"/>
+<ui:param name="scrollController" value="#{cityListController}"/>
+<ui:param name="panelGroup" value="cityPanelGroup"/>
+</ui:include>
 </f:facet>
 <h:outputText value="#{city.regionCode}"/>
 </rich:column>
 
-<rich:column sortBy="#{city.code}">
+<rich:column>
 <f:facet name="header">
 <h:outputText value="#{i18n.cityCode}" />
 </f:facet>
 <h:outputText value="#{city.code}"/>
 </rich:column>
 
-<rich:column sortBy="#{city.label}">
+<rich:column>
 <f:facet name="header">
+
+<a4j:commandLink rendered="#{empty cityListView.scrollForm.sorting.labelOrderType}" action="#{cityListController.refresh()}" render="cityPanelGroup">
 <h:outputText value="#{i18n.cityLabel}" />
+<f:setPropertyActionListener value="ASC" target="#{cityListView.scrollForm.sorting.labelOrderType}"></f:setPropertyActionListener>
+</a4j:commandLink>
+<a4j:commandLink rendered="#{cityListView.scrollForm.sorting.labelOrderType=='ASC'}" action="#{cityListController.refresh()}" render="cityPanelGroup">
+<h:outputText value="#{i18n.cityLabel}" />
+<f:setPropertyActionListener value="DESC" target="#{cityListView.scrollForm.sorting.labelOrderType}"></f:setPropertyActionListener>
+<span class="glyphicon glyphicon-triangle-top"/>
+</a4j:commandLink>
+<a4j:commandLink rendered="#{cityListView.scrollForm.sorting.labelOrderType=='DESC'}" action="#{cityListController.refresh()}" render="cityPanelGroup">
+<h:outputText value="#{i18n.cityLabel}" />
+<f:setPropertyActionListener value="#{null}" target="#{cityListView.scrollForm.sorting.labelOrderType}"></f:setPropertyActionListener>
+<span class="glyphicon glyphicon-triangle-bottom"/>
+</a4j:commandLink>
+
 </f:facet>
 <h:outputText value="#{city.label}"/>
 </rich:column>
@@ -160,14 +179,12 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="cityPanelG
 
 </div>
 
-<div class="scroller">
-	<h:inputText value="#{cityListView.scrollForm.page}">
-		<a4j:ajax event="keyup" render="cityPanelGroup" listener="#{cityListController.refresh}"
-				oncomplete="setCaretToEnd(event);" >
-			<a4j:attachQueue requestDelay="500" />
-		</a4j:ajax>
-	</h:inputText> / #{cityListView.scrollView.numberOfPages}
-</div>
+<ui:include src="/resources/components/scroller.xhtml">
+<ui:param name="scrollView" value="#{cityListView.scrollView}"/>
+<ui:param name="scrollForm" value="#{cityListView.scrollForm}"/>
+<ui:param name="scrollController" value="#{cityListController}"/>
+<ui:param name="panelGroup" value="cityPanelGroup"/>
+</ui:include>
 
 </ui:fragment>
 

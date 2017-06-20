@@ -2,14 +2,17 @@ package org.sklsft.demo.mvc.controller.localization.list.base;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import org.sklsft.commons.api.exception.rights.OperationDeniedException;
+import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.mvc.ajax.AjaxMethodTemplate;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
 import org.sklsft.demo.api.interfaces.localization.RegionService;
 import org.sklsft.demo.api.model.localization.filters.RegionFilter;
+import org.sklsft.demo.api.model.localization.sortings.RegionSorting;
 import org.sklsft.demo.api.model.localization.views.basic.RegionBasicView;
-import org.sklsft.demo.api.model.localization.views.full.RegionFullView;
 import org.sklsft.demo.mvc.controller.BaseController;
 import org.sklsft.demo.mvc.controller.CommonController;
 import org.sklsft.demo.mvc.model.localization.list.RegionListView;
@@ -49,15 +52,15 @@ this.regionListView = regionListView;
  * load object list
  */
 public void load() {
-this.resetRegionFilter();
-this.refresh();
+this.reset();
 }
 
 /**
  * refresh object list
  */
 public void refresh() {
-this.regionListView.setRegionList(this.regionService.loadList());
+regionListView.setScrollView(regionService.scroll(regionListView.getScrollForm()));
+regionListView.getScrollForm().setPage(regionListView.getScrollView().getCurrentPage());
 }
 
 /**
@@ -119,7 +122,7 @@ this.refresh();
 @AjaxMethod("Region.deleteList")
 public void deleteList() {
 List<Long> ids = new ArrayList<>();
-for (RegionBasicView region:regionListView.getRegionList()) {
+for (RegionBasicView region:regionListView.getScrollView().getElements()) {
 if (region.getSelected()) {
 ids.add(region.getId());
 }
@@ -129,10 +132,41 @@ this.refresh();
 }
 
 /**
- * reset object datatable filter
+ * reset filters and sortings
  */
-public void resetRegionFilter() {
-this.regionListView.setRegionFilter(new RegionFilter());
+public void reset() {
+this.regionListView.setScrollForm(new ScrollForm<>());
+this.regionListView.getScrollForm().setFilter(new RegionFilter());
+this.regionListView.getScrollForm().setSorting(new RegionSorting());
+refresh();
 }
 
+/**
+ * move forward
+ */
+public void moveForward() {
+regionListView.getScrollForm().setPage(regionListView.getScrollForm().getPage()+1);
+refresh();
+}
+/**
+ * move last
+ */
+public void moveLast() {
+regionListView.getScrollForm().setPage(regionListView.getScrollView().getNumberOfPages());
+refresh();
+}
+/**
+ * move backward
+ */
+public void moveBackward() {
+regionListView.getScrollForm().setPage(regionListView.getScrollForm().getPage()-1);
+refresh();
+}
+/**
+ * move first
+ */
+public void moveFirst() {
+regionListView.getScrollForm().setPage(1L);
+refresh();
+}
 }

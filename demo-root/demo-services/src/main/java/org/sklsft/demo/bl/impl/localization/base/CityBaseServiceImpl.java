@@ -1,14 +1,16 @@
 package org.sklsft.demo.bl.impl.localization.base;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
+
 import javax.inject.Inject;
-import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
+
+import org.sklsft.commons.api.model.ScrollForm;
+import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.demo.api.interfaces.localization.base.CityBaseService;
 import org.sklsft.demo.api.model.localization.filters.CityFilter;
 import org.sklsft.demo.api.model.localization.forms.CityForm;
+import org.sklsft.demo.api.model.localization.sortings.CitySorting;
 import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CityFullView;
 import org.sklsft.demo.bc.mapper.localization.forms.CityFormMapper;
@@ -66,21 +68,6 @@ return result;
 }
 
 /**
- * load filtered object list
- */
-@Override
-@Transactional(readOnly=true)
-public List<CityBasicView> loadList(CityFilter filter) {
-cityRightsManager.checkCanAccess();
-List<City> cityList = cityDao.loadListEagerly(filter);
-List<CityBasicView> result = new ArrayList<>(cityList.size());
-for (City city : cityList) {
-result.add(this.cityBasicViewMapper.mapFrom(new CityBasicView(),city));
-}
-return result;
-}
-
-/**
  * load object list from region
  */
 @Override
@@ -92,6 +79,27 @@ List<CityBasicView> result = new ArrayList<>(cityList.size());
 for (City city : cityList) {
 result.add(this.cityBasicViewMapper.mapFrom(new CityBasicView(),city));
 }
+return result;
+}
+
+/**
+ * scroll object list
+ */
+@Override
+@Transactional(readOnly=true)
+public ScrollView<CityBasicView> scroll(ScrollForm<CityFilter, CitySorting> form) {
+cityRightsManager.checkCanAccess();
+ScrollView<CityBasicView> result = new ScrollView<>();
+result.setSize(cityDao.count());
+Long count = cityDao.count(form.getFilter());
+result.setNumberOfPages(count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L));
+result.setCurrentPage(Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, result.getNumberOfPages())));
+List<City> list = cityDao.scroll(form.getFilter(), form.getSorting(),(result.getCurrentPage()-1)*form.getElementsPerPage(), form.getElementsPerPage());
+List<CityBasicView> elements = new ArrayList<>(list.size());
+for (City city : list) {
+elements.add(this.cityBasicViewMapper.mapFrom(new CityBasicView(),city));
+}
+result.setElements(elements);
 return result;
 }
 
