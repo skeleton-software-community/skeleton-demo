@@ -104,6 +104,27 @@ return result;
 }
 
 /**
+ * scroll object list from region
+ */
+@Override
+@Transactional(readOnly=true)
+public ScrollView<CityBasicView> scrollFromRegion (Long regionId, ScrollForm<CityFilter, CitySorting> form) {
+cityRightsManager.checkCanAccess();
+ScrollView<CityBasicView> result = new ScrollView<>();
+result.setSize(cityDao.countFromRegion(regionId));
+Long count = cityDao.countFromRegion(regionId, form.getFilter());
+result.setNumberOfPages(count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L));
+result.setCurrentPage(Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, result.getNumberOfPages())));
+List<City> list = cityDao.scrollFromRegion(regionId, form.getFilter(), form.getSorting(),(result.getCurrentPage()-1)*form.getElementsPerPage(), form.getElementsPerPage());
+List<CityBasicView> elements = new ArrayList<>(list.size());
+for (City city : list) {
+elements.add(this.cityBasicViewMapper.mapFrom(new CityBasicView(),city));
+}
+result.setElements(elements);
+return result;
+}
+
+/**
  * load object
  */
 @Override

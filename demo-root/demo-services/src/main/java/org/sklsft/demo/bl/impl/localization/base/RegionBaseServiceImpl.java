@@ -104,6 +104,27 @@ return result;
 }
 
 /**
+ * scroll object list from country
+ */
+@Override
+@Transactional(readOnly=true)
+public ScrollView<RegionBasicView> scrollFromCountry (Long countryId, ScrollForm<RegionFilter, RegionSorting> form) {
+regionRightsManager.checkCanAccess();
+ScrollView<RegionBasicView> result = new ScrollView<>();
+result.setSize(regionDao.countFromCountry(countryId));
+Long count = regionDao.countFromCountry(countryId, form.getFilter());
+result.setNumberOfPages(count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L));
+result.setCurrentPage(Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, result.getNumberOfPages())));
+List<Region> list = regionDao.scrollFromCountry(countryId, form.getFilter(), form.getSorting(),(result.getCurrentPage()-1)*form.getElementsPerPage(), form.getElementsPerPage());
+List<RegionBasicView> elements = new ArrayList<>(list.size());
+for (Region region : list) {
+elements.add(this.regionBasicViewMapper.mapFrom(new RegionBasicView(),region));
+}
+result.setElements(elements);
+return result;
+}
+
+/**
  * load object
  */
 @Override

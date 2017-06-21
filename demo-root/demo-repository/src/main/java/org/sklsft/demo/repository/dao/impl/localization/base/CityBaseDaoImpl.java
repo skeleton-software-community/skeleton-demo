@@ -1,17 +1,16 @@
 package org.sklsft.demo.repository.dao.impl.localization.base;
 
+import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addOrder;
 import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
 
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
-import org.sklsft.commons.api.model.OrderType;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.localization.filters.CityFilter;
 import org.sklsft.demo.api.model.localization.sortings.CitySorting;
@@ -91,6 +90,38 @@ return (Long) criteria.uniqueResult();
 }
 
 /**
+ * count object list from region
+ */
+public Long countFromRegion(Long regionId) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class).setProjection(Projections.rowCount());
+if (regionId == null){
+criteria.add(Restrictions.isNull("region.id"));
+} else {
+criteria.add(Restrictions.eq("region.id", regionId));
+}
+return (Long) criteria.uniqueResult();
+}
+
+/**
+ * count filtered object list from region
+ */
+public Long countFromRegion(Long regionId, CityFilter filter) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class).setProjection(Projections.rowCount());
+if (regionId == null){
+criteria.add(Restrictions.isNull("region.id"));
+} else {
+criteria.add(Restrictions.eq("region.id", regionId));
+}
+Criteria regionCriteria = criteria.createCriteria("region", JoinType.LEFT_OUTER_JOIN);
+Criteria regionCountryCriteria = regionCriteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
+addStringContainsRestriction(regionCountryCriteria, "{alias}.code", filter.getRegionCountryCode());
+addStringContainsRestriction(regionCriteria, "{alias}.code", filter.getRegionCode());
+addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+return (Long) criteria.uniqueResult();
+}
+
+/**
  * scroll filtered object list
  */
 public List<City> scroll(CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults) {
@@ -101,34 +132,39 @@ addStringContainsRestriction(regionCountryCriteria, "{alias}.code", filter.getRe
 addStringContainsRestriction(regionCriteria, "{alias}.code", filter.getRegionCode());
 addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
 addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
-if (sorting.getRegionCountryCodeOrderType() != null) {
-if (sorting.getRegionCountryCodeOrderType().equals(OrderType.ASC)) {
-regionCountryCriteria.addOrder(Order.asc("code"));
+addOrder(regionCountryCriteria, "code", sorting.getRegionCountryCodeOrderType());
+addOrder(regionCriteria, "code", sorting.getRegionCodeOrderType());
+addOrder(criteria, "code", sorting.getCodeOrderType());
+addOrder(criteria, "label", sorting.getLabelOrderType());
+if (firstResult != null){
+criteria.setFirstResult(firstResult.intValue());
+}
+if (maxResults != null){
+criteria.setMaxResults(maxResults.intValue());
+}
+return criteria.list();
+}
+
+/**
+ * scroll filtered object list from region
+ */
+public List<City> scrollFromRegion(Long regionId, CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class);
+if (regionId == null){
+criteria.add(Restrictions.isNull("region.id"));
 } else {
-regionCountryCriteria.addOrder(Order.desc("code"));
+criteria.add(Restrictions.eq("region.id", regionId));
 }
-}
-if (sorting.getRegionCodeOrderType() != null) {
-if (sorting.getRegionCodeOrderType().equals(OrderType.ASC)) {
-regionCriteria.addOrder(Order.asc("code"));
-} else {
-regionCriteria.addOrder(Order.desc("code"));
-}
-}
-if (sorting.getCodeOrderType() != null) {
-if (sorting.getCodeOrderType().equals(OrderType.ASC)) {
-criteria.addOrder(Order.asc("code"));
-} else {
-criteria.addOrder(Order.desc("code"));
-}
-}
-if (sorting.getLabelOrderType() != null) {
-if (sorting.getLabelOrderType().equals(OrderType.ASC)) {
-criteria.addOrder(Order.asc("label"));
-} else {
-criteria.addOrder(Order.desc("label"));
-}
-}
+Criteria regionCriteria = criteria.createCriteria("region", JoinType.LEFT_OUTER_JOIN);
+Criteria regionCountryCriteria = regionCriteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
+addStringContainsRestriction(regionCountryCriteria, "{alias}.code", filter.getRegionCountryCode());
+addStringContainsRestriction(regionCriteria, "{alias}.code", filter.getRegionCode());
+addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+addOrder(regionCountryCriteria, "code", sorting.getRegionCountryCodeOrderType());
+addOrder(regionCriteria, "code", sorting.getRegionCodeOrderType());
+addOrder(criteria, "code", sorting.getCodeOrderType());
+addOrder(criteria, "label", sorting.getLabelOrderType());
 if (firstResult != null){
 criteria.setFirstResult(firstResult.intValue());
 }

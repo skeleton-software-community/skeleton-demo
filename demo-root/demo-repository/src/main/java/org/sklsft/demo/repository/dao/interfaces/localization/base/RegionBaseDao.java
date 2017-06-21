@@ -15,12 +15,12 @@ public interface RegionBaseDao extends BaseDao<Region, Long> {
 /**
  * load object list from country
  */
-List<Region> loadListFromCountry (Long countryId);
+List<Region> loadListFromCountry(Long countryId);
 
 /**
  * load object list eagerly from country
  */
-List<Region> loadListEagerlyFromCountry (Long countryId);
+List<Region> loadListEagerlyFromCountry(Long countryId);
 
 /**
  * count filtered object list
@@ -28,9 +28,24 @@ List<Region> loadListEagerlyFromCountry (Long countryId);
 Long count(RegionFilter filter);
 
 /**
+ * count object list from country
+ */
+Long countFromCountry(Long countryId);
+
+/**
+ * count filtered object list from country
+ */
+Long countFromCountry(Long countryId, RegionFilter filter);
+
+/**
  * scroll filtered object list
  */
 List<Region> scroll(RegionFilter filter, RegionSorting ordering, Long firstResult, Long maxResults);
+
+/**
+ * scroll filtered object from country
+ */
+List<Region> scrollFromCountry(Long countryId, RegionFilter filter, RegionSorting ordering, Long firstResult, Long maxResults);
 
 /**
  * exists object

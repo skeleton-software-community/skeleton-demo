@@ -33,6 +33,11 @@ List<RegionBasicView> loadListFromCountry (Long countryId);
 ScrollView<RegionBasicView> scroll(ScrollForm<RegionFilter, RegionSorting> form);
 
 /**
+ * scroll object list from country
+ */
+ScrollView<RegionBasicView> scrollFromCountry (Long countryId, ScrollForm<RegionFilter, RegionSorting> form);
+
+/**
  * load object
  */
 RegionFullView load(Long id);
