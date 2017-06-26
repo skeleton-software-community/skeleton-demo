@@ -134,32 +134,4 @@ this.cityListView.getScrollForm().setSorting(new CitySorting());
 refresh();
 }
 
-/**
- * move forward
- */
-public void moveForward() {
-cityListView.getScrollForm().setPage(cityListView.getScrollForm().getPage()+1);
-refresh();
-}
-/**
- * move last
- */
-public void moveLast() {
-cityListView.getScrollForm().setPage(cityListView.getScrollView().getNumberOfPages());
-refresh();
-}
-/**
- * move backward
- */
-public void moveBackward() {
-cityListView.getScrollForm().setPage(cityListView.getScrollForm().getPage()-1);
-refresh();
-}
-/**
- * move first
- */
-public void moveFirst() {
-cityListView.getScrollForm().setPage(1L);
-refresh();
-}
 }

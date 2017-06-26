@@ -141,32 +141,4 @@ this.regionListView.getScrollForm().setSorting(new RegionSorting());
 refresh();
 }
 
-/**
- * move forward
- */
-public void moveForward() {
-regionListView.getScrollForm().setPage(regionListView.getScrollForm().getPage()+1);
-refresh();
-}
-/**
- * move last
- */
-public void moveLast() {
-regionListView.getScrollForm().setPage(regionListView.getScrollView().getNumberOfPages());
-refresh();
-}
-/**
- * move backward
- */
-public void moveBackward() {
-regionListView.getScrollForm().setPage(regionListView.getScrollForm().getPage()-1);
-refresh();
-}
-/**
- * move first
- */
-public void moveFirst() {
-regionListView.getScrollForm().setPage(1L);
-refresh();
-}
 }

@@ -6,10 +6,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.sklsft.commons.api.exception.rights.OperationDeniedException;
+import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
 import org.sklsft.demo.api.interfaces.localization.CityService;
 import org.sklsft.demo.api.interfaces.localization.RegionService;
 import org.sklsft.demo.api.model.localization.filters.CityFilter;
+import org.sklsft.demo.api.model.localization.sortings.CitySorting;
 import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;
 import org.sklsft.demo.mvc.controller.BaseController;
 import org.sklsft.demo.mvc.controller.CommonController;
@@ -51,8 +53,15 @@ regionDetailView.setSelectedRegion(this.regionService.load(this.regionDetailView
  * load one to many city list
  */
 public void loadCityList() {
-this.resetCityFilter();
-regionDetailView.setCityList(this.cityService.loadListFromRegion(this.regionDetailView.getSelectedRegion().getId()));
+this.resetCityList();
+}
+
+/**
+ * refresh one to many city list
+ */
+public void refreshCityList() {
+regionDetailView.setCityScrollView(cityService.scrollFromRegion(regionDetailView.getSelectedRegion().getId(), regionDetailView.getCityScrollForm()));
+regionDetailView.getCityScrollForm().setPage(regionDetailView.getCityScrollView().getCurrentPage());
 }
 
 /**
@@ -72,7 +81,7 @@ displayError(e.getMessage());
 @AjaxMethod("City.save")
 public void saveCity() {
 cityService.saveFromRegion(this.regionDetailView.getSelectedRegion().getId(), regionDetailView.getSelectedCity().getForm());
-loadCityList();
+refreshCityList();
 }
 
 /**
@@ -97,7 +106,7 @@ regionDetailView.setSelectedCity(cityService.load(id));
 @AjaxMethod("City.update")
 public void updateCity() {
 cityService.update(regionDetailView.getSelectedCity().getId(), regionDetailView.getSelectedCity().getForm());
-loadCityList();
+refreshCityList();
 }
 
 /**
@@ -106,7 +115,7 @@ loadCityList();
 @AjaxMethod("City.delete")
 public void deleteCity(Long id) {
 cityService.delete(id);
-loadCityList();
+refreshCityList();
 }
 
 /**
@@ -115,20 +124,23 @@ loadCityList();
 @AjaxMethod("City.deleteList")
 public void deleteCityList() {
 List<Long> ids = new ArrayList<>();
-for (CityBasicView city:regionDetailView.getCityList()) {
+for (CityBasicView city:regionDetailView.getCityScrollView().getElements()) {
 if (city.getSelected()) {
 ids.add(city.getId());
 }
 }
 cityService.deleteList(ids);
-loadCityList();
+refreshCityList();
 }
 
 /**
- * reset one to many CityFilter datatable filter
+ * reset one to many CityFilter datatable filter and sorting
  */
-public void resetCityFilter() {
-regionDetailView.setCityFilter(new CityFilter());
+public void resetCityList() {
+this.regionDetailView.setCityScrollForm(new ScrollForm<>());
+this.regionDetailView.getCityScrollForm().setFilter(new CityFilter());
+this.regionDetailView.getCityScrollForm().setSorting(new CitySorting());
+refreshCityList();
 }
 
 }

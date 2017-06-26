@@ -4,8 +4,7 @@ xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
 xmlns:rich = "http://richfaces.org/rich"
 xmlns:a4j = "http://richfaces.org/a4j"
-xmlns:c="http://java.sun.com/jstl/core"
-xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+xmlns:cc="http://java.sun.com/jsf/composite/components"
 template="/templates/template.xhtml">
 
 <!-- -->
@@ -35,7 +34,7 @@ template="/templates/template.xhtml">
 
 <rich:dataTable rows="10"
 id="countryList" var="country" name="datatable"
-value="#{countryListView.scrollView.elements}" rowClasses="datatableRow, datatableRowLight">
+value="#{countryListView.scrollView.elements}" headerClass="datatableHeader" rowClasses="datatableRow, datatableRowLight">
 
 <f:facet name="header">
 <rich:columnGroup>
@@ -104,24 +103,22 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="countryPan
 
 <rich:column>
 <f:facet name="header">
-<ui:include src="/resources/components/datatable-header.xhtml">
-<ui:param name="label" value="#{i18n.countryCode}"/>
-<ui:param name="orderType" value="#{countryListView.scrollForm.sorting.codeOrderType}"/>
-<ui:param name="scrollController" value="#{countryListController}"/>
-<ui:param name="panelGroup" value="countryPanelGroup"/>
-</ui:include>
+<cc:datatableHeader
+label="#{i18n.countryCode}"
+orderType="#{countryListView.scrollForm.sorting.codeOrderType}"
+action="#{countryListController.refresh}"
+render="countryPanelGroup"/>
 </f:facet>
 <h:outputText value="#{country.code}"/>
 </rich:column>
 
 <rich:column>
 <f:facet name="header">
-<ui:include src="/resources/components/datatable-header.xhtml">
-<ui:param name="label" value="#{i18n.countryLabel}"/>
-<ui:param name="orderType" value="#{countryListView.scrollForm.sorting.labelOrderType}"/>
-<ui:param name="scrollController" value="#{countryListController}"/>
-<ui:param name="panelGroup" value="countryPanelGroup"/>
-</ui:include>
+<cc:datatableHeader
+label="#{i18n.countryLabel}"
+orderType="#{countryListView.scrollForm.sorting.labelOrderType}"
+action="#{countryListController.refresh}"
+render="countryPanelGroup"/>
 </f:facet>
 <h:outputText value="#{country.label}"/>
 </rich:column>
@@ -130,12 +127,11 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="countryPan
 
 </div>
 
-<ui:include src="/resources/components/scroller.xhtml">
-<ui:param name="scrollView" value="#{countryListView.scrollView}"/>
-<ui:param name="scrollForm" value="#{countryListView.scrollForm}"/>
-<ui:param name="scrollController" value="#{countryListController}"/>
-<ui:param name="panelGroup" value="countryPanelGroup"/>
-</ui:include>
+<cc:datatableScroller
+page="#{countryListView.scrollForm.page}"
+numberOfPages="#{countryListView.scrollView.numberOfPages}"
+action="#{countryListController.refresh}"
+render="countryPanelGroup"/>
 
 </ui:fragment>
 

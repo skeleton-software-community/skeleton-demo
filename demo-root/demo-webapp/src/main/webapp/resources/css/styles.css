@@ -178,10 +178,14 @@ ul.nav.nav-pills {
 * tables definitions
 */
 
-.scroller {
+.datatable-scroller {
 	text-align:center;
 	padding-top:8px;
 	padding-bottom:8px;
+}
+
+.datatable-scroller .datatable-scroller-page-input {
+	width:50px;
 }
 
 .dropList {

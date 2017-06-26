@@ -4,8 +4,7 @@ xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
 xmlns:rich = "http://richfaces.org/rich"
 xmlns:a4j = "http://richfaces.org/a4j"
-xmlns:c="http://java.sun.com/jstl/core"
-xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+xmlns:cc="http://java.sun.com/jsf/composite/components"
 template="/templates/template.xhtml">
 
 <!-- -->
@@ -35,7 +34,7 @@ template="/templates/template.xhtml">
 
 <rich:dataTable rows="10"
 id="cityList" var="city" name="datatable"
-value="#{cityListView.scrollView.elements}" rowClasses="datatableRow, datatableRowLight">
+value="#{cityListView.scrollView.elements}" headerClass="datatableHeader" rowClasses="datatableRow, datatableRowLight">
 
 <f:facet name="header">
 <rich:columnGroup>
@@ -125,48 +124,44 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="cityPanelG
 
 <rich:column>
 <f:facet name="header">
-<ui:include src="/resources/components/datatable-header.xhtml">
-<ui:param name="label" value="#{i18n.cityRegionCountryCode}"/>
-<ui:param name="orderType" value="#{cityListView.scrollForm.sorting.regionCountryCodeOrderType}"/>
-<ui:param name="scrollController" value="#{cityListController}"/>
-<ui:param name="panelGroup" value="cityPanelGroup"/>
-</ui:include>
+<cc:datatableHeader
+label="#{i18n.cityRegionCountryCode}"
+orderType="#{cityListView.scrollForm.sorting.regionCountryCodeOrderType}"
+action="#{cityListController.refresh}"
+render="cityPanelGroup"/>
 </f:facet>
 <h:outputText value="#{city.regionCountryCode}"/>
 </rich:column>
 
 <rich:column>
 <f:facet name="header">
-<ui:include src="/resources/components/datatable-header.xhtml">
-<ui:param name="label" value="#{i18n.cityRegionCode}"/>
-<ui:param name="orderType" value="#{cityListView.scrollForm.sorting.regionCodeOrderType}"/>
-<ui:param name="scrollController" value="#{cityListController}"/>
-<ui:param name="panelGroup" value="cityPanelGroup"/>
-</ui:include>
+<cc:datatableHeader
+label="#{i18n.cityRegionCode}"
+orderType="#{cityListView.scrollForm.sorting.regionCodeOrderType}"
+action="#{cityListController.refresh}"
+render="cityPanelGroup"/>
 </f:facet>
 <h:outputText value="#{city.regionCode}"/>
 </rich:column>
 
 <rich:column>
 <f:facet name="header">
-<ui:include src="/resources/components/datatable-header.xhtml">
-<ui:param name="label" value="#{i18n.cityCode}"/>
-<ui:param name="orderType" value="#{cityListView.scrollForm.sorting.codeOrderType}"/>
-<ui:param name="scrollController" value="#{cityListController}"/>
-<ui:param name="panelGroup" value="cityPanelGroup"/>
-</ui:include>
+<cc:datatableHeader
+label="#{i18n.cityCode}"
+orderType="#{cityListView.scrollForm.sorting.codeOrderType}"
+action="#{cityListController.refresh}"
+render="cityPanelGroup"/>
 </f:facet>
 <h:outputText value="#{city.code}"/>
 </rich:column>
 
 <rich:column>
 <f:facet name="header">
-<ui:include src="/resources/components/datatable-header.xhtml">
-<ui:param name="label" value="#{i18n.cityLabel}"/>
-<ui:param name="orderType" value="#{cityListView.scrollForm.sorting.labelOrderType}"/>
-<ui:param name="scrollController" value="#{cityListController}"/>
-<ui:param name="panelGroup" value="cityPanelGroup"/>
-</ui:include>
+<cc:datatableHeader
+label="#{i18n.cityLabel}"
+orderType="#{cityListView.scrollForm.sorting.labelOrderType}"
+action="#{cityListController.refresh}"
+render="cityPanelGroup"/>
 </f:facet>
 <h:outputText value="#{city.label}"/>
 </rich:column>
@@ -175,12 +170,11 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="cityPanelG
 
 </div>
 
-<ui:include src="/resources/components/scroller.xhtml">
-<ui:param name="scrollView" value="#{cityListView.scrollView}"/>
-<ui:param name="scrollForm" value="#{cityListView.scrollForm}"/>
-<ui:param name="scrollController" value="#{cityListController}"/>
-<ui:param name="panelGroup" value="cityPanelGroup"/>
-</ui:include>
+<cc:datatableScroller
+page="#{cityListView.scrollForm.page}"
+numberOfPages="#{cityListView.scrollView.numberOfPages}"
+action="#{cityListController.refresh}"
+render="cityPanelGroup"/>
 
 </ui:fragment>
 

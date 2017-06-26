@@ -1,10 +1,12 @@
 package org.sklsft.demo.mvc.model.localization.detail;
 
 import java.io.Serializable;
-import java.util.List;
 
+import org.sklsft.commons.api.model.ScrollForm;
+import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.commons.mvc.scopes.ViewScope;
 import org.sklsft.demo.api.model.localization.filters.RegionFilter;
+import org.sklsft.demo.api.model.localization.sortings.RegionSorting;
 import org.sklsft.demo.api.model.localization.views.basic.RegionBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CountryFullView;
 import org.sklsft.demo.api.model.localization.views.full.RegionFullView;
@@ -27,8 +29,8 @@ private static final long serialVersionUID = 1L;
  */
 private CountryFullView selectedCountry = new CountryFullView();
 
-private List<RegionBasicView> regionList;
-private RegionFilter regionFilter = new RegionFilter();
+protected ScrollForm<RegionFilter, RegionSorting> regionScrollForm = new ScrollForm<>();
+protected ScrollView<RegionBasicView> regionScrollView = new ScrollView<>();
 private RegionFullView selectedRegion;
 
 /*
@@ -41,18 +43,18 @@ public void setSelectedCountry(CountryFullView selectedCountry) {
 this.selectedCountry = selectedCountry;
 }
 
-public List<RegionBasicView> getRegionList() {
-return regionList;
+public ScrollView<RegionBasicView> getRegionScrollView() {
+return regionScrollView;
 }
-public void setRegionList(List<RegionBasicView> regionList) {
-this.regionList = regionList;
+public void setRegionScrollView(ScrollView<RegionBasicView> regionScrollView) {
+this.regionScrollView = regionScrollView;
 }
 
-public RegionFilter getRegionFilter() {
-return regionFilter;
+public ScrollForm<RegionFilter, RegionSorting> getRegionScrollForm() {
+return regionScrollForm;
 }
-public void setRegionFilter(RegionFilter regionFilter) {
-this.regionFilter = regionFilter;
+public void setRegionScrollForm(ScrollForm<RegionFilter, RegionSorting> RegionScrollForm) {
+this.regionScrollForm = regionScrollForm;
 }
 
 public RegionFullView getSelectedRegion() {

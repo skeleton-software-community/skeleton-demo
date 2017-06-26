@@ -6,11 +6,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.sklsft.commons.api.exception.rights.OperationDeniedException;
+import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.mvc.ajax.AjaxMethodTemplate;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
 import org.sklsft.demo.api.interfaces.localization.CountryService;
 import org.sklsft.demo.api.interfaces.localization.RegionService;
 import org.sklsft.demo.api.model.localization.filters.RegionFilter;
+import org.sklsft.demo.api.model.localization.sortings.RegionSorting;
 import org.sklsft.demo.api.model.localization.views.basic.RegionBasicView;
 import org.sklsft.demo.mvc.controller.BaseController;
 import org.sklsft.demo.mvc.controller.CommonController;
@@ -51,8 +53,15 @@ countryDetailView.setSelectedCountry(this.countryService.load(this.countryDetail
  * load one to many region list
  */
 public void loadRegionList() {
-this.resetRegionFilter();
-countryDetailView.setRegionList(this.regionService.loadListFromCountry(this.countryDetailView.getSelectedCountry().getId()));
+this.resetRegionList();
+}
+
+/**
+ * refresh one to many region list
+ */
+public void refreshRegionList() {
+countryDetailView.setRegionScrollView(regionService.scrollFromCountry(countryDetailView.getSelectedCountry().getId(), countryDetailView.getRegionScrollForm()));
+countryDetailView.getRegionScrollForm().setPage(countryDetailView.getRegionScrollView().getCurrentPage());
 }
 
 /**
@@ -103,7 +112,7 @@ countryDetailView.setSelectedRegion(regionService.load(id));
 @AjaxMethod("Region.update")
 public void updateRegion() {
 regionService.update(countryDetailView.getSelectedRegion().getId(), countryDetailView.getSelectedRegion().getForm());
-loadRegionList();
+refreshRegionList();
 }
 
 /**
@@ -112,7 +121,7 @@ loadRegionList();
 @AjaxMethod("Region.delete")
 public void deleteRegion(Long id) {
 regionService.delete(id);
-loadRegionList();
+refreshRegionList();
 }
 
 /**
@@ -121,20 +130,23 @@ loadRegionList();
 @AjaxMethod("Region.deleteList")
 public void deleteRegionList() {
 List<Long> ids = new ArrayList<>();
-for (RegionBasicView region:countryDetailView.getRegionList()) {
+for (RegionBasicView region:countryDetailView.getRegionScrollView().getElements()) {
 if (region.getSelected()) {
 ids.add(region.getId());
 }
 }
 regionService.deleteList(ids);
-loadRegionList();
+refreshRegionList();
 }
 
 /**
- * reset one to many RegionFilter datatable filter
+ * reset one to many RegionFilter datatable filter and sorting
  */
-public void resetRegionFilter() {
-countryDetailView.setRegionFilter(new RegionFilter());
+public void resetRegionList() {
+this.countryDetailView.setRegionScrollForm(new ScrollForm<>());
+this.countryDetailView.getRegionScrollForm().setFilter(new RegionFilter());
+this.countryDetailView.getRegionScrollForm().setSorting(new RegionSorting());
+refreshRegionList();
 }
 
 }

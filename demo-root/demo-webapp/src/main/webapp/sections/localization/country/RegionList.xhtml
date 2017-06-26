@@ -4,7 +4,7 @@ xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
 xmlns:rich = "http://richfaces.org/rich"
 xmlns:a4j = "http://richfaces.org/a4j"
-xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+xmlns:cc="http://java.sun.com/jsf/composite/components"
 template="/templates/template.xhtml">
 
 <!-- -->
@@ -23,24 +23,24 @@ template="/templates/template.xhtml">
 
 <ui:include src="/sections/localization/country/CountryDetailsMenu.xhtml"/>
 
-<h2>
-#{i18n.regionList}
-</h2>
 <h:panelGroup id="regionPanelGroup">
 
+<h2>
+#{i18n.regionList} (#{countryDetailView.regionScrollView.size})
+</h2>
 <a4j:region>
 
-<ui:fragment rendered="#{empty countryDetailView.regionList}">
+<ui:fragment rendered="#{countryDetailView.regionScrollView.size == 0}">
 #{i18n.noDataFound}<br/>
 </ui:fragment>
 
-<ui:fragment rendered="#{not empty countryDetailView.regionList}">
+<ui:fragment rendered="#{countryDetailView.regionScrollView.size > 0}">
 
 <div style="overflow-x:scroll">
 
 <rich:dataTable rows="10"
 id="regionList" var="region" name="datatable"
-value="#{countryDetailView.regionList}" headerClass="datatableHeader" rowClasses="datatableRow, datatableRowLight">
+value="#{countryDetailView.regionScrollView.elements}" headerClass="datatableHeader" rowClasses="datatableRow, datatableRowLight">
 
 <f:facet name="header">
 <rich:columnGroup>
@@ -54,29 +54,29 @@ onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="
 </rich:column>
 
 <rich:column>
-<a4j:commandLink action="#{countryDetailController.resetRegionFilter}" reRender="regionList, regionScroller">
+<a4j:commandLink action="#{countryDetailController.resetRegionList}" render="regionPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
 </a4j:commandLink>
 </rich:column>
 
 <rich:column>
-<h:inputText id="regionCodeFilter"
-value="#{countryDetailView.regionFilter.code}"
+<h:inputText
+value="#{countryDetailView.regionScrollForm.filter.code}"
 styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="regionList, regionScroller"
-oncomplete="setCaretToEnd(event);" >
-<a4j:attachQueue requestDelay="500" />
+<a4j:ajax event="keyup" render="regionPanelGroup" listener="#{countryDetailController.refreshRegionList}"
+oncomplete="setCaretToEnd(event);">
+<a4j:attachQueue requestDelay="500"/>
 </a4j:ajax>
 </h:inputText>
 </rich:column>
 
 <rich:column>
-<h:inputText id="regionLabelFilter"
-value="#{countryDetailView.regionFilter.label}"
+<h:inputText
+value="#{countryDetailView.regionScrollForm.filter.label}"
 styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="regionList, regionScroller"
-oncomplete="setCaretToEnd(event);" >
-<a4j:attachQueue requestDelay="500" />
+<a4j:ajax event="keyup" render="regionPanelGroup" listener="#{countryDetailController.refreshRegionList}"
+oncomplete="setCaretToEnd(event);">
+<a4j:attachQueue requestDelay="500"/>
 </a4j:ajax>
 </h:inputText>
 </rich:column>
@@ -108,18 +108,24 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" execute="@this" re
 </h:panelGrid>
 </rich:column>
 
-<rich:column sortBy="#{region.code}"
-filterType="custom" filterExpression="#{fn:containsIgnoreCase(region.code, countryDetailView.regionFilter.code)}">
+<rich:column>
 <f:facet name="header">
-<h:outputText value="#{i18n.regionCode}" />
+<cc:datatableHeader
+label="#{i18n.regionCode}"
+orderType="#{countryDetailView.regionScrollForm.sorting.codeOrderType}"
+action="#{countryDetailController.refreshRegionList}"
+render="regionPanelGroup"/>
 </f:facet>
 <h:outputText value="#{region.code}"/>
 </rich:column>
 
-<rich:column sortBy="#{region.label}"
-filterType="custom" filterExpression="#{fn:containsIgnoreCase(region.label, countryDetailView.regionFilter.label)}">
+<rich:column>
 <f:facet name="header">
-<h:outputText value="#{i18n.regionLabel}" />
+<cc:datatableHeader
+label="#{i18n.regionLabel}"
+orderType="#{countryDetailView.regionScrollForm.sorting.labelOrderType}"
+action="#{countryDetailController.refreshRegionList}"
+render="regionPanelGroup"/>
 </f:facet>
 <h:outputText value="#{region.label}"/>
 </rich:column>
@@ -128,9 +134,11 @@ filterType="custom" filterExpression="#{fn:containsIgnoreCase(region.label, coun
 
 </div>
 
-<div class="scroller">
-<rich:dataScroller id="regionScroller" maxPages="5" renderIfSinglePage="false" for="regionList"/>
-</div>
+<cc:datatableScroller
+page="#{countryDetailView.regionScrollForm.page}"
+numberOfPages="#{countryDetailView.regionScrollView.numberOfPages}"
+action="#{countryDetailController.refreshRegionList}"
+render="regionPanelGroup"/>
 
 </ui:fragment>
 

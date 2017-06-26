@@ -139,32 +139,4 @@ this.countryListView.getScrollForm().setSorting(new CountrySorting());
 refresh();
 }
 
-/**
- * move forward
- */
-public void moveForward() {
-countryListView.getScrollForm().setPage(countryListView.getScrollForm().getPage()+1);
-refresh();
-}
-/**
- * move last
- */
-public void moveLast() {
-countryListView.getScrollForm().setPage(countryListView.getScrollView().getNumberOfPages());
-refresh();
-}
-/**
- * move backward
- */
-public void moveBackward() {
-countryListView.getScrollForm().setPage(countryListView.getScrollForm().getPage()-1);
-refresh();
-}
-/**
- * move first
- */
-public void moveFirst() {
-countryListView.getScrollForm().setPage(1L);
-refresh();
-}
 }

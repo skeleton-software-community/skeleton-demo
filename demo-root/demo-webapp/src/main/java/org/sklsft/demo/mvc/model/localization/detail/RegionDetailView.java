@@ -1,10 +1,12 @@
 package org.sklsft.demo.mvc.model.localization.detail;
 
 import java.io.Serializable;
-import java.util.List;
 
+import org.sklsft.commons.api.model.ScrollForm;
+import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.commons.mvc.scopes.ViewScope;
 import org.sklsft.demo.api.model.localization.filters.CityFilter;
+import org.sklsft.demo.api.model.localization.sortings.CitySorting;
 import org.sklsft.demo.api.model.localization.views.basic.CityBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CityFullView;
 import org.sklsft.demo.api.model.localization.views.full.RegionFullView;
@@ -27,8 +29,8 @@ private static final long serialVersionUID = 1L;
  */
 private RegionFullView selectedRegion = new RegionFullView();
 
-private List<CityBasicView> cityList;
-private CityFilter cityFilter = new CityFilter();
+protected ScrollForm<CityFilter, CitySorting> cityScrollForm = new ScrollForm<>();
+protected ScrollView<CityBasicView> cityScrollView = new ScrollView<>();
 private CityFullView selectedCity;
 
 /*
@@ -41,18 +43,18 @@ public void setSelectedRegion(RegionFullView selectedRegion) {
 this.selectedRegion = selectedRegion;
 }
 
-public List<CityBasicView> getCityList() {
-return cityList;
+public ScrollView<CityBasicView> getCityScrollView() {
+return cityScrollView;
 }
-public void setCityList(List<CityBasicView> cityList) {
-this.cityList = cityList;
+public void setCityScrollView(ScrollView<CityBasicView> cityScrollView) {
+this.cityScrollView = cityScrollView;
 }
 
-public CityFilter getCityFilter() {
-return cityFilter;
+public ScrollForm<CityFilter, CitySorting> getCityScrollForm() {
+return cityScrollForm;
 }
-public void setCityFilter(CityFilter cityFilter) {
-this.cityFilter = cityFilter;
+public void setCityScrollForm(ScrollForm<CityFilter, CitySorting> CityScrollForm) {
+this.cityScrollForm = cityScrollForm;
 }
 
 public CityFullView getSelectedCity() {

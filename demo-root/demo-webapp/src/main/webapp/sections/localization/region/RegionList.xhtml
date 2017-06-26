@@ -4,8 +4,7 @@ xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
 xmlns:rich = "http://richfaces.org/rich"
 xmlns:a4j = "http://richfaces.org/a4j"
-xmlns:c="http://java.sun.com/jstl/core"
-xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+xmlns:cc="http://java.sun.com/jsf/composite/components"
 template="/templates/template.xhtml">
 
 <!-- -->
@@ -35,7 +34,7 @@ template="/templates/template.xhtml">
 
 <rich:dataTable rows="10"
 id="regionList" var="region" name="datatable"
-value="#{regionListView.scrollView.elements}" rowClasses="datatableRow, datatableRowLight">
+value="#{regionListView.scrollView.elements}" headerClass="datatableHeader" rowClasses="datatableRow, datatableRowLight">
 
 <f:facet name="header">
 <rich:columnGroup>
@@ -115,36 +114,33 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="regionPane
 
 <rich:column>
 <f:facet name="header">
-<ui:include src="/resources/components/datatable-header.xhtml">
-<ui:param name="label" value="#{i18n.regionCountryCode}"/>
-<ui:param name="orderType" value="#{regionListView.scrollForm.sorting.countryCodeOrderType}"/>
-<ui:param name="scrollController" value="#{regionListController}"/>
-<ui:param name="panelGroup" value="regionPanelGroup"/>
-</ui:include>
+<cc:datatableHeader
+label="#{i18n.regionCountryCode}"
+orderType="#{regionListView.scrollForm.sorting.countryCodeOrderType}"
+action="#{regionListController.refresh}"
+render="regionPanelGroup"/>
 </f:facet>
 <h:outputText value="#{region.countryCode}"/>
 </rich:column>
 
 <rich:column>
 <f:facet name="header">
-<ui:include src="/resources/components/datatable-header.xhtml">
-<ui:param name="label" value="#{i18n.regionCode}"/>
-<ui:param name="orderType" value="#{regionListView.scrollForm.sorting.codeOrderType}"/>
-<ui:param name="scrollController" value="#{regionListController}"/>
-<ui:param name="panelGroup" value="regionPanelGroup"/>
-</ui:include>
+<cc:datatableHeader
+label="#{i18n.regionCode}"
+orderType="#{regionListView.scrollForm.sorting.codeOrderType}"
+action="#{regionListController.refresh}"
+render="regionPanelGroup"/>
 </f:facet>
 <h:outputText value="#{region.code}"/>
 </rich:column>
 
 <rich:column>
 <f:facet name="header">
-<ui:include src="/resources/components/datatable-header.xhtml">
-<ui:param name="label" value="#{i18n.regionLabel}"/>
-<ui:param name="orderType" value="#{regionListView.scrollForm.sorting.labelOrderType}"/>
-<ui:param name="scrollController" value="#{regionListController}"/>
-<ui:param name="panelGroup" value="regionPanelGroup"/>
-</ui:include>
+<cc:datatableHeader
+label="#{i18n.regionLabel}"
+orderType="#{regionListView.scrollForm.sorting.labelOrderType}"
+action="#{regionListController.refresh}"
+render="regionPanelGroup"/>
 </f:facet>
 <h:outputText value="#{region.label}"/>
 </rich:column>
@@ -153,12 +149,11 @@ onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="regionPane
 
 </div>
 
-<ui:include src="/resources/components/scroller.xhtml">
-<ui:param name="scrollView" value="#{regionListView.scrollView}"/>
-<ui:param name="scrollForm" value="#{regionListView.scrollForm}"/>
-<ui:param name="scrollController" value="#{regionListController}"/>
-<ui:param name="panelGroup" value="regionPanelGroup"/>
-</ui:include>
+<cc:datatableScroller
+page="#{regionListView.scrollForm.page}"
+numberOfPages="#{regionListView.scrollView.numberOfPages}"
+action="#{regionListController.refresh}"
+render="regionPanelGroup"/>
 
 </ui:fragment>
 
