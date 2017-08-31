@@ -48,13 +48,6 @@
 		</dependency>
 		
 		
-		<!-- hibernate -->
-		<dependency>
-			<groupId>javassist</groupId>
-			<artifactId>javassist</artifactId>
-		</dependency>
-				
-		
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -99,6 +92,13 @@
 		<dependency>
 			<groupId>commons-digester</groupId>
 			<artifactId>commons-digester</artifactId>
+		</dependency>
+		
+		
+		<!-- el -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.el</artifactId>
 		</dependency>
 		
 	</dependencies>

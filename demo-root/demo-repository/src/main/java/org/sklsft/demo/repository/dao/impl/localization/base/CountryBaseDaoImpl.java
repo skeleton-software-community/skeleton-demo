@@ -44,18 +44,20 @@ return criteria.list();
 @Override
 public Long count(CountryFilter filter) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Country.class).setProjection(Projections.rowCount());
-addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
 return (Long) criteria.uniqueResult();
 }
 
 /**
  * scroll filtered object list
  */
+@Override
+@SuppressWarnings("unchecked")
 public List<Country> scroll(CountryFilter filter, CountrySorting sorting, Long firstResult, Long maxResults) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Country.class);
-addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
 addOrder(criteria, "code", sorting.getCodeOrderType());
 addOrder(criteria, "label", sorting.getLabelOrderType());
 if (firstResult != null){

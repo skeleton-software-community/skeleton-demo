@@ -7,6 +7,7 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import org.sklsft.demo.api.interfaces.localization.CountryService;
+import org.sklsft.demo.api.interfaces.time.CalendarService;
 import org.sklsft.demo.mvc.model.CommonView;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,8 @@ private CommonView commonView;
  */
 @Inject
 private CountryService countryService;
+@Inject
+private CalendarService calendarService;
 
 /**
  * load combobox items for Country
@@ -47,6 +50,21 @@ result.add(new SelectItem(option));
 }
 }
 this.commonView.setCountryOptions(result);
+}
+
+/**
+ * load combobox items for Calendar
+ */
+public void loadCalendarOptions() {
+List<SelectItem> result = new ArrayList<>();
+result.add(new SelectItem(null,""));
+List<String> options = this.calendarService.getOptions();
+if (options != null){
+for (String option:options){
+result.add(new SelectItem(option));
+}
+}
+this.commonView.setCalendarOptions(result);
 }
 
 /* Specific Code Start */

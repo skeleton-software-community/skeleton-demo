@@ -53,7 +53,7 @@ this.cityScrollView = cityScrollView;
 public ScrollForm<CityFilter, CitySorting> getCityScrollForm() {
 return cityScrollForm;
 }
-public void setCityScrollForm(ScrollForm<CityFilter, CitySorting> CityScrollForm) {
+public void setCityScrollForm(ScrollForm<CityFilter, CitySorting> cityScrollForm) {
 this.cityScrollForm = cityScrollForm;
 }
 

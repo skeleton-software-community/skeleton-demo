@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:rich="http://richfaces.org/rich"
+xmlns:a4j="http://richfaces.org/a4j"
+xmlns:c="http://java.sun.com/jstl/core">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton-generator -->
+<!-- -->
+
+<div class="modal-header">
+<h2>
+#{i18n.calendarDetail}
+</h2>
+</div>
+
+<div class="modal-body">
+
+<h:panelGroup id="calendarDetailPanelGroup">
+<a4j:region>
+
+<ui:param name="view" value="#{calendarListView.selectedCalendar}"/>
+<ui:param name="form" value="#{view.form}"/>
+
+<div class="row">
+<div class="col-xs-12">
+<label>#{i18n.calendarCode}</label>
+<h:inputText id="calendarCode" styleClass="form-control" value="#{form.code}"/>
+<h:message for="calendarCode" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.calendarLabel}</label>
+<h:inputText id="calendarLabel" styleClass="form-control" value="#{form.label}"/>
+<h:message for="calendarLabel" styleClass="detail-error-message"/>
+</div>
+
+</div>
+
+<a4j:commandButton value="#{i18n.save}" action="#{calendarListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" execute="@region" render="calendarPanelGroup, calendarDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#calendarModal').modal('hide');"/>
+<a4j:commandButton value="#{i18n.update}" action="#{calendarListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" execute="@region" render="calendarPanelGroup, calendarDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#calendarModal').modal('hide');"/>
+<a4j:commandButton value="#{i18n.cancel}" actionListener="#{calendarListController.resetForm}" styleClass="btn btn-info" immediate="true" execute="@region" render="calendarPanelGroup" oncomplete="$('#calendarModal').modal('hide')"/>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+
+</a4j:region>
+
+</h:panelGroup>
+
+</div>
+
+</ui:composition>

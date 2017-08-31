@@ -79,9 +79,9 @@ return criteria.list();
 public Long count(RegionFilter filter) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class).setProjection(Projections.rowCount());
 Criteria countryCriteria = criteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
-addStringContainsRestriction(countryCriteria, "{alias}.code", filter.getCountryCode());
-addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+addStringContainsRestriction(countryCriteria, "{alias}.CODE", filter.getCountryCode());
+addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
 return (Long) criteria.uniqueResult();
 }
 
@@ -109,21 +109,23 @@ criteria.add(Restrictions.isNull("country.id"));
 criteria.add(Restrictions.eq("country.id", countryId));
 }
 Criteria countryCriteria = criteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
-addStringContainsRestriction(countryCriteria, "{alias}.code", filter.getCountryCode());
-addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+addStringContainsRestriction(countryCriteria, "{alias}.CODE", filter.getCountryCode());
+addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
 return (Long) criteria.uniqueResult();
 }
 
 /**
  * scroll filtered object list
  */
+@Override
+@SuppressWarnings("unchecked")
 public List<Region> scroll(RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
 Criteria countryCriteria = criteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
-addStringContainsRestriction(countryCriteria, "{alias}.code", filter.getCountryCode());
-addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+addStringContainsRestriction(countryCriteria, "{alias}.CODE", filter.getCountryCode());
+addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
 addOrder(countryCriteria, "code", sorting.getCountryCodeOrderType());
 addOrder(criteria, "code", sorting.getCodeOrderType());
 addOrder(criteria, "label", sorting.getLabelOrderType());
@@ -139,6 +141,8 @@ return criteria.list();
 /**
  * scroll filtered object list from country
  */
+@Override
+@SuppressWarnings("unchecked")
 public List<Region> scrollFromCountry(Long countryId, RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
 if (countryId == null){
@@ -147,9 +151,9 @@ criteria.add(Restrictions.isNull("country.id"));
 criteria.add(Restrictions.eq("country.id", countryId));
 }
 Criteria countryCriteria = criteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
-addStringContainsRestriction(countryCriteria, "{alias}.code", filter.getCountryCode());
-addStringContainsRestriction(criteria, "{alias}.code", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.label", filter.getLabel());
+addStringContainsRestriction(countryCriteria, "{alias}.CODE", filter.getCountryCode());
+addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
+addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
 addOrder(countryCriteria, "code", sorting.getCountryCodeOrderType());
 addOrder(criteria, "code", sorting.getCodeOrderType());
 addOrder(criteria, "label", sorting.getLabelOrderType());

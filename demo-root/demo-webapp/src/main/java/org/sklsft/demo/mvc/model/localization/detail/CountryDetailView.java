@@ -53,7 +53,7 @@ this.regionScrollView = regionScrollView;
 public ScrollForm<RegionFilter, RegionSorting> getRegionScrollForm() {
 return regionScrollForm;
 }
-public void setRegionScrollForm(ScrollForm<RegionFilter, RegionSorting> RegionScrollForm) {
+public void setRegionScrollForm(ScrollForm<RegionFilter, RegionSorting> regionScrollForm) {
 this.regionScrollForm = regionScrollForm;
 }
 

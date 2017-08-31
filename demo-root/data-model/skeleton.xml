@@ -59,5 +59,33 @@
 				</table>
 			</tables>
 		</package>
+		<package name="TIME">
+			<tables>
+				<table name="CALENDAR" cardinality="1" listRendering="Calendars"
+					detailRendering="Calendar details" comboxable="true" createEnabled="true"
+					updateEnabled="true" deleteEnabled="true">
+					<columns>						
+						<column name="CODE" dataType="STRING" nullable="false"
+							editable="true" rendering="Code">
+						</column>
+						<column name="LABEL" dataType="STRING" nullable="false"
+							editable="true" rendering="Label">
+						</column>
+					</columns>
+				</table>
+				<table name="CALENDAR_DAY_OFF" cardinality="2" listRendering="Days off" detailRendering="Day off" comboxable="false"
+					createEnabled="true" updateEnabled="true" deleteEnabled="true">
+					<columns>
+						<column name="CALENDAR_ID" dataType="LONG" nullable="false" referenceTableName="CALENDAR" referenceTableRelation="MANY_TO_ONE_COMPONENT"
+							editable="true" rendering="User">
+						</column>
+						<column name="DAY_OFF_DATE" dataType="DATETIME" nullable="false" editable="true" rendering="Date">
+						</column>
+						<column name="DAY_OFF_LABEL" dataType="STRING" nullable="true" editable="true" rendering="Label">
+						</column>
+					</columns>
+				</table>
+			</tables>
+		</package>
 	</packages>
 </metadata:project>
