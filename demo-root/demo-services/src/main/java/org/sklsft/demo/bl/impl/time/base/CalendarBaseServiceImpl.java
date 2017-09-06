@@ -155,6 +155,8 @@ return result;
 /**
  * scroll one to many component calendarDayOff
  */
+@Override
+@Transactional(readOnly=true)
 public ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (Long calendarId, ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
 Calendar calendar = calendarDao.load(calendarId);
 calendarRightsManager.checkCanAccessCalendarDayOff(calendar);
