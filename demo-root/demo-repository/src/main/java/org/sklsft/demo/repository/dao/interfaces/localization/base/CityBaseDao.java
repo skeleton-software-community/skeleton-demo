@@ -40,12 +40,12 @@ Long countFromRegion(Long regionId, CityFilter filter);
 /**
  * scroll filtered object list
  */
-List<City> scroll(CityFilter filter, CitySorting ordering, Long firstResult, Long maxResults);
+List<City> scroll(CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults);
 
 /**
  * scroll filtered object from region
  */
-List<City> scrollFromRegion(Long regionId, CityFilter filter, CitySorting ordering, Long firstResult, Long maxResults);
+List<City> scrollFromRegion(Long regionId, CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults);
 
 /**
  * exists object

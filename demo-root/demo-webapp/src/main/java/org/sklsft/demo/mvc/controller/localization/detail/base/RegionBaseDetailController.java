@@ -53,7 +53,7 @@ regionDetailView.setSelectedRegion(this.regionService.load(this.regionDetailView
  * load one to many city list
  */
 public void loadCityList() {
-this.resetCityList();
+this.resetCityFilter();
 }
 
 /**
@@ -136,7 +136,7 @@ refreshCityList();
 /**
  * reset one to many CityFilter datatable filter and sorting
  */
-public void resetCityList() {
+public void resetCityFilter() {
 this.regionDetailView.setCityScrollForm(new ScrollForm<>());
 this.regionDetailView.getCityScrollForm().setFilter(new CityFilter());
 this.regionDetailView.getCityScrollForm().setSorting(new CitySorting());

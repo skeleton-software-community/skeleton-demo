@@ -4,6 +4,7 @@ import java.util.List;
 import org.sklsft.commons.model.patterns.BaseDao;
 import org.sklsft.demo.api.model.time.filters.CalendarDayOffFilter;
 import org.sklsft.demo.api.model.time.filters.CalendarFilter;
+import org.sklsft.demo.api.model.time.sortings.CalendarDayOffSorting;
 import org.sklsft.demo.api.model.time.sortings.CalendarSorting;
 import org.sklsft.demo.model.time.Calendar;
 import org.sklsft.demo.model.time.CalendarDayOff;
@@ -22,7 +23,7 @@ Long count(CalendarFilter filter);
 /**
  * scroll filtered object list
  */
-List<Calendar> scroll(CalendarFilter filter, CalendarSorting ordering, Long firstResult, Long maxResults);
+List<Calendar> scroll(CalendarFilter filter, CalendarSorting sorting, Long firstResult, Long maxResults);
 
 /**
  * load one to many component CalendarDayOff list
@@ -38,6 +39,11 @@ Long countCalendarDayOff(Long calendarId);
  * count filtered one to many component CalendarDayOff
  */
 Long countCalendarDayOff(Long calendarId, CalendarDayOffFilter filter);
+
+/**
+ * scroll filtered one to many component CalendarDayOff
+ */
+List<CalendarDayOff> scrollCalendarDayOff(Long calendarId, CalendarDayOffFilter filter, CalendarDayOffSorting sorting, Long firstResult, Long maxResults);
 
 /**
  * load one to many component CalendarDayOff

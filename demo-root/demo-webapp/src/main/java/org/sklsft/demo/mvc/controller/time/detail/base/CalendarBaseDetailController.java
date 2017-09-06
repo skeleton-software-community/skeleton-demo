@@ -6,9 +6,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.sklsft.commons.api.exception.rights.OperationDeniedException;
+import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
 import org.sklsft.demo.api.interfaces.time.CalendarService;
 import org.sklsft.demo.api.model.time.filters.CalendarDayOffFilter;
+import org.sklsft.demo.api.model.time.sortings.CalendarDayOffSorting;
 import org.sklsft.demo.api.model.time.views.basic.CalendarDayOffBasicView;
 import org.sklsft.demo.mvc.controller.BaseController;
 import org.sklsft.demo.mvc.controller.CommonController;
@@ -48,7 +50,14 @@ calendarDetailView.setSelectedCalendar(this.calendarService.load(this.calendarDe
  */
 public void loadCalendarDayOffList() {
 this.resetCalendarDayOffFilter();
-calendarDetailView.setCalendarDayOffList(this.calendarService.loadCalendarDayOffList(this.calendarDetailView.getSelectedCalendar().getId()));
+}
+
+/**
+ * refresh one to many calendarDayOff list
+ */
+public void refreshCalendarDayOffList() {
+calendarDetailView.setCalendarDayOffScrollView(calendarService.scrollCalendarDayOff(calendarDetailView.getSelectedCalendar().getId(), calendarDetailView.getCalendarDayOffScrollForm()));
+calendarDetailView.getCalendarDayOffScrollForm().setPage(calendarDetailView.getCalendarDayOffScrollView().getCurrentPage());
 }
 
 /**
@@ -111,7 +120,7 @@ loadCalendarDayOffList();
 @AjaxMethod("CalendarDayOff.deleteList")
 public void deleteCalendarDayOffList() {
 List<Long> ids = new ArrayList<>();
-for (CalendarDayOffBasicView calendarDayOff:calendarDetailView.getCalendarDayOffList()) {
+for (CalendarDayOffBasicView calendarDayOff:calendarDetailView.getCalendarDayOffScrollView().getElements()) {
 if (calendarDayOff.getSelected()) {
 ids.add(calendarDayOff.getId());
 }
@@ -124,7 +133,10 @@ loadCalendarDayOffList();
  * reset one to many component CalendarDayOffFilter datatable filter
  */
 public void resetCalendarDayOffFilter() {
-calendarDetailView.setCalendarDayOffFilter(new CalendarDayOffFilter());
+this.calendarDetailView.setCalendarDayOffScrollForm(new ScrollForm<>());
+this.calendarDetailView.getCalendarDayOffScrollForm().setFilter(new CalendarDayOffFilter());
+this.calendarDetailView.getCalendarDayOffScrollForm().setSorting(new CalendarDayOffSorting());
+refreshCalendarDayOffList();
 }
 
 }

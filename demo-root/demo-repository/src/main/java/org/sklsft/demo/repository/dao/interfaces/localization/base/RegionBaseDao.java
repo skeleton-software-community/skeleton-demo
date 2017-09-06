@@ -40,12 +40,12 @@ Long countFromCountry(Long countryId, RegionFilter filter);
 /**
  * scroll filtered object list
  */
-List<Region> scroll(RegionFilter filter, RegionSorting ordering, Long firstResult, Long maxResults);
+List<Region> scroll(RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults);
 
 /**
  * scroll filtered object from country
  */
-List<Region> scrollFromCountry(Long countryId, RegionFilter filter, RegionSorting ordering, Long firstResult, Long maxResults);
+List<Region> scrollFromCountry(Long countryId, RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults);
 
 /**
  * exists object

@@ -13,6 +13,7 @@ import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.time.filters.CalendarDayOffFilter;
 import org.sklsft.demo.api.model.time.filters.CalendarFilter;
+import org.sklsft.demo.api.model.time.sortings.CalendarDayOffSorting;
 import org.sklsft.demo.api.model.time.sortings.CalendarSorting;
 import org.sklsft.demo.model.time.Calendar;
 import org.sklsft.demo.model.time.CalendarDayOff;
@@ -115,6 +116,31 @@ criteria.add(Restrictions.eq("calendar.id", calendarId));
 addDateContainsRestriction(criteria, "{alias}.DAY_OFF_DATE", filter.getDayOffDate());
 addStringContainsRestriction(criteria, "{alias}.DAY_OFF_LABEL", filter.getDayOffLabel());
 return (Long) criteria.uniqueResult();
+}
+
+/**
+ * scroll filtered one to many component CalendarDayOff
+ */
+@Override
+@SuppressWarnings("unchecked")
+public List<CalendarDayOff> scrollCalendarDayOff(Long calendarId, CalendarDayOffFilter filter, CalendarDayOffSorting sorting, Long firstResult, Long maxResults) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(CalendarDayOff.class);
+if (calendarId == null){
+criteria.add(Restrictions.isNull("calendar.id"));
+} else {
+criteria.add(Restrictions.eq("calendar.id", calendarId));
+}
+addDateContainsRestriction(criteria, "{alias}.DAY_OFF_DATE", filter.getDayOffDate());
+addStringContainsRestriction(criteria, "{alias}.DAY_OFF_LABEL", filter.getDayOffLabel());
+addOrder(criteria, "dayOffDate", sorting.getDayOffDateOrderType());
+addOrder(criteria, "dayOffLabel", sorting.getDayOffLabelOrderType());
+if (firstResult != null){
+criteria.setFirstResult(firstResult.intValue());
+}
+if (maxResults != null){
+criteria.setMaxResults(maxResults.intValue());
+}
+return criteria.list();
 }
 
 /**

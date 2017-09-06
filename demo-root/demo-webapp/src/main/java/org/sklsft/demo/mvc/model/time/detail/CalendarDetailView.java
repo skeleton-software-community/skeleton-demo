@@ -1,10 +1,12 @@
 package org.sklsft.demo.mvc.model.time.detail;
 
 import java.io.Serializable;
-import java.util.List;
 
+import org.sklsft.commons.api.model.ScrollForm;
+import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.commons.mvc.scopes.ViewScope;
 import org.sklsft.demo.api.model.time.filters.CalendarDayOffFilter;
+import org.sklsft.demo.api.model.time.sortings.CalendarDayOffSorting;
 import org.sklsft.demo.api.model.time.views.basic.CalendarDayOffBasicView;
 import org.sklsft.demo.api.model.time.views.full.CalendarDayOffFullView;
 import org.sklsft.demo.api.model.time.views.full.CalendarFullView;
@@ -27,8 +29,8 @@ private static final long serialVersionUID = 1L;
  */
 private CalendarFullView selectedCalendar = new CalendarFullView();
 
-private List<CalendarDayOffBasicView> calendarDayOffList;
-private CalendarDayOffFilter calendarDayOffFilter = new CalendarDayOffFilter();
+protected ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> calendarDayOffScrollForm = new ScrollForm<>();
+protected ScrollView<CalendarDayOffBasicView> calendarDayOffScrollView = new ScrollView<>();
 private CalendarDayOffFullView selectedCalendarDayOff;
 
 /*
@@ -41,18 +43,18 @@ public void setSelectedCalendar(CalendarFullView selectedCalendar) {
 this.selectedCalendar = selectedCalendar;
 }
 
-public List<CalendarDayOffBasicView> getCalendarDayOffList() {
-return calendarDayOffList;
+public ScrollView<CalendarDayOffBasicView> getCalendarDayOffScrollView() {
+return calendarDayOffScrollView;
 }
-public void setCalendarDayOffList(List<CalendarDayOffBasicView> calendarDayOffList) {
-this.calendarDayOffList = calendarDayOffList;
+public void setCalendarDayOffScrollView(ScrollView<CalendarDayOffBasicView> calendarDayOffScrollView) {
+this.calendarDayOffScrollView = calendarDayOffScrollView;
 }
 
-public CalendarDayOffFilter getCalendarDayOffFilter() {
-return calendarDayOffFilter;
+public ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> getCalendarDayOffScrollForm() {
+return calendarDayOffScrollForm;
 }
-public void setCalendarDayOffFilter(CalendarDayOffFilter calendarDayOffFilter) {
-this.calendarDayOffFilter = calendarDayOffFilter;
+public void setCalendarDayOffScrollForm(ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> calendarDayOffScrollForm) {
+this.calendarDayOffScrollForm = calendarDayOffScrollForm;
 }
 
 public CalendarDayOffFullView getSelectedCalendarDayOff() {

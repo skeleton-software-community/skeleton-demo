@@ -20,7 +20,7 @@ Long count(CountryFilter filter);
 /**
  * scroll filtered object list
  */
-List<Country> scroll(CountryFilter filter, CountrySorting ordering, Long firstResult, Long maxResults);
+List<Country> scroll(CountryFilter filter, CountrySorting sorting, Long firstResult, Long maxResults);
 
 /**
  * exists object

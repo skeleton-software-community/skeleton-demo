@@ -53,7 +53,7 @@ countryDetailView.setSelectedCountry(this.countryService.load(this.countryDetail
  * load one to many region list
  */
 public void loadRegionList() {
-this.resetRegionList();
+this.resetRegionFilter();
 }
 
 /**
@@ -142,7 +142,7 @@ refreshRegionList();
 /**
  * reset one to many RegionFilter datatable filter and sorting
  */
-public void resetRegionList() {
+public void resetRegionFilter() {
 this.countryDetailView.setRegionScrollForm(new ScrollForm<>());
 this.countryDetailView.getRegionScrollForm().setFilter(new RegionFilter());
 this.countryDetailView.getRegionScrollForm().setSorting(new RegionSorting());

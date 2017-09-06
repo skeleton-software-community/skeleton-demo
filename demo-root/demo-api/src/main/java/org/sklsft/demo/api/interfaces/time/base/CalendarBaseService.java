@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
+import org.sklsft.demo.api.model.time.filters.CalendarDayOffFilter;
 import org.sklsft.demo.api.model.time.filters.CalendarFilter;
 import org.sklsft.demo.api.model.time.forms.CalendarDayOffForm;
 import org.sklsft.demo.api.model.time.forms.CalendarForm;
+import org.sklsft.demo.api.model.time.sortings.CalendarDayOffSorting;
 import org.sklsft.demo.api.model.time.sortings.CalendarSorting;
 import org.sklsft.demo.api.model.time.views.basic.CalendarBasicView;
 import org.sklsft.demo.api.model.time.views.basic.CalendarDayOffBasicView;
@@ -49,6 +51,11 @@ CalendarFullView find(String code);
  * load one to many component calendarDayOff list
  */
 List<CalendarDayOffBasicView> loadCalendarDayOffList(Long id);
+
+/**
+ * scroll one to many component calendarDayOff
+ */
+ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (Long calendarId, ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form);
 
 /**
  * load one to many component calendarDayOff
