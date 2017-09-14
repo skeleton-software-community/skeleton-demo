@@ -32,6 +32,17 @@ AS $$
 SELECT $1::varchar;
 $$;
 
+-------------------------------------------------------------
+---- FUNCTION double_to_string ----
+-------------------------------------------------------------
+CREATE OR REPLACE FUNCTION double_to_string(double precision)
+RETURNS text
+IMMUTABLE
+STRICT
+LANGUAGE SQL
+AS $$
+SELECT $1::varchar;
+$$;
 
 -------------------------------------------------------------
 ---- FUNCTION date_to_string ----
