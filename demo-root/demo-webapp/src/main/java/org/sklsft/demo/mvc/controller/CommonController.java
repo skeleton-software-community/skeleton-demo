@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
+import org.sklsft.demo.api.interfaces.dummy.FoolService;
 import org.sklsft.demo.api.interfaces.localization.CountryService;
 import org.sklsft.demo.api.interfaces.time.CalendarService;
 import org.sklsft.demo.mvc.model.CommonView;
@@ -36,6 +37,8 @@ private CommonView commonView;
 private CountryService countryService;
 @Inject
 private CalendarService calendarService;
+@Inject
+private FoolService foolService;
 
 /**
  * load combobox items for Country
@@ -65,6 +68,21 @@ result.add(new SelectItem(option));
 }
 }
 this.commonView.setCalendarOptions(result);
+}
+
+/**
+ * load combobox items for Fool
+ */
+public void loadFoolOptions() {
+List<SelectItem> result = new ArrayList<>();
+result.add(new SelectItem(null,""));
+List<String> options = this.foolService.getOptions();
+if (options != null){
+for (String option:options){
+result.add(new SelectItem(option));
+}
+}
+this.commonView.setFoolOptions(result);
 }
 
 /* Specific Code Start */

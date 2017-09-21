@@ -24,19 +24,15 @@ private String label;
 public String getCode() {
 return this.code;
 }
-
 public void setCode(String code) {
 this.code = code;
 }
-
 public String getLabel() {
 return this.label;
 }
-
 public void setLabel(String label) {
 this.label = label;
 }
-
 
 /* Specific Code Start */
 /* Specific Code End */

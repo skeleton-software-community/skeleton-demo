@@ -60,14 +60,6 @@ onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="
 </rich:column>
 
 <rich:column>
-<h:inputText
-value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffDate}"
-styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="calendarDayOffPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"
-oncomplete="setCaretToEnd(event);">
-<a4j:attachQueue requestDelay="500"/>
-</a4j:ajax>
-</h:inputText>
 </rich:column>
 
 <rich:column>

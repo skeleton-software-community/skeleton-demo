@@ -25,27 +25,21 @@ private String label;
 public String getCountryCode() {
 return this.countryCode;
 }
-
 public void setCountryCode(String countryCode) {
 this.countryCode = countryCode;
 }
-
 public String getCode() {
 return this.code;
 }
-
 public void setCode(String code) {
 this.code = code;
 }
-
 public String getLabel() {
 return this.label;
 }
-
 public void setLabel(String label) {
 this.label = label;
 }
-
 
 /* Specific Code Start */
 /* Specific Code End */

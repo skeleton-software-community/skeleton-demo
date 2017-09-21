@@ -87,5 +87,39 @@
 				</table>
 			</tables>
 		</package>
+		<package name="DUMMY">
+			<tables>
+				<table name="FOOL" cardinality="1" listRendering="Fools"
+					detailRendering="Fool details" comboxable="true" createEnabled="true"
+					updateEnabled="true" deleteEnabled="true">
+					<columns>						
+						<column name="CODE" dataType="STRING" nullable="false"
+							editable="true" rendering="Code">
+						</column>
+						<column name="DESCRIPTION" dataType="TEXT" nullable="true"
+							editable="true" rendering="Description">
+						</column>
+						<column name="LONG_FIELD" dataType="LONG" nullable="true"
+							editable="true" rendering="Long">
+						</column>
+						<column name="BOOLEAN_FIELD" dataType="BOOLEAN" nullable="true"
+							editable="true" rendering="Boolean">
+						</column>
+						<column name="DOUBLE_FIELD_2" dataType="DOUBLE" nullable="true"
+							editable="true" rendering="Double 2" format="TWO_DECIMALS">
+						</column>
+						<column name="DOUBLE_FIELD_4" dataType="DOUBLE" nullable="true"
+							editable="true" rendering="Double 4" format="FOUR_DECIMALS">
+						</column>
+						<column name="DATE_FIELD" dataType="DATETIME" nullable="true"
+							editable="true" format="DATE" rendering="Date">
+						</column>
+						<column name="DATETIME_FIELD" dataType="DATETIME" nullable="true"
+							editable="true" format="DATE_AND_TIME" rendering="Date and time">
+						</column>
+					</columns>
+				</table>
+			</tables>
+		</package>
 	</packages>
 </metadata:project>

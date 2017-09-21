@@ -1,6 +1,6 @@
 package org.sklsft.demo.repository.dao.impl.time.base;
 
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addDateContainsRestriction;
+import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addBetweenRestriction;
 import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addOrder;
 import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
 
@@ -113,7 +113,7 @@ criteria.add(Restrictions.isNull("calendar.id"));
 } else {
 criteria.add(Restrictions.eq("calendar.id", calendarId));
 }
-addDateContainsRestriction(criteria, "{alias}.DAY_OFF_DATE", filter.getDayOffDate());
+addBetweenRestriction(criteria, "{alias}.DAY_OFF_DATE", filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
 addStringContainsRestriction(criteria, "{alias}.DAY_OFF_LABEL", filter.getDayOffLabel());
 return (Long) criteria.uniqueResult();
 }
@@ -130,7 +130,7 @@ criteria.add(Restrictions.isNull("calendar.id"));
 } else {
 criteria.add(Restrictions.eq("calendar.id", calendarId));
 }
-addDateContainsRestriction(criteria, "{alias}.DAY_OFF_DATE", filter.getDayOffDate());
+addBetweenRestriction(criteria, "{alias}.DAY_OFF_DATE", filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
 addStringContainsRestriction(criteria, "{alias}.DAY_OFF_LABEL", filter.getDayOffLabel());
 addOrder(criteria, "dayOffDate", sorting.getDayOffDateOrderType());
 addOrder(criteria, "dayOffLabel", sorting.getDayOffLabelOrderType());

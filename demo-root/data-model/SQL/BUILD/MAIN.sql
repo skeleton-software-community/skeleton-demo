@@ -1,7 +1,5 @@
 DROP SCHEMA IF EXISTS public CASCADE;
 CREATE SCHEMA public;
--- Specific Code Start --
-
 
 
 -------------------------------------------------------------
@@ -47,7 +45,7 @@ $$;
 -------------------------------------------------------------
 ---- FUNCTION date_to_string ----
 -------------------------------------------------------------
-CREATE OR REPLACE FUNCTION date_to_string(timestamp)
+CREATE OR REPLACE FUNCTION date_to_string(timestamp with time zone)
 RETURNS text
 IMMUTABLE
 STRICT
@@ -56,5 +54,3 @@ AS $$
 SELECT $1::varchar;
 $$;
 
-
--- Specific Code End --

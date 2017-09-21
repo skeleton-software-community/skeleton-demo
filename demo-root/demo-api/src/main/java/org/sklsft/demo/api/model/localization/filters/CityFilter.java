@@ -26,35 +26,27 @@ private String label;
 public String getRegionCountryCode() {
 return this.regionCountryCode;
 }
-
 public void setRegionCountryCode(String regionCountryCode) {
 this.regionCountryCode = regionCountryCode;
 }
-
 public String getRegionCode() {
 return this.regionCode;
 }
-
 public void setRegionCode(String regionCode) {
 this.regionCode = regionCode;
 }
-
 public String getCode() {
 return this.code;
 }
-
 public void setCode(String code) {
 this.code = code;
 }
-
 public String getLabel() {
 return this.label;
 }
-
 public void setLabel(String label) {
 this.label = label;
 }
-
 
 /* Specific Code Start */
 /* Specific Code End */

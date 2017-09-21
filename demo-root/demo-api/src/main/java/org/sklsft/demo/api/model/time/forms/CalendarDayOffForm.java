@@ -28,19 +28,15 @@ private String dayOffLabel;
 public Date getDayOffDate() {
 return this.dayOffDate;
 }
-
 public void setDayOffDate(Date dayOffDate) {
 this.dayOffDate = dayOffDate;
 }
-
 public String getDayOffLabel() {
 return this.dayOffLabel;
 }
-
 public void setDayOffLabel(String dayOffLabel) {
 this.dayOffLabel = dayOffLabel;
 }
-
 
 /* Specific Code Start */
 /* Specific Code End */

@@ -26,6 +26,7 @@ private static final long serialVersionUID = 1L;
  */
 private List<SelectItem>countryOptions;
 private List<SelectItem>calendarOptions;
+private List<SelectItem>foolOptions;
 
 /*
  * getters and setters
@@ -42,6 +43,13 @@ return calendarOptions;
 }
 public void setCalendarOptions(List<SelectItem> calendarOptions) {
 this.calendarOptions = calendarOptions;
+}
+
+public List<SelectItem> getFoolOptions() {
+return foolOptions;
+}
+public void setFoolOptions(List<SelectItem> foolOptions) {
+this.foolOptions = foolOptions;
 }
 
 /* Specific Code Start */
