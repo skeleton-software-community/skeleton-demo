@@ -3,9 +3,9 @@ CREATE SCHEMA public;
 
 
 -------------------------------------------------------------
----- FUNCTION unaccent: turn accent to lowercase  ----
+---- FUNCTION normalize  ----
 -------------------------------------------------------------
-CREATE OR REPLACE FUNCTION unaccent(text)
+CREATE OR REPLACE FUNCTION normalize(text)
 RETURNS text
 IMMUTABLE
 STRICT
@@ -16,41 +16,5 @@ SELECT translate(
     'àâäèéêëîïôöûü',
     'aaaeeeeiioouu'
 );
-$$;
-
--------------------------------------------------------------
----- FUNCTION long_to_string ----
--------------------------------------------------------------
-CREATE OR REPLACE FUNCTION long_to_string(bigint)
-RETURNS text
-IMMUTABLE
-STRICT
-LANGUAGE SQL
-AS $$
-SELECT $1::varchar;
-$$;
-
--------------------------------------------------------------
----- FUNCTION double_to_string ----
--------------------------------------------------------------
-CREATE OR REPLACE FUNCTION double_to_string(double precision)
-RETURNS text
-IMMUTABLE
-STRICT
-LANGUAGE SQL
-AS $$
-SELECT $1::varchar;
-$$;
-
--------------------------------------------------------------
----- FUNCTION date_to_string ----
--------------------------------------------------------------
-CREATE OR REPLACE FUNCTION date_to_string(timestamp with time zone)
-RETURNS text
-IMMUTABLE
-STRICT
-LANGUAGE SQL
-AS $$
-SELECT $1::varchar;
 $$;
 

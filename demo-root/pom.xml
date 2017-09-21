@@ -14,7 +14,6 @@
 
 	<modules>
 		<module>demo-api</module>
-		<module>demo-util</module>
 		<module>demo-business-model</module>
 		<module>demo-repository</module>
 		<module>demo-business-component</module>
