@@ -5,6 +5,7 @@ xmlns:h = "http://java.sun.com/jsf/html"
 xmlns:rich = "http://richfaces.org/rich"
 xmlns:a4j = "http://richfaces.org/a4j"
 xmlns:cc="http://java.sun.com/jsf/composite/components"
+xmlns:s="http://commons.sklsft.org/ui/components"
 template="/templates/template.xhtml">
 
 <!-- -->
@@ -13,11 +14,11 @@ template="/templates/template.xhtml">
 <!-- processed by skeleton generator -->
 <!-- -->
 
-<ui:define name="content">
-
 <f:metadata>
 <f:viewAction action="#{calendarListController.load}"/>
 </f:metadata>
+<ui:define name="content">
+
 <h:form id="calendarListForm">
 <h:panelGroup id="calendarPanelGroup">
 <h2>
@@ -25,58 +26,51 @@ template="/templates/template.xhtml">
 </h2>
 <a4j:region>
 
-<ui:fragment rendered="#{calendarListView.scrollView.size == 0}">
-#{i18n.noDataFound}<br/>
-</ui:fragment>
-
-<ui:fragment rendered="#{calendarListView.scrollView.size > 0}">
-<div style="overflow-x:scroll">
-
-<rich:dataTable rows="10"
-id="calendarList" var="calendar" name="datatable"
-value="#{calendarListView.scrollView.elements}" headerClass="datatableHeader" rowClasses="datatableRow, datatableRowLight">
-
-<f:facet name="header">
-<rich:columnGroup>
-<rich:column>
-<div id="dropList" class="dropList">
-<a4j:commandLink title="#{i18n.deleteSelection}" action="#{calendarListController.deleteList}"
-onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="calendarPanelGroup">
-<span class="glyphicon glyphicon-trash"/>
-</a4j:commandLink>
-</div>
-</rich:column>
-
-<rich:column>
+<div class="filter-panel">
+<h3>
+#{i18n.filters}
 <a4j:commandLink action="#{calendarListController.reset}" render="calendarPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
 </a4j:commandLink>
-</rich:column>
-
-<rich:column>
+</h3>
+<div class="row row-eq-height">
+<div class="col-xs-3">
+<label>#{i18n.calendarCode}</label>
 <h:inputText
 value="#{calendarListView.scrollForm.filter.code}"
-styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="calendarPanelGroup" listener="#{calendarListController.refresh}"
-oncomplete="setCaretToEnd(event);">
+styleClass="form-control">
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{calendarListController.refresh}">
 <a4j:attachQueue requestDelay="500"/>
 </a4j:ajax>
 </h:inputText>
-</rich:column>
+</div>
 
-<rich:column>
+<div class="col-xs-3">
+<label>#{i18n.calendarLabel}</label>
 <h:inputText
 value="#{calendarListView.scrollForm.filter.label}"
-styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="calendarPanelGroup" listener="#{calendarListController.refresh}"
-oncomplete="setCaretToEnd(event);">
+styleClass="form-control">
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{calendarListController.refresh}">
 <a4j:attachQueue requestDelay="500"/>
 </a4j:ajax>
 </h:inputText>
-</rich:column>
+</div>
 
-</rich:columnGroup>
-</f:facet>
+</div>
+</div>
+<div class="results-panel">
+<h:panelGroup id="resultsPanelGroup">
+<ui:fragment rendered="#{calendarListView.scrollView.elements.size() == 0}">
+#{i18n.noDataFound}<br/>
+</ui:fragment>
+
+<ui:fragment rendered="#{calendarListView.scrollView.elements.size() > 0}">
+<s:tooltip for=".truncated-text"/>
+
+<rich:dataTable rows="10"
+id="calendarList" var="calendar" name="datatable"
+value="#{calendarListView.scrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
+
 <rich:column>
 <f:facet name="header">
 <h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
@@ -88,6 +82,12 @@ oncomplete="setCaretToEnd(event);">
 <rich:column>
 <f:facet name="header">
 <h:outputText value="Actions" />
+<div class="drop-list" id="drop-list">
+<a4j:commandLink title="#{i18n.deleteSelection}" action="#{calendarListController.deleteList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="calendarPanelGroup">
+<span class="glyphicon glyphicon-trash"/>
+</a4j:commandLink>
+</div>
 </f:facet>
 <h:panelGrid columns="2">
 <h:link outcome="/sections/time/calendar/CalendarDetails.jsf">
@@ -125,8 +125,6 @@ render="calendarPanelGroup"/>
 
 </rich:dataTable>
 
-</div>
-
 <cc:datatableScroller
 page="#{calendarListView.scrollForm.page}"
 numberOfPages="#{calendarListView.scrollView.numberOfPages}"
@@ -134,6 +132,10 @@ action="#{calendarListController.refresh}"
 render="calendarPanelGroup"/>
 
 </ui:fragment>
+
+</h:panelGroup>
+
+</div>
 
 <a4j:commandButton value="#{i18n.create}" action="#{calendarListController.createCalendar}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#calendarModal').modal('show')}" render="calendarDetailPanelGroup"/>
 

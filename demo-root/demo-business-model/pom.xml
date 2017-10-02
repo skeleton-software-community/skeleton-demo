@@ -21,7 +21,8 @@
 		<dependency>
 			<groupId>org.sklsft.demo</groupId>
 			<artifactId>demo-api</artifactId>
-		</dependency>		
+		</dependency>
+		
 		
 		<!-- skeleton commons -->
 		<dependency>

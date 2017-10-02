@@ -113,7 +113,7 @@ criteria.add(Restrictions.isNull("calendar.id"));
 } else {
 criteria.add(Restrictions.eq("calendar.id", calendarId));
 }
-addBetweenRestriction(criteria, "{alias}.DAY_OFF_DATE", filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
+addBetweenRestriction(criteria, "dayOffDate", filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
 addStringContainsRestriction(criteria, "{alias}.DAY_OFF_LABEL", filter.getDayOffLabel());
 return (Long) criteria.uniqueResult();
 }
@@ -130,7 +130,7 @@ criteria.add(Restrictions.isNull("calendar.id"));
 } else {
 criteria.add(Restrictions.eq("calendar.id", calendarId));
 }
-addBetweenRestriction(criteria, "{alias}.DAY_OFF_DATE", filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
+addBetweenRestriction(criteria, "dayOffDate", filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
 addStringContainsRestriction(criteria, "{alias}.DAY_OFF_LABEL", filter.getDayOffLabel());
 addOrder(criteria, "dayOffDate", sorting.getDayOffDateOrderType());
 addOrder(criteria, "dayOffLabel", sorting.getDayOffLabelOrderType());

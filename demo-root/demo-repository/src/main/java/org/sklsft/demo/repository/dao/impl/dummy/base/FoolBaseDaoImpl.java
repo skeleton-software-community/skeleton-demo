@@ -48,12 +48,12 @@ public Long count(FoolFilter filter) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Fool.class).setProjection(Projections.rowCount());
 addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
 addStringContainsRestriction(criteria, "{alias}.DESCRIPTION", filter.getDescription());
-addBetweenRestriction(criteria, "{alias}.LONG_FIELD", filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
+addBetweenRestriction(criteria, "longField", filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
 addBooleanRestriction(criteria, "booleanField", filter.getBooleanField());
-addBetweenRestriction(criteria, "{alias}.DOUBLE_FIELD_2", filter.getDoubleField2MinValue(), filter.getDoubleField2MaxValue());
-addBetweenRestriction(criteria, "{alias}.DOUBLE_FIELD_4", filter.getDoubleField4MinValue(), filter.getDoubleField4MaxValue());
-addBetweenRestriction(criteria, "{alias}.DATE_FIELD", filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
-addBetweenRestriction(criteria, "{alias}.DATETIME_FIELD", filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
+addBetweenRestriction(criteria, "doubleField2", filter.getDoubleField2MinValue(), filter.getDoubleField2MaxValue());
+addBetweenRestriction(criteria, "doubleField4", filter.getDoubleField4MinValue(), filter.getDoubleField4MaxValue());
+addBetweenRestriction(criteria, "dateField", filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
+addBetweenRestriction(criteria, "datetimeField", filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
 return (Long) criteria.uniqueResult();
 }
 
@@ -66,12 +66,12 @@ public List<Fool> scroll(FoolFilter filter, FoolSorting sorting, Long firstResul
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Fool.class);
 addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
 addStringContainsRestriction(criteria, "{alias}.DESCRIPTION", filter.getDescription());
-addBetweenRestriction(criteria, "{alias}.LONG_FIELD", filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
+addBetweenRestriction(criteria, "longField", filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
 addBooleanRestriction(criteria, "booleanField", filter.getBooleanField());
-addBetweenRestriction(criteria, "{alias}.DOUBLE_FIELD_2", filter.getDoubleField2MinValue(), filter.getDoubleField2MaxValue());
-addBetweenRestriction(criteria, "{alias}.DOUBLE_FIELD_4", filter.getDoubleField4MinValue(), filter.getDoubleField4MaxValue());
-addBetweenRestriction(criteria, "{alias}.DATE_FIELD", filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
-addBetweenRestriction(criteria, "{alias}.DATETIME_FIELD", filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
+addBetweenRestriction(criteria, "doubleField2", filter.getDoubleField2MinValue(), filter.getDoubleField2MaxValue());
+addBetweenRestriction(criteria, "doubleField4", filter.getDoubleField4MinValue(), filter.getDoubleField4MaxValue());
+addBetweenRestriction(criteria, "dateField", filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
+addBetweenRestriction(criteria, "datetimeField", filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
 addOrder(criteria, "code", sorting.getCodeOrderType());
 addOrder(criteria, "description", sorting.getDescriptionOrderType());
 addOrder(criteria, "longField", sorting.getLongFieldOrderType());

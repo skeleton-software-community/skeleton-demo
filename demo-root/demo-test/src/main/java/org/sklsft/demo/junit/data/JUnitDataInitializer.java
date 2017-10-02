@@ -28,6 +28,11 @@ public class JUnitDataInitializer {
 	 */
 	private final Logger logger = LoggerFactory.getLogger(JUnitDataInitializer.class);
 	
+	private static final String TRUNCATE_SHEMA_SCRIPT = "TRUNCATE SCHEMA PUBLIC RESTART IDENTITY AND COMMIT NO CHECK";
+	private static final String CREATE_NORMALIZE_FUNCTION = "CREATE FUNCTION normalize(CHAR VARYING(255))"
+																		+ " RETURNS CHAR VARYING(255)"
+																		+ " LANGUAGE JAVA DETERMINISTIC NO SQL"
+																		+ " EXTERNAL NAME 'CLASSPATH:org.sklsft.commons.text.StringUtils.normalize'";
 	
 	private boolean initialized = false;
 	private Project project;
@@ -50,7 +55,8 @@ public class JUnitDataInitializer {
 
 		if (initialized) {
 			cleanDatabase();
-		} else {			
+		} else {
+			createNormalizeFunction();
 			logger.info("start loading project");
 			ProjectMetaData projectMetaData = projectMetaDataService.loadProjectMetaData("..");
 			project = projectLoader.loadProject(projectMetaData);
@@ -69,9 +75,18 @@ public class JUnitDataInitializer {
 	private void cleanDatabase() {
 
 		try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement();) {
-			statement.execute("TRUNCATE SCHEMA PUBLIC RESTART IDENTITY AND COMMIT NO CHECK");
+			statement.execute(TRUNCATE_SHEMA_SCRIPT);
 		} catch (SQLException e) {
 			throw new TechnicalError(TechnicalError.ERROR_UNKNOWN, e);
+		}
+	}
+	
+	private void createNormalizeFunction() {
+
+		try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement();) {			
+			statement.execute(CREATE_NORMALIZE_FUNCTION);
+		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
 		}
 	}
 }

@@ -5,6 +5,7 @@ xmlns:h = "http://java.sun.com/jsf/html"
 xmlns:rich = "http://richfaces.org/rich"
 xmlns:a4j = "http://richfaces.org/a4j"
 xmlns:cc="http://java.sun.com/jsf/composite/components"
+xmlns:s="http://commons.sklsft.org/ui/components"
 template="/templates/template.xhtml">
 
 <!-- -->
@@ -13,11 +14,11 @@ template="/templates/template.xhtml">
 <!-- processed by skeleton generator -->
 <!-- -->
 
-<ui:define name="content">
-
 <f:metadata>
 <f:viewAction action="#{foolListController.load}"/>
 </f:metadata>
+<ui:define name="content">
+
 <h:form id="foolListForm">
 <h:panelGroup id="foolPanelGroup">
 <h2>
@@ -25,76 +26,144 @@ template="/templates/template.xhtml">
 </h2>
 <a4j:region>
 
-<ui:fragment rendered="#{foolListView.scrollView.size == 0}">
-#{i18n.noDataFound}<br/>
-</ui:fragment>
-
-<ui:fragment rendered="#{foolListView.scrollView.size > 0}">
-<div style="overflow-x:scroll">
-
-<rich:dataTable rows="10"
-id="foolList" var="fool" name="datatable"
-value="#{foolListView.scrollView.elements}" headerClass="datatableHeader" rowClasses="datatableRow, datatableRowLight">
-
-<f:facet name="header">
-<rich:columnGroup>
-<rich:column>
-<div id="dropList" class="dropList">
-<a4j:commandLink title="#{i18n.deleteSelection}" action="#{foolListController.deleteList}"
-onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="foolPanelGroup">
-<span class="glyphicon glyphicon-trash"/>
-</a4j:commandLink>
-</div>
-</rich:column>
-
-<rich:column>
+<div class="filter-panel">
+<h3>
+#{i18n.filters}
 <a4j:commandLink action="#{foolListController.reset}" render="foolPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
 </a4j:commandLink>
-</rich:column>
-
-<rich:column>
+</h3>
+<div class="row row-eq-height">
+<div class="col-xs-3">
+<label>#{i18n.foolCode}</label>
 <h:inputText
 value="#{foolListView.scrollForm.filter.code}"
-styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="foolPanelGroup" listener="#{foolListController.refresh}"
-oncomplete="setCaretToEnd(event);">
+styleClass="form-control">
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
 <a4j:attachQueue requestDelay="500"/>
 </a4j:ajax>
 </h:inputText>
-</rich:column>
+</div>
 
-<rich:column>
+<div class="col-xs-3">
+<label>#{i18n.foolDescription}</label>
 <h:inputText
 value="#{foolListView.scrollForm.filter.description}"
-styleClass="dataTableFilter">
-<a4j:ajax event="keyup" render="foolPanelGroup" listener="#{foolListController.refresh}"
-oncomplete="setCaretToEnd(event);">
+styleClass="form-control">
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
 <a4j:attachQueue requestDelay="500"/>
 </a4j:ajax>
 </h:inputText>
-</rich:column>
+</div>
 
-<rich:column>
-</rich:column>
+<div class="col-xs-3">
+<label>#{i18n.foolLongField}</label>
+<h:inputText value="#{foolListView.scrollForm.filter.longFieldMinValue}"
+styleClass="form-control">
+<f:convertNumber integerOnly="true" pattern="#,##0"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
+</h:inputText>
+<h:inputText value="#{foolListView.scrollForm.filter.longFieldMaxValue}"
+styleClass="form-control">
+<f:convertNumber integerOnly="true" pattern="#,##0"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
+</h:inputText>
+</div>
 
-<rich:column>
-</rich:column>
+<div class="col-xs-3">
+<label>#{i18n.foolBooleanField}</label>
+<h:selectOneMenu value="#{foolListView.scrollForm.filter.booleanField}" styleClass="form-control">
+<f:selectItem itemLabel="" itemValue="#{null}"></f:selectItem>
+<f:selectItem itemLabel="#{i18n.trueLabel}" itemValue="#{true}"></f:selectItem>
+<f:selectItem itemLabel="#{i18n.falseLabel}" itemValue="#{false}"></f:selectItem>
+<a4j:ajax event="change" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+</a4j:ajax>
+</h:selectOneMenu>
+</div>
 
-<rich:column>
-</rich:column>
+<div class="col-xs-3">
+<label>#{i18n.foolDoubleField2}</label>
+<h:inputText value="#{foolListView.scrollForm.filter.doubleField2MinValue}"
+styleClass="form-control">
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
+</h:inputText>
+<h:inputText value="#{foolListView.scrollForm.filter.doubleField2MaxValue}"
+styleClass="form-control">
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
+</h:inputText>
+</div>
 
-<rich:column>
-</rich:column>
+<div class="col-xs-3">
+<label>#{i18n.foolDoubleField4}</label>
+<h:inputText value="#{foolListView.scrollForm.filter.doubleField4MinValue}"
+styleClass="form-control">
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
+</h:inputText>
+<h:inputText value="#{foolListView.scrollForm.filter.doubleField4MaxValue}"
+styleClass="form-control">
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
+</h:inputText>
+</div>
 
-<rich:column>
-</rich:column>
+<div class="col-xs-3">
+<label>#{i18n.foolDateField}</label>
+<rich:calendar value="#{foolListView.scrollForm.filter.dateFieldMinValue}"
+inputClass="form-control"
+datePattern="dd MMMM yyyy">
+<a4j:ajax event="change" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+</a4j:ajax>
+</rich:calendar>
+<rich:calendar value="#{foolListView.scrollForm.filter.dateFieldMaxValue}"
+inputClass="form-control"
+datePattern="dd MMMM yyyy">
+<a4j:ajax event="change" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+</a4j:ajax>
+</rich:calendar>
+</div>
 
-<rich:column>
-</rich:column>
+<div class="col-xs-3">
+<label>#{i18n.foolDatetimeField}</label>
+<rich:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMinValue}"
+inputClass="form-control"
+datePattern="dd MMMM yyyy HH:mm">
+<a4j:ajax event="change" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+</a4j:ajax>
+</rich:calendar>
+<rich:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMaxValue}"
+inputClass="form-control"
+datePattern="dd MMMM yyyy HH:mm">
+<a4j:ajax event="change" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+</a4j:ajax>
+</rich:calendar>
+</div>
 
-</rich:columnGroup>
-</f:facet>
+</div>
+</div>
+<div class="results-panel">
+<h:panelGroup id="resultsPanelGroup">
+<ui:fragment rendered="#{foolListView.scrollView.elements.size() == 0}">
+#{i18n.noDataFound}<br/>
+</ui:fragment>
+
+<ui:fragment rendered="#{foolListView.scrollView.elements.size() > 0}">
+<s:tooltip for=".truncated-text"/>
+
+<rich:dataTable rows="10"
+id="foolList" var="fool" name="datatable"
+value="#{foolListView.scrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
+
 <rich:column>
 <f:facet name="header">
 <h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
@@ -106,6 +175,12 @@ oncomplete="setCaretToEnd(event);">
 <rich:column>
 <f:facet name="header">
 <h:outputText value="Actions" />
+<div class="drop-list" id="drop-list">
+<a4j:commandLink title="#{i18n.deleteSelection}" action="#{foolListController.deleteList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="foolPanelGroup">
+<span class="glyphicon glyphicon-trash"/>
+</a4j:commandLink>
+</div>
 </f:facet>
 <h:panelGrid columns="2">
 <a4j:commandLink action="#{foolListController.editFool(fool.id)}" oncomplete="$('#foolModal').modal('show')" render="foolDetailPanelGroup">
@@ -137,14 +212,14 @@ orderType="#{foolListView.scrollForm.sorting.descriptionOrderType}"
 action="#{foolListController.refresh}"
 render="foolPanelGroup"/>
 </f:facet>
-<pre class="truncated-text">
+<pre class="truncated-text"
+ data-toggle="tooltip"
+ data-html="true"
+ data-title='&lt;pre&gt;#{fool.description}&lt;/pre&gt;'
+ data-placement="bottom"
+ data-trigger="click">
 #{fool.description}
 </pre>
-<rich:tooltip>
-<pre>
-#{fool.description}
-</pre>
-</rich:tooltip>
 </rich:column>
 
 <rich:column>
@@ -225,8 +300,6 @@ render="foolPanelGroup"/>
 
 </rich:dataTable>
 
-</div>
-
 <cc:datatableScroller
 page="#{foolListView.scrollForm.page}"
 numberOfPages="#{foolListView.scrollView.numberOfPages}"
@@ -234,6 +307,10 @@ action="#{foolListController.refresh}"
 render="foolPanelGroup"/>
 
 </ui:fragment>
+
+</h:panelGroup>
+
+</div>
 
 <a4j:commandButton value="#{i18n.create}" action="#{foolListController.createFool}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#foolModal').modal('show')}" render="foolDetailPanelGroup"/>
 

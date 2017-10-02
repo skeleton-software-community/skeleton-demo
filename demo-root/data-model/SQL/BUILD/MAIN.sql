@@ -1,9 +1,8 @@
 DROP SCHEMA IF EXISTS public CASCADE;
 CREATE SCHEMA public;
 
-
 -------------------------------------------------------------
----- FUNCTION normalize  ----
+---- FUNCTION normalize : unaccent and lowercase  ----
 -------------------------------------------------------------
 CREATE OR REPLACE FUNCTION normalize(text)
 RETURNS text
@@ -17,4 +16,5 @@ SELECT translate(
     'aaaeeeeiioouu'
 );
 $$;
+
 
