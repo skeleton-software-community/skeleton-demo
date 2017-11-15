@@ -35,7 +35,9 @@ template="/templates/template.xhtml">
 <div class="col-xs-12">
 <label>#{i18n.regionCountryCode}</label>
 <h:selectOneMenu id="regionCountryCode" styleClass="form-control" value="#{form.countryCode}">
-<f:selectItems value="#{commonView.countryOptions}"/>
+<f:selectItem itemValue="#{null}" itemLabel=""/>
+<f:selectItems value="#{commonView.countryOptions}"
+var="option" itemValue="#{option.key}" itemLabel="#{option.label}"/>
 </h:selectOneMenu>
 <h:message for="regionCountryCode" styleClass="detail-error-message"/>
 </div>

@@ -130,4 +130,15 @@ return fool;
 }
 }
 
+/**
+ * search
+ */
+@Override
+public List<Fool> search(String arg) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Fool.class);
+addStringContainsRestriction(criteria, "{alias}.CODE", arg);
+criteria.setMaxResults(20);
+return criteria.list();
+}
+
 }

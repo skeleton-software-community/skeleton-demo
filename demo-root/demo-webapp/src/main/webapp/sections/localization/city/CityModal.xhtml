@@ -30,7 +30,9 @@ xmlns:c="http://java.sun.com/jstl/core">
 <div class="col-xs-12">
 <label>#{i18n.cityRegionCountryCode}</label>
 <h:selectOneMenu id="cityRegionCountryCode" styleClass="form-control" value="#{form.regionCountryCode}">
-<f:selectItems value="#{commonView.countryOptions}"/>
+<f:selectItem itemValue="#{null}" itemLabel=""/>
+<f:selectItems value="#{commonView.countryOptions}"
+var="option" itemValue="#{option.key}" itemLabel="#{option.label}"/>
 </h:selectOneMenu>
 <h:message for="cityRegionCountryCode" styleClass="detail-error-message"/>
 </div>

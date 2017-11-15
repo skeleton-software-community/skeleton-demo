@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
+import org.sklsft.commons.api.model.SelectItem;
 import org.sklsft.demo.api.model.time.filters.CalendarDayOffFilter;
 import org.sklsft.demo.api.model.time.filters.CalendarFilter;
 import org.sklsft.demo.api.model.time.forms.CalendarDayOffForm;
@@ -25,7 +26,7 @@ public interface CalendarBaseService {
 /**
  * get options
  */
-List<String> getOptions();
+List<SelectItem> getOptions();
 
 /**
  * load object list

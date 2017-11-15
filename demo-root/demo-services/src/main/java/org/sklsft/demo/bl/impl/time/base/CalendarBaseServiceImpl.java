@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
+import org.sklsft.commons.api.model.SelectItem;
 import org.sklsft.demo.api.interfaces.time.base.CalendarBaseService;
 import org.sklsft.demo.api.model.time.filters.CalendarDayOffFilter;
 import org.sklsft.demo.api.model.time.filters.CalendarFilter;
@@ -69,13 +70,13 @@ protected CalendarProcessor calendarProcessor;
  */
 @Override
 @Transactional(readOnly=true)
-public List<String> getOptions() {
+public List<SelectItem> getOptions() {
 List<Calendar> calendarList = calendarDao.loadList();
-List<String> calendarCodeList = new ArrayList<>(calendarList.size());
+List<SelectItem> result = new ArrayList<>(calendarList.size());
 for (Calendar calendar : calendarList) {
-calendarCodeList.add(calendar.getCode());
+result.add(new SelectItem(calendar.getCode(), calendar.getCode()));
 }
-return calendarCodeList;
+return result;
 }
 
 /**

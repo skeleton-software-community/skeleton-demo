@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
+import org.sklsft.commons.api.model.SelectItem;
 import org.sklsft.demo.api.interfaces.dummy.base.FoolBaseService;
 import org.sklsft.demo.api.model.dummy.filters.FoolFilter;
 import org.sklsft.demo.api.model.dummy.forms.FoolForm;
@@ -49,17 +50,17 @@ protected FoolRightsManager foolRightsManager;
 protected FoolProcessor foolProcessor;
 
 /**
- * get options
+ * search options
  */
 @Override
 @Transactional(readOnly=true)
-public List<String> getOptions() {
-List<Fool> foolList = foolDao.loadList();
-List<String> foolCodeList = new ArrayList<>(foolList.size());
+public List<SelectItem> searchOptions(String arg) {
+List<Fool> foolList = foolDao.search(arg);
+List<SelectItem> result = new ArrayList<>(foolList.size());
 for (Fool fool : foolList) {
-foolCodeList.add(fool.getCode());
+result.add(new SelectItem(fool.getCode(), fool.getCode()));
 }
-return foolCodeList;
+return result;
 }
 
 /**

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
+import org.sklsft.commons.api.model.SelectItem;
 import org.sklsft.demo.api.interfaces.localization.base.CountryBaseService;
 import org.sklsft.demo.api.model.localization.filters.CountryFilter;
 import org.sklsft.demo.api.model.localization.forms.CountryForm;
@@ -53,13 +54,13 @@ protected CountryProcessor countryProcessor;
  */
 @Override
 @Transactional(readOnly=true)
-public List<String> getOptions() {
+public List<SelectItem> getOptions() {
 List<Country> countryList = countryDao.loadList();
-List<String> countryCodeList = new ArrayList<>(countryList.size());
+List<SelectItem> result = new ArrayList<>(countryList.size());
 for (Country country : countryList) {
-countryCodeList.add(country.getCode());
+result.add(new SelectItem(country.getCode(), country.getCode()));
 }
-return countryCodeList;
+return result;
 }
 
 /**

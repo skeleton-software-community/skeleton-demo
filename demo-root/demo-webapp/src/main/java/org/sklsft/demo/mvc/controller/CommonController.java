@@ -3,9 +3,9 @@ package org.sklsft.demo.mvc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
+import org.sklsft.commons.api.model.SelectItem;
 import org.sklsft.demo.api.interfaces.dummy.FoolService;
 import org.sklsft.demo.api.interfaces.localization.CountryService;
 import org.sklsft.demo.api.interfaces.time.CalendarService;
@@ -41,48 +41,31 @@ private CalendarService calendarService;
 private FoolService foolService;
 
 /**
- * load combobox items for Country
+ * load options for Country
  */
 public void loadCountryOptions() {
-List<SelectItem> result = new ArrayList<>();
-result.add(new SelectItem(null,""));
-List<String> options = this.countryService.getOptions();
-if (options != null){
-for (String option:options){
-result.add(new SelectItem(option));
-}
-}
-this.commonView.setCountryOptions(result);
+List<SelectItem> options = this.countryService.getOptions();
+this.commonView.setCountryOptions(options);
 }
 
 /**
- * load combobox items for Calendar
+ * load options for Calendar
  */
 public void loadCalendarOptions() {
-List<SelectItem> result = new ArrayList<>();
-result.add(new SelectItem(null,""));
-List<String> options = this.calendarService.getOptions();
-if (options != null){
-for (String option:options){
-result.add(new SelectItem(option));
-}
-}
-this.commonView.setCalendarOptions(result);
+List<SelectItem> options = this.calendarService.getOptions();
+this.commonView.setCalendarOptions(options);
 }
 
 /**
- * load combobox items for Fool
+ * search options for Fool
  */
-public void loadFoolOptions() {
-List<SelectItem> result = new ArrayList<>();
-result.add(new SelectItem(null,""));
-List<String> options = this.foolService.getOptions();
-if (options != null){
-for (String option:options){
-result.add(new SelectItem(option));
+public List<String> searchFoolOptions(String arg) {
+List<SelectItem> options = this.foolService.searchOptions(arg);
+List<String> result = new ArrayList<>(options.size());
+for (SelectItem option : options) {
+result.add(option.getKey());
 }
-}
-this.commonView.setFoolOptions(result);
+return result;
 }
 
 /* Specific Code Start */

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
+import org.sklsft.commons.api.model.SelectItem;
 import org.sklsft.demo.api.model.dummy.filters.FoolFilter;
 import org.sklsft.demo.api.model.dummy.forms.FoolForm;
 import org.sklsft.demo.api.model.dummy.sortings.FoolSorting;
@@ -18,9 +19,9 @@ import org.sklsft.demo.api.model.dummy.views.full.FoolFullView;
 public interface FoolBaseService {
 
 /**
- * get options
+ * search options
  */
-List<String> getOptions();
+List<SelectItem> searchOptions(String arg);
 
 /**
  * load object list

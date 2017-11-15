@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
+import org.sklsft.commons.api.model.SelectItem;
 import org.sklsft.demo.api.model.localization.filters.CountryFilter;
 import org.sklsft.demo.api.model.localization.forms.CountryForm;
 import org.sklsft.demo.api.model.localization.sortings.CountrySorting;
@@ -20,7 +21,7 @@ public interface CountryBaseService {
 /**
  * get options
  */
-List<String> getOptions();
+List<SelectItem> getOptions();
 
 /**
  * load object list

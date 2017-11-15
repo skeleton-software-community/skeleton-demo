@@ -3,8 +3,7 @@ package org.sklsft.demo.mvc.model;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.model.SelectItem;
-
+import org.sklsft.commons.api.model.SelectItem;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
@@ -26,7 +25,6 @@ private static final long serialVersionUID = 1L;
  */
 private List<SelectItem>countryOptions;
 private List<SelectItem>calendarOptions;
-private List<SelectItem>foolOptions;
 
 /*
  * getters and setters
@@ -43,13 +41,6 @@ return calendarOptions;
 }
 public void setCalendarOptions(List<SelectItem> calendarOptions) {
 this.calendarOptions = calendarOptions;
-}
-
-public List<SelectItem> getFoolOptions() {
-return foolOptions;
-}
-public void setFoolOptions(List<SelectItem> foolOptions) {
-this.foolOptions = foolOptions;
 }
 
 /* Specific Code Start */

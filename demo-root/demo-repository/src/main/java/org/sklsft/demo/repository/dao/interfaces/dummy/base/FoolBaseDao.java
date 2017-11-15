@@ -37,4 +37,9 @@ Fool findOrNull(String code);
  */
 Fool find(String code);
 
+/**
+ * search
+ */
+List<Fool> search(String arg);
+
 }

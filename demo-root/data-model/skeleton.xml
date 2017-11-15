@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<metadata:project xmlns:metadata="http://generator.sklsft.org/schema/model/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://generator.sklsft.org/schema/model/metadata skeleton-metadata-2.1.xsd">
+<metadata:project xmlns:metadata="http://generator.sklsft.org/schema/model/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://generator.sklsft.org/schema/model/metadata skeleton-metadata-3.0.xsd">
     <domainName>org.sklsft</domainName>
     <projectName>demo</projectName>
-    <skeletonType>SPRING_HIBERNATE_RICHFACES_4</skeletonType>
+    <skeleton>SPRING_HIBERNATE_PRIMEFACES</skeleton>
     <databaseEngine>POSTGRESQL</databaseEngine>
     <databaseName>demo</databaseName>
     <databaseDNS>localhost</databaseDNS>
@@ -14,8 +14,9 @@
 		<package name="LOCALIZATION">
 			<tables>
 				<table name="COUNTRY" cardinality="1" listRendering="Countries"
-					detailRendering="Country details" comboxable="true" createEnabled="true"
+					detailRendering="Country details" createEnabled="true"
 					updateEnabled="true" deleteEnabled="true">
+					<selectionBehavior selectionMode="DROPDOWN_OPTIONS"/>
 					<columns>
 						<column name="CODE" dataType="STRING" nullable="false"
 							editable="true" rendering="ISO Code">
@@ -26,9 +27,9 @@
 					</columns>
 				</table>
 				<table name="REGION" cardinality="2" listRendering="Regions/States/Provinces"
-					detailRendering="Region details" comboxable="false" createEnabled="true"
+					detailRendering="Region details" createEnabled="true"
 					updateEnabled="true" deleteEnabled="true">
-					<columns>
+					<columns>						
 						<column name="COUNTRY_ID" dataType="LONG"
 							referenceTableName="COUNTRY" referenceTableRelation="MANY_TO_ONE"
 							nullable="false" editable="true" rendering="Country">
@@ -38,11 +39,11 @@
 						</column>
 						<column name="LABEL" dataType="STRING" nullable="false"
 							editable="true" rendering="Label">
-						</column>
-					</columns>
+						</column>					
+					</columns>					
 				</table>
 				<table name="CITY" cardinality="2" listRendering="Cities"
-					detailRendering="City details" comboxable="false" createEnabled="true"
+					detailRendering="City details" createEnabled="true"
 					updateEnabled="true" deleteEnabled="true">
 					<columns>
 						<column name="REGION_ID" dataType="LONG"
@@ -62,8 +63,9 @@
 		<package name="TIME">
 			<tables>
 				<table name="CALENDAR" cardinality="1" listRendering="Calendars"
-					detailRendering="Calendar details" comboxable="true" createEnabled="true"
+					detailRendering="Calendar details" createEnabled="true"
 					updateEnabled="true" deleteEnabled="true">
+					<selectionBehavior selectionMode="DROPDOWN_OPTIONS"/>
 					<columns>						
 						<column name="CODE" dataType="STRING" nullable="false"
 							editable="true" rendering="Code">
@@ -73,7 +75,7 @@
 						</column>
 					</columns>
 				</table>
-				<table name="CALENDAR_DAY_OFF" cardinality="2" listRendering="Days off" detailRendering="Day off" comboxable="false"
+				<table name="CALENDAR_DAY_OFF" cardinality="2" listRendering="Days off" detailRendering="Day off"
 					createEnabled="true" updateEnabled="true" deleteEnabled="true">
 					<columns>
 						<column name="CALENDAR_ID" dataType="LONG" nullable="false" referenceTableName="CALENDAR" referenceTableRelation="MANY_TO_ONE_COMPONENT"
@@ -90,8 +92,9 @@
 		<package name="DUMMY">
 			<tables>
 				<table name="FOOL" cardinality="1" listRendering="Fools"
-					detailRendering="Fool details" comboxable="true" createEnabled="true"
+					detailRendering="Fool details" createEnabled="true"
 					updateEnabled="true" deleteEnabled="true">
+					<selectionBehavior selectionMode="AUTO_COMPLETE"/>
 					<columns>						
 						<column name="CODE" dataType="STRING" nullable="false"
 							editable="true" rendering="Code">
