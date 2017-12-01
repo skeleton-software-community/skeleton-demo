@@ -2,8 +2,7 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
-xmlns:rich = "http://richfaces.org/rich"
-xmlns:a4j = "http://richfaces.org/a4j"
+xmlns:p="http://primefaces.org/ui"
 xmlns:cc="http://java.sun.com/jsf/composite/components"
 xmlns:s="http://commons.sklsft.org/ui/components"
 template="/templates/template.xhtml">
@@ -24,14 +23,12 @@ template="/templates/template.xhtml">
 <h2>
 #{i18n.calendarList} (#{calendarListView.scrollView.size})
 </h2>
-<a4j:region>
-
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
-<a4j:commandLink action="#{calendarListController.reset}" render="calendarPanelGroup">
+<p:commandLink action="#{calendarListController.reset}" process="@this" update="@form:calendarPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
-</a4j:commandLink>
+</p:commandLink>
 </h3>
 <div class="row row-eq-height">
 <div class="col-xs-3">
@@ -39,9 +36,7 @@ template="/templates/template.xhtml">
 <h:inputText
 value="#{calendarListView.scrollForm.filter.code}"
 styleClass="form-control">
-<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{calendarListController.refresh}">
-<a4j:attachQueue requestDelay="500"/>
-</a4j:ajax>
+<p:ajax event="keyup" update="resultsPanelGroup" listener="#{calendarListController.refresh}"/>
 </h:inputText>
 </div>
 
@@ -50,9 +45,7 @@ styleClass="form-control">
 <h:inputText
 value="#{calendarListView.scrollForm.filter.label}"
 styleClass="form-control">
-<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{calendarListController.refresh}">
-<a4j:attachQueue requestDelay="500"/>
-</a4j:ajax>
+<p:ajax event="keyup" update="resultsPanelGroup" listener="#{calendarListController.refresh}"/>
 </h:inputText>
 </div>
 
@@ -67,69 +60,69 @@ styleClass="form-control">
 <ui:fragment rendered="#{calendarListView.scrollView.elements.size() > 0}">
 <s:tooltip for=".truncated-text"/>
 
-<rich:dataTable rows="10"
+<p:dataTable rows="10"
 id="calendarList" var="calendar" name="datatable"
 value="#{calendarListView.scrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
 <script>$(function(){displaySelectUnselectAll();});</script>
 </f:facet>
 <h:selectBooleanCheckbox rendered="#{calendar.canDelete}" id="selectUnselect" value="#{calendar.selected}" onclick="selectUnselect('calendarListForm:calendarList:selectUnselectAll')"/>
-</rich:column>
+</p:column>
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <h:outputText value="Actions" />
 <div class="drop-list" id="drop-list">
-<a4j:commandLink title="#{i18n.deleteSelection}" action="#{calendarListController.deleteList}"
-onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="calendarPanelGroup">
+<p:commandLink title="#{i18n.deleteSelection}" action="#{calendarListController.deleteList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" process="@form:calendarPanelGroup" update=":messages, @form:calendarPanelGroup">
 <span class="glyphicon glyphicon-trash"/>
-</a4j:commandLink>
+</p:commandLink>
 </div>
 </f:facet>
-<h:panelGrid columns="2">
+<h:panelGrid styleClass="actions-grid" columns="2">
 <h:link outcome="/sections/time/calendar/CalendarDetails.jsf">
 <h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
 <f:param name="id" value="#{calendar.id}" />
 </h:link>
-<a4j:commandLink rendered="#{calendar.canDelete}" action="#{calendarListController.delete(calendar.id)}"
-onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="calendarPanelGroup">
+<p:commandLink rendered="#{calendar.canDelete}" action="#{calendarListController.delete(calendar.id)}"
+onclick="if (!confirm('#{i18n.confirmDelete}')) return false" process="@this" update=":messages, @form:calendarPanelGroup">
 <h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
-</a4j:commandLink>
+</p:commandLink>
 </h:panelGrid>
-</rich:column>
+</p:column>
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.calendarCode}"
 orderType="#{calendarListView.scrollForm.sorting.codeOrderType}"
 action="#{calendarListController.refresh}"
-render="calendarPanelGroup"/>
+render="@form:calendarPanelGroup"/>
 </f:facet>
 <h:outputText value="#{calendar.code}"/>
-</rich:column>
+</p:column>
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.calendarLabel}"
 orderType="#{calendarListView.scrollForm.sorting.labelOrderType}"
 action="#{calendarListController.refresh}"
-render="calendarPanelGroup"/>
+render="@form:calendarPanelGroup"/>
 </f:facet>
 <h:outputText value="#{calendar.label}"/>
-</rich:column>
+</p:column>
 
-</rich:dataTable>
+</p:dataTable>
 
 <cc:datatableScroller
 page="#{calendarListView.scrollForm.page}"
 numberOfPages="#{calendarListView.scrollView.numberOfPages}"
 action="#{calendarListController.refresh}"
-render="calendarPanelGroup"/>
+render="@form:calendarPanelGroup"/>
 
 </ui:fragment>
 
@@ -137,12 +130,10 @@ render="calendarPanelGroup"/>
 
 </div>
 
-<a4j:commandButton value="#{i18n.create}" action="#{calendarListController.createCalendar}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#calendarModal').modal('show')}" render="calendarDetailPanelGroup"/>
+<p:commandButton value="#{i18n.create}" action="#{calendarListController.createCalendar}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#calendarModal').modal('show')}" process="@this" update="calendarDetailPanelGroup"/>
 
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
-</a4j:region>
-
 </h:panelGroup>
 
 <div class="modal modal-default" id="calendarModal" tabindex="-1" aria-hidden="true">

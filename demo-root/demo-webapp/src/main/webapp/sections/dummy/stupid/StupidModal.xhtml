@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:p="http://primefaces.org/ui">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton-generator -->
+<!-- -->
+
+<div class="modal-header">
+<h2>
+#{i18n.stupidDetail}
+</h2>
+</div>
+
+<div class="modal-body">
+
+<h:panelGroup id="stupidDetailPanelGroup">
+<ui:param name="view" value="#{stupidListView.selectedStupid}"/>
+<ui:param name="form" value="#{view.form}"/>
+
+<div class="row">
+<div class="col-xs-12">
+<label>#{i18n.stupidCode}</label>
+<h:inputText id="stupidCode" styleClass="form-control" value="#{form.code}"/>
+<h:message for="stupidCode" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.stupidFoolCode}</label>
+<p:autoComplete id="stupidFoolCode" styleClass="form-control" value="#{form.foolCode}"
+ completeMethod="#{commonController.searchFoolOptions}"/>
+<h:message for="stupidFoolCode" styleClass="detail-error-message"/>
+</div>
+
+</div>
+
+<p:commandButton value="#{i18n.save}" action="#{stupidListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" process="@form:stupidDetailPanelGroup" update=":messages, @form:stupidPanelGroup, @form:stupidDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#stupidModal').modal('hide');"/>
+<p:commandButton value="#{i18n.update}" action="#{stupidListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" process="@form:stupidDetailPanelGroup" update=":messages, @form:stupidPanelGroup, @form:stupidDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#stupidModal').modal('hide');"/>
+<p:commandButton value="#{i18n.cancel}" actionListener="#{stupidListController.resetForm}" styleClass="btn btn-info" immediate="true" execute="@this" update="@form:stupidPanelGroup" oncomplete="$('#stupidModal').modal('hide')"/>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+
+</h:panelGroup>
+
+</div>
+
+</ui:composition>

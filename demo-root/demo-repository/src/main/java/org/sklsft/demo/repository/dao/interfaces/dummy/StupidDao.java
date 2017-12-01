@@ -1,0 +1,14 @@
+package org.sklsft.demo.repository.dao.interfaces.dummy;
+
+import org.sklsft.demo.repository.dao.interfaces.dummy.base.StupidBaseDao;
+
+/**
+ * auto generated dao interface file
+ * <br/>write modifications between specific code marks
+ * <br/>processed by skeleton-generator
+ */
+public interface StupidDao extends StupidBaseDao {
+
+/* Specific Code Start */
+/* Specific Code End */
+}

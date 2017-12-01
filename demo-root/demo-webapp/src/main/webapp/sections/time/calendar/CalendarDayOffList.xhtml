@@ -2,8 +2,7 @@
 xmlns:ui = "http://java.sun.com/jsf/facelets"
 xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
-xmlns:rich = "http://richfaces.org/rich"
-xmlns:a4j = "http://richfaces.org/a4j"
+xmlns:p="http://primefaces.org/ui"
 xmlns:cc="http://java.sun.com/jsf/composite/components"
 xmlns:s="http://commons.sklsft.org/ui/components"
 template="/templates/template.xhtml">
@@ -29,30 +28,26 @@ template="/templates/template.xhtml">
 <h2>
 #{i18n.calendarDayOffList} (#{calendarDetailView.calendarDayOffScrollView.size})
 </h2>
-<a4j:region>
-
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
-<a4j:commandLink action="#{calendarDetailController.resetCalendarDayOffFilter}" render="calendarDayOffPanelGroup">
+<p:commandLink action="#{calendarDetailController.resetCalendarDayOffFilter}" process="@this" update="@form:calendarDayOffPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
-</a4j:commandLink>
+</p:commandLink>
 </h3>
 <div class="row row-eq-height">
 <div class="col-xs-3">
 <label>#{i18n.calendarDayOffDayOffDate}</label>
-<rich:calendar value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffDateMinValue}"
-inputClass="form-control"
+<p:calendar value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffDateMinValue}"
+class="form-control date-picker"
 datePattern="dd MMMM yyyy HH:mm">
-<a4j:ajax event="change" render="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}">
-</a4j:ajax>
-</rich:calendar>
-<rich:calendar value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffDateMaxValue}"
-inputClass="form-control"
+<p:ajax event="change" update="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
+</p:calendar>
+<p:calendar value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffDateMaxValue}"
+class="form-control date-picker"
 datePattern="dd MMMM yyyy HH:mm">
-<a4j:ajax event="change" render="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}">
-</a4j:ajax>
-</rich:calendar>
+<p:ajax event="change" update="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
+</p:calendar>
 </div>
 
 <div class="col-xs-3">
@@ -60,9 +55,7 @@ datePattern="dd MMMM yyyy HH:mm">
 <h:inputText
 value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffLabel}"
 styleClass="form-control">
-<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}">
-<a4j:attachQueue requestDelay="500"/>
-</a4j:ajax>
+<p:ajax event="keyup" update="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
 </h:inputText>
 </div>
 
@@ -78,72 +71,72 @@ styleClass="form-control">
 
 <s:tooltip for=".truncated-text"/>
 
-<rich:dataTable rows="10"
+<p:dataTable rows="10"
 id="calendarDayOffList" var="calendarDayOff" name="datatable"
 value="#{calendarDetailView.calendarDayOffScrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
 <script>$(function(){displaySelectUnselectAll();});</script>
 </f:facet>
 <h:selectBooleanCheckbox  rendered="#{calendarDayOff.canDelete}" id="selectUnselect" value="#{calendarDayOff.selected}" onclick="selectUnselect('calendarDayOffListForm:calendarDayOffList:selectUnselectAll')"/>
-</rich:column>
+</p:column>
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <h:outputText value="Actions" />
 <div id="drop-list" class="drop-list">
-<a4j:commandLink title="#{i18n.deleteSelection}" action="#{calendarDetailController.deleteCalendarDayOffList}"
-onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="calendarDayOffPanelGroup">
+<p:commandLink title="#{i18n.deleteSelection}" action="#{calendarDetailController.deleteCalendarDayOffList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" process="@form:calendarDayOffPanelGroup" update=":messages, @form:calendarDayOffPanelGroup">
 <span class="glyphicon glyphicon-trash"/>
-</a4j:commandLink>
+</p:commandLink>
 </div>
 
 </f:facet>
 <h:panelGrid columns="2">
-<a4j:commandLink action="#{calendarDetailController.editCalendarDayOff(calendarDayOff.id)}" oncomplete="$('#calendarDayOffModal').modal('show')" render="calendarDayOffDetailPanelGroup">
+<p:commandLink action="#{calendarDetailController.editCalendarDayOff(calendarDayOff.id)}" oncomplete="$('#calendarDayOffModal').modal('show')" update="@form:calendarDayOffDetailPanelGroup">
 <h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
-</a4j:commandLink>
-<a4j:commandLink action="#{calendarDetailController.deleteCalendarDayOff(calendarDayOff.id)}"
+</p:commandLink>
+<p:commandLink action="#{calendarDetailController.deleteCalendarDayOff(calendarDayOff.id)}"
 rendered="#{calendarDayOff.canDelete}"
-onclick="if (!confirm('#{i18n.confirmDelete}')) return false" execute="@this" render="calendarDayOffPanelGroup">
+onclick="if (!confirm('#{i18n.confirmDelete}')) return false" process="@this" update=":messages, @form:calendarDayOffPanelGroup">
 <h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
-</a4j:commandLink>
+</p:commandLink>
 </h:panelGrid>
-</rich:column>
+</p:column>
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.calendarDayOffDayOffDate}"
 orderType="#{calendarDetailView.calendarDayOffScrollForm.sorting.dayOffDateOrderType}"
 action="#{calendarDetailController.refreshCalendarDayOffList}"
-render="calendarDayOffPanelGroup"/>
+render="@form:calendarDayOffPanelGroup"/>
 </f:facet>
 <h:outputText value="#{calendarDayOff.dayOffDate}">
 <f:convertDateTime type="both" dateStyle="medium"/>
 </h:outputText>
-</rich:column>
+</p:column>
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.calendarDayOffDayOffLabel}"
 orderType="#{calendarDetailView.calendarDayOffScrollForm.sorting.dayOffLabelOrderType}"
 action="#{calendarDetailController.refreshCalendarDayOffList}"
-render="calendarDayOffPanelGroup"/>
+render="@form:calendarDayOffPanelGroup"/>
 </f:facet>
 <h:outputText value="#{calendarDayOff.dayOffLabel}"/>
-</rich:column>
+</p:column>
 
-</rich:dataTable>
+</p:dataTable>
 
 <cc:datatableScroller
 page="#{calendarDetailView.calendarDayOffScrollForm.page}"
 numberOfPages="#{calendarDetailView.calendarDayOffScrollView.numberOfPages}"
 action="#{calendarDetailController.refreshCalendarDayOffList}"
-render="calendarDayOffPanelGroup"/>
+render="@form:calendarDayOffPanelGroup"/>
 
 </ui:fragment>
 
@@ -151,12 +144,10 @@ render="calendarDayOffPanelGroup"/>
 
 </div>
 
-<a4j:commandButton value="#{i18n.create}" action="#{calendarDetailController.createCalendarDayOff}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#calendarDayOffModal').modal('show')" execute="@this" render="calendarDayOffDetailPanelGroup"/>
+<p:commandButton value="#{i18n.create}" action="#{calendarDetailController.createCalendarDayOff}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#calendarDayOffModal').modal('show')" process="@this" update="@form:calendarDayOffDetailPanelGroup"/>
 
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
-
-</a4j:region>
 
 </h:panelGroup>
 

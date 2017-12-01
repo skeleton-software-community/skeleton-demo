@@ -2,9 +2,7 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html"
-xmlns:rich="http://richfaces.org/rich"
-xmlns:a4j="http://richfaces.org/a4j"
-xmlns:c="http://java.sun.com/jstl/core">
+xmlns:p="http://primefaces.org/ui">
 
 <!-- -->
 <!-- auto generated jsf file -->
@@ -21,8 +19,6 @@ xmlns:c="http://java.sun.com/jstl/core">
 <div class="modal-body">
 
 <h:panelGroup id="countryDetailPanelGroup">
-<a4j:region>
-
 <ui:param name="view" value="#{countryListView.selectedCountry}"/>
 <ui:param name="form" value="#{view.form}"/>
 
@@ -41,13 +37,11 @@ xmlns:c="http://java.sun.com/jstl/core">
 
 </div>
 
-<a4j:commandButton value="#{i18n.save}" action="#{countryListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" execute="@region" render="countryPanelGroup, countryDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#countryModal').modal('hide');"/>
-<a4j:commandButton value="#{i18n.update}" action="#{countryListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" execute="@region" render="countryPanelGroup, countryDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#countryModal').modal('hide');"/>
-<a4j:commandButton value="#{i18n.cancel}" actionListener="#{countryListController.resetForm}" styleClass="btn btn-info" immediate="true" execute="@region" render="countryPanelGroup" oncomplete="$('#countryModal').modal('hide')"/>
+<p:commandButton value="#{i18n.save}" action="#{countryListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" process="@form:countryDetailPanelGroup" update=":messages, @form:countryPanelGroup, @form:countryDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#countryModal').modal('hide');"/>
+<p:commandButton value="#{i18n.update}" action="#{countryListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" process="@form:countryDetailPanelGroup" update=":messages, @form:countryPanelGroup, @form:countryDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#countryModal').modal('hide');"/>
+<p:commandButton value="#{i18n.cancel}" actionListener="#{countryListController.resetForm}" styleClass="btn btn-info" immediate="true" execute="@this" update="@form:countryPanelGroup" oncomplete="$('#countryModal').modal('hide')"/>
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
-
-</a4j:region>
 
 </h:panelGroup>
 

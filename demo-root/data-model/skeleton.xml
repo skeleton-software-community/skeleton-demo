@@ -122,6 +122,18 @@
 						</column>
 					</columns>
 				</table>
+				<table name="STUPID" cardinality="1" listRendering="Stupids"
+					detailRendering="Stupid details" createEnabled="true"
+					updateEnabled="true" deleteEnabled="true">
+					<columns>						
+						<column name="CODE" dataType="STRING" nullable="false"
+							editable="true" rendering="Code">
+						</column>
+						<column name="FOOL_ID" dataType="LONG" nullable="false" referenceTableName="FOOL"
+							editable="true" rendering="Fool">
+						</column>
+					</columns>
+				</table>
 			</tables>
 		</package>
 	</packages>
