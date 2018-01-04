@@ -2,7 +2,9 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html"
-xmlns:p="http://primefaces.org/ui"
+xmlns:rich="http://richfaces.org/rich"
+xmlns:a4j="http://richfaces.org/a4j"
+xmlns:c="http://java.sun.com/jstl/core"
 template="/templates/template.xhtml">
 
 <!-- -->
@@ -23,6 +25,8 @@ template="/templates/template.xhtml">
 
 <h2>#{i18n.foolDetail}</h2>
 <h:panelGroup id="foolDetailPanelGroup">
+
+<a4j:region>
 
 <ui:param name="view" value="#{foolDetailView.selectedFool}"/>
 <ui:param name="form" value="#{view.form}"/>
@@ -59,40 +63,42 @@ readonly="false" disabled="false"/>
 </div>
 
 <div class="col-xs-12">
-<label>#{i18n.foolDoubleField2}</label>
-<h:inputText id="foolDoubleField2" styleClass="form-control" value="#{form.doubleField2}">
-<f:convertNumber pattern="#,##0.00"/>
+<label>#{i18n.foolDoubleField}</label>
+<h:inputText id="foolDoubleField" styleClass="form-control" value="#{form.doubleField}">
+<f:convertNumber pattern="#,##0.########"/>
 </h:inputText>
-<h:message for="foolDoubleField2" styleClass="detail-error-message"/>
+<h:message for="foolDoubleField" styleClass="detail-error-message"/>
 </div>
 
 <div class="col-xs-12">
-<label>#{i18n.foolDoubleField4}</label>
-<h:inputText id="foolDoubleField4" styleClass="form-control" value="#{form.doubleField4}">
-<f:convertNumber pattern="#,##0.0000"/>
+<label>#{i18n.foolDecimalField}</label>
+<h:inputText id="foolDecimalField" styleClass="form-control" value="#{form.decimalField}">
+<f:convertNumber pattern="#,##0.########"/>
 </h:inputText>
-<h:message for="foolDoubleField4" styleClass="detail-error-message"/>
+<h:message for="foolDecimalField" styleClass="detail-error-message"/>
 </div>
 
 <div class="col-xs-12">
 <label>#{i18n.foolDateField}</label>
-<p:calendar id="foolDateField" class="form-control date-picker" value="#{form.dateField}"
- datePattern="dd MMMM yyyy"/>
+<rich:calendar id="foolDateField" inputClass="form-control" value="#{form.dateField}"
+ datePattern="yyyy-MM-dd"/>
 <h:message for="foolDateField" styleClass="detail-error-message"/>
 </div>
 
 <div class="col-xs-12">
 <label>#{i18n.foolDatetimeField}</label>
-<p:calendar id="foolDatetimeField" class="form-control date-picker" value="#{form.datetimeField}"
- datePattern="dd MMMM yyyy HH:mm"/>
+<rich:calendar id="foolDatetimeField" inputClass="form-control" value="#{form.datetimeField}"
+ datePattern="yyyy-MM-dd HH:mm:ss"/>
 <h:message for="foolDatetimeField" styleClass="detail-error-message"/>
 </div>
 
 </div>
 
-<p:commandButton value="#{i18n.update}" disabled="#{not view.canUpdate}" action="#{foolDetailController.update}" styleClass="btn btn-success" process="@form" update=":messages, @form:foolDetailPanelGroup"/>
+<a4j:commandButton value="#{i18n.update}" disabled="#{not view.canUpdate}" action="#{foolDetailController.update}" styleClass="btn btn-success" execute="@region" render="foolDetailPanelGroup"/>
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
+
+</a4j:region>
 
 </h:panelGroup>
 

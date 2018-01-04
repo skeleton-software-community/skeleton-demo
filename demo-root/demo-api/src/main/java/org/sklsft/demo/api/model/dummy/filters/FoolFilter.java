@@ -1,6 +1,7 @@
 package org.sklsft.demo.api.model.dummy.filters;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -21,10 +22,10 @@ private String description;
 private Long longFieldMinValue;
 private Long longFieldMaxValue;
 private Boolean booleanField;
-private Double doubleField2MinValue;
-private Double doubleField2MaxValue;
-private Double doubleField4MinValue;
-private Double doubleField4MaxValue;
+private Double doubleFieldMinValue;
+private Double doubleFieldMaxValue;
+private BigDecimal decimalFieldMinValue;
+private BigDecimal decimalFieldMaxValue;
 private Date dateFieldMinValue;
 private Date dateFieldMaxValue;
 private Date datetimeFieldMinValue;
@@ -63,29 +64,29 @@ return this.booleanField;
 public void setBooleanField(Boolean booleanField) {
 this.booleanField = booleanField;
 }
-public Double getDoubleField2MinValue() {
-return this.doubleField2MinValue;
+public Double getDoubleFieldMinValue() {
+return this.doubleFieldMinValue;
 }
-public void setDoubleField2MinValue(Double doubleField2MinValue) {
-this.doubleField2MinValue = doubleField2MinValue;
+public void setDoubleFieldMinValue(Double doubleFieldMinValue) {
+this.doubleFieldMinValue = doubleFieldMinValue;
 }
-public Double getDoubleField2MaxValue() {
-return this.doubleField2MaxValue;
+public Double getDoubleFieldMaxValue() {
+return this.doubleFieldMaxValue;
 }
-public void setDoubleField2MaxValue(Double doubleField2MaxValue) {
-this.doubleField2MaxValue = doubleField2MaxValue;
+public void setDoubleFieldMaxValue(Double doubleFieldMaxValue) {
+this.doubleFieldMaxValue = doubleFieldMaxValue;
 }
-public Double getDoubleField4MinValue() {
-return this.doubleField4MinValue;
+public BigDecimal getDecimalFieldMinValue() {
+return this.decimalFieldMinValue;
 }
-public void setDoubleField4MinValue(Double doubleField4MinValue) {
-this.doubleField4MinValue = doubleField4MinValue;
+public void setDecimalFieldMinValue(BigDecimal decimalFieldMinValue) {
+this.decimalFieldMinValue = decimalFieldMinValue;
 }
-public Double getDoubleField4MaxValue() {
-return this.doubleField4MaxValue;
+public BigDecimal getDecimalFieldMaxValue() {
+return this.decimalFieldMaxValue;
 }
-public void setDoubleField4MaxValue(Double doubleField4MaxValue) {
-this.doubleField4MaxValue = doubleField4MaxValue;
+public void setDecimalFieldMaxValue(BigDecimal decimalFieldMaxValue) {
+this.decimalFieldMaxValue = decimalFieldMaxValue;
 }
 public Date getDateFieldMinValue() {
 return this.dateFieldMinValue;

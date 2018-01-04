@@ -2,7 +2,8 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
-xmlns:p="http://primefaces.org/ui"
+xmlns:rich = "http://richfaces.org/rich"
+xmlns:a4j = "http://richfaces.org/a4j"
 xmlns:cc="http://java.sun.com/jsf/composite/components"
 xmlns:s="http://commons.sklsft.org/ui/components"
 template="/templates/template.xhtml">
@@ -23,12 +24,14 @@ template="/templates/template.xhtml">
 <h2>
 #{i18n.foolList} (#{foolListView.scrollView.size})
 </h2>
+<a4j:region>
+
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
-<p:commandLink action="#{foolListController.reset}" process="@this" update="@form:foolPanelGroup">
+<a4j:commandLink action="#{foolListController.reset}" render="foolPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
-</p:commandLink>
+</a4j:commandLink>
 </h3>
 <div class="row row-eq-height">
 <div class="col-xs-3">
@@ -36,7 +39,9 @@ template="/templates/template.xhtml">
 <h:inputText
 value="#{foolListView.scrollForm.filter.code}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -45,7 +50,9 @@ styleClass="form-control">
 <h:inputText
 value="#{foolListView.scrollForm.filter.description}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -54,12 +61,16 @@ styleClass="form-control">
 <h:inputText value="#{foolListView.scrollForm.filter.longFieldMinValue}"
 styleClass="form-control">
 <f:convertNumber integerOnly="true" pattern="#,##0"/>
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 <h:inputText value="#{foolListView.scrollForm.filter.longFieldMaxValue}"
 styleClass="form-control">
 <f:convertNumber integerOnly="true" pattern="#,##0"/>
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -69,60 +80,73 @@ styleClass="form-control">
 <f:selectItem itemLabel="" itemValue="#{null}"></f:selectItem>
 <f:selectItem itemLabel="#{i18n.trueLabel}" itemValue="#{true}"></f:selectItem>
 <f:selectItem itemLabel="#{i18n.falseLabel}" itemValue="#{false}"></f:selectItem>
-<p:ajax event="change" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<a4j:ajax event="change" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+</a4j:ajax>
 </h:selectOneMenu>
 </div>
 
 <div class="col-xs-3">
-<label>#{i18n.foolDoubleField2}</label>
-<h:inputText value="#{foolListView.scrollForm.filter.doubleField2MinValue}"
+<label>#{i18n.foolDoubleField}</label>
+<h:inputText value="#{foolListView.scrollForm.filter.doubleFieldMinValue}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
-<h:inputText value="#{foolListView.scrollForm.filter.doubleField2MaxValue}"
+<h:inputText value="#{foolListView.scrollForm.filter.doubleFieldMaxValue}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
 <div class="col-xs-3">
-<label>#{i18n.foolDoubleField4}</label>
-<h:inputText value="#{foolListView.scrollForm.filter.doubleField4MinValue}"
+<label>#{i18n.foolDecimalField}</label>
+<h:inputText value="#{foolListView.scrollForm.filter.decimalFieldMinValue}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
-<h:inputText value="#{foolListView.scrollForm.filter.doubleField4MaxValue}"
+<h:inputText value="#{foolListView.scrollForm.filter.decimalFieldMaxValue}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
 <div class="col-xs-3">
 <label>#{i18n.foolDateField}</label>
-<p:calendar value="#{foolListView.scrollForm.filter.dateFieldMinValue}"
-class="form-control date-picker"
-datePattern="dd MMMM yyyy">
-<p:ajax event="change" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
-</p:calendar>
-<p:calendar value="#{foolListView.scrollForm.filter.dateFieldMaxValue}"
-class="form-control date-picker"
-datePattern="dd MMMM yyyy">
-<p:ajax event="change" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
-</p:calendar>
+<rich:calendar value="#{foolListView.scrollForm.filter.dateFieldMinValue}"
+inputClass="form-control"
+datePattern="yyyy-MM-dd">
+<a4j:ajax event="change" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+</a4j:ajax>
+</rich:calendar>
+<rich:calendar value="#{foolListView.scrollForm.filter.dateFieldMaxValue}"
+inputClass="form-control"
+datePattern="yyyy-MM-dd">
+<a4j:ajax event="change" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+</a4j:ajax>
+</rich:calendar>
 </div>
 
 <div class="col-xs-3">
 <label>#{i18n.foolDatetimeField}</label>
-<p:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMinValue}"
-class="form-control date-picker"
-datePattern="dd MMMM yyyy HH:mm">
-<p:ajax event="change" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
-</p:calendar>
-<p:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMaxValue}"
-class="form-control date-picker"
-datePattern="dd MMMM yyyy HH:mm">
-<p:ajax event="change" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
-</p:calendar>
+<rich:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMinValue}"
+inputClass="form-control"
+datePattern="yyyy-MM-dd HH:mm:ss">
+<a4j:ajax event="change" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+</a4j:ajax>
+</rich:calendar>
+<rich:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMaxValue}"
+inputClass="form-control"
+datePattern="yyyy-MM-dd HH:mm:ss">
+<a4j:ajax event="change" render="resultsPanelGroup" listener="#{foolListController.refresh}">
+</a4j:ajax>
+</rich:calendar>
 </div>
 
 </div>
@@ -136,57 +160,57 @@ datePattern="dd MMMM yyyy HH:mm">
 <ui:fragment rendered="#{foolListView.scrollView.elements.size() > 0}">
 <s:tooltip for=".truncated-text"/>
 
-<p:dataTable rows="10"
+<rich:dataTable rows="10"
 id="foolList" var="fool" name="datatable"
 value="#{foolListView.scrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
 <script>$(function(){displaySelectUnselectAll();});</script>
 </f:facet>
 <h:selectBooleanCheckbox rendered="#{fool.canDelete}" id="selectUnselect" value="#{fool.selected}" onclick="selectUnselect('foolListForm:foolList:selectUnselectAll')"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <h:outputText value="Actions" />
 <div class="drop-list" id="drop-list">
-<p:commandLink title="#{i18n.deleteSelection}" action="#{foolListController.deleteList}"
-onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" process="@form:foolPanelGroup" update=":messages, @form:foolPanelGroup">
+<a4j:commandLink title="#{i18n.deleteSelection}" action="#{foolListController.deleteList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="foolPanelGroup">
 <span class="glyphicon glyphicon-trash"/>
-</p:commandLink>
+</a4j:commandLink>
 </div>
 </f:facet>
-<h:panelGrid styleClass="actions-grid" columns="2">
-<p:commandLink action="#{foolListController.editFool(fool.id)}" oncomplete="$('#foolModal').modal('show')" process="@this" update="@form:foolDetailPanelGroup">
+<h:panelGrid columns="2">
+<a4j:commandLink action="#{foolListController.editFool(fool.id)}" oncomplete="$('#foolModal').modal('show')" render="foolDetailPanelGroup">
 <h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
-</p:commandLink>
-<p:commandLink rendered="#{fool.canDelete}" action="#{foolListController.delete(fool.id)}"
-onclick="if (!confirm('#{i18n.confirmDelete}')) return false" process="@this" update=":messages, @form:foolPanelGroup">
+</a4j:commandLink>
+<a4j:commandLink rendered="#{fool.canDelete}" action="#{foolListController.delete(fool.id)}"
+onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="foolPanelGroup">
 <h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
-</p:commandLink>
+</a4j:commandLink>
 </h:panelGrid>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.foolCode}"
 orderType="#{foolListView.scrollForm.sorting.codeOrderType}"
 action="#{foolListController.refresh}"
-render="@form:foolPanelGroup"/>
+render="foolPanelGroup"/>
 </f:facet>
 <h:outputText value="#{fool.code}"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.foolDescription}"
 orderType="#{foolListView.scrollForm.sorting.descriptionOrderType}"
 action="#{foolListController.refresh}"
-render="@form:foolPanelGroup"/>
+render="foolPanelGroup"/>
 </f:facet>
 <pre class="truncated-text"
  data-toggle="tooltip"
@@ -196,91 +220,91 @@ render="@form:foolPanelGroup"/>
  data-trigger="click">
 #{fool.description}
 </pre>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.foolLongField}"
 orderType="#{foolListView.scrollForm.sorting.longFieldOrderType}"
 action="#{foolListController.refresh}"
-render="@form:foolPanelGroup"/>
+render="foolPanelGroup"/>
 </f:facet>
 <h:outputText value="#{fool.longField}">
 <f:convertNumber pattern="#,##0"/>
 </h:outputText>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.foolBooleanField}"
 orderType="#{foolListView.scrollForm.sorting.booleanFieldOrderType}"
 action="#{foolListController.refresh}"
-render="@form:foolPanelGroup"/>
+render="foolPanelGroup"/>
 </f:facet>
 <h:outputText value="#{fool.booleanField}"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
-label="#{i18n.foolDoubleField2}"
-orderType="#{foolListView.scrollForm.sorting.doubleField2OrderType}"
+label="#{i18n.foolDoubleField}"
+orderType="#{foolListView.scrollForm.sorting.doubleFieldOrderType}"
 action="#{foolListController.refresh}"
-render="@form:foolPanelGroup"/>
+render="foolPanelGroup"/>
 </f:facet>
-<h:outputText value="#{fool.doubleField2}">
-<f:convertNumber pattern="#,##0.00"/>
+<h:outputText value="#{fool.doubleField}">
+<f:convertNumber pattern="#,##0.########"/>
 </h:outputText>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
-label="#{i18n.foolDoubleField4}"
-orderType="#{foolListView.scrollForm.sorting.doubleField4OrderType}"
+label="#{i18n.foolDecimalField}"
+orderType="#{foolListView.scrollForm.sorting.decimalFieldOrderType}"
 action="#{foolListController.refresh}"
-render="@form:foolPanelGroup"/>
+render="foolPanelGroup"/>
 </f:facet>
-<h:outputText value="#{fool.doubleField4}">
-<f:convertNumber pattern="#,##0.0000"/>
+<h:outputText value="#{fool.decimalField}">
+<f:convertNumber pattern="#,##0.########"/>
 </h:outputText>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.foolDateField}"
 orderType="#{foolListView.scrollForm.sorting.dateFieldOrderType}"
 action="#{foolListController.refresh}"
-render="@form:foolPanelGroup"/>
+render="foolPanelGroup"/>
 </f:facet>
 <h:outputText value="#{fool.dateField}">
-<f:convertDateTime type="date" dateStyle="medium"/>
+<f:convertDateTime pattern="yyyy-MM-dd"/>
 </h:outputText>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.foolDatetimeField}"
 orderType="#{foolListView.scrollForm.sorting.datetimeFieldOrderType}"
 action="#{foolListController.refresh}"
-render="@form:foolPanelGroup"/>
+render="foolPanelGroup"/>
 </f:facet>
 <h:outputText value="#{fool.datetimeField}">
-<f:convertDateTime type="both" dateStyle="medium"/>
+<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss"/>
 </h:outputText>
-</p:column>
+</rich:column>
 
-</p:dataTable>
+</rich:dataTable>
 
 <cc:datatableScroller
 page="#{foolListView.scrollForm.page}"
 numberOfPages="#{foolListView.scrollView.numberOfPages}"
 action="#{foolListController.refresh}"
-render="@form:foolPanelGroup"/>
+render="foolPanelGroup"/>
 
 </ui:fragment>
 
@@ -288,10 +312,12 @@ render="@form:foolPanelGroup"/>
 
 </div>
 
-<p:commandButton value="#{i18n.create}" action="#{foolListController.createFool}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#foolModal').modal('show')}" process="@this" update="foolDetailPanelGroup"/>
+<a4j:commandButton value="#{i18n.create}" action="#{foolListController.createFool}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#foolModal').modal('show')}" render="foolDetailPanelGroup"/>
 
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
+</a4j:region>
+
 </h:panelGroup>
 
 <div class="modal modal-default" id="foolModal" tabindex="-1" aria-hidden="true">

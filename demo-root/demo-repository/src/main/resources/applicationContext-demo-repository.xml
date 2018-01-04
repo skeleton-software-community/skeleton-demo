@@ -32,8 +32,6 @@
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
-		
-
 	</bean>
 
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />

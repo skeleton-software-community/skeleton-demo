@@ -2,7 +2,8 @@
 xmlns:ui = "http://java.sun.com/jsf/facelets"
 xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
-xmlns:p="http://primefaces.org/ui"
+xmlns:rich = "http://richfaces.org/rich"
+xmlns:a4j = "http://richfaces.org/a4j"
 xmlns:cc="http://java.sun.com/jsf/composite/components"
 xmlns:s="http://commons.sklsft.org/ui/components"
 template="/templates/template.xhtml">
@@ -28,12 +29,14 @@ template="/templates/template.xhtml">
 <h2>
 #{i18n.cityList} (#{regionDetailView.cityScrollView.size})
 </h2>
+<a4j:region>
+
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
-<p:commandLink action="#{regionDetailController.resetCityFilter}" process="@this" update="@form:cityPanelGroup">
+<a4j:commandLink action="#{regionDetailController.resetCityFilter}" render="cityPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
-</p:commandLink>
+</a4j:commandLink>
 </h3>
 <div class="row row-eq-height">
 <div class="col-xs-3">
@@ -41,7 +44,9 @@ template="/templates/template.xhtml">
 <h:inputText
 value="#{regionDetailView.cityScrollForm.filter.code}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionDetailController.refreshCityList}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{regionDetailController.refreshCityList}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -50,7 +55,9 @@ styleClass="form-control">
 <h:inputText
 value="#{regionDetailView.cityScrollForm.filter.label}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionDetailController.refreshCityList}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{regionDetailController.refreshCityList}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -66,70 +73,70 @@ styleClass="form-control">
 
 <s:tooltip for=".truncated-text"/>
 
-<p:dataTable rows="10"
+<rich:dataTable rows="10"
 id="cityList" var="city" name="datatable"
 value="#{regionDetailView.cityScrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
 <script>$(function(){displaySelectUnselectAll();});</script>
 </f:facet>
 <h:selectBooleanCheckbox  rendered="#{city.canDelete}" id="selectUnselect" value="#{city.selected}" onclick="selectUnselect('cityListForm:cityList:selectUnselectAll')"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <h:outputText value="Actions" />
 <div id="drop-list" class="drop-list">
-<p:commandLink title="#{i18n.deleteSelection}" action="#{regionDetailController.deleteCityList}"
-onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" process="@form:cityPanelGroup" update=":messages, @form:cityPanelGroup">
+<a4j:commandLink title="#{i18n.deleteSelection}" action="#{regionDetailController.deleteCityList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="cityPanelGroup">
 <span class="glyphicon glyphicon-trash"/>
-</p:commandLink>
+</a4j:commandLink>
 </div>
 
 </f:facet>
 <h:panelGrid columns="2">
-<p:commandLink action="#{regionDetailController.editCity(city.id)}" oncomplete="$('#cityModal').modal('show')" process="@this" update="@form:cityDetailPanelGroup">
+<a4j:commandLink action="#{regionDetailController.editCity(city.id)}" oncomplete="$('#cityModal').modal('show')" render="cityDetailPanelGroup">
 <h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
-</p:commandLink>
-<p:commandLink action="#{regionDetailController.deleteCity(city.id)}"
+</a4j:commandLink>
+<a4j:commandLink action="#{regionDetailController.deleteCity(city.id)}"
 rendered="#{city.canDelete}"
-onclick="if (!confirm('#{i18n.confirmDelete}')) return false" process="@this" update=":messages, @form:cityPanelGroup">
+onclick="if (!confirm('#{i18n.confirmDelete}')) return false" execute="@this" render="cityPanelGroup">
 <h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
-</p:commandLink>
+</a4j:commandLink>
 </h:panelGrid>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.cityCode}"
 orderType="#{regionDetailView.cityScrollForm.sorting.codeOrderType}"
 action="#{regionDetailController.refreshCityList}"
-render="@form:cityPanelGroup"/>
+render="cityPanelGroup"/>
 </f:facet>
 <h:outputText value="#{city.code}"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.cityLabel}"
 orderType="#{regionDetailView.cityScrollForm.sorting.labelOrderType}"
 action="#{regionDetailController.refreshCityList}"
-render="@form:cityPanelGroup"/>
+render="cityPanelGroup"/>
 </f:facet>
 <h:outputText value="#{city.label}"/>
-</p:column>
+</rich:column>
 
-</p:dataTable>
+</rich:dataTable>
 
 <cc:datatableScroller
 page="#{regionDetailView.cityScrollForm.page}"
 numberOfPages="#{regionDetailView.cityScrollView.numberOfPages}"
 action="#{regionDetailController.refreshCityList}"
-render="@form:cityPanelGroup"/>
+render="cityPanelGroup"/>
 
 </ui:fragment>
 
@@ -137,10 +144,12 @@ render="@form:cityPanelGroup"/>
 
 </div>
 
-<p:commandButton value="#{i18n.create}" action="#{regionDetailController.createCity}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#cityModal').modal('show')" process="@this" update="@form:cityDetailPanelGroup"/>
+<a4j:commandButton value="#{i18n.create}" action="#{regionDetailController.createCity}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#cityModal').modal('show')" execute="@this" render="cityDetailPanelGroup"/>
 
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
+
+</a4j:region>
 
 </h:panelGroup>
 

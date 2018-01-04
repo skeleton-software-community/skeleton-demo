@@ -1,6 +1,7 @@
 package org.sklsft.demo.api.model.dummy.views.basic;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -23,8 +24,8 @@ private String code;
 private String description;
 private Long longField;
 private Boolean booleanField;
-private Double doubleField2;
-private Double doubleField4;
+private Double doubleField;
+private BigDecimal decimalField;
 private Date dateField;
 private Date datetimeField;
 
@@ -87,20 +88,20 @@ public void setBooleanField(Boolean booleanField) {
 this.booleanField = booleanField;
 }
 
-public Double getDoubleField2() {
-return this.doubleField2;
+public Double getDoubleField() {
+return this.doubleField;
 }
 
-public void setDoubleField2(Double doubleField2) {
-this.doubleField2 = doubleField2;
+public void setDoubleField(Double doubleField) {
+this.doubleField = doubleField;
 }
 
-public Double getDoubleField4() {
-return this.doubleField4;
+public BigDecimal getDecimalField() {
+return this.decimalField;
 }
 
-public void setDoubleField4(Double doubleField4) {
-this.doubleField4 = doubleField4;
+public void setDecimalField(BigDecimal decimalField) {
+this.decimalField = decimalField;
 }
 
 public Date getDateField() {

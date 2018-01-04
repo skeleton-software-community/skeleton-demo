@@ -2,7 +2,8 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
-xmlns:p="http://primefaces.org/ui"
+xmlns:rich = "http://richfaces.org/rich"
+xmlns:a4j = "http://richfaces.org/a4j"
 xmlns:cc="http://java.sun.com/jsf/composite/components"
 xmlns:s="http://commons.sklsft.org/ui/components"
 template="/templates/template.xhtml">
@@ -23,12 +24,14 @@ template="/templates/template.xhtml">
 <h2>
 #{i18n.regionList} (#{regionListView.scrollView.size})
 </h2>
+<a4j:region>
+
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
-<p:commandLink action="#{regionListController.reset}" process="@this" update="@form:regionPanelGroup">
+<a4j:commandLink action="#{regionListController.reset}" render="regionPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
-</p:commandLink>
+</a4j:commandLink>
 </h3>
 <div class="row row-eq-height">
 <div class="col-xs-3">
@@ -36,7 +39,9 @@ template="/templates/template.xhtml">
 <h:inputText
 value="#{regionListView.scrollForm.filter.countryCode}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{regionListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -45,7 +50,9 @@ styleClass="form-control">
 <h:inputText
 value="#{regionListView.scrollForm.filter.code}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{regionListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -54,7 +61,9 @@ styleClass="form-control">
 <h:inputText
 value="#{regionListView.scrollForm.filter.label}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{regionListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -69,80 +78,80 @@ styleClass="form-control">
 <ui:fragment rendered="#{regionListView.scrollView.elements.size() > 0}">
 <s:tooltip for=".truncated-text"/>
 
-<p:dataTable rows="10"
+<rich:dataTable rows="10"
 id="regionList" var="region" name="datatable"
 value="#{regionListView.scrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
 <script>$(function(){displaySelectUnselectAll();});</script>
 </f:facet>
 <h:selectBooleanCheckbox rendered="#{region.canDelete}" id="selectUnselect" value="#{region.selected}" onclick="selectUnselect('regionListForm:regionList:selectUnselectAll')"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <h:outputText value="Actions" />
 <div class="drop-list" id="drop-list">
-<p:commandLink title="#{i18n.deleteSelection}" action="#{regionListController.deleteList}"
-onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" process="@form:regionPanelGroup" update=":messages, @form:regionPanelGroup">
+<a4j:commandLink title="#{i18n.deleteSelection}" action="#{regionListController.deleteList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="regionPanelGroup">
 <span class="glyphicon glyphicon-trash"/>
-</p:commandLink>
+</a4j:commandLink>
 </div>
 </f:facet>
-<h:panelGrid styleClass="actions-grid" columns="2">
+<h:panelGrid columns="2">
 <h:link outcome="/sections/localization/region/RegionDetails.jsf">
 <h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
 <f:param name="id" value="#{region.id}" />
 </h:link>
-<p:commandLink rendered="#{region.canDelete}" action="#{regionListController.delete(region.id)}"
-onclick="if (!confirm('#{i18n.confirmDelete}')) return false" process="@this" update=":messages, @form:regionPanelGroup">
+<a4j:commandLink rendered="#{region.canDelete}" action="#{regionListController.delete(region.id)}"
+onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="regionPanelGroup">
 <h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
-</p:commandLink>
+</a4j:commandLink>
 </h:panelGrid>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.regionCountryCode}"
 orderType="#{regionListView.scrollForm.sorting.countryCodeOrderType}"
 action="#{regionListController.refresh}"
-render="@form:regionPanelGroup"/>
+render="regionPanelGroup"/>
 </f:facet>
 <h:outputText value="#{region.countryCode}"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.regionCode}"
 orderType="#{regionListView.scrollForm.sorting.codeOrderType}"
 action="#{regionListController.refresh}"
-render="@form:regionPanelGroup"/>
+render="regionPanelGroup"/>
 </f:facet>
 <h:outputText value="#{region.code}"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.regionLabel}"
 orderType="#{regionListView.scrollForm.sorting.labelOrderType}"
 action="#{regionListController.refresh}"
-render="@form:regionPanelGroup"/>
+render="regionPanelGroup"/>
 </f:facet>
 <h:outputText value="#{region.label}"/>
-</p:column>
+</rich:column>
 
-</p:dataTable>
+</rich:dataTable>
 
 <cc:datatableScroller
 page="#{regionListView.scrollForm.page}"
 numberOfPages="#{regionListView.scrollView.numberOfPages}"
 action="#{regionListController.refresh}"
-render="@form:regionPanelGroup"/>
+render="regionPanelGroup"/>
 
 </ui:fragment>
 
@@ -150,10 +159,12 @@ render="@form:regionPanelGroup"/>
 
 </div>
 
-<p:commandButton value="#{i18n.create}" action="#{regionListController.createRegion}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#regionModal').modal('show')}" process="@this" update="regionDetailPanelGroup"/>
+<a4j:commandButton value="#{i18n.create}" action="#{regionListController.createRegion}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#regionModal').modal('show')}" render="regionDetailPanelGroup"/>
 
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
+</a4j:region>
+
 </h:panelGroup>
 
 <div class="modal modal-default" id="regionModal" tabindex="-1" aria-hidden="true">

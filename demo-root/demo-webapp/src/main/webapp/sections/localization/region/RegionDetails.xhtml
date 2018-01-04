@@ -2,7 +2,9 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html"
-xmlns:p="http://primefaces.org/ui"
+xmlns:rich="http://richfaces.org/rich"
+xmlns:a4j="http://richfaces.org/a4j"
+xmlns:c="http://java.sun.com/jstl/core"
 template="/templates/template.xhtml">
 
 <!-- -->
@@ -23,6 +25,8 @@ template="/templates/template.xhtml">
 
 <h2>#{i18n.regionDetail}</h2>
 <h:panelGroup id="regionDetailPanelGroup">
+
+<a4j:region>
 
 <ui:param name="view" value="#{regionDetailView.selectedRegion}"/>
 <ui:param name="form" value="#{view.form}"/>
@@ -52,9 +56,11 @@ var="option" itemValue="#{option.key}" itemLabel="#{option.label}"/>
 
 </div>
 
-<p:commandButton value="#{i18n.update}" disabled="#{not view.canUpdate}" action="#{regionDetailController.update}" styleClass="btn btn-success" process="@form" update=":messages, @form:regionDetailPanelGroup"/>
+<a4j:commandButton value="#{i18n.update}" disabled="#{not view.canUpdate}" action="#{regionDetailController.update}" styleClass="btn btn-success" execute="@region" render="regionDetailPanelGroup"/>
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
+
+</a4j:region>
 
 </h:panelGroup>
 

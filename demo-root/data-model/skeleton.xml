@@ -2,7 +2,7 @@
 <metadata:project xmlns:metadata="http://generator.sklsft.org/schema/model/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://generator.sklsft.org/schema/model/metadata skeleton-metadata-3.0.xsd">
     <domainName>org.sklsft</domainName>
     <projectName>demo</projectName>
-    <skeleton>SPRING_HIBERNATE_PRIMEFACES</skeleton>
+    <skeleton>SPRING_HIBERNATE_RICHFACES_4</skeleton>
     <databaseEngine>POSTGRESQL</databaseEngine>
     <databaseName>demo</databaseName>
     <databaseDNS>localhost</databaseDNS>
@@ -108,17 +108,17 @@
 						<column name="BOOLEAN_FIELD" dataType="BOOLEAN" nullable="true"
 							editable="true" rendering="Boolean">
 						</column>
-						<column name="DOUBLE_FIELD_2" dataType="DOUBLE" nullable="true"
-							editable="true" rendering="Double 2" format="TWO_DECIMALS">
+						<column name="DOUBLE_FIELD" dataType="DOUBLE" nullable="true"
+							editable="true" rendering="Double">
 						</column>
-						<column name="DOUBLE_FIELD_4" dataType="DOUBLE" nullable="true"
-							editable="true" rendering="Double 4" format="FOUR_DECIMALS">
+						<column name="DECIMAL_FIELD" dataType="BIG_DECIMAL" nullable="true"
+							editable="true" rendering="Decimal">
 						</column>
-						<column name="DATE_FIELD" dataType="DATETIME" nullable="true"
-							editable="true" format="DATE" rendering="Date">
+						<column name="DATE_FIELD" dataType="DATE" nullable="true"
+							editable="true" rendering="Date">
 						</column>
 						<column name="DATETIME_FIELD" dataType="DATETIME" nullable="true"
-							editable="true" format="DATE_AND_TIME" rendering="Date and time">
+							editable="true" rendering="Date and time">
 						</column>
 					</columns>
 				</table>

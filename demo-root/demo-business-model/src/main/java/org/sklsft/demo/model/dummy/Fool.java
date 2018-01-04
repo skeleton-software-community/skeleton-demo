@@ -1,5 +1,6 @@
 package org.sklsft.demo.model.dummy;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -58,13 +59,13 @@ private Long longField;
 @Column(name = "BOOLEAN_FIELD")
 private Boolean booleanField;
 
-@Column(name = "DOUBLE_FIELD_2")
-private Double doubleField2;
+@Column(name = "DOUBLE_FIELD")
+private Double doubleField;
 
-@Column(name = "DOUBLE_FIELD_4")
-private Double doubleField4;
+@Column(name = "DECIMAL_FIELD")
+private BigDecimal decimalField;
 
-@Temporal(TemporalType.TIMESTAMP)
+@Temporal(TemporalType.DATE)
 @Column(name = "DATE_FIELD")
 private Date dateField;
 
@@ -116,20 +117,20 @@ public void setBooleanField(Boolean booleanField) {
 this.booleanField = booleanField;
 }
 
-public Double getDoubleField2() {
-return this.doubleField2;
+public Double getDoubleField() {
+return this.doubleField;
 }
 
-public void setDoubleField2(Double doubleField2) {
-this.doubleField2 = doubleField2;
+public void setDoubleField(Double doubleField) {
+this.doubleField = doubleField;
 }
 
-public Double getDoubleField4() {
-return this.doubleField4;
+public BigDecimal getDecimalField() {
+return this.decimalField;
 }
 
-public void setDoubleField4(Double doubleField4) {
-this.doubleField4 = doubleField4;
+public void setDecimalField(BigDecimal decimalField) {
+this.decimalField = decimalField;
 }
 
 public Date getDateField() {

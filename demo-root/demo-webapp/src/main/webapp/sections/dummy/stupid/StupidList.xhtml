@@ -2,7 +2,8 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
-xmlns:p="http://primefaces.org/ui"
+xmlns:rich = "http://richfaces.org/rich"
+xmlns:a4j = "http://richfaces.org/a4j"
 xmlns:cc="http://java.sun.com/jsf/composite/components"
 xmlns:s="http://commons.sklsft.org/ui/components"
 template="/templates/template.xhtml">
@@ -23,12 +24,14 @@ template="/templates/template.xhtml">
 <h2>
 #{i18n.stupidList} (#{stupidListView.scrollView.size})
 </h2>
+<a4j:region>
+
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
-<p:commandLink action="#{stupidListController.reset}" process="@this" update="@form:stupidPanelGroup">
+<a4j:commandLink action="#{stupidListController.reset}" render="stupidPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
-</p:commandLink>
+</a4j:commandLink>
 </h3>
 <div class="row row-eq-height">
 <div class="col-xs-3">
@@ -36,7 +39,9 @@ template="/templates/template.xhtml">
 <h:inputText
 value="#{stupidListView.scrollForm.filter.code}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{stupidListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{stupidListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -45,7 +50,9 @@ styleClass="form-control">
 <h:inputText
 value="#{stupidListView.scrollForm.filter.foolCode}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{stupidListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{stupidListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -60,68 +67,68 @@ styleClass="form-control">
 <ui:fragment rendered="#{stupidListView.scrollView.elements.size() > 0}">
 <s:tooltip for=".truncated-text"/>
 
-<p:dataTable rows="10"
+<rich:dataTable rows="10"
 id="stupidList" var="stupid" name="datatable"
 value="#{stupidListView.scrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
 <script>$(function(){displaySelectUnselectAll();});</script>
 </f:facet>
 <h:selectBooleanCheckbox rendered="#{stupid.canDelete}" id="selectUnselect" value="#{stupid.selected}" onclick="selectUnselect('stupidListForm:stupidList:selectUnselectAll')"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <h:outputText value="Actions" />
 <div class="drop-list" id="drop-list">
-<p:commandLink title="#{i18n.deleteSelection}" action="#{stupidListController.deleteList}"
-onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" process="@form:stupidPanelGroup" update=":messages, @form:stupidPanelGroup">
+<a4j:commandLink title="#{i18n.deleteSelection}" action="#{stupidListController.deleteList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="stupidPanelGroup">
 <span class="glyphicon glyphicon-trash"/>
-</p:commandLink>
+</a4j:commandLink>
 </div>
 </f:facet>
-<h:panelGrid styleClass="actions-grid" columns="2">
-<p:commandLink action="#{stupidListController.editStupid(stupid.id)}" oncomplete="$('#stupidModal').modal('show')" process="@this" update="@form:stupidDetailPanelGroup">
+<h:panelGrid columns="2">
+<a4j:commandLink action="#{stupidListController.editStupid(stupid.id)}" oncomplete="$('#stupidModal').modal('show')" render="stupidDetailPanelGroup">
 <h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
-</p:commandLink>
-<p:commandLink rendered="#{stupid.canDelete}" action="#{stupidListController.delete(stupid.id)}"
-onclick="if (!confirm('#{i18n.confirmDelete}')) return false" process="@this" update=":messages, @form:stupidPanelGroup">
+</a4j:commandLink>
+<a4j:commandLink rendered="#{stupid.canDelete}" action="#{stupidListController.delete(stupid.id)}"
+onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="stupidPanelGroup">
 <h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
-</p:commandLink>
+</a4j:commandLink>
 </h:panelGrid>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.stupidCode}"
 orderType="#{stupidListView.scrollForm.sorting.codeOrderType}"
 action="#{stupidListController.refresh}"
-render="@form:stupidPanelGroup"/>
+render="stupidPanelGroup"/>
 </f:facet>
 <h:outputText value="#{stupid.code}"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.stupidFoolCode}"
 orderType="#{stupidListView.scrollForm.sorting.foolCodeOrderType}"
 action="#{stupidListController.refresh}"
-render="@form:stupidPanelGroup"/>
+render="stupidPanelGroup"/>
 </f:facet>
 <h:outputText value="#{stupid.foolCode}"/>
-</p:column>
+</rich:column>
 
-</p:dataTable>
+</rich:dataTable>
 
 <cc:datatableScroller
 page="#{stupidListView.scrollForm.page}"
 numberOfPages="#{stupidListView.scrollView.numberOfPages}"
 action="#{stupidListController.refresh}"
-render="@form:stupidPanelGroup"/>
+render="stupidPanelGroup"/>
 
 </ui:fragment>
 
@@ -129,10 +136,12 @@ render="@form:stupidPanelGroup"/>
 
 </div>
 
-<p:commandButton value="#{i18n.create}" action="#{stupidListController.createStupid}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#stupidModal').modal('show')}" process="@this" update="stupidDetailPanelGroup"/>
+<a4j:commandButton value="#{i18n.create}" action="#{stupidListController.createStupid}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#stupidModal').modal('show')}" render="stupidDetailPanelGroup"/>
 
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
+</a4j:region>
+
 </h:panelGroup>
 
 <div class="modal modal-default" id="stupidModal" tabindex="-1" aria-hidden="true">

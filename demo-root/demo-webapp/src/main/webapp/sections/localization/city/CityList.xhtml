@@ -2,7 +2,8 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
-xmlns:p="http://primefaces.org/ui"
+xmlns:rich = "http://richfaces.org/rich"
+xmlns:a4j = "http://richfaces.org/a4j"
 xmlns:cc="http://java.sun.com/jsf/composite/components"
 xmlns:s="http://commons.sklsft.org/ui/components"
 template="/templates/template.xhtml">
@@ -23,12 +24,14 @@ template="/templates/template.xhtml">
 <h2>
 #{i18n.cityList} (#{cityListView.scrollView.size})
 </h2>
+<a4j:region>
+
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
-<p:commandLink action="#{cityListController.reset}" process="@this" update="@form:cityPanelGroup">
+<a4j:commandLink action="#{cityListController.reset}" render="cityPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
-</p:commandLink>
+</a4j:commandLink>
 </h3>
 <div class="row row-eq-height">
 <div class="col-xs-3">
@@ -36,7 +39,9 @@ template="/templates/template.xhtml">
 <h:inputText
 value="#{cityListView.scrollForm.filter.regionCountryCode}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{cityListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{cityListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -45,7 +50,9 @@ styleClass="form-control">
 <h:inputText
 value="#{cityListView.scrollForm.filter.regionCode}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{cityListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{cityListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -54,7 +61,9 @@ styleClass="form-control">
 <h:inputText
 value="#{cityListView.scrollForm.filter.code}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{cityListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{cityListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -63,7 +72,9 @@ styleClass="form-control">
 <h:inputText
 value="#{cityListView.scrollForm.filter.label}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{cityListController.refresh}"/>
+<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{cityListController.refresh}">
+<a4j:attachQueue requestDelay="500"/>
+</a4j:ajax>
 </h:inputText>
 </div>
 
@@ -78,90 +89,90 @@ styleClass="form-control">
 <ui:fragment rendered="#{cityListView.scrollView.elements.size() > 0}">
 <s:tooltip for=".truncated-text"/>
 
-<p:dataTable rows="10"
+<rich:dataTable rows="10"
 id="cityList" var="city" name="datatable"
 value="#{cityListView.scrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
 <script>$(function(){displaySelectUnselectAll();});</script>
 </f:facet>
 <h:selectBooleanCheckbox rendered="#{city.canDelete}" id="selectUnselect" value="#{city.selected}" onclick="selectUnselect('cityListForm:cityList:selectUnselectAll')"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <h:outputText value="Actions" />
 <div class="drop-list" id="drop-list">
-<p:commandLink title="#{i18n.deleteSelection}" action="#{cityListController.deleteList}"
-onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" process="@form:cityPanelGroup" update=":messages, @form:cityPanelGroup">
+<a4j:commandLink title="#{i18n.deleteSelection}" action="#{cityListController.deleteList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="cityPanelGroup">
 <span class="glyphicon glyphicon-trash"/>
-</p:commandLink>
+</a4j:commandLink>
 </div>
 </f:facet>
-<h:panelGrid styleClass="actions-grid" columns="2">
-<p:commandLink action="#{cityListController.editCity(city.id)}" oncomplete="$('#cityModal').modal('show')" process="@this" update="@form:cityDetailPanelGroup">
+<h:panelGrid columns="2">
+<a4j:commandLink action="#{cityListController.editCity(city.id)}" oncomplete="$('#cityModal').modal('show')" render="cityDetailPanelGroup">
 <h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
-</p:commandLink>
-<p:commandLink rendered="#{city.canDelete}" action="#{cityListController.delete(city.id)}"
-onclick="if (!confirm('#{i18n.confirmDelete}')) return false" process="@this" update=":messages, @form:cityPanelGroup">
+</a4j:commandLink>
+<a4j:commandLink rendered="#{city.canDelete}" action="#{cityListController.delete(city.id)}"
+onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="cityPanelGroup">
 <h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
-</p:commandLink>
+</a4j:commandLink>
 </h:panelGrid>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.cityRegionCountryCode}"
 orderType="#{cityListView.scrollForm.sorting.regionCountryCodeOrderType}"
 action="#{cityListController.refresh}"
-render="@form:cityPanelGroup"/>
+render="cityPanelGroup"/>
 </f:facet>
 <h:outputText value="#{city.regionCountryCode}"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.cityRegionCode}"
 orderType="#{cityListView.scrollForm.sorting.regionCodeOrderType}"
 action="#{cityListController.refresh}"
-render="@form:cityPanelGroup"/>
+render="cityPanelGroup"/>
 </f:facet>
 <h:outputText value="#{city.regionCode}"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.cityCode}"
 orderType="#{cityListView.scrollForm.sorting.codeOrderType}"
 action="#{cityListController.refresh}"
-render="@form:cityPanelGroup"/>
+render="cityPanelGroup"/>
 </f:facet>
 <h:outputText value="#{city.code}"/>
-</p:column>
+</rich:column>
 
-<p:column>
+<rich:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.cityLabel}"
 orderType="#{cityListView.scrollForm.sorting.labelOrderType}"
 action="#{cityListController.refresh}"
-render="@form:cityPanelGroup"/>
+render="cityPanelGroup"/>
 </f:facet>
 <h:outputText value="#{city.label}"/>
-</p:column>
+</rich:column>
 
-</p:dataTable>
+</rich:dataTable>
 
 <cc:datatableScroller
 page="#{cityListView.scrollForm.page}"
 numberOfPages="#{cityListView.scrollView.numberOfPages}"
 action="#{cityListController.refresh}"
-render="@form:cityPanelGroup"/>
+render="cityPanelGroup"/>
 
 </ui:fragment>
 
@@ -169,10 +180,12 @@ render="@form:cityPanelGroup"/>
 
 </div>
 
-<p:commandButton value="#{i18n.create}" action="#{cityListController.createCity}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#cityModal').modal('show')}" process="@this" update="cityDetailPanelGroup"/>
+<a4j:commandButton value="#{i18n.create}" action="#{cityListController.createCity}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#cityModal').modal('show')}" render="cityDetailPanelGroup"/>
 
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
+</a4j:region>
+
 </h:panelGroup>
 
 <div class="modal modal-default" id="cityModal" tabindex="-1" aria-hidden="true">

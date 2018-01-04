@@ -5,7 +5,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 
 <composite:interface>
@@ -17,26 +18,26 @@
 
 <composite:implementation>
 
-	<p:commandLink rendered="#{empty cc.attrs.orderType}"
-		action="#{cc.attrs.action}" process="@this" update="#{cc.attrs.render}">
+	<a4j:commandLink rendered="#{empty cc.attrs.orderType}"
+		action="#{cc.attrs.action}" render="#{cc.attrs.render}">
 		<h:outputText value="#{cc.attrs.label}" />
 		<f:setPropertyActionListener value="ASC" target="#{cc.attrs.orderType}">
 		</f:setPropertyActionListener>
-	</p:commandLink>
-	<p:commandLink rendered="#{cc.attrs.orderType=='ASC'}"
-		action="#{cc.attrs.action}" process="@this" update="#{cc.attrs.render}">
+	</a4j:commandLink>
+	<a4j:commandLink rendered="#{cc.attrs.orderType=='ASC'}"
+		action="#{cc.attrs.action}" render="#{cc.attrs.render}">
 		<h:outputText value="#{cc.attrs.label}" />
 		<f:setPropertyActionListener value="DESC" target="#{cc.attrs.orderType}">
 		</f:setPropertyActionListener>
 		<span class="glyphicon glyphicon-triangle-top" />
-	</p:commandLink>
-	<p:commandLink rendered="#{cc.attrs.orderType=='DESC'}"
-		action="#{cc.attrs.action}" process="@this" update="#{cc.attrs.render}">
+	</a4j:commandLink>
+	<a4j:commandLink rendered="#{cc.attrs.orderType=='DESC'}"
+		action="#{cc.attrs.action}" render="#{cc.attrs.render}">
 		<h:outputText value="#{cc.attrs.label}" />
 		<f:setPropertyActionListener value="#{null}" target="#{cc.attrs.orderType}">
 		</f:setPropertyActionListener>
 		<span class="glyphicon glyphicon-triangle-bottom" />
-	</p:commandLink>
+	</a4j:commandLink>
 
 </composite:implementation>
 </html>

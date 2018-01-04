@@ -21,8 +21,8 @@ private OrderType codeOrderType;
 private OrderType descriptionOrderType;
 private OrderType longFieldOrderType;
 private OrderType booleanFieldOrderType;
-private OrderType doubleField2OrderType;
-private OrderType doubleField4OrderType;
+private OrderType doubleFieldOrderType;
+private OrderType decimalFieldOrderType;
 private OrderType dateFieldOrderType;
 private OrderType datetimeFieldOrderType;
 
@@ -61,20 +61,20 @@ public void setBooleanFieldOrderType(OrderType booleanFieldOrderType) {
 this.booleanFieldOrderType = booleanFieldOrderType;
 }
 
-public OrderType getDoubleField2OrderType() {
-return this.doubleField2OrderType;
+public OrderType getDoubleFieldOrderType() {
+return this.doubleFieldOrderType;
 }
 
-public void setDoubleField2OrderType(OrderType doubleField2OrderType) {
-this.doubleField2OrderType = doubleField2OrderType;
+public void setDoubleFieldOrderType(OrderType doubleFieldOrderType) {
+this.doubleFieldOrderType = doubleFieldOrderType;
 }
 
-public OrderType getDoubleField4OrderType() {
-return this.doubleField4OrderType;
+public OrderType getDecimalFieldOrderType() {
+return this.decimalFieldOrderType;
 }
 
-public void setDoubleField4OrderType(OrderType doubleField4OrderType) {
-this.doubleField4OrderType = doubleField4OrderType;
+public void setDecimalFieldOrderType(OrderType decimalFieldOrderType) {
+this.decimalFieldOrderType = decimalFieldOrderType;
 }
 
 public OrderType getDateFieldOrderType() {
