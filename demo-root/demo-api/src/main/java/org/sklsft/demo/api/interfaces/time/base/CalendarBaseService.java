@@ -27,21 +27,25 @@ public interface CalendarBaseService {
  * get options
  */
 List<SelectItem> getOptions();
+public static final String GET_OPTIONS_URL = "/calendar/options";
 
 /**
  * load object list
  */
 List<CalendarBasicView> loadList();
+public static final String GET_LIST_URL = "/calendar/list";
 
 /**
  * scroll object list
  */
 ScrollView<CalendarBasicView> scroll(ScrollForm<CalendarFilter, CalendarSorting> form);
+public static final String SCROLL_URL = "/calendar/scroll";
 
 /**
  * load object
  */
 CalendarFullView load(Long id);
+public static final String GET_URL = "/calendar/{id}";
 
 /**
  * find object
@@ -52,6 +56,7 @@ CalendarFullView find(String code);
  * load one to many component calendarDayOff list
  */
 List<CalendarDayOffBasicView> loadCalendarDayOffList(Long id);
+public static final String GET_CALENDAR_DAY_OFF_LIST_URL = "/calendar/{id}/calendar-day-off/list";
 
 /**
  * scroll one to many component calendarDayOff
@@ -67,6 +72,7 @@ CalendarDayOffFullView loadCalendarDayOff(Long calendarDayOffId,Long id);
  * create object
  */
 CalendarFullView create();
+public static final String GET_NEW_URL = "/calendar/new";
 
 /**
  * create one to many component calendarDayOff
@@ -77,6 +83,7 @@ CalendarDayOffFullView createCalendarDayOff(Long id);
  * save object
  */
 Long save(CalendarForm calendarForm);
+public static final String SAVE_URL = "/calendar";
 
 /**
  * save one to many component calendarDayOff
@@ -87,6 +94,7 @@ void saveCalendarDayOff(Long id, CalendarDayOffForm calendarDayOffForm);
  * update object
  */
 void update(Long id, CalendarForm calendarForm);
+public static final String UPDATE_URL = "/calendar/{id}";
 
 /**
  * update one to many component calendarDayOff
@@ -97,6 +105,7 @@ void updateCalendarDayOff(Long id, CalendarDayOffForm calendarDayOffForm);
  * delete object
  */
 void delete(Long id);
+public static final String DELETE_URL = "/calendar/{id}";
 
 /**
  * delete one to many component calendarDayOff

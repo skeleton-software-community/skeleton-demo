@@ -21,16 +21,19 @@ public interface StupidBaseService {
  * load object list
  */
 List<StupidBasicView> loadList();
+public static final String GET_LIST_URL = "/stupid/list";
 
 /**
  * scroll object list
  */
 ScrollView<StupidBasicView> scroll(ScrollForm<StupidFilter, StupidSorting> form);
+public static final String SCROLL_URL = "/stupid/scroll";
 
 /**
  * load object
  */
 StupidFullView load(Long id);
+public static final String GET_URL = "/stupid/{id}";
 
 /**
  * find object
@@ -41,21 +44,25 @@ StupidFullView find(String code);
  * create object
  */
 StupidFullView create();
+public static final String GET_NEW_URL = "/stupid/new";
 
 /**
  * save object
  */
 Long save(StupidForm stupidForm);
+public static final String SAVE_URL = "/stupid";
 
 /**
  * update object
  */
 void update(Long id, StupidForm stupidForm);
+public static final String UPDATE_URL = "/stupid/{id}";
 
 /**
  * delete object
  */
 void delete(Long id);
+public static final String DELETE_URL = "/stupid/{id}";
 
 /**
  * delete object list

@@ -22,21 +22,25 @@ public interface CountryBaseService {
  * get options
  */
 List<SelectItem> getOptions();
+public static final String GET_OPTIONS_URL = "/country/options";
 
 /**
  * load object list
  */
 List<CountryBasicView> loadList();
+public static final String GET_LIST_URL = "/country/list";
 
 /**
  * scroll object list
  */
 ScrollView<CountryBasicView> scroll(ScrollForm<CountryFilter, CountrySorting> form);
+public static final String SCROLL_URL = "/country/scroll";
 
 /**
  * load object
  */
 CountryFullView load(Long id);
+public static final String GET_URL = "/country/{id}";
 
 /**
  * find object
@@ -47,21 +51,25 @@ CountryFullView find(String code);
  * create object
  */
 CountryFullView create();
+public static final String GET_NEW_URL = "/country/new";
 
 /**
  * save object
  */
 Long save(CountryForm countryForm);
+public static final String SAVE_URL = "/country";
 
 /**
  * update object
  */
 void update(Long id, CountryForm countryForm);
+public static final String UPDATE_URL = "/country/{id}";
 
 /**
  * delete object
  */
 void delete(Long id);
+public static final String DELETE_URL = "/country/{id}";
 
 /**
  * delete object list
