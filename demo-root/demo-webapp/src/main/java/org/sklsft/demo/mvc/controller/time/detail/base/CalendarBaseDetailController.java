@@ -93,7 +93,7 @@ load();
  * edit one to many component calendarDayOff
  */
 public void editCalendarDayOff(Long id) {
-calendarDetailView.setSelectedCalendarDayOff(calendarService.loadCalendarDayOff(id, this.calendarDetailView.getSelectedCalendar().getId()));
+calendarDetailView.setSelectedCalendarDayOff(calendarService.loadCalendarDayOff(id));
 }
 
 /**

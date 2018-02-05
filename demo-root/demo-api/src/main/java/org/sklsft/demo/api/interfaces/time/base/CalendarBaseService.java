@@ -62,11 +62,13 @@ public static final String GET_CALENDAR_DAY_OFF_LIST_URL = "/calendar/{id}/calen
  * scroll one to many component calendarDayOff
  */
 ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (Long calendarId, ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form);
+public static final String SCROLL_CALENDAR_DAY_OFF_URL = "/calendar/{id}/calendar-day-off/scroll";
 
 /**
  * load one to many component calendarDayOff
  */
-CalendarDayOffFullView loadCalendarDayOff(Long calendarDayOffId,Long id);
+CalendarDayOffFullView loadCalendarDayOff(Long id);
+public static final String GET_CALENDAR_DAY_OFF_URL = "/calendar-day-off/{id}";
 
 /**
  * create object
@@ -78,6 +80,7 @@ public static final String GET_NEW_URL = "/calendar/new";
  * create one to many component calendarDayOff
  */
 CalendarDayOffFullView createCalendarDayOff(Long id);
+public static final String GET_NEW_CALENDAR_DAY_OFF_URL = "/calendar/{id}/calendar-day-off/new";
 
 /**
  * save object
@@ -89,6 +92,7 @@ public static final String SAVE_URL = "/calendar";
  * save one to many component calendarDayOff
  */
 void saveCalendarDayOff(Long id, CalendarDayOffForm calendarDayOffForm);
+public static final String SAVE_CALENDAR_DAY_OFF_URL = "/calendar/{id}/calendar-day-off";
 
 /**
  * update object
@@ -100,6 +104,7 @@ public static final String UPDATE_URL = "/calendar/{id}";
  * update one to many component calendarDayOff
  */
 void updateCalendarDayOff(Long id, CalendarDayOffForm calendarDayOffForm);
+public static final String UPDATE_CALENDAR_DAY_OFF_URL = "/calendar-day-off/{id}";
 
 /**
  * delete object
@@ -111,6 +116,7 @@ public static final String DELETE_URL = "/calendar/{id}";
  * delete one to many component calendarDayOff
  */
 void deleteCalendarDayOff(Long id);
+public static final String DELETE_CALENDAR_DAY_OFF_URL = "/calendar-day-off/{id}";
 
 /**
  * delete object list

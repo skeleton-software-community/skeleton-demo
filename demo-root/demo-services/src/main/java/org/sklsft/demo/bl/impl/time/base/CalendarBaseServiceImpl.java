@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.commons.api.model.SelectItem;
@@ -180,15 +179,10 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public CalendarDayOffFullView loadCalendarDayOff(Long calendarDayOffId,Long id) {
-Calendar calendar = calendarDao.load(id);
-calendarRightsManager.checkCanAccessCalendarDayOff(calendar);
-for (CalendarDayOff collectionCalendarDayOff : calendar.getCalendarDayOffCollection()){
-if (collectionCalendarDayOff.getId().equals(calendarDayOffId)){
-return this.calendarDayOffFullViewMapper.mapFrom(new CalendarDayOffFullView(),collectionCalendarDayOff);
-}
-}
-throw new ObjectNotFoundException("Invalid one to many component id");
+public CalendarDayOffFullView loadCalendarDayOff(Long id) {
+CalendarDayOff calendarDayOff = calendarDao.loadCalendarDayOff(id);
+calendarRightsManager.checkCanAccessCalendarDayOff(calendarDayOff.getCalendar());
+return this.calendarDayOffFullViewMapper.mapFrom(calendarDayOff);
 }
 
 /**
