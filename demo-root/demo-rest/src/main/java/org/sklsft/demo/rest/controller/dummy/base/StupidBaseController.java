@@ -68,16 +68,16 @@ return stupidService.create();
  * save object
  */
 @RequestMapping(value = {StupidService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Long save(@RequestBody StupidForm stupidForm) {
-return stupidService.save(stupidForm);
+public @ResponseBody Long save(@RequestBody StupidForm form) {
+return stupidService.save(form);
 }
 
 /**
  * update object
  */
 @RequestMapping(value = {StupidService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @RequestBody StupidForm stupidForm) {
-stupidService.update(id, stupidForm);
+public void update(@PathVariable("id") Long id, @RequestBody StupidForm form) {
+stupidService.update(id, form);
 }
 
 /**

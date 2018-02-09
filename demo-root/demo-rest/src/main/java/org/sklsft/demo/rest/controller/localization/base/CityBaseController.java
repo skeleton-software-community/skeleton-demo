@@ -82,24 +82,24 @@ return cityService.create();
  * save object
  */
 @RequestMapping(value = {CityService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Long save(@RequestBody CityForm cityForm) {
-return cityService.save(cityForm);
+public @ResponseBody Long save(@RequestBody CityForm form) {
+return cityService.save(form);
 }
 
 /**
  * save object from parent Region
  */
 @RequestMapping(value = {CityService.SAVE_FROM_REGION_URL}, method = RequestMethod.POST)
-public @ResponseBody Long saveFromRegion(@PathVariable("regionId") Long regionId, @RequestBody CityForm cityForm) {
-return cityService.save(cityForm);
+public @ResponseBody Long saveFromRegion(@PathVariable("regionId") Long regionId, @RequestBody CityForm form) {
+return cityService.saveFromRegion(regionId, form);
 }
 
 /**
  * update object
  */
 @RequestMapping(value = {CityService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @RequestBody CityForm cityForm) {
-cityService.update(id, cityForm);
+public void update(@PathVariable("id") Long id, @RequestBody CityForm form) {
+cityService.update(id, form);
 }
 
 /**

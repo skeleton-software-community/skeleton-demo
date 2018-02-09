@@ -77,16 +77,16 @@ return countryService.create();
  * save object
  */
 @RequestMapping(value = {CountryService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Long save(@RequestBody CountryForm countryForm) {
-return countryService.save(countryForm);
+public @ResponseBody Long save(@RequestBody CountryForm form) {
+return countryService.save(form);
 }
 
 /**
  * update object
  */
 @RequestMapping(value = {CountryService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @RequestBody CountryForm countryForm) {
-countryService.update(id, countryForm);
+public void update(@PathVariable("id") Long id, @RequestBody CountryForm form) {
+countryService.update(id, form);
 }
 
 /**

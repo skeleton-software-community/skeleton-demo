@@ -77,16 +77,16 @@ return foolService.create();
  * save object
  */
 @RequestMapping(value = {FoolService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Long save(@RequestBody FoolForm foolForm) {
-return foolService.save(foolForm);
+public @ResponseBody Long save(@RequestBody FoolForm form) {
+return foolService.save(form);
 }
 
 /**
  * update object
  */
 @RequestMapping(value = {FoolService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @RequestBody FoolForm foolForm) {
-foolService.update(id, foolForm);
+public void update(@PathVariable("id") Long id, @RequestBody FoolForm form) {
+foolService.update(id, form);
 }
 
 /**

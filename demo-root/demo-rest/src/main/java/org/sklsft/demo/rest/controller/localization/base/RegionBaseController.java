@@ -82,24 +82,24 @@ return regionService.create();
  * save object
  */
 @RequestMapping(value = {RegionService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Long save(@RequestBody RegionForm regionForm) {
-return regionService.save(regionForm);
+public @ResponseBody Long save(@RequestBody RegionForm form) {
+return regionService.save(form);
 }
 
 /**
  * save object from parent Country
  */
 @RequestMapping(value = {RegionService.SAVE_FROM_COUNTRY_URL}, method = RequestMethod.POST)
-public @ResponseBody Long saveFromCountry(@PathVariable("countryId") Long countryId, @RequestBody RegionForm regionForm) {
-return regionService.save(regionForm);
+public @ResponseBody Long saveFromCountry(@PathVariable("countryId") Long countryId, @RequestBody RegionForm form) {
+return regionService.saveFromCountry(countryId, form);
 }
 
 /**
  * update object
  */
 @RequestMapping(value = {RegionService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @RequestBody RegionForm regionForm) {
-regionService.update(id, regionForm);
+public void update(@PathVariable("id") Long id, @RequestBody RegionForm form) {
+regionService.update(id, form);
 }
 
 /**
