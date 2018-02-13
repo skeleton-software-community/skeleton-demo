@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.sklsft.commons.api.model.SelectItem;
 import org.sklsft.demo.api.interfaces.dummy.FoolService;
 import org.sklsft.demo.api.interfaces.localization.CountryService;
+import org.sklsft.demo.api.interfaces.organizations.OrganizationService;
 import org.sklsft.demo.api.interfaces.time.CalendarService;
 import org.sklsft.demo.mvc.model.CommonView;
 import org.springframework.context.annotation.Scope;
@@ -38,6 +39,8 @@ private CountryService countryService;
 @Inject
 private CalendarService calendarService;
 @Inject
+private OrganizationService organizationService;
+@Inject
 private FoolService foolService;
 
 /**
@@ -54,6 +57,18 @@ this.commonView.setCountryOptions(options);
 public void loadCalendarOptions() {
 List<SelectItem> options = this.calendarService.getOptions();
 this.commonView.setCalendarOptions(options);
+}
+
+/**
+ * search options for Organization
+ */
+public List<String> searchOrganizationOptions(String arg) {
+List<SelectItem> options = this.organizationService.searchOptions(arg);
+List<String> result = new ArrayList<>(options.size());
+for (SelectItem option : options) {
+result.add(option.getKey());
+}
+return result;
 }
 
 /**

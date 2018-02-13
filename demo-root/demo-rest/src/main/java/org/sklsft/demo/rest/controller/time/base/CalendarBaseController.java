@@ -119,7 +119,7 @@ return calendarService.save(form);
  * save one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.SAVE_CALENDAR_DAY_OFF_URL}, method = RequestMethod.POST)
-public void saveCalendarDayOff(@PathVariable("id") Long id, @RequestBody CalendarDayOffForm form) {
+@ResponseBody public void saveCalendarDayOff(@PathVariable("id") Long id, @RequestBody CalendarDayOffForm form) {
 calendarService.saveCalendarDayOff(id, form);
 }
 
