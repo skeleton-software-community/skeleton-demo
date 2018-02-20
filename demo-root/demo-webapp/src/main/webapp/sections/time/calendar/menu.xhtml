@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton-generator -->
+<!-- -->
+
+<ul class="nav nav-pills">
+<li role="presentation" id="menu">
+<h:link outcome="/sections/time/calendar/details.jsf">
+<f:param name="id" value="#{calendarDetailView.selectedCalendar.id}" />
+#{i18n.calendarDetails}
+</h:link>
+</li>
+<li role="presentation" id="calendar-day-off-list-menu">
+<h:link outcome="/sections/time/calendar/calendar-day-off/list.jsf">
+<f:param name="id" value="#{calendarDetailView.selectedCalendar.id}" />
+#{i18n.calendarDayOffList}
+</h:link>
+</li>
+</ul>
+</ui:composition>

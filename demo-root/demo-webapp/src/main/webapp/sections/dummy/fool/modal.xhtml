@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:rich="http://richfaces.org/rich"
+xmlns:a4j="http://richfaces.org/a4j">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton-generator -->
+<!-- -->
+
+<div class="modal-header">
+<h2>
+#{i18n.foolDetails}
+</h2>
+</div>
+
+<div class="modal-body">
+
+<h:panelGroup id="foolDetailPanelGroup">
+<a4j:region>
+
+<ui:param name="view" value="#{foolListView.selectedFool}"/>
+<ui:param name="form" value="#{view.form}"/>
+
+<div class="row">
+<div class="col-xs-12">
+<label>#{i18n.foolCode}</label>
+<h:inputText id="foolCode" styleClass="form-control" value="#{form.code}"/>
+<h:message for="foolCode" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.foolDescription}</label>
+<h:inputTextarea id="foolDescription" styleClass="form-control" rows="10" value="#{form.description}"/>
+<h:message for="foolDescription" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.foolLongField}</label>
+<h:inputText id="foolLongField" styleClass="form-control" value="#{form.longField}">
+<f:convertNumber integerOnly="true" pattern="#,##0"/>
+</h:inputText>
+<h:message for="foolLongField" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<div class="checkbox">
+<label>
+<h:selectBooleanCheckbox id="foolBooleanField" value="#{form.booleanField}"
+readonly="false" disabled="false"/>
+#{i18n.foolBooleanField}
+</label>
+</div>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.foolDoubleField}</label>
+<h:inputText id="foolDoubleField" styleClass="form-control" value="#{form.doubleField}">
+<f:convertNumber pattern="#,##0.########"/>
+</h:inputText>
+<h:message for="foolDoubleField" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.foolDecimalField}</label>
+<h:inputText id="foolDecimalField" styleClass="form-control" value="#{form.decimalField}">
+<f:convertNumber pattern="#,##0.########"/>
+</h:inputText>
+<h:message for="foolDecimalField" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.foolDateField}</label>
+<rich:calendar id="foolDateField" inputClass="form-control" value="#{form.dateField}"
+ datePattern="yyyy-MM-dd"/>
+<h:message for="foolDateField" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.foolDatetimeField}</label>
+<rich:calendar id="foolDatetimeField" inputClass="form-control" value="#{form.datetimeField}"
+ datePattern="yyyy-MM-dd HH:mm:ss"/>
+<h:message for="foolDatetimeField" styleClass="detail-error-message"/>
+</div>
+
+</div>
+
+<a4j:commandButton value="#{i18n.save}" action="#{foolListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" execute="@region" render="foolPanelGroup, foolDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#foolModal').modal('hide');"/>
+<a4j:commandButton value="#{i18n.update}" action="#{foolListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" execute="@region" render="foolPanelGroup, foolDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#foolModal').modal('hide');"/>
+<a4j:commandButton value="#{i18n.cancel}" actionListener="#{foolListController.resetForm}" styleClass="btn btn-info" immediate="true" execute="@region" render="foolPanelGroup" oncomplete="$('#foolModal').modal('hide')"/>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+
+</a4j:region>
+
+</h:panelGroup>
+
+</div>
+
+</ui:composition>

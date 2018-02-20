@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:rich="http://richfaces.org/rich"
+xmlns:a4j="http://richfaces.org/a4j">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton-generator -->
+<!-- -->
+
+<div class="modal-header">
+<h2>
+#{i18n.calendarDayOffDetails}
+</h2>
+</div>
+
+<div class="modal-body">
+<h:panelGroup id="calendarDayOffDetailPanelGroup">
+
+<a4j:region>
+
+<ui:param name="view" value="#{calendarDetailView.selectedCalendarDayOff}"/>
+<ui:param name="form" value="#{view.form}"/>
+
+<div class="row">
+
+<div class="col-xs-12">
+<label>#{i18n.calendarDayOffDayOffDate}</label>
+<rich:calendar id="calendarDayOffDayOffDate" inputClass="form-control" value="#{form.dayOffDate}"
+ datePattern="yyyy-MM-dd HH:mm:ss"/>
+<h:message for="calendarDayOffDayOffDate" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.calendarDayOffDayOffLabel}</label>
+<h:inputText id="calendarDayOffDayOffLabel" styleClass="form-control" value="#{form.dayOffLabel}"/>
+<h:message for="calendarDayOffDayOffLabel" styleClass="detail-error-message"/>
+</div>
+
+</div>
+
+<a4j:commandButton value="#{i18n.save}" action="#{calendarDetailController.saveCalendarDayOff}" rendered="#{empty view.id}" styleClass="btn btn-success" execute="@region" render="calendarDayOffPanelGroup, calendarDayOffDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#calendarDayOffModal').modal('hide')"/>
+<a4j:commandButton value="#{i18n.update}" action="#{calendarDetailController.updateCalendarDayOff}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" execute="@region" render="calendarDayOffPanelGroup, calendarDayOffDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal==0}) $('#calendarDayOffModal').modal('hide')"/>
+<a4j:commandButton value="#{i18n.cancel}" actionListener="#{calendarListController.resetForm}" styleClass="btn btn-info" immediate="true" update="calendarDayOffPanelGroup" oncomplete="$('#calendarDayOffModal').modal('hide')"/>
+
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+
+</a4j:region>
+
+</h:panelGroup>
+
+</div>
+
+</ui:composition>

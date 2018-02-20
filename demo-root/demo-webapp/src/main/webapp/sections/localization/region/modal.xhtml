@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:rich="http://richfaces.org/rich"
+xmlns:a4j="http://richfaces.org/a4j">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton-generator -->
+<!-- -->
+
+<div class="modal-header">
+<h2>
+#{i18n.regionDetails}
+</h2>
+</div>
+
+<div class="modal-body">
+
+<h:panelGroup id="regionDetailPanelGroup">
+<a4j:region>
+
+<ui:param name="view" value="#{regionListView.selectedRegion}"/>
+<ui:param name="form" value="#{view.form}"/>
+
+<div class="row">
+<div class="col-xs-12">
+<label>#{i18n.regionCountryCode}</label>
+<h:selectOneMenu id="regionCountryCode" styleClass="form-control" value="#{form.countryCode}">
+<f:selectItem itemValue="#{null}" itemLabel=""/>
+<f:selectItems value="#{commonView.countryOptions}"
+var="option" itemValue="#{option.key}" itemLabel="#{option.label}"/>
+</h:selectOneMenu>
+<h:message for="regionCountryCode" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.regionCode}</label>
+<h:inputText id="regionCode" styleClass="form-control" value="#{form.code}"/>
+<h:message for="regionCode" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.regionLabel}</label>
+<h:inputText id="regionLabel" styleClass="form-control" value="#{form.label}"/>
+<h:message for="regionLabel" styleClass="detail-error-message"/>
+</div>
+
+</div>
+
+<a4j:commandButton value="#{i18n.save}" action="#{regionListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" execute="@region" render="regionPanelGroup, regionDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#regionModal').modal('hide');"/>
+<a4j:commandButton value="#{i18n.update}" action="#{regionListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" execute="@region" render="regionPanelGroup, regionDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#regionModal').modal('hide');"/>
+<a4j:commandButton value="#{i18n.cancel}" actionListener="#{regionListController.resetForm}" styleClass="btn btn-info" immediate="true" execute="@region" render="regionPanelGroup" oncomplete="$('#regionModal').modal('hide')"/>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+
+</a4j:region>
+
+</h:panelGroup>
+
+</div>
+
+</ui:composition>

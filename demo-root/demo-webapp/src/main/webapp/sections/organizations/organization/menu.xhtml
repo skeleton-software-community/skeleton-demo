@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton-generator -->
+<!-- -->
+
+<ul class="nav nav-pills">
+<li role="presentation" id="menu">
+<h:link outcome="/sections/organizations/organization/details.jsf">
+<f:param name="id" value="#{organizationDetailView.selectedOrganization.id}" />
+#{i18n.organizationDetails}
+</h:link>
+</li>
+<li role="presentation" id="organization-certification-menu">
+<h:link outcome="/sections/organizations/organization/organization-certification/details.jsf">
+<f:param name="id" value="#{organizationDetailView.selectedOrganization.id}" />
+#{i18n.organizationCertificationDetails}
+</h:link>
+</li>
+</ul>
+</ui:composition>
