@@ -85,7 +85,7 @@ return organizationService.save(organizationListView.getSelectedOrganization().g
 }
 @Override
 public void redirectOnComplete(Object result) {
-redirect("/sections/organizations/organization/OrganizationDetails.jsf?id=" + result);
+redirect("/sections/organizations/organization/details.jsf?id=" + result);
 }
 });
 }

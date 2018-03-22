@@ -2,8 +2,7 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html"
-xmlns:rich="http://richfaces.org/rich"
-xmlns:a4j="http://richfaces.org/a4j">
+xmlns:p="http://primefaces.org/ui">
 
 <!-- -->
 <!-- auto generated jsf file -->
@@ -20,8 +19,6 @@ xmlns:a4j="http://richfaces.org/a4j">
 <div class="modal-body">
 
 <h:panelGroup id="foolDetailPanelGroup">
-<a4j:region>
-
 <ui:param name="view" value="#{foolListView.selectedFool}"/>
 <ui:param name="form" value="#{view.form}"/>
 
@@ -74,27 +71,25 @@ readonly="false" disabled="false"/>
 
 <div class="col-xs-12">
 <label>#{i18n.foolDateField}</label>
-<rich:calendar id="foolDateField" inputClass="form-control" value="#{form.dateField}"
- datePattern="yyyy-MM-dd"/>
+<p:calendar id="foolDateField" class="form-control date-picker" value="#{form.dateField}"
+ pattern="yyyy-MM-dd" mask="true"/>
 <h:message for="foolDateField" styleClass="detail-error-message"/>
 </div>
 
 <div class="col-xs-12">
 <label>#{i18n.foolDatetimeField}</label>
-<rich:calendar id="foolDatetimeField" inputClass="form-control" value="#{form.datetimeField}"
- datePattern="yyyy-MM-dd HH:mm:ss"/>
+<p:calendar id="foolDatetimeField" class="form-control date-picker" value="#{form.datetimeField}"
+ pattern="yyyy-MM-dd HH:mm:ss" mask="true"/>
 <h:message for="foolDatetimeField" styleClass="detail-error-message"/>
 </div>
 
 </div>
 
-<a4j:commandButton value="#{i18n.save}" action="#{foolListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" execute="@region" render="foolPanelGroup, foolDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#foolModal').modal('hide');"/>
-<a4j:commandButton value="#{i18n.update}" action="#{foolListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" execute="@region" render="foolPanelGroup, foolDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#foolModal').modal('hide');"/>
-<a4j:commandButton value="#{i18n.cancel}" actionListener="#{foolListController.resetForm}" styleClass="btn btn-info" immediate="true" execute="@region" render="foolPanelGroup" oncomplete="$('#foolModal').modal('hide')"/>
+<p:commandButton value="#{i18n.save}" action="#{foolListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" process="@form:foolDetailPanelGroup" update=":messages, @form:foolPanelGroup, @form:foolDetailPanelGroup" oncomplete="onSuccess(args, function(){$('#foolModal').modal('hide')});"/>
+<p:commandButton value="#{i18n.update}" action="#{foolListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" process="@form:foolDetailPanelGroup" update=":messages, @form:foolPanelGroup, @form:foolDetailPanelGroup" oncomplete="onSuccess(args, function(){$('#foolModal').modal('hide')});"/>
+<p:commandButton value="#{i18n.cancel}" actionListener="#{foolListController.resetForm}" styleClass="btn btn-info" immediate="true" process="@this" update="@form:foolPanelGroup" oncomplete="$('#foolModal').modal('hide')"/>
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
-
-</a4j:region>
 
 </h:panelGroup>
 

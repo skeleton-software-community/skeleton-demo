@@ -2,8 +2,7 @@
 xmlns:ui = "http://java.sun.com/jsf/facelets"
 xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
-xmlns:rich = "http://richfaces.org/rich"
-xmlns:a4j = "http://richfaces.org/a4j"
+xmlns:p="http://primefaces.org/ui"
 template="/templates/template.xhtml">
 
 <!-- -->
@@ -23,11 +22,9 @@ template="/templates/template.xhtml">
 <ui:include src="/sections/organizations/organization/menu.xhtml"/>
 
 <h2>
-#{i18n.organizationCertificationDetails}
+#{i18n.organizationCertificationDetail}
 </h2>
 <h:panelGroup id="organizationCertificationDetailPanelGroup">
-
-<a4j:region>
 
 <ui:param name="view" value="#{organizationDetailView.selectedOrganizationCertification}"/>
 <ui:param name="form" value="#{view.form}"/>
@@ -45,14 +42,12 @@ readonly="false" disabled="false"/>
 
 </div>
 
-<a4j:commandButton value="#{i18n.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" action="#{organizationDetailController.updateOrganizationCertification}" styleClass="btn btn-success" execute="@region" render="organizationCertificationDetailPanelGroup"/>
-<a4j:commandButton value="#{i18n.delete}" rendered="#{not empty view.id}" action="#{organizationDetailController.deleteOrganizationCertification}" styleClass="btn btn-warning" execute="@region" render="organizationCertificationDetailPanelGroup"/>
-<a4j:commandButton value="#{i18n.save}" rendered="#{empty view.id}" action="#{organizationDetailController.saveOrganizationCertification}" styleClass="btn btn-success" execute="@region" render="organizationCertificationDetailPanelGroup"/>
+<p:commandButton value="#{i18n.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" action="#{organizationDetailController.updateOrganizationCertification}" styleClass="btn btn-success" process="@form" update=":messages, @form:organizationCertificationDetailPanelGroup"/>
+<p:commandButton value="#{i18n.delete}" rendered="#{not empty view.id}" action="#{organizationDetailController.deleteOrganizationCertification}" styleClass="btn btn-warning" process="@this" update=":messages, @form:organizationCertificationDetailPanelGroup"/>
+<p:commandButton value="#{i18n.save}" rendered="#{empty view.id}" action="#{organizationDetailController.saveOrganizationCertification}" styleClass="btn btn-success" process="@form" update=":messages, @form:organizationCertificationDetailPanelGroup"/>
 
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
-
-</a4j:region>
 
 </h:panelGroup>
 

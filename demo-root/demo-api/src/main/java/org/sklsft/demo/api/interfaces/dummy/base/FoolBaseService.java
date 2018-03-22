@@ -45,6 +45,7 @@ public static final String GET_URL = "/fool/{id}";
 /**
  * find object
  */
+public static final String FIND_URL = "/fool/find";
 FoolFullView find(String code);
 
 /**
@@ -75,5 +76,6 @@ public static final String DELETE_URL = "/fool/{id}";
  * delete object list
  */
 void deleteList(List<Long> idList);
+public static final String DELETE_LIST_URL = "/fool/delete";
 
 }

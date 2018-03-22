@@ -2,8 +2,7 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html"
-xmlns:rich="http://richfaces.org/rich"
-xmlns:a4j="http://richfaces.org/a4j">
+xmlns:p="http://primefaces.org/ui">
 
 <!-- -->
 <!-- auto generated jsf file -->
@@ -20,8 +19,6 @@ xmlns:a4j="http://richfaces.org/a4j">
 <div class="modal-body">
 
 <h:panelGroup id="cityDetailPanelGroup">
-<a4j:region>
-
 <ui:param name="view" value="#{cityListView.selectedCity}"/>
 <ui:param name="form" value="#{view.form}"/>
 
@@ -56,13 +53,11 @@ var="option" itemValue="#{option.key}" itemLabel="#{option.label}"/>
 
 </div>
 
-<a4j:commandButton value="#{i18n.save}" action="#{cityListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" execute="@region" render="cityPanelGroup, cityDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#cityModal').modal('hide');"/>
-<a4j:commandButton value="#{i18n.update}" action="#{cityListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" execute="@region" render="cityPanelGroup, cityDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#cityModal').modal('hide');"/>
-<a4j:commandButton value="#{i18n.cancel}" actionListener="#{cityListController.resetForm}" styleClass="btn btn-info" immediate="true" execute="@region" render="cityPanelGroup" oncomplete="$('#cityModal').modal('hide')"/>
+<p:commandButton value="#{i18n.save}" action="#{cityListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" process="@form:cityDetailPanelGroup" update=":messages, @form:cityPanelGroup, @form:cityDetailPanelGroup" oncomplete="onSuccess(args, function(){$('#cityModal').modal('hide')});"/>
+<p:commandButton value="#{i18n.update}" action="#{cityListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" process="@form:cityDetailPanelGroup" update=":messages, @form:cityPanelGroup, @form:cityDetailPanelGroup" oncomplete="onSuccess(args, function(){$('#cityModal').modal('hide')});"/>
+<p:commandButton value="#{i18n.cancel}" actionListener="#{cityListController.resetForm}" styleClass="btn btn-info" immediate="true" process="@this" update="@form:cityPanelGroup" oncomplete="$('#cityModal').modal('hide')"/>
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
-
-</a4j:region>
 
 </h:panelGroup>
 

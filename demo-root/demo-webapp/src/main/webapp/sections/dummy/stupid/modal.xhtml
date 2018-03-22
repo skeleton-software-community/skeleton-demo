@@ -2,8 +2,7 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html"
-xmlns:rich="http://richfaces.org/rich"
-xmlns:a4j="http://richfaces.org/a4j">
+xmlns:p="http://primefaces.org/ui">
 
 <!-- -->
 <!-- auto generated jsf file -->
@@ -20,8 +19,6 @@ xmlns:a4j="http://richfaces.org/a4j">
 <div class="modal-body">
 
 <h:panelGroup id="stupidDetailPanelGroup">
-<a4j:region>
-
 <ui:param name="view" value="#{stupidListView.selectedStupid}"/>
 <ui:param name="form" value="#{view.form}"/>
 
@@ -34,20 +31,18 @@ xmlns:a4j="http://richfaces.org/a4j">
 
 <div class="col-xs-12">
 <label>#{i18n.stupidFoolCode}</label>
-<rich:autocomplete id="stupidFoolCode" styleClass="form-control" value="#{form.foolCode}"
- autocompleteMethod="#{commonController.searchFoolOptions}"/>
+<p:autoComplete id="stupidFoolCode" styleClass="form-control" value="#{form.foolCode}"
+ completeMethod="#{commonController.searchFoolOptions}"/>
 <h:message for="stupidFoolCode" styleClass="detail-error-message"/>
 </div>
 
 </div>
 
-<a4j:commandButton value="#{i18n.save}" action="#{stupidListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" execute="@region" render="stupidPanelGroup, stupidDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#stupidModal').modal('hide');"/>
-<a4j:commandButton value="#{i18n.update}" action="#{stupidListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" execute="@region" render="stupidPanelGroup, stupidDetailPanelGroup" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) $('#stupidModal').modal('hide');"/>
-<a4j:commandButton value="#{i18n.cancel}" actionListener="#{stupidListController.resetForm}" styleClass="btn btn-info" immediate="true" execute="@region" render="stupidPanelGroup" oncomplete="$('#stupidModal').modal('hide')"/>
+<p:commandButton value="#{i18n.save}" action="#{stupidListController.save}" rendered="#{empty view.id}" styleClass="btn btn-success" process="@form:stupidDetailPanelGroup" update=":messages, @form:stupidPanelGroup, @form:stupidDetailPanelGroup" oncomplete="onSuccess(args, function(){$('#stupidModal').modal('hide')});"/>
+<p:commandButton value="#{i18n.update}" action="#{stupidListController.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" process="@form:stupidDetailPanelGroup" update=":messages, @form:stupidPanelGroup, @form:stupidDetailPanelGroup" oncomplete="onSuccess(args, function(){$('#stupidModal').modal('hide')});"/>
+<p:commandButton value="#{i18n.cancel}" actionListener="#{stupidListController.resetForm}" styleClass="btn btn-info" immediate="true" process="@this" update="@form:stupidPanelGroup" oncomplete="$('#stupidModal').modal('hide')"/>
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
-
-</a4j:region>
 
 </h:panelGroup>
 

@@ -2,8 +2,7 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f = "http://java.sun.com/jsf/core"
 xmlns:h = "http://java.sun.com/jsf/html"
-xmlns:rich = "http://richfaces.org/rich"
-xmlns:a4j = "http://richfaces.org/a4j"
+xmlns:p="http://primefaces.org/ui"
 xmlns:cc="http://java.sun.com/jsf/composite/components"
 xmlns:s="http://commons.sklsft.org/ui/components"
 template="/templates/template.xhtml">
@@ -24,14 +23,12 @@ template="/templates/template.xhtml">
 <h2>
 #{i18n.organizationList} (#{organizationListView.scrollView.size})
 </h2>
-<a4j:region>
-
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
-<a4j:commandLink action="#{organizationListController.reset}" render="organizationPanelGroup">
+<p:commandLink action="#{organizationListController.reset}" process="@this" update="@form:organizationPanelGroup">
 <h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
-</a4j:commandLink>
+</p:commandLink>
 </h3>
 <div class="row row-eq-height">
 <div class="col-xs-3">
@@ -39,9 +36,7 @@ template="/templates/template.xhtml">
 <h:inputText
 value="#{organizationListView.scrollForm.filter.code}"
 styleClass="form-control">
-<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{organizationListController.refresh}">
-<a4j:attachQueue requestDelay="500"/>
-</a4j:ajax>
+<p:ajax event="keyup" update="resultsPanelGroup" listener="#{organizationListController.refresh}"/>
 </h:inputText>
 </div>
 
@@ -50,9 +45,7 @@ styleClass="form-control">
 <h:inputText
 value="#{organizationListView.scrollForm.filter.description}"
 styleClass="form-control">
-<a4j:ajax event="keyup" render="resultsPanelGroup" listener="#{organizationListController.refresh}">
-<a4j:attachQueue requestDelay="500"/>
-</a4j:ajax>
+<p:ajax event="keyup" update="resultsPanelGroup" listener="#{organizationListController.refresh}"/>
 </h:inputText>
 </div>
 
@@ -67,58 +60,58 @@ styleClass="form-control">
 <ui:fragment rendered="#{organizationListView.scrollView.elements.size() > 0}">
 <s:tooltip for=".truncated-text"/>
 
-<rich:dataTable rows="10"
+<p:dataTable rows="10"
 id="organizationList" var="organization" name="datatable"
 value="#{organizationListView.scrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
 <script>$(function(){displaySelectUnselectAll();});</script>
 </f:facet>
 <h:selectBooleanCheckbox rendered="#{organization.canDelete}" id="selectUnselect" value="#{organization.selected}" onclick="selectUnselect('organizationListForm:organizationList:selectUnselectAll')"/>
-</rich:column>
+</p:column>
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <h:outputText value="Actions" />
 <div class="drop-list" id="drop-list">
-<a4j:commandLink title="#{i18n.deleteSelection}" action="#{organizationListController.deleteList}"
-onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" execute="@region" render="organizationPanelGroup">
+<p:commandLink title="#{i18n.deleteSelection}" action="#{organizationListController.deleteList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" process="@form:organizationPanelGroup" update=":messages, @form:organizationPanelGroup">
 <span class="glyphicon glyphicon-trash"/>
-</a4j:commandLink>
+</p:commandLink>
 </div>
 </f:facet>
-<h:panelGrid columns="2">
+<h:panelGrid styleClass="actions-grid" columns="2">
 <h:link outcome="/sections/organizations/organization/details.jsf">
 <h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
 <f:param name="id" value="#{organization.id}" />
 </h:link>
-<a4j:commandLink rendered="#{organization.canDelete}" action="#{organizationListController.delete(organization.id)}"
-onclick="if (!confirm('#{i18n.confirmDelete}')) return false" render="organizationPanelGroup">
+<p:commandLink rendered="#{organization.canDelete}" action="#{organizationListController.delete(organization.id)}"
+onclick="if (!confirm('#{i18n.confirmDelete}')) return false" process="@this" update=":messages, @form:organizationPanelGroup">
 <h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
-</a4j:commandLink>
+</p:commandLink>
 </h:panelGrid>
-</rich:column>
+</p:column>
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.organizationCode}"
 orderType="#{organizationListView.scrollForm.sorting.codeOrderType}"
 action="#{organizationListController.refresh}"
-render="organizationPanelGroup"/>
+render="@form:organizationPanelGroup"/>
 </f:facet>
 <h:outputText value="#{organization.code}"/>
-</rich:column>
+</p:column>
 
-<rich:column>
+<p:column>
 <f:facet name="header">
 <cc:datatableHeader
 label="#{i18n.organizationDescription}"
 orderType="#{organizationListView.scrollForm.sorting.descriptionOrderType}"
 action="#{organizationListController.refresh}"
-render="organizationPanelGroup"/>
+render="@form:organizationPanelGroup"/>
 </f:facet>
 <pre class="truncated-text"
  data-toggle="tooltip"
@@ -128,15 +121,15 @@ render="organizationPanelGroup"/>
  data-trigger="click">
 #{organization.description}
 </pre>
-</rich:column>
+</p:column>
 
-</rich:dataTable>
+</p:dataTable>
 
 <cc:datatableScroller
 page="#{organizationListView.scrollForm.page}"
 numberOfPages="#{organizationListView.scrollView.numberOfPages}"
 action="#{organizationListController.refresh}"
-render="organizationPanelGroup"/>
+render="@form:organizationPanelGroup"/>
 
 </ui:fragment>
 
@@ -144,12 +137,10 @@ render="organizationPanelGroup"/>
 
 </div>
 
-<a4j:commandButton value="#{i18n.create}" action="#{organizationListController.createOrganization}" styleClass="btn btn-info" oncomplete="if (#{empty facesContext.maximumSeverity or facesContext.maximumSeverity.ordinal ==0}) {$('#organizationModal').modal('show')}" render="organizationDetailPanelGroup"/>
+<p:commandButton value="#{i18n.create}" action="#{organizationListController.createOrganization}" styleClass="btn btn-info" oncomplete="onSuccess(args, function(){$('#organizationModal').modal('show')});" process="@this" update="organizationDetailPanelGroup"/>
 
 <!-- Specific Code Start -->
 <!-- Specific Code End -->
-</a4j:region>
-
 </h:panelGroup>
 
 <div class="modal modal-default" id="organizationModal" tabindex="-1" aria-hidden="true">
