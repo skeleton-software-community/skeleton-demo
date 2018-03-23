@@ -45,6 +45,7 @@ public static final String GET_URL = "/country/{id}";
 /**
  * find object
  */
+public static final String FIND_URL = "/country/find";
 CountryFullView find(String code);
 
 /**
@@ -75,5 +76,6 @@ public static final String DELETE_URL = "/country/{id}";
  * delete object list
  */
 void deleteList(List<Long> idList);
+public static final String DELETE_LIST_URL = "/country/delete";
 
 }

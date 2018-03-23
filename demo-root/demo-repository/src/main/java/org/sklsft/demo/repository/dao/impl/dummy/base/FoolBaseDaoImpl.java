@@ -134,6 +134,7 @@ return fool;
  * search
  */
 @Override
+@SuppressWarnings("unchecked")
 public List<Fool> search(String arg) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Fool.class);
 addStringContainsRestriction(criteria, "{alias}.CODE", arg);

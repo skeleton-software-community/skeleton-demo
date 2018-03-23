@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -71,12 +72,21 @@ public @ResponseBody CalendarFullView load(@PathVariable("id") Long id) {
 return calendarService.load(id);
 }
 /**
+ * find object
+ */
+@RequestMapping(value = {CalendarService.FIND_URL}, method = RequestMethod.GET)
+@ResponseBody CalendarFullView find(@RequestParam("code") String code) {
+return calendarService.find(code);
+}
+
+/**
  * load one to many component calendarDayOff list
  */
 @RequestMapping(value = {CalendarService.GET_CALENDAR_DAY_OFF_LIST_URL}, method = RequestMethod.GET)
 public @ResponseBody List<CalendarDayOffBasicView> loadCalendarDayOffList(@PathVariable("id") Long id) {
 return calendarService.loadCalendarDayOffList(id);
 }
+
 /**
  * scroll one to many component calendarDayOff
  */
@@ -84,6 +94,7 @@ return calendarService.loadCalendarDayOffList(id);
 public @ResponseBody ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (@PathVariable("calendarId") Long calendarId, @RequestBody ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
 return calendarService.scrollCalendarDayOff(calendarId, form);
 }
+
 /**
  * load one to many component calendarDayOff
  */
@@ -91,6 +102,7 @@ return calendarService.scrollCalendarDayOff(calendarId, form);
 public @ResponseBody CalendarDayOffFullView loadCalendarDayOff(@PathVariable("id") Long id) {
 return calendarService.loadCalendarDayOff(id);
 }
+
 /**
  * create object
  */
@@ -153,6 +165,22 @@ calendarService.delete(id);
 @RequestMapping(value = {CalendarService.DELETE_CALENDAR_DAY_OFF_URL}, method = RequestMethod.DELETE)
 public void deleteCalendarDayOff(@PathVariable("id")Long id) {
 calendarService.deleteCalendarDayOff(id);
+}
+
+/**
+ * delete object list
+ */
+@RequestMapping(value = {CalendarService.DELETE_LIST_URL}, method = RequestMethod.POST)
+@ResponseBody void deleteList(@RequestBody List<Long> idList) {
+calendarService.deleteList(idList);
+}
+
+/**
+ * delete one to many component calendarDayOff list
+ */
+@RequestMapping(value = {CalendarService.DELETE_CALENDAR_DAY_OFF_LIST_URL}, method = RequestMethod.POST)
+@ResponseBody void deleteCalendarDayOffList(List<Long> idList) {
+calendarService.deleteCalendarDayOffList(idList);
 }
 
 }

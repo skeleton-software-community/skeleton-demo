@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -68,12 +69,21 @@ public @ResponseBody OrganizationFullView load(@PathVariable("id") Long id) {
 return organizationService.load(id);
 }
 /**
+ * find object
+ */
+@RequestMapping(value = {OrganizationService.FIND_URL}, method = RequestMethod.GET)
+@ResponseBody OrganizationFullView find(@RequestParam("code") String code) {
+return organizationService.find(code);
+}
+
+/**
  * load one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.GET_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.GET)
 public @ResponseBody OrganizationCertificationFullView loadOrganizationCertification(@PathVariable("id") Long id) {
 return organizationService.loadOrganizationCertification(id);
 }
+
 /**
  * create object
  */
@@ -128,6 +138,14 @@ organizationService.delete(id);
 @RequestMapping(value = {OrganizationService.DELETE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.DELETE)
 public void deleteOrganizationCertification(@PathVariable("id")Long id) {
 organizationService.deleteOrganizationCertification(id);
+}
+
+/**
+ * delete object list
+ */
+@RequestMapping(value = {OrganizationService.DELETE_LIST_URL}, method = RequestMethod.POST)
+@ResponseBody void deleteList(@RequestBody List<Long> idList) {
+organizationService.deleteList(idList);
 }
 
 }

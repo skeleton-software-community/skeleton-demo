@@ -50,6 +50,7 @@ public static final String GET_URL = "/calendar/{id}";
 /**
  * find object
  */
+public static final String FIND_URL = "/calendar/find";
 CalendarFullView find(String code);
 
 /**
@@ -122,10 +123,12 @@ public static final String DELETE_CALENDAR_DAY_OFF_URL = "/calendar-day-off/{id}
  * delete object list
  */
 void deleteList(List<Long> idList);
+public static final String DELETE_LIST_URL = "/calendar/delete";
 
 /**
  * delete one to many component calendarDayOff list
  */
 void deleteCalendarDayOffList(List<Long> idList);
+public static final String DELETE_CALENDAR_DAY_OFF_LIST_URL = "/calendar-day-off/delete";
 
 }

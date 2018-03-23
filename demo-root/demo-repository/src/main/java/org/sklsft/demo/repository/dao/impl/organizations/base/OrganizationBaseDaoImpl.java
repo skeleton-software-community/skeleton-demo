@@ -120,6 +120,7 @@ return organization;
  * search
  */
 @Override
+@SuppressWarnings("unchecked")
 public List<Organization> search(String arg) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Organization.class);
 addStringContainsRestriction(criteria, "{alias}.CODE", arg);

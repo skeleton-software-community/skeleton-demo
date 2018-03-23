@@ -38,6 +38,7 @@ public static final String GET_URL = "/stupid/{id}";
 /**
  * find object
  */
+public static final String FIND_URL = "/stupid/find";
 StupidFullView find(String code);
 
 /**
@@ -68,5 +69,6 @@ public static final String DELETE_URL = "/stupid/{id}";
  * delete object list
  */
 void deleteList(List<Long> idList);
+public static final String DELETE_LIST_URL = "/stupid/delete";
 
 }

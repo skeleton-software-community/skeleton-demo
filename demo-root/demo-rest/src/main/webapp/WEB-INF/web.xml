@@ -15,7 +15,7 @@
 			classpath:applicationContext-demo-business-component.xml
 			classpath:applicationContext-demo-services.xml
 			classpath:applicationContext-demo-rest.xml
-        </param-value>
+        	</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

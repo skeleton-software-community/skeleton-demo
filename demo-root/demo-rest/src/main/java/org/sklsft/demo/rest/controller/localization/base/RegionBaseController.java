@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -71,6 +72,14 @@ public @ResponseBody RegionFullView load(@PathVariable("id") Long id) {
 return regionService.load(id);
 }
 /**
+ * find object
+ */
+@RequestMapping(value = {RegionService.FIND_URL}, method = RequestMethod.GET)
+@ResponseBody RegionFullView find(@RequestParam("countryCode") String countryCode, @RequestParam("code") String code) {
+return regionService.find(countryCode, code);
+}
+
+/**
  * create object
  */
 @RequestMapping(value = {RegionService.GET_NEW_URL}, method = RequestMethod.GET)
@@ -108,6 +117,14 @@ regionService.update(id, form);
 @RequestMapping(value = {RegionService.DELETE_URL}, method = RequestMethod.DELETE)
 void delete(@PathVariable("id") Long id) {
 regionService.delete(id);
+}
+
+/**
+ * delete object list
+ */
+@RequestMapping(value = {RegionService.DELETE_LIST_URL}, method = RequestMethod.POST)
+@ResponseBody void deleteList(@RequestBody List<Long> idList) {
+regionService.deleteList(idList);
 }
 
 }

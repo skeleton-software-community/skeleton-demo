@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -66,6 +67,14 @@ public @ResponseBody FoolFullView load(@PathVariable("id") Long id) {
 return foolService.load(id);
 }
 /**
+ * find object
+ */
+@RequestMapping(value = {FoolService.FIND_URL}, method = RequestMethod.GET)
+@ResponseBody FoolFullView find(@RequestParam("code") String code) {
+return foolService.find(code);
+}
+
+/**
  * create object
  */
 @RequestMapping(value = {FoolService.GET_NEW_URL}, method = RequestMethod.GET)
@@ -95,6 +104,14 @@ foolService.update(id, form);
 @RequestMapping(value = {FoolService.DELETE_URL}, method = RequestMethod.DELETE)
 void delete(@PathVariable("id") Long id) {
 foolService.delete(id);
+}
+
+/**
+ * delete object list
+ */
+@RequestMapping(value = {FoolService.DELETE_LIST_URL}, method = RequestMethod.POST)
+@ResponseBody void deleteList(@RequestBody List<Long> idList) {
+foolService.deleteList(idList);
 }
 
 }
