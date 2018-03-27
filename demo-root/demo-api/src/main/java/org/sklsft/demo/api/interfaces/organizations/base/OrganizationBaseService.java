@@ -47,6 +47,7 @@ public static final String GET_URL = "/organization/{id}";
 /**
  * find object
  */
+public static final String FIND_URL = "/organization/find";
 OrganizationFullView find(String code);
 
 /**
@@ -101,5 +102,6 @@ public static final String DELETE_ORGANIZATION_CERTIFICATION_URL = "/organizatio
  * delete object list
  */
 void deleteList(List<Long> idList);
+public static final String DELETE_LIST_URL = "/organization/delete";
 
 }

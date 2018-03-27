@@ -86,7 +86,7 @@ return regionService.saveFromCountry( countryDetailView.getSelectedCountry().get
 }
 @Override
 public void redirectOnComplete(Object result) {
-redirect("/sections/localization/region/RegionDetails.jsf?id=" + result);
+redirect("/sections/localization/region/details.jsf?id=" + result);
 }
 });
 }

@@ -85,7 +85,7 @@ return countryService.save(countryListView.getSelectedCountry().getForm());
 }
 @Override
 public void redirectOnComplete(Object result) {
-redirect("/sections/localization/country/CountryDetails.jsf?id=" + result);
+redirect("/sections/localization/country/details.jsf?id=" + result);
 }
 });
 }

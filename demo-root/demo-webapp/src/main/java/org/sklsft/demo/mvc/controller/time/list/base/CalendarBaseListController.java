@@ -85,7 +85,7 @@ return calendarService.save(calendarListView.getSelectedCalendar().getForm());
 }
 @Override
 public void redirectOnComplete(Object result) {
-redirect("/sections/time/calendar/CalendarDetails.jsf?id=" + result);
+redirect("/sections/time/calendar/details.jsf?id=" + result);
 }
 });
 }
