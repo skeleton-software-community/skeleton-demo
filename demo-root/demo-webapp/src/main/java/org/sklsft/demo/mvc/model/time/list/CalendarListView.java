@@ -28,7 +28,7 @@ private static final long serialVersionUID = 1L;
  */
 protected ScrollForm<CalendarFilter, CalendarSorting> scrollForm = new ScrollForm<>();
 protected ScrollView<CalendarBasicView> scrollView = new ScrollView<>();
-protected CalendarFullView selectedCalendar;
+protected CalendarFullView selectedCalendar = new CalendarFullView();
 
 /*
  * getters and setters

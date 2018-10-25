@@ -31,7 +31,7 @@ private RegionFullView selectedRegion = new RegionFullView();
 
 protected ScrollForm<CityFilter, CitySorting> cityScrollForm = new ScrollForm<>();
 protected ScrollView<CityBasicView> cityScrollView = new ScrollView<>();
-private CityFullView selectedCity;
+private CityFullView selectedCity = new CityFullView();
 
 /*
  * getters and setters

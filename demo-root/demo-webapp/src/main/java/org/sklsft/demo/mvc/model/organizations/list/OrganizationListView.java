@@ -28,7 +28,7 @@ private static final long serialVersionUID = 1L;
  */
 protected ScrollForm<OrganizationFilter, OrganizationSorting> scrollForm = new ScrollForm<>();
 protected ScrollView<OrganizationBasicView> scrollView = new ScrollView<>();
-protected OrganizationFullView selectedOrganization;
+protected OrganizationFullView selectedOrganization = new OrganizationFullView();
 
 /*
  * getters and setters

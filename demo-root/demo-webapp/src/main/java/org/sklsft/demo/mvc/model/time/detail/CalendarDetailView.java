@@ -31,7 +31,7 @@ private CalendarFullView selectedCalendar = new CalendarFullView();
 
 protected ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> calendarDayOffScrollForm = new ScrollForm<>();
 protected ScrollView<CalendarDayOffBasicView> calendarDayOffScrollView = new ScrollView<>();
-private CalendarDayOffFullView selectedCalendarDayOff;
+private CalendarDayOffFullView selectedCalendarDayOff = new CalendarDayOffFullView();
 
 /*
  * getters and setters

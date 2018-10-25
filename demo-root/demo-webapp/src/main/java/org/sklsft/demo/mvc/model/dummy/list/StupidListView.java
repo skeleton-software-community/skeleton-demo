@@ -28,7 +28,7 @@ private static final long serialVersionUID = 1L;
  */
 protected ScrollForm<StupidFilter, StupidSorting> scrollForm = new ScrollForm<>();
 protected ScrollView<StupidBasicView> scrollView = new ScrollView<>();
-protected StupidFullView selectedStupid;
+protected StupidFullView selectedStupid = new StupidFullView();
 
 /*
  * getters and setters

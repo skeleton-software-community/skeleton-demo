@@ -28,7 +28,7 @@ private static final long serialVersionUID = 1L;
  */
 protected ScrollForm<CityFilter, CitySorting> scrollForm = new ScrollForm<>();
 protected ScrollView<CityBasicView> scrollView = new ScrollView<>();
-protected CityFullView selectedCity;
+protected CityFullView selectedCity = new CityFullView();
 
 /*
  * getters and setters

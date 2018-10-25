@@ -28,7 +28,7 @@ private static final long serialVersionUID = 1L;
  */
 protected ScrollForm<RegionFilter, RegionSorting> scrollForm = new ScrollForm<>();
 protected ScrollView<RegionBasicView> scrollView = new ScrollView<>();
-protected RegionFullView selectedRegion;
+protected RegionFullView selectedRegion = new RegionFullView();
 
 /*
  * getters and setters
