@@ -15,7 +15,6 @@ import org.sklsft.demo.api.model.organizations.sortings.OrganizationSorting;
 import org.sklsft.demo.api.model.organizations.views.basic.OrganizationBasicView;
 import org.sklsft.demo.api.model.organizations.views.full.OrganizationCertificationFullView;
 import org.sklsft.demo.api.model.organizations.views.full.OrganizationFullView;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-@Controller
 public class OrganizationBaseController {
 
 /*

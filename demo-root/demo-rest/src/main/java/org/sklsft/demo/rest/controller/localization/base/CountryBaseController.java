@@ -13,7 +13,6 @@ import org.sklsft.demo.api.model.localization.forms.CountryForm;
 import org.sklsft.demo.api.model.localization.sortings.CountrySorting;
 import org.sklsft.demo.api.model.localization.views.basic.CountryBasicView;
 import org.sklsft.demo.api.model.localization.views.full.CountryFullView;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-@Controller
 public class CountryBaseController {
 
 /*

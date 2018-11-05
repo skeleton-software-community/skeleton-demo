@@ -12,7 +12,6 @@ import org.sklsft.demo.api.model.dummy.forms.StupidForm;
 import org.sklsft.demo.api.model.dummy.sortings.StupidSorting;
 import org.sklsft.demo.api.model.dummy.views.basic.StupidBasicView;
 import org.sklsft.demo.api.model.dummy.views.full.StupidFullView;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-@Controller
 public class StupidBaseController {
 
 /*

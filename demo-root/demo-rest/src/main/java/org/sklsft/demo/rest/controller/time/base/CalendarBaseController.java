@@ -18,7 +18,6 @@ import org.sklsft.demo.api.model.time.views.basic.CalendarBasicView;
 import org.sklsft.demo.api.model.time.views.basic.CalendarDayOffBasicView;
 import org.sklsft.demo.api.model.time.views.full.CalendarDayOffFullView;
 import org.sklsft.demo.api.model.time.views.full.CalendarFullView;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +30,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-@Controller
 public class CalendarBaseController {
 
 /*

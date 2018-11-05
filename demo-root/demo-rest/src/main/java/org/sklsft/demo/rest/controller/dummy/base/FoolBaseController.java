@@ -13,7 +13,6 @@ import org.sklsft.demo.api.model.dummy.forms.FoolForm;
 import org.sklsft.demo.api.model.dummy.sortings.FoolSorting;
 import org.sklsft.demo.api.model.dummy.views.basic.FoolBasicView;
 import org.sklsft.demo.api.model.dummy.views.full.FoolFullView;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-@Controller
 public class FoolBaseController {
 
 /*
