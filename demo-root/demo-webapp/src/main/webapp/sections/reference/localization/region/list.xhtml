@@ -1,0 +1,168 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f = "http://java.sun.com/jsf/core"
+xmlns:h = "http://java.sun.com/jsf/html"
+xmlns:p="http://primefaces.org/ui"
+xmlns:cc="http://java.sun.com/jsf/composite/components"
+xmlns:s="http://commons.sklsft.org/ui/components"
+template="/templates/template.xhtml">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton generator -->
+<!-- -->
+
+<f:metadata>
+<f:viewAction action="#{regionListController.load}"/>
+</f:metadata>
+<ui:define name="content">
+
+<h:form id="regionListForm">
+<h:panelGroup id="regionPanelGroup">
+<h2>
+#{i18n.regionList} (#{regionListView.scrollView.size})
+</h2>
+<div class="filter-panel">
+<h3>
+#{i18n.filters}
+<p:commandLink action="#{regionListController.reset}" process="@this" update="@form:regionPanelGroup">
+<h:graphicImage url="/resources/images/icons/refresh.png" styleClass="imageIcon" title="#{i18n.resetFilter}"/>
+</p:commandLink>
+</h3>
+<div class="row row-eq-height">
+<div class="col-xs-3">
+<label>#{i18n.regionCountryCode}</label>
+<h:inputText
+value="#{regionListView.scrollForm.filter.countryCode}"
+styleClass="form-control">
+<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionListController.refresh}"/>
+</h:inputText>
+</div>
+
+<div class="col-xs-3">
+<label>#{i18n.regionCode}</label>
+<h:inputText
+value="#{regionListView.scrollForm.filter.code}"
+styleClass="form-control">
+<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionListController.refresh}"/>
+</h:inputText>
+</div>
+
+<div class="col-xs-3">
+<label>#{i18n.regionLabel}</label>
+<h:inputText
+value="#{regionListView.scrollForm.filter.label}"
+styleClass="form-control">
+<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionListController.refresh}"/>
+</h:inputText>
+</div>
+
+</div>
+</div>
+<div class="results-panel">
+<h:panelGroup id="resultsPanelGroup">
+<ui:fragment rendered="#{regionListView.scrollView.elements.size() == 0}">
+#{i18n.noDataFound}<br/>
+</ui:fragment>
+
+<ui:fragment rendered="#{regionListView.scrollView.elements.size() > 0}">
+<s:tooltip for=".truncated-text"/>
+
+<p:dataTable rows="10"
+id="regionList" var="region" name="datatable"
+value="#{regionListView.scrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
+
+<p:column width="40">
+<f:facet name="header">
+<h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
+<script>$(function(){displaySelectUnselectAll();});</script>
+</f:facet>
+<h:selectBooleanCheckbox rendered="#{region.canDelete}" id="selectUnselect" value="#{region.selected}" onclick="selectUnselect('regionListForm:regionList:selectUnselectAll')"/>
+</p:column>
+
+<p:column width="100">
+<f:facet name="header">
+<h:outputText value="Actions" />
+<div class="drop-list" id="drop-list">
+<p:commandLink title="#{i18n.deleteSelection}" action="#{regionListController.deleteList}"
+onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" process="@form:regionPanelGroup" update=":messages, @form:regionPanelGroup">
+<span class="glyphicon glyphicon-trash"/>
+</p:commandLink>
+</div>
+</f:facet>
+<h:panelGrid styleClass="actions-grid" columns="2">
+<h:link outcome="/sections/reference/localization/region/details.jsf">
+<h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
+<f:param name="id" value="#{region.id}" />
+</h:link>
+<p:commandLink rendered="#{region.canDelete}" action="#{regionListController.delete(region.id)}"
+onclick="if (!confirm('#{i18n.confirmDelete}')) return false" process="@this" update=":messages, @form:regionPanelGroup">
+<h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
+</p:commandLink>
+</h:panelGrid>
+</p:column>
+
+<p:column>
+<f:facet name="header">
+<cc:datatableHeader
+label="#{i18n.regionCountryCode}"
+orderType="#{regionListView.scrollForm.sorting.countryCodeOrderType}"
+action="#{regionListController.refresh}"
+render="@form:regionPanelGroup"/>
+</f:facet>
+<h:outputText value="#{region.countryCode}"/>
+</p:column>
+
+<p:column>
+<f:facet name="header">
+<cc:datatableHeader
+label="#{i18n.regionCode}"
+orderType="#{regionListView.scrollForm.sorting.codeOrderType}"
+action="#{regionListController.refresh}"
+render="@form:regionPanelGroup"/>
+</f:facet>
+<h:outputText value="#{region.code}"/>
+</p:column>
+
+<p:column>
+<f:facet name="header">
+<cc:datatableHeader
+label="#{i18n.regionLabel}"
+orderType="#{regionListView.scrollForm.sorting.labelOrderType}"
+action="#{regionListController.refresh}"
+render="@form:regionPanelGroup"/>
+</f:facet>
+<h:outputText value="#{region.label}"/>
+</p:column>
+
+</p:dataTable>
+
+<cc:datatableScroller
+page="#{regionListView.scrollForm.page}"
+numberOfPages="#{regionListView.scrollView.numberOfPages}"
+action="#{regionListController.refresh}"
+render="@form:regionPanelGroup"/>
+
+</ui:fragment>
+
+</h:panelGroup>
+
+</div>
+
+<p:commandButton value="#{i18n.create}" action="#{regionListController.createRegion}" styleClass="btn btn-info" oncomplete="onSuccess(args, function(){$('#regionModal').modal('show')});" process="@this" update="regionDetailPanelGroup"/>
+
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+</h:panelGroup>
+
+<div class="modal modal-default" id="regionModal" tabindex="-1" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<ui:include src="/sections/reference/localization/region/modal.xhtml"/>
+</div>
+</div>
+</div>
+</h:form>
+</ui:define>
+</ui:composition>

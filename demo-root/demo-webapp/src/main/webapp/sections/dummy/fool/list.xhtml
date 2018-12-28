@@ -140,7 +140,7 @@ pattern="yyyy-MM-dd HH:mm:ss" mask="true">
 id="foolList" var="fool" name="datatable"
 value="#{foolListView.scrollView.elements}" headerClass="datatable-header" rowClasses="datatable-row, datatable-row-light">
 
-<p:column>
+<p:column width="40">
 <f:facet name="header">
 <h:selectBooleanCheckbox id="selectUnselectAll" onclick="selectUnselectAll(this)" value="false"/>
 <script>$(function(){displaySelectUnselectAll();});</script>
@@ -148,7 +148,7 @@ value="#{foolListView.scrollView.elements}" headerClass="datatable-header" rowCl
 <h:selectBooleanCheckbox rendered="#{fool.canDelete}" id="selectUnselect" value="#{fool.selected}" onclick="selectUnselect('foolListForm:foolList:selectUnselectAll')"/>
 </p:column>
 
-<p:column>
+<p:column width="100">
 <f:facet name="header">
 <h:outputText value="Actions" />
 <div class="drop-list" id="drop-list">

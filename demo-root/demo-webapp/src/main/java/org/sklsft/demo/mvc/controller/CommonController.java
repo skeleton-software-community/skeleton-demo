@@ -7,9 +7,9 @@ import javax.inject.Inject;
 
 import org.sklsft.commons.api.model.SelectItem;
 import org.sklsft.demo.api.interfaces.dummy.FoolService;
-import org.sklsft.demo.api.interfaces.localization.CountryService;
 import org.sklsft.demo.api.interfaces.organizations.OrganizationService;
-import org.sklsft.demo.api.interfaces.time.CalendarService;
+import org.sklsft.demo.api.interfaces.reference.localization.CountryService;
+import org.sklsft.demo.api.interfaces.reference.time.CalendarService;
 import org.sklsft.demo.mvc.model.CommonView;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:p="http://primefaces.org/ui"
+template="/templates/template.xhtml">
+
+<!-- -->
+<!-- auto generated jsf file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton-generator -->
+<!-- -->
+
+<f:metadata>
+<f:viewParam name="id" value="#{regionDetailView.selectedRegion.id}" />
+<f:viewAction action="#{regionDetailController.load}" />
+</f:metadata>
+<ui:define name="content">
+
+<h:form>
+
+<ui:include src="/sections/reference/localization/region/menu.xhtml"/>
+
+<h2>#{i18n.regionDetails}</h2>
+<h:panelGroup id="regionDetailPanelGroup">
+
+<ui:param name="view" value="#{regionDetailView.selectedRegion}"/>
+<ui:param name="form" value="#{view.form}"/>
+
+<div class="row">
+<div class="col-xs-12">
+<label>#{i18n.regionCountryCode}</label>
+<h:selectOneMenu id="regionCountryCode" styleClass="form-control" value="#{form.countryCode}">
+<f:selectItem itemValue="#{null}" itemLabel=""/>
+<f:selectItems value="#{commonView.countryOptions}"
+var="option" itemValue="#{option.key}" itemLabel="#{option.label}"/>
+</h:selectOneMenu>
+<h:message for="regionCountryCode" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.regionCode}</label>
+<h:inputText id="regionCode" styleClass="form-control" value="#{form.code}"/>
+<h:message for="regionCode" styleClass="detail-error-message"/>
+</div>
+
+<div class="col-xs-12">
+<label>#{i18n.regionLabel}</label>
+<h:inputText id="regionLabel" styleClass="form-control" value="#{form.label}"/>
+<h:message for="regionLabel" styleClass="detail-error-message"/>
+</div>
+
+</div>
+
+<p:commandButton value="#{i18n.update}" disabled="#{not view.canUpdate}" action="#{regionDetailController.update}" styleClass="btn btn-success" process="@form" update=":messages, @form:regionDetailPanelGroup"/>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+
+</h:panelGroup>
+
+</h:form>
+<script>$('#menu').addClass('active');</script>
+</ui:define>
+</ui:composition>
