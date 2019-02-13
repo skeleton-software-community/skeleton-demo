@@ -44,7 +44,7 @@ return regionService.loadList();
  * load object list from country
  */
 @RequestMapping(value = {RegionService.GET_REGION_LIST_fROM_COUNTRY_URL}, method = RequestMethod.GET)
-public @ResponseBody List<RegionBasicView> loadListFromCountry (@PathVariable("countryId") Long countryId) {
+public @ResponseBody List<RegionBasicView> loadListFromCountry (@PathVariable("countryId") Short countryId) {
 return regionService.loadListFromCountry(countryId);
 }
 /**
@@ -59,21 +59,21 @@ return regionService.scroll(form);
  * scroll object list from country
  */
 @RequestMapping(value = {RegionService.SCROLL_REGION_fROM_COUNTRY_URL}, method = RequestMethod.POST)
-public @ResponseBody ScrollView<RegionBasicView> scrollFromCountry (@PathVariable("countryId") Long countryId, @RequestBody ScrollForm<RegionFilter, RegionSorting> form) {
+public @ResponseBody ScrollView<RegionBasicView> scrollFromCountry (@PathVariable("countryId") Short countryId, @RequestBody ScrollForm<RegionFilter, RegionSorting> form) {
 return regionService.scrollFromCountry(countryId, form);
 }
 /**
  * load object
  */
 @RequestMapping(value = {RegionService.GET_URL}, method = RequestMethod.GET)
-public @ResponseBody RegionFullView load(@PathVariable("id") Long id) {
+public @ResponseBody RegionFullView load(@PathVariable("id") Integer id) {
 return regionService.load(id);
 }
 /**
  * find object
  */
 @RequestMapping(value = {RegionService.FIND_URL}, method = RequestMethod.GET)
-@ResponseBody RegionFullView find(@RequestParam("countryCode") String countryCode, @RequestParam("code") String code) {
+public @ResponseBody RegionFullView find(@RequestParam("countryCode") String countryCode, @RequestParam("code") String code) {
 return regionService.find(countryCode, code);
 }
 
@@ -89,7 +89,7 @@ return regionService.create();
  * save object
  */
 @RequestMapping(value = {RegionService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Long save(@RequestBody RegionForm form) {
+public @ResponseBody Integer save(@RequestBody RegionForm form) {
 return regionService.save(form);
 }
 
@@ -97,7 +97,7 @@ return regionService.save(form);
  * save object from parent Country
  */
 @RequestMapping(value = {RegionService.SAVE_FROM_COUNTRY_URL}, method = RequestMethod.POST)
-public @ResponseBody Long saveFromCountry(@PathVariable("countryId") Long countryId, @RequestBody RegionForm form) {
+public @ResponseBody Integer saveFromCountry(@PathVariable("countryId") Short countryId, @RequestBody RegionForm form) {
 return regionService.saveFromCountry(countryId, form);
 }
 
@@ -105,7 +105,7 @@ return regionService.saveFromCountry(countryId, form);
  * update object
  */
 @RequestMapping(value = {RegionService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @RequestBody RegionForm form) {
+public void update(@PathVariable("id") Integer id, @RequestBody RegionForm form) {
 regionService.update(id, form);
 }
 
@@ -113,7 +113,7 @@ regionService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {RegionService.DELETE_URL}, method = RequestMethod.DELETE)
-void delete(@PathVariable("id") Long id) {
+public void delete(@PathVariable("id") Integer id) {
 regionService.delete(id);
 }
 
@@ -121,7 +121,7 @@ regionService.delete(id);
  * delete object list
  */
 @RequestMapping(value = {RegionService.DELETE_LIST_URL}, method = RequestMethod.POST)
-@ResponseBody void deleteList(@RequestBody List<Long> idList) {
+public @ResponseBody void deleteList(@RequestBody List<Integer> idList) {
 regionService.deleteList(idList);
 }
 

@@ -119,7 +119,7 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public CalendarFullView load(Long id) {
+public CalendarFullView load(Integer id) {
 Calendar calendar = calendarDao.load(id);
 calendarRightsManager.checkCanAccess(calendar);
 return this.calendarFullViewMapper.mapFrom(new CalendarFullView(),calendar);
@@ -141,7 +141,7 @@ return this.calendarFullViewMapper.mapFrom(new CalendarFullView(), calendar);
  */
 @Override
 @Transactional(readOnly=true)
-public List<CalendarDayOffBasicView> loadCalendarDayOffList(Long id) {
+public List<CalendarDayOffBasicView> loadCalendarDayOffList(Integer id) {
 Calendar calendar = calendarDao.load(id);
 calendarRightsManager.checkCanAccessCalendarDayOff(calendar);
 List<CalendarDayOff> calendarDayOffList = calendarDao.loadCalendarDayOffList(id);
@@ -157,7 +157,7 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (Long calendarId, ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
+public ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (Integer calendarId, ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
 Calendar calendar = calendarDao.load(calendarId);
 calendarRightsManager.checkCanAccessCalendarDayOff(calendar);
 ScrollView<CalendarDayOffBasicView> result = new ScrollView<>();
@@ -179,7 +179,7 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public CalendarDayOffFullView loadCalendarDayOff(Long id) {
+public CalendarDayOffFullView loadCalendarDayOff(Integer id) {
 CalendarDayOff calendarDayOff = calendarDao.loadCalendarDayOff(id);
 calendarRightsManager.checkCanAccessCalendarDayOff(calendarDayOff.getCalendar());
 return this.calendarDayOffFullViewMapper.mapFrom(calendarDayOff);
@@ -199,7 +199,7 @@ return new CalendarFullView();
  */
 @Override
 @Transactional(readOnly=true)
-public CalendarDayOffFullView createCalendarDayOff(Long id) {
+public CalendarDayOffFullView createCalendarDayOff(Integer id) {
 Calendar calendar = calendarDao.load(id);
 calendarRightsManager.checkCanCreateCalendarDayOff(calendar);
 return new CalendarDayOffFullView();
@@ -210,7 +210,7 @@ return new CalendarDayOffFullView();
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public Long save(CalendarForm calendarForm) {
+public Integer save(CalendarForm calendarForm) {
 Calendar calendar = this.calendarFormMapper.mapTo(calendarForm, new Calendar());
 calendarRightsManager.checkCanSave(calendar);
 calendarStateManager.checkCanSave(calendar);
@@ -222,7 +222,7 @@ return calendarProcessor.save(calendar);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void saveCalendarDayOff(Long id, CalendarDayOffForm calendarDayOffForm) {
+public void saveCalendarDayOff(Integer id, CalendarDayOffForm calendarDayOffForm) {
 Calendar calendar = this.calendarDao.load(id);
 CalendarDayOff calendarDayOff = this.calendarDayOffFormMapper.mapTo(calendarDayOffForm, new CalendarDayOff());
 calendarRightsManager.checkCanSaveCalendarDayOff(calendarDayOff,calendar);
@@ -235,7 +235,7 @@ calendarProcessor.saveCalendarDayOff(calendarDayOff,calendar);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void update(Long id, CalendarForm calendarForm) {
+public void update(Integer id, CalendarForm calendarForm) {
 Calendar calendar = this.calendarDao.load(id);
 calendarRightsManager.checkCanUpdate(calendar);
 calendarStateManager.checkCanUpdate(calendar);
@@ -248,7 +248,7 @@ calendarProcessor.update(calendar);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void updateCalendarDayOff(Long id, CalendarDayOffForm calendarDayOffForm) {
+public void updateCalendarDayOff(Integer id, CalendarDayOffForm calendarDayOffForm) {
 CalendarDayOff calendarDayOff = this.calendarDao.loadCalendarDayOff(id);
 calendarRightsManager.checkCanUpdateCalendarDayOff(calendarDayOff);
 calendarStateManager.checkCanUpdateCalendarDayOff(calendarDayOff);
@@ -262,7 +262,7 @@ calendarProcessor.updateCalendarDayOff(calendarDayOff);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void delete(Long id) {
+public void delete(Integer id) {
 Calendar calendar = calendarDao.load(id);
 calendarRightsManager.checkCanDelete(calendar);
 calendarStateManager.checkCanDelete(calendar);
@@ -274,7 +274,7 @@ calendarProcessor.delete(calendar);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void deleteCalendarDayOff(Long id) {
+public void deleteCalendarDayOff(Integer id) {
 CalendarDayOff calendarDayOff = calendarDao.loadCalendarDayOff(id);
 calendarRightsManager.checkCanDeleteCalendarDayOff(calendarDayOff);
 calendarStateManager.checkCanDeleteCalendarDayOff(calendarDayOff);
@@ -286,10 +286,10 @@ this.calendarProcessor.deleteCalendarDayOff(calendarDayOff);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void deleteList(List<Long> idList) {
+public void deleteList(List<Integer> idList) {
 Calendar calendar;
 if (idList != null){
-for (Long id:idList){
+for (Integer id:idList){
 calendar = calendarDao.load(id);
 calendarRightsManager.checkCanDelete(calendar);
 calendarStateManager.checkCanDelete(calendar);
@@ -303,10 +303,10 @@ calendarProcessor.delete(calendar);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void deleteCalendarDayOffList(List<Long> idList) {
+public void deleteCalendarDayOffList(List<Integer> idList) {
 CalendarDayOff calendarDayOff;
 if (idList != null){
-for (Long i:idList){
+for (Integer i:idList){
 calendarDayOff = calendarDao.loadCalendarDayOff(i);
 calendarRightsManager.checkCanDeleteCalendarDayOff(calendarDayOff);
 calendarStateManager.checkCanDeleteCalendarDayOff(calendarDayOff);

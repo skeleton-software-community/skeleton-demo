@@ -61,14 +61,14 @@ return foolService.scroll(form);
  * load object
  */
 @RequestMapping(value = {FoolService.GET_URL}, method = RequestMethod.GET)
-public @ResponseBody FoolFullView load(@PathVariable("id") Long id) {
+public @ResponseBody FoolFullView load(@PathVariable("id") String id) {
 return foolService.load(id);
 }
 /**
  * find object
  */
 @RequestMapping(value = {FoolService.FIND_URL}, method = RequestMethod.GET)
-@ResponseBody FoolFullView find(@RequestParam("code") String code) {
+public @ResponseBody FoolFullView find(@RequestParam("code") String code) {
 return foolService.find(code);
 }
 
@@ -84,7 +84,7 @@ return foolService.create();
  * save object
  */
 @RequestMapping(value = {FoolService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Long save(@RequestBody FoolForm form) {
+public @ResponseBody String save(@RequestBody FoolForm form) {
 return foolService.save(form);
 }
 
@@ -92,7 +92,7 @@ return foolService.save(form);
  * update object
  */
 @RequestMapping(value = {FoolService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @RequestBody FoolForm form) {
+public void update(@PathVariable("id") String id, @RequestBody FoolForm form) {
 foolService.update(id, form);
 }
 
@@ -100,7 +100,7 @@ foolService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {FoolService.DELETE_URL}, method = RequestMethod.DELETE)
-void delete(@PathVariable("id") Long id) {
+public void delete(@PathVariable("id") String id) {
 foolService.delete(id);
 }
 
@@ -108,7 +108,7 @@ foolService.delete(id);
  * delete object list
  */
 @RequestMapping(value = {FoolService.DELETE_LIST_URL}, method = RequestMethod.POST)
-@ResponseBody void deleteList(@RequestBody List<Long> idList) {
+public @ResponseBody void deleteList(@RequestBody List<String> idList) {
 foolService.deleteList(idList);
 }
 

@@ -104,7 +104,7 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public FoolFullView load(Long id) {
+public FoolFullView load(String id) {
 Fool fool = foolDao.load(id);
 foolRightsManager.checkCanAccess(fool);
 return this.foolFullViewMapper.mapFrom(new FoolFullView(),fool);
@@ -135,7 +135,7 @@ return new FoolFullView();
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public Long save(FoolForm foolForm) {
+public String save(FoolForm foolForm) {
 Fool fool = this.foolFormMapper.mapTo(foolForm, new Fool());
 foolRightsManager.checkCanSave(fool);
 foolStateManager.checkCanSave(fool);
@@ -147,7 +147,7 @@ return foolProcessor.save(fool);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void update(Long id, FoolForm foolForm) {
+public void update(String id, FoolForm foolForm) {
 Fool fool = this.foolDao.load(id);
 foolRightsManager.checkCanUpdate(fool);
 foolStateManager.checkCanUpdate(fool);
@@ -160,7 +160,7 @@ foolProcessor.update(fool);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void delete(Long id) {
+public void delete(String id) {
 Fool fool = foolDao.load(id);
 foolRightsManager.checkCanDelete(fool);
 foolStateManager.checkCanDelete(fool);
@@ -172,10 +172,10 @@ foolProcessor.delete(fool);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void deleteList(List<Long> idList) {
+public void deleteList(List<String> idList) {
 Fool fool;
 if (idList != null){
-for (Long id:idList){
+for (String id:idList){
 fool = foolDao.load(id);
 foolRightsManager.checkCanDelete(fool);
 foolStateManager.checkCanDelete(fool);

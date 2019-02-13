@@ -9,7 +9,7 @@ import org.sklsft.demo.api.model.dummy.forms.FoolForm;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-public class FoolFullView extends FullView<Long, FoolForm> {
+public class FoolFullView extends FullView<String, FoolForm> {
 
 private static final long serialVersionUID = 1L;
 

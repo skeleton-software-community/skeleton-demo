@@ -19,7 +19,9 @@ import org.sklsft.demo.bc.mapper.dummy.views.full.StupidFullViewMapper;
 import org.sklsft.demo.bc.processor.dummy.StupidProcessor;
 import org.sklsft.demo.bc.rightsmanager.dummy.StupidRightsManager;
 import org.sklsft.demo.bc.statemanager.dummy.StupidStateManager;
+import org.sklsft.demo.model.dummy.Fool;
 import org.sklsft.demo.model.dummy.Stupid;
+import org.sklsft.demo.repository.dao.interfaces.dummy.FoolDao;
 import org.sklsft.demo.repository.dao.interfaces.dummy.StupidDao;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +37,8 @@ public class StupidBaseServiceImpl implements StupidBaseService {
  */
 @Inject
 protected StupidDao stupidDao;
+@Inject
+protected FoolDao foolDao;
 @Inject
 protected StupidFullViewMapper stupidFullViewMapper;
 @Inject
@@ -64,6 +68,21 @@ return result;
 }
 
 /**
+ * load object list from fool
+ */
+@Override
+@Transactional(readOnly=true)
+public List<StupidBasicView> loadListFromFool (String foolId) {
+stupidRightsManager.checkCanAccess();
+List<Stupid> stupidList = stupidDao.loadListEagerlyFromFool(foolId);
+List<StupidBasicView> result = new ArrayList<>(stupidList.size());
+for (Stupid stupid : stupidList) {
+result.add(this.stupidBasicViewMapper.mapFrom(new StupidBasicView(),stupid));
+}
+return result;
+}
+
+/**
  * scroll object list
  */
 @Override
@@ -76,6 +95,27 @@ Long count = stupidDao.count(form.getFilter());
 result.setNumberOfPages(count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L));
 result.setCurrentPage(Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, result.getNumberOfPages())));
 List<Stupid> list = stupidDao.scroll(form.getFilter(), form.getSorting(),(result.getCurrentPage()-1)*form.getElementsPerPage(), form.getElementsPerPage());
+List<StupidBasicView> elements = new ArrayList<>(list.size());
+for (Stupid stupid : list) {
+elements.add(this.stupidBasicViewMapper.mapFrom(new StupidBasicView(),stupid));
+}
+result.setElements(elements);
+return result;
+}
+
+/**
+ * scroll object list from fool
+ */
+@Override
+@Transactional(readOnly=true)
+public ScrollView<StupidBasicView> scrollFromFool (String foolId, ScrollForm<StupidFilter, StupidSorting> form) {
+stupidRightsManager.checkCanAccess();
+ScrollView<StupidBasicView> result = new ScrollView<>();
+result.setSize(stupidDao.countFromFool(foolId));
+Long count = stupidDao.countFromFool(foolId, form.getFilter());
+result.setNumberOfPages(count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L));
+result.setCurrentPage(Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, result.getNumberOfPages())));
+List<Stupid> list = stupidDao.scrollFromFool(foolId, form.getFilter(), form.getSorting(),(result.getCurrentPage()-1)*form.getElementsPerPage(), form.getElementsPerPage());
 List<StupidBasicView> elements = new ArrayList<>(list.size());
 for (Stupid stupid : list) {
 elements.add(this.stupidBasicViewMapper.mapFrom(new StupidBasicView(),stupid));
@@ -122,6 +162,20 @@ return new StupidFullView();
 @Transactional(rollbackFor=Exception.class)
 public Long save(StupidForm stupidForm) {
 Stupid stupid = this.stupidFormMapper.mapTo(stupidForm, new Stupid());
+stupidRightsManager.checkCanSave(stupid);
+stupidStateManager.checkCanSave(stupid);
+return stupidProcessor.save(stupid);
+}
+
+/**
+ * save object from parent Fool
+ */
+@Override
+@Transactional(rollbackFor=Exception.class)
+public Long saveFromFool(String foolId, StupidForm stupidForm) {
+Stupid stupid = this.stupidFormMapper.mapTo(stupidForm, new Stupid());
+Fool fool = this.foolDao.load(foolId);
+stupid.setFool(fool);
 stupidRightsManager.checkCanSave(stupid);
 stupidStateManager.checkCanSave(stupid);
 return stupidProcessor.save(stupid);

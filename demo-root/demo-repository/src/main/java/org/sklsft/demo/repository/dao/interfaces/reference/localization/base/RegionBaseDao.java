@@ -10,17 +10,17 @@ import org.sklsft.demo.model.reference.localization.Region;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public interface RegionBaseDao extends BaseDao<Region, Long> {
+public interface RegionBaseDao extends BaseDao<Region, Integer> {
 
 /**
  * load object list from country
  */
-List<Region> loadListFromCountry(Long countryId);
+List<Region> loadListFromCountry(Short countryId);
 
 /**
  * load object list eagerly from country
  */
-List<Region> loadListEagerlyFromCountry(Long countryId);
+List<Region> loadListEagerlyFromCountry(Short countryId);
 
 /**
  * count filtered object list
@@ -30,12 +30,12 @@ Long count(RegionFilter filter);
 /**
  * count object list from country
  */
-Long countFromCountry(Long countryId);
+Long countFromCountry(Short countryId);
 
 /**
  * count filtered object list from country
  */
-Long countFromCountry(Long countryId, RegionFilter filter);
+Long countFromCountry(Short countryId, RegionFilter filter);
 
 /**
  * scroll filtered object list
@@ -45,7 +45,7 @@ List<Region> scroll(RegionFilter filter, RegionSorting sorting, Long firstResult
 /**
  * scroll filtered object from country
  */
-List<Region> scrollFromCountry(Long countryId, RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults);
+List<Region> scrollFromCountry(Short countryId, RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults);
 
 /**
  * exists object

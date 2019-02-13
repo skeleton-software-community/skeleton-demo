@@ -24,7 +24,7 @@ import org.sklsft.demo.repository.dao.interfaces.reference.time.base.CalendarBas
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CalendarBaseDaoImpl extends BaseDaoImpl<Calendar, Long> implements CalendarBaseDao {
+public class CalendarBaseDaoImpl extends BaseDaoImpl<Calendar, Integer> implements CalendarBaseDao {
 
 /**
  * constructor
@@ -78,7 +78,7 @@ return criteria.list();
  */
 @Override
 @SuppressWarnings("unchecked")
-public List<CalendarDayOff> loadCalendarDayOffList(Long calendarId) {
+public List<CalendarDayOff> loadCalendarDayOffList(Integer calendarId) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(CalendarDayOff.class);
 if (calendarId == null){
 criteria.add(Restrictions.isNull("calendar.id"));
@@ -92,7 +92,7 @@ return criteria.list();
  * count one to many component CalendarDayOff
  */
 @Override
-public Long countCalendarDayOff(Long calendarId) {
+public Long countCalendarDayOff(Integer calendarId) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(CalendarDayOff.class).setProjection(Projections.rowCount());
 if (calendarId == null){
 criteria.add(Restrictions.isNull("calendar.id"));
@@ -106,7 +106,7 @@ return (Long) criteria.uniqueResult();
 @Override
  * count filtered one to many component CalendarDayOff
  */
-public Long countCalendarDayOff(Long calendarId, CalendarDayOffFilter filter) {
+public Long countCalendarDayOff(Integer calendarId, CalendarDayOffFilter filter) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(CalendarDayOff.class).setProjection(Projections.rowCount());
 if (calendarId == null){
 criteria.add(Restrictions.isNull("calendar.id"));
@@ -123,7 +123,7 @@ return (Long) criteria.uniqueResult();
  */
 @Override
 @SuppressWarnings("unchecked")
-public List<CalendarDayOff> scrollCalendarDayOff(Long calendarId, CalendarDayOffFilter filter, CalendarDayOffSorting sorting, Long firstResult, Long maxResults) {
+public List<CalendarDayOff> scrollCalendarDayOff(Integer calendarId, CalendarDayOffFilter filter, CalendarDayOffSorting sorting, Long firstResult, Long maxResults) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(CalendarDayOff.class);
 if (calendarId == null){
 criteria.add(Restrictions.isNull("calendar.id"));
@@ -147,7 +147,7 @@ return criteria.list();
  * load one to many component CalendarDayOff
  */
 @Override
-public CalendarDayOff loadCalendarDayOff(Long id) {
+public CalendarDayOff loadCalendarDayOff(Integer id) {
 CalendarDayOff calendarDayOff = (CalendarDayOff)this.sessionFactory.getCurrentSession().get(CalendarDayOff.class,id);
 if (calendarDayOff == null) {
 throw new ObjectNotFoundException("CalendarDayOff.notFound");

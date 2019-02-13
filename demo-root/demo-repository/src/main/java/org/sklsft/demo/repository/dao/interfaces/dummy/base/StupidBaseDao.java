@@ -13,14 +13,39 @@ import org.sklsft.demo.model.dummy.Stupid;
 public interface StupidBaseDao extends BaseDao<Stupid, Long> {
 
 /**
+ * load object list from fool
+ */
+List<Stupid> loadListFromFool(String foolId);
+
+/**
+ * load object list eagerly from fool
+ */
+List<Stupid> loadListEagerlyFromFool(String foolId);
+
+/**
  * count filtered object list
  */
 Long count(StupidFilter filter);
 
 /**
+ * count object list from fool
+ */
+Long countFromFool(String foolId);
+
+/**
+ * count filtered object list from fool
+ */
+Long countFromFool(String foolId, StupidFilter filter);
+
+/**
  * scroll filtered object list
  */
 List<Stupid> scroll(StupidFilter filter, StupidSorting sorting, Long firstResult, Long maxResults);
+
+/**
+ * scroll filtered object from fool
+ */
+List<Stupid> scrollFromFool(String foolId, StupidFilter filter, StupidSorting sorting, Long firstResult, Long maxResults);
 
 /**
  * exists object

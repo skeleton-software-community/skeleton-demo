@@ -11,7 +11,7 @@ import org.sklsft.demo.model.reference.time.CalendarDayOff;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CalendarBaseRightsManager implements RightsManager<Calendar, Long> {
+public class CalendarBaseRightsManager implements RightsManager<Calendar, Integer> {
 
 /**
  * can access all

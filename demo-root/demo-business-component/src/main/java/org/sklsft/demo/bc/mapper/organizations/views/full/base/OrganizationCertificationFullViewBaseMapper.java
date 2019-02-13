@@ -15,7 +15,7 @@ import org.sklsft.demo.model.organizations.OrganizationCertification;
  * <br/>processed by skeleton-generator
  */
 
-public class OrganizationCertificationFullViewBaseMapper extends FullViewMapper<OrganizationCertificationFullView, Long, OrganizationCertificationForm, OrganizationCertification> {
+public class OrganizationCertificationFullViewBaseMapper extends FullViewMapper<OrganizationCertificationFullView, String, OrganizationCertificationForm, OrganizationCertification> {
 
 @Inject
 protected OrganizationRightsManager organizationRightsManager;

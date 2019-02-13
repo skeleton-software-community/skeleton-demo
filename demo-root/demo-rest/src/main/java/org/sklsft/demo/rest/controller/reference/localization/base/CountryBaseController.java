@@ -61,14 +61,14 @@ return countryService.scroll(form);
  * load object
  */
 @RequestMapping(value = {CountryService.GET_URL}, method = RequestMethod.GET)
-public @ResponseBody CountryFullView load(@PathVariable("id") Long id) {
+public @ResponseBody CountryFullView load(@PathVariable("id") Short id) {
 return countryService.load(id);
 }
 /**
  * find object
  */
 @RequestMapping(value = {CountryService.FIND_URL}, method = RequestMethod.GET)
-@ResponseBody CountryFullView find(@RequestParam("code") String code) {
+public @ResponseBody CountryFullView find(@RequestParam("code") String code) {
 return countryService.find(code);
 }
 
@@ -84,7 +84,7 @@ return countryService.create();
  * save object
  */
 @RequestMapping(value = {CountryService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Long save(@RequestBody CountryForm form) {
+public @ResponseBody Short save(@RequestBody CountryForm form) {
 return countryService.save(form);
 }
 
@@ -92,7 +92,7 @@ return countryService.save(form);
  * update object
  */
 @RequestMapping(value = {CountryService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @RequestBody CountryForm form) {
+public void update(@PathVariable("id") Short id, @RequestBody CountryForm form) {
 countryService.update(id, form);
 }
 
@@ -100,7 +100,7 @@ countryService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {CountryService.DELETE_URL}, method = RequestMethod.DELETE)
-void delete(@PathVariable("id") Long id) {
+public void delete(@PathVariable("id") Short id) {
 countryService.delete(id);
 }
 
@@ -108,7 +108,7 @@ countryService.delete(id);
  * delete object list
  */
 @RequestMapping(value = {CountryService.DELETE_LIST_URL}, method = RequestMethod.POST)
-@ResponseBody void deleteList(@RequestBody List<Long> idList) {
+public @ResponseBody void deleteList(@RequestBody List<Short> idList) {
 countryService.deleteList(idList);
 }
 

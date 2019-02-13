@@ -11,7 +11,7 @@ import org.sklsft.demo.repository.dao.interfaces.reference.localization.RegionDa
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class RegionBaseProcessor implements Processor<Region, Long> {
+public class RegionBaseProcessor implements Processor<Region, Integer> {
 
 /*
  * properties injected by spring
@@ -22,7 +22,7 @@ protected RegionDao regionDao;
 /**
  * process save
  */
-public Long save(Region region) {
+public Integer save(Region region) {
 return regionDao.save(region);
 }
 

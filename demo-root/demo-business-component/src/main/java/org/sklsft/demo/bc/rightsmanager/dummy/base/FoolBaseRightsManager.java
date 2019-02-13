@@ -10,7 +10,7 @@ import org.sklsft.demo.model.dummy.Fool;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class FoolBaseRightsManager implements RightsManager<Fool, Long> {
+public class FoolBaseRightsManager implements RightsManager<Fool, String> {
 
 /**
  * can access all

@@ -39,7 +39,7 @@ public static final String SCROLL_URL = "/fool/scroll";
 /**
  * load object
  */
-FoolFullView load(Long id);
+FoolFullView load(String id);
 public static final String GET_URL = "/fool/{id}";
 
 /**
@@ -57,25 +57,25 @@ public static final String GET_NEW_URL = "/fool/new";
 /**
  * save object
  */
-Long save(FoolForm foolForm);
+String save(FoolForm foolForm);
 public static final String SAVE_URL = "/fool";
 
 /**
  * update object
  */
-void update(Long id, FoolForm foolForm);
+void update(String id, FoolForm foolForm);
 public static final String UPDATE_URL = "/fool/{id}";
 
 /**
  * delete object
  */
-void delete(Long id);
+void delete(String id);
 public static final String DELETE_URL = "/fool/{id}";
 
 /**
  * delete object list
  */
-void deleteList(List<Long> idList);
+void deleteList(List<String> idList);
 public static final String DELETE_LIST_URL = "/fool/delete";
 
 }

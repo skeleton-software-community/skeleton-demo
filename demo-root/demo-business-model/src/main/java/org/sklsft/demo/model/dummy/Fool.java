@@ -2,19 +2,21 @@ package org.sklsft.demo.model.dummy;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 /**
@@ -26,7 +28,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @Table(name="FOOL"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})
-public class Fool implements org.sklsft.commons.model.interfaces.Entity<Long> {
+public class Fool implements org.sklsft.commons.model.interfaces.Entity<String> {
 
 private static final long serialVersionUID = 1L;
 
@@ -41,9 +43,9 @@ public Fool(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "generator", sequenceName = "FOOL_id_seq", allocationSize=1)
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-private Long id;
+@GeneratedValue(generator="uuid")
+@GenericGenerator(name="uuid", strategy = "uuid2")
+private String id;
 
 @Column(name = "CODE", nullable = false)
 private String code;
@@ -73,15 +75,18 @@ private Date dateField;
 @Column(name = "DATETIME_FIELD")
 private Date datetimeField;
 
+@OneToMany(fetch = FetchType.LAZY, mappedBy = "fool")
+private Set <Stupid> stupidCollection;
+
 
 /*
  * getters and setters
  */
-public Long getId() {
+public String getId() {
 return this.id;
 }
 
-public void setId(Long id) {
+public void setId(String id) {
 this.id = id;
 }
 
@@ -147,6 +152,14 @@ return this.datetimeField;
 
 public void setDatetimeField(Date datetimeField) {
 this.datetimeField = datetimeField;
+}
+
+public Set <Stupid> getStupidCollection () {
+return this.stupidCollection;
+}
+
+public void setStupidCollection(Set <Stupid> stupidCollection) {
+this.stupidCollection = stupidCollection;
 }
 
 

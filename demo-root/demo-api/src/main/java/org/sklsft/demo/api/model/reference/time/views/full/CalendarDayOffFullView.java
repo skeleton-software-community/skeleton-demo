@@ -9,7 +9,7 @@ import org.sklsft.demo.api.model.reference.time.forms.CalendarDayOffForm;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-public class CalendarDayOffFullView extends FullView<Long, CalendarDayOffForm> {
+public class CalendarDayOffFullView extends FullView<Integer, CalendarDayOffForm> {
 
 private static final long serialVersionUID = 1L;
 

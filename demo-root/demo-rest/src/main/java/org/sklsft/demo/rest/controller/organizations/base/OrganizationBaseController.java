@@ -63,14 +63,14 @@ return organizationService.scroll(form);
  * load object
  */
 @RequestMapping(value = {OrganizationService.GET_URL}, method = RequestMethod.GET)
-public @ResponseBody OrganizationFullView load(@PathVariable("id") Long id) {
+public @ResponseBody OrganizationFullView load(@PathVariable("id") Integer id) {
 return organizationService.load(id);
 }
 /**
  * find object
  */
 @RequestMapping(value = {OrganizationService.FIND_URL}, method = RequestMethod.GET)
-@ResponseBody OrganizationFullView find(@RequestParam("code") String code) {
+public @ResponseBody OrganizationFullView find(@RequestParam("code") String code) {
 return organizationService.find(code);
 }
 
@@ -78,7 +78,7 @@ return organizationService.find(code);
  * load one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.GET_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.GET)
-public @ResponseBody OrganizationCertificationFullView loadOrganizationCertification(@PathVariable("id") Long id) {
+public @ResponseBody OrganizationCertificationFullView loadOrganizationCertification(@PathVariable("id") Integer id) {
 return organizationService.loadOrganizationCertification(id);
 }
 
@@ -94,7 +94,7 @@ return organizationService.create();
  * save object
  */
 @RequestMapping(value = {OrganizationService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Long save(@RequestBody OrganizationForm form) {
+public @ResponseBody Integer save(@RequestBody OrganizationForm form) {
 return organizationService.save(form);
 }
 
@@ -102,7 +102,7 @@ return organizationService.save(form);
  * save one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.SAVE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.POST)
-@ResponseBody public void saveOrganizationCertification(@PathVariable("id") Long id, @RequestBody OrganizationCertificationForm form) {
+public @ResponseBody void saveOrganizationCertification(@PathVariable("id") Integer id, @RequestBody OrganizationCertificationForm form) {
 organizationService.saveOrganizationCertification(id, form);
 }
 
@@ -110,7 +110,7 @@ organizationService.saveOrganizationCertification(id, form);
  * update object
  */
 @RequestMapping(value = {OrganizationService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @RequestBody OrganizationForm form) {
+public void update(@PathVariable("id") Integer id, @RequestBody OrganizationForm form) {
 organizationService.update(id, form);
 }
 
@@ -118,7 +118,7 @@ organizationService.update(id, form);
  * update one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.UPDATE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.PUT)
-void updateOrganizationCertification(Long id, OrganizationCertificationForm form) {
+public void updateOrganizationCertification(Integer id, OrganizationCertificationForm form) {
 organizationService.updateOrganizationCertification(id, form);
 }
 
@@ -126,7 +126,7 @@ organizationService.updateOrganizationCertification(id, form);
  * delete object
  */
 @RequestMapping(value = {OrganizationService.DELETE_URL}, method = RequestMethod.DELETE)
-void delete(@PathVariable("id") Long id) {
+public void delete(@PathVariable("id") Integer id) {
 organizationService.delete(id);
 }
 
@@ -134,7 +134,7 @@ organizationService.delete(id);
  * delete one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.DELETE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.DELETE)
-public void deleteOrganizationCertification(@PathVariable("id")Long id) {
+public void deleteOrganizationCertification(@PathVariable("id")Integer id) {
 organizationService.deleteOrganizationCertification(id);
 }
 
@@ -142,7 +142,7 @@ organizationService.deleteOrganizationCertification(id);
  * delete object list
  */
 @RequestMapping(value = {OrganizationService.DELETE_LIST_URL}, method = RequestMethod.POST)
-@ResponseBody void deleteList(@RequestBody List<Long> idList) {
+public @ResponseBody void deleteList(@RequestBody List<Integer> idList) {
 organizationService.deleteList(idList);
 }
 

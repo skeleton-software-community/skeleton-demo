@@ -4,16 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * auto generated entity class file
@@ -24,7 +23,7 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name="ORGANIZATION_CERTIFICATION"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"ORGANIZATION_ID"})})
-public class OrganizationCertification implements org.sklsft.commons.model.interfaces.Entity<Long> {
+public class OrganizationCertification implements org.sklsft.commons.model.interfaces.Entity<String> {
 
 private static final long serialVersionUID = 1L;
 
@@ -39,9 +38,9 @@ public OrganizationCertification(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "generator", sequenceName = "ORGANIZATION_CERTIFICATION_id_seq", allocationSize=1)
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-private Long id;
+@GeneratedValue(generator="uuid")
+@GenericGenerator(name="uuid", strategy = "uuid2")
+private String id;
 
 @ManyToOne(fetch = FetchType.LAZY)
 @Fetch(FetchMode.JOIN)
@@ -55,11 +54,11 @@ private Boolean certified;
 /*
  * getters and setters
  */
-public Long getId() {
+public String getId() {
 return this.id;
 }
 
-public void setId(Long id) {
+public void setId(String id) {
 this.id = id;
 }
 

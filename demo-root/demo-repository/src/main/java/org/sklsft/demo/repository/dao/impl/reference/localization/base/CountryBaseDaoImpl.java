@@ -20,7 +20,7 @@ import org.sklsft.demo.repository.dao.interfaces.reference.localization.base.Cou
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CountryBaseDaoImpl extends BaseDaoImpl<Country, Long> implements CountryBaseDao {
+public class CountryBaseDaoImpl extends BaseDaoImpl<Country, Short> implements CountryBaseDao {
 
 /**
  * constructor

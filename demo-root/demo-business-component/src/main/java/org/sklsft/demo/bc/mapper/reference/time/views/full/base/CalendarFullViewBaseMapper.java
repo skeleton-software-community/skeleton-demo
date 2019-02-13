@@ -15,7 +15,7 @@ import org.sklsft.demo.model.reference.time.Calendar;
  * <br/>processed by skeleton-generator
  */
 
-public class CalendarFullViewBaseMapper extends FullViewMapper<CalendarFullView, Long, CalendarForm, Calendar> {
+public class CalendarFullViewBaseMapper extends FullViewMapper<CalendarFullView, Integer, CalendarForm, Calendar> {
 
 @Inject
 protected CalendarRightsManager calendarRightsManager;

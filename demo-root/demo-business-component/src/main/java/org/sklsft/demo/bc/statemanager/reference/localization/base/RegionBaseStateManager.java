@@ -9,7 +9,7 @@ import org.sklsft.demo.model.reference.localization.Region;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class RegionBaseStateManager implements StateManager<Region, Long> {
+public class RegionBaseStateManager implements StateManager<Region, Integer> {
 
 /**
  * can save

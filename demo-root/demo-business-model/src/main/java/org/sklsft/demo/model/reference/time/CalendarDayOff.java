@@ -28,7 +28,7 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name="CALENDAR_DAY_OFF"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"CALENDAR_ID", "DAY_OFF_DATE"})})
-public class CalendarDayOff implements org.sklsft.commons.model.interfaces.Entity<Long> {
+public class CalendarDayOff implements org.sklsft.commons.model.interfaces.Entity<Integer> {
 
 private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,7 @@ public CalendarDayOff(){
 @Column(name = "id", nullable = false)
 @SequenceGenerator(name = "generator", sequenceName = "CALENDAR_DAY_OFF_id_seq", allocationSize=1)
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-private Long id;
+private Integer id;
 
 @ManyToOne(fetch = FetchType.LAZY)
 @Fetch(FetchMode.JOIN)
@@ -63,11 +63,11 @@ private String dayOffLabel;
 /*
  * getters and setters
  */
-public Long getId() {
+public Integer getId() {
 return this.id;
 }
 
-public void setId(Long id) {
+public void setId(Integer id) {
 this.id = id;
 }
 

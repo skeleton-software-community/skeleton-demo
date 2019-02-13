@@ -66,14 +66,14 @@ return calendarService.scroll(form);
  * load object
  */
 @RequestMapping(value = {CalendarService.GET_URL}, method = RequestMethod.GET)
-public @ResponseBody CalendarFullView load(@PathVariable("id") Long id) {
+public @ResponseBody CalendarFullView load(@PathVariable("id") Integer id) {
 return calendarService.load(id);
 }
 /**
  * find object
  */
 @RequestMapping(value = {CalendarService.FIND_URL}, method = RequestMethod.GET)
-@ResponseBody CalendarFullView find(@RequestParam("code") String code) {
+public @ResponseBody CalendarFullView find(@RequestParam("code") String code) {
 return calendarService.find(code);
 }
 
@@ -81,7 +81,7 @@ return calendarService.find(code);
  * load one to many component calendarDayOff list
  */
 @RequestMapping(value = {CalendarService.GET_CALENDAR_DAY_OFF_LIST_URL}, method = RequestMethod.GET)
-public @ResponseBody List<CalendarDayOffBasicView> loadCalendarDayOffList(@PathVariable("id") Long id) {
+public @ResponseBody List<CalendarDayOffBasicView> loadCalendarDayOffList(@PathVariable("id") Integer id) {
 return calendarService.loadCalendarDayOffList(id);
 }
 
@@ -89,7 +89,7 @@ return calendarService.loadCalendarDayOffList(id);
  * scroll one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.SCROLL_CALENDAR_DAY_OFF_URL}, method = RequestMethod.POST)
-public @ResponseBody ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (@PathVariable("calendarId") Long calendarId, @RequestBody ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
+public @ResponseBody ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (@PathVariable("calendarId") Integer calendarId, @RequestBody ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
 return calendarService.scrollCalendarDayOff(calendarId, form);
 }
 
@@ -97,7 +97,7 @@ return calendarService.scrollCalendarDayOff(calendarId, form);
  * load one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.GET_CALENDAR_DAY_OFF_URL}, method = RequestMethod.GET)
-public @ResponseBody CalendarDayOffFullView loadCalendarDayOff(@PathVariable("id") Long id) {
+public @ResponseBody CalendarDayOffFullView loadCalendarDayOff(@PathVariable("id") Integer id) {
 return calendarService.loadCalendarDayOff(id);
 }
 
@@ -113,7 +113,7 @@ return calendarService.create();
  * create one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.GET_NEW_CALENDAR_DAY_OFF_URL}, method = RequestMethod.GET)
-public @ResponseBody CalendarDayOffFullView createCalendarDayOff(@PathVariable("id") Long id) {
+public @ResponseBody CalendarDayOffFullView createCalendarDayOff(@PathVariable("id") Integer id) {
 return calendarService.createCalendarDayOff(id);
 }
 
@@ -121,7 +121,7 @@ return calendarService.createCalendarDayOff(id);
  * save object
  */
 @RequestMapping(value = {CalendarService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Long save(@RequestBody CalendarForm form) {
+public @ResponseBody Integer save(@RequestBody CalendarForm form) {
 return calendarService.save(form);
 }
 
@@ -129,7 +129,7 @@ return calendarService.save(form);
  * save one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.SAVE_CALENDAR_DAY_OFF_URL}, method = RequestMethod.POST)
-@ResponseBody public void saveCalendarDayOff(@PathVariable("id") Long id, @RequestBody CalendarDayOffForm form) {
+public @ResponseBody void saveCalendarDayOff(@PathVariable("id") Integer id, @RequestBody CalendarDayOffForm form) {
 calendarService.saveCalendarDayOff(id, form);
 }
 
@@ -137,7 +137,7 @@ calendarService.saveCalendarDayOff(id, form);
  * update object
  */
 @RequestMapping(value = {CalendarService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @RequestBody CalendarForm form) {
+public void update(@PathVariable("id") Integer id, @RequestBody CalendarForm form) {
 calendarService.update(id, form);
 }
 
@@ -145,7 +145,7 @@ calendarService.update(id, form);
  * update one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.UPDATE_CALENDAR_DAY_OFF_URL}, method = RequestMethod.PUT)
-void updateCalendarDayOff(Long id, CalendarDayOffForm form) {
+public void updateCalendarDayOff(Integer id, CalendarDayOffForm form) {
 calendarService.updateCalendarDayOff(id, form);
 }
 
@@ -153,7 +153,7 @@ calendarService.updateCalendarDayOff(id, form);
  * delete object
  */
 @RequestMapping(value = {CalendarService.DELETE_URL}, method = RequestMethod.DELETE)
-void delete(@PathVariable("id") Long id) {
+public void delete(@PathVariable("id") Integer id) {
 calendarService.delete(id);
 }
 
@@ -161,7 +161,7 @@ calendarService.delete(id);
  * delete one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.DELETE_CALENDAR_DAY_OFF_URL}, method = RequestMethod.DELETE)
-public void deleteCalendarDayOff(@PathVariable("id")Long id) {
+public void deleteCalendarDayOff(@PathVariable("id")Integer id) {
 calendarService.deleteCalendarDayOff(id);
 }
 
@@ -169,7 +169,7 @@ calendarService.deleteCalendarDayOff(id);
  * delete object list
  */
 @RequestMapping(value = {CalendarService.DELETE_LIST_URL}, method = RequestMethod.POST)
-@ResponseBody void deleteList(@RequestBody List<Long> idList) {
+public @ResponseBody void deleteList(@RequestBody List<Integer> idList) {
 calendarService.deleteList(idList);
 }
 
@@ -177,7 +177,7 @@ calendarService.deleteList(idList);
  * delete one to many component calendarDayOff list
  */
 @RequestMapping(value = {CalendarService.DELETE_CALENDAR_DAY_OFF_LIST_URL}, method = RequestMethod.POST)
-@ResponseBody void deleteCalendarDayOffList(List<Long> idList) {
+public @ResponseBody void deleteCalendarDayOffList(List<Integer> idList) {
 calendarService.deleteCalendarDayOffList(idList);
 }
 

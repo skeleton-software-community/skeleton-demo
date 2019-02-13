@@ -41,7 +41,7 @@ public static final String SCROLL_URL = "/organization/scroll";
 /**
  * load object
  */
-OrganizationFullView load(Long id);
+OrganizationFullView load(Integer id);
 public static final String GET_URL = "/organization/{id}";
 
 /**
@@ -53,7 +53,7 @@ OrganizationFullView find(String code);
 /**
  * load one to one component organizationCertification
  */
-OrganizationCertificationFullView loadOrganizationCertification(Long id);
+OrganizationCertificationFullView loadOrganizationCertification(Integer id);
 public static final String GET_ORGANIZATION_CERTIFICATION_URL = "/organization/{id}/organization-certification";
 
 /**
@@ -65,43 +65,43 @@ public static final String GET_NEW_URL = "/organization/new";
 /**
  * save object
  */
-Long save(OrganizationForm organizationForm);
+Integer save(OrganizationForm organizationForm);
 public static final String SAVE_URL = "/organization";
 
 /**
  * save one to one component organizationCertification
  */
-public void saveOrganizationCertification(Long id, OrganizationCertificationForm organizationCertificationForm);
+public void saveOrganizationCertification(Integer id, OrganizationCertificationForm organizationCertificationForm);
 public static final String SAVE_ORGANIZATION_CERTIFICATION_URL = "/organization/{id}/organization-certification";
 
 /**
  * update object
  */
-void update(Long id, OrganizationForm organizationForm);
+void update(Integer id, OrganizationForm organizationForm);
 public static final String UPDATE_URL = "/organization/{id}";
 
 /**
  * update one to one component organizationCertification
  */
-void updateOrganizationCertification(Long id, OrganizationCertificationForm organizationCertificationForm);
+void updateOrganizationCertification(Integer id, OrganizationCertificationForm organizationCertificationForm);
 public static final String UPDATE_ORGANIZATION_CERTIFICATION_URL = "/organization/{id}/organization-certification";
 
 /**
  * delete object
  */
-void delete(Long id);
+void delete(Integer id);
 public static final String DELETE_URL = "/organization/{id}";
 
 /**
  * delete one to one component organizationCertification
  */
-public void deleteOrganizationCertification(Long id);
+public void deleteOrganizationCertification(Integer id);
 public static final String DELETE_ORGANIZATION_CERTIFICATION_URL = "/organization/{id}/organization-certification";
 
 /**
  * delete object list
  */
-void deleteList(List<Long> idList);
+void deleteList(List<Integer> idList);
 public static final String DELETE_LIST_URL = "/organization/delete";
 
 }

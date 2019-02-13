@@ -10,7 +10,7 @@ import org.sklsft.demo.model.dummy.Fool;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public interface FoolBaseDao extends BaseDao<Fool, Long> {
+public interface FoolBaseDao extends BaseDao<Fool, String> {
 
 /**
  * count filtered object list

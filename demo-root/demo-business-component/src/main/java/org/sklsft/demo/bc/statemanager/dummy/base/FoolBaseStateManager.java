@@ -9,7 +9,7 @@ import org.sklsft.demo.model.dummy.Fool;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class FoolBaseStateManager implements StateManager<Fool, Long> {
+public class FoolBaseStateManager implements StateManager<Fool, String> {
 
 /**
  * can save

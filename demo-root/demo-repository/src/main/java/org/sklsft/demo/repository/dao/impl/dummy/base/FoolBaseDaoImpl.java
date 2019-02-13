@@ -22,7 +22,7 @@ import org.sklsft.demo.repository.dao.interfaces.dummy.base.FoolBaseDao;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class FoolBaseDaoImpl extends BaseDaoImpl<Fool, Long> implements FoolBaseDao {
+public class FoolBaseDaoImpl extends BaseDaoImpl<Fool, String> implements FoolBaseDao {
 
 /**
  * constructor

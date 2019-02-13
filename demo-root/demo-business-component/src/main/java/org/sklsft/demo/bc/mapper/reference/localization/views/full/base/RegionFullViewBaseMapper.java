@@ -15,7 +15,7 @@ import org.sklsft.demo.model.reference.localization.Region;
  * <br/>processed by skeleton-generator
  */
 
-public class RegionFullViewBaseMapper extends FullViewMapper<RegionFullView, Long, RegionForm, Region> {
+public class RegionFullViewBaseMapper extends FullViewMapper<RegionFullView, Integer, RegionForm, Region> {
 
 @Inject
 protected RegionRightsManager regionRightsManager;

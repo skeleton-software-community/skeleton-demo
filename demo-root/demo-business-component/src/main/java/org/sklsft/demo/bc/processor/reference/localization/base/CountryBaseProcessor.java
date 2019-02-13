@@ -11,7 +11,7 @@ import org.sklsft.demo.repository.dao.interfaces.reference.localization.CountryD
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CountryBaseProcessor implements Processor<Country, Long> {
+public class CountryBaseProcessor implements Processor<Country, Short> {
 
 /*
  * properties injected by spring
@@ -22,7 +22,7 @@ protected CountryDao countryDao;
 /**
  * process save
  */
-public Long save(Country country) {
+public Short save(Country country) {
 return countryDao.save(country);
 }
 

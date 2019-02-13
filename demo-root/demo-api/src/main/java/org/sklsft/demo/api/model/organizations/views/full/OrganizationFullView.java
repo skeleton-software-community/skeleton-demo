@@ -9,7 +9,7 @@ import org.sklsft.demo.api.model.organizations.forms.OrganizationForm;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-public class OrganizationFullView extends FullView<Long, OrganizationForm> {
+public class OrganizationFullView extends FullView<Integer, OrganizationForm> {
 
 private static final long serialVersionUID = 1L;
 

@@ -42,11 +42,71 @@ return criteria.list();
 }
 
 /**
+ * load object list from fool
+ */
+@Override
+@SuppressWarnings("unchecked")
+public List<Stupid> loadListFromFool(String foolId) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Stupid.class);
+if (foolId == null){
+criteria.add(Restrictions.isNull("fool.id"));
+} else {
+criteria.add(Restrictions.eq("fool.id", foolId));
+}
+return criteria.list();
+}
+
+/**
+ * load object list eagerly from fool
+ */
+@Override
+@SuppressWarnings("unchecked")
+public List<Stupid> loadListEagerlyFromFool(String foolId) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Stupid.class);
+if (foolId == null){
+criteria.add(Restrictions.isNull("fool.id"));
+} else {
+criteria.add(Restrictions.eq("fool.id", foolId));
+}
+criteria.setFetchMode("fool",FetchMode.JOIN);
+return criteria.list();
+}
+
+/**
  * count filtered object list
  */
 @Override
 public Long count(StupidFilter filter) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Stupid.class).setProjection(Projections.rowCount());
+Criteria foolCriteria = criteria.createCriteria("fool", JoinType.LEFT_OUTER_JOIN);
+addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
+addStringContainsRestriction(foolCriteria, "{alias}.CODE", filter.getFoolCode());
+return (Long) criteria.uniqueResult();
+}
+
+/**
+ * count object list from fool
+ */
+public Long countFromFool(String foolId) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Stupid.class).setProjection(Projections.rowCount());
+if (foolId == null){
+criteria.add(Restrictions.isNull("fool.id"));
+} else {
+criteria.add(Restrictions.eq("fool.id", foolId));
+}
+return (Long) criteria.uniqueResult();
+}
+
+/**
+ * count filtered object list from fool
+ */
+public Long countFromFool(String foolId, StupidFilter filter) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Stupid.class).setProjection(Projections.rowCount());
+if (foolId == null){
+criteria.add(Restrictions.isNull("fool.id"));
+} else {
+criteria.add(Restrictions.eq("fool.id", foolId));
+}
 Criteria foolCriteria = criteria.createCriteria("fool", JoinType.LEFT_OUTER_JOIN);
 addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
 addStringContainsRestriction(foolCriteria, "{alias}.CODE", filter.getFoolCode());
@@ -60,6 +120,32 @@ return (Long) criteria.uniqueResult();
 @SuppressWarnings("unchecked")
 public List<Stupid> scroll(StupidFilter filter, StupidSorting sorting, Long firstResult, Long maxResults) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Stupid.class);
+Criteria foolCriteria = criteria.createCriteria("fool", JoinType.LEFT_OUTER_JOIN);
+addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
+addStringContainsRestriction(foolCriteria, "{alias}.CODE", filter.getFoolCode());
+addOrder(criteria, "code", sorting.getCodeOrderType());
+addOrder(foolCriteria, "code", sorting.getFoolCodeOrderType());
+if (firstResult != null){
+criteria.setFirstResult(firstResult.intValue());
+}
+if (maxResults != null){
+criteria.setMaxResults(maxResults.intValue());
+}
+return criteria.list();
+}
+
+/**
+ * scroll filtered object list from fool
+ */
+@Override
+@SuppressWarnings("unchecked")
+public List<Stupid> scrollFromFool(String foolId, StupidFilter filter, StupidSorting sorting, Long firstResult, Long maxResults) {
+Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Stupid.class);
+if (foolId == null){
+criteria.add(Restrictions.isNull("fool.id"));
+} else {
+criteria.add(Restrictions.eq("fool.id", foolId));
+}
 Criteria foolCriteria = criteria.createCriteria("fool", JoinType.LEFT_OUTER_JOIN);
 addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
 addStringContainsRestriction(foolCriteria, "{alias}.CODE", filter.getFoolCode());
