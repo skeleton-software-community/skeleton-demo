@@ -72,7 +72,7 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public List<RegionBasicView> loadListFromCountry (Long countryId) {
+public List<RegionBasicView> loadListFromCountry (Short countryId) {
 regionRightsManager.checkCanAccess();
 List<Region> regionList = regionDao.loadListEagerlyFromCountry(countryId);
 List<RegionBasicView> result = new ArrayList<>(regionList.size());
@@ -108,7 +108,7 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public ScrollView<RegionBasicView> scrollFromCountry (Long countryId, ScrollForm<RegionFilter, RegionSorting> form) {
+public ScrollView<RegionBasicView> scrollFromCountry (Short countryId, ScrollForm<RegionFilter, RegionSorting> form) {
 regionRightsManager.checkCanAccess();
 ScrollView<RegionBasicView> result = new ScrollView<>();
 result.setSize(regionDao.countFromCountry(countryId));
@@ -129,7 +129,7 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public RegionFullView load(Long id) {
+public RegionFullView load(Integer id) {
 Region region = regionDao.load(id);
 regionRightsManager.checkCanAccess(region);
 return this.regionFullViewMapper.mapFrom(new RegionFullView(),region);
@@ -160,7 +160,7 @@ return new RegionFullView();
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public Long save(RegionForm regionForm) {
+public Integer save(RegionForm regionForm) {
 Region region = this.regionFormMapper.mapTo(regionForm, new Region());
 regionRightsManager.checkCanSave(region);
 regionStateManager.checkCanSave(region);
@@ -172,7 +172,7 @@ return regionProcessor.save(region);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public Long saveFromCountry(Long countryId, RegionForm regionForm) {
+public Integer saveFromCountry(Short countryId, RegionForm regionForm) {
 Region region = this.regionFormMapper.mapTo(regionForm, new Region());
 Country country = this.countryDao.load(countryId);
 region.setCountry(country);
@@ -186,7 +186,7 @@ return regionProcessor.save(region);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void update(Long id, RegionForm regionForm) {
+public void update(Integer id, RegionForm regionForm) {
 Region region = this.regionDao.load(id);
 regionRightsManager.checkCanUpdate(region);
 regionStateManager.checkCanUpdate(region);
@@ -199,7 +199,7 @@ regionProcessor.update(region);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void delete(Long id) {
+public void delete(Integer id) {
 Region region = regionDao.load(id);
 regionRightsManager.checkCanDelete(region);
 regionStateManager.checkCanDelete(region);
@@ -211,10 +211,10 @@ regionProcessor.delete(region);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void deleteList(List<Long> idList) {
+public void deleteList(List<Integer> idList) {
 Region region;
 if (idList != null){
-for (Long id:idList){
+for (Integer id:idList){
 region = regionDao.load(id);
 regionRightsManager.checkCanDelete(region);
 regionStateManager.checkCanDelete(region);

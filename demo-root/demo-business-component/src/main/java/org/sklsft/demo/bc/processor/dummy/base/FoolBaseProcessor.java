@@ -11,7 +11,7 @@ import org.sklsft.demo.repository.dao.interfaces.dummy.FoolDao;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class FoolBaseProcessor implements Processor<Fool, Long> {
+public class FoolBaseProcessor implements Processor<Fool, String> {
 
 /*
  * properties injected by spring
@@ -22,7 +22,7 @@ protected FoolDao foolDao;
 /**
  * process save
  */
-public Long save(Fool fool) {
+public String save(Fool fool) {
 return foolDao.save(fool);
 }
 

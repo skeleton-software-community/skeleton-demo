@@ -11,7 +11,7 @@ import org.sklsft.demo.model.organizations.OrganizationCertification;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public interface OrganizationBaseDao extends BaseDao<Organization, Long> {
+public interface OrganizationBaseDao extends BaseDao<Organization, Integer> {
 
 /**
  * count filtered object list

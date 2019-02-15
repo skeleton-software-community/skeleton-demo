@@ -26,7 +26,7 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name="ORGANIZATION"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})
-public class Organization implements org.sklsft.commons.model.interfaces.Entity<Long> {
+public class Organization implements org.sklsft.commons.model.interfaces.Entity<Integer> {
 
 private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public Organization(){
 @Column(name = "id", nullable = false)
 @SequenceGenerator(name = "generator", sequenceName = "ORGANIZATION_id_seq", allocationSize=1)
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-private Long id;
+private Integer id;
 
 @Column(name = "CODE", nullable = false)
 private String code;
@@ -60,11 +60,11 @@ private OrganizationCertification organizationCertification;
 /*
  * getters and setters
  */
-public Long getId() {
+public Integer getId() {
 return this.id;
 }
 
-public void setId(Long id) {
+public void setId(Integer id) {
 this.id = id;
 }
 

@@ -72,7 +72,7 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public List<CityBasicView> loadListFromRegion (Long regionId) {
+public List<CityBasicView> loadListFromRegion (Integer regionId) {
 cityRightsManager.checkCanAccess();
 List<City> cityList = cityDao.loadListEagerlyFromRegion(regionId);
 List<CityBasicView> result = new ArrayList<>(cityList.size());
@@ -108,7 +108,7 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public ScrollView<CityBasicView> scrollFromRegion (Long regionId, ScrollForm<CityFilter, CitySorting> form) {
+public ScrollView<CityBasicView> scrollFromRegion (Integer regionId, ScrollForm<CityFilter, CitySorting> form) {
 cityRightsManager.checkCanAccess();
 ScrollView<CityBasicView> result = new ScrollView<>();
 result.setSize(cityDao.countFromRegion(regionId));
@@ -172,7 +172,7 @@ return cityProcessor.save(city);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public Long saveFromRegion(Long regionId, CityForm cityForm) {
+public Long saveFromRegion(Integer regionId, CityForm cityForm) {
 City city = this.cityFormMapper.mapTo(cityForm, new City());
 Region region = this.regionDao.load(regionId);
 city.setRegion(region);

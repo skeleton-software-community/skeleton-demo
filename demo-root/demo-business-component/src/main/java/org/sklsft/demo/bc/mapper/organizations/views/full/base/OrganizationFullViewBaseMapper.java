@@ -15,7 +15,7 @@ import org.sklsft.demo.model.organizations.Organization;
  * <br/>processed by skeleton-generator
  */
 
-public class OrganizationFullViewBaseMapper extends FullViewMapper<OrganizationFullView, Long, OrganizationForm, Organization> {
+public class OrganizationFullViewBaseMapper extends FullViewMapper<OrganizationFullView, Integer, OrganizationForm, Organization> {
 
 @Inject
 protected OrganizationRightsManager organizationRightsManager;

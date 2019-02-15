@@ -10,7 +10,7 @@ import org.sklsft.demo.model.reference.time.CalendarDayOff;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CalendarBaseStateManager implements StateManager<Calendar, Long> {
+public class CalendarBaseStateManager implements StateManager<Calendar, Integer> {
 
 /**
  * can save

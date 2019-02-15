@@ -10,7 +10,7 @@ import org.sklsft.demo.model.organizations.OrganizationCertification;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class OrganizationBaseStateManager implements StateManager<Organization, Long> {
+public class OrganizationBaseStateManager implements StateManager<Organization, Integer> {
 
 /**
  * can save

@@ -10,7 +10,7 @@ import org.sklsft.demo.model.reference.localization.Country;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public interface CountryBaseDao extends BaseDao<Country, Long> {
+public interface CountryBaseDao extends BaseDao<Country, Short> {
 
 /**
  * count filtered object list

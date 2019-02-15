@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<metadata:project xmlns:metadata="http://generator.sklsft.org/schema/model/metadata"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://generator.sklsft.org/schema/model/metadata skeleton-metadata-3.0.xsd">
-	<domainName>org.sklsft</domainName>
-	<projectName>demo</projectName>
-	<skeleton>SPRING_HIBERNATE_PRIMEFACES</skeleton>
-	<databaseEngine>POSTGRESQL</databaseEngine>
-	<databaseName>demo</databaseName>
-	<databaseDNS>localhost</databaseDNS>
-	<databasePort>5432</databasePort>
-	<databaseUserName>postgres</databaseUserName>
-	<databasePassword>postgres</databasePassword>
-	<audited>false</audited>
+<metadata:project xmlns:metadata="http://generator.sklsft.org/schema/model/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://generator.sklsft.org/schema/model/metadata skeleton-metadata-3.0.xsd">
+    <domainName>org.sklsft</domainName>
+    <projectName>demo</projectName>
+    <skeleton>SPRING_HIBERNATE_PRIMEFACES</skeleton>
+    <databaseEngine>POSTGRESQL</databaseEngine>
+    <databaseName>demo</databaseName>
+    <databaseDNS>localhost</databaseDNS>
+    <databasePort>5432</databasePort>
+    <databaseUserName>postgres</databaseUserName>
+    <databasePassword>postgres</databasePassword>
+    <audited>false</audited>
 	<packages>
 		<package name="REFERENCE">
 			<packages>
 				<package name="LOCALIZATION">
 					<tables>
-						<table name="COUNTRY" cardinality="1" listRendering="Countries"
+						<table name="COUNTRY" idType="SHORT" cardinality="1" listRendering="Countries"
 							detailRendering="Country details" createEnabled="true"
 							updateEnabled="true" deleteEnabled="true">
 							<selectionBehavior selectionMode="DROPDOWN_OPTIONS" />
@@ -30,7 +28,7 @@
 								</column>
 							</columns>
 						</table>
-						<table name="REGION" cardinality="2" listRendering="Regions/States/Provinces"
+						<table name="REGION" idType="INTEGER" cardinality="2" listRendering="Regions/States/Provinces"
 							detailRendering="Region details" createEnabled="true"
 							updateEnabled="true" deleteEnabled="true">
 							<columns>
@@ -46,7 +44,7 @@
 								</column>
 							</columns>
 						</table>
-						<table name="CITY" cardinality="2" listRendering="Cities"
+						<table name="CITY" idType="LONG" cardinality="2" listRendering="Cities"
 							detailRendering="City details" createEnabled="true"
 							updateEnabled="true" deleteEnabled="true">
 							<columns>
@@ -66,7 +64,7 @@
 				</package>
 				<package name="TIME">
 					<tables>
-						<table name="CALENDAR" cardinality="1" listRendering="Calendars"
+						<table name="CALENDAR" idType="INTEGER" cardinality="1" listRendering="Calendars"
 							detailRendering="Calendar details" createEnabled="true"
 							updateEnabled="true" deleteEnabled="true">
 							<selectionBehavior selectionMode="DROPDOWN_OPTIONS" />
@@ -79,7 +77,7 @@
 								</column>
 							</columns>
 						</table>
-						<table name="CALENDAR_DAY_OFF" cardinality="2"
+						<table name="CALENDAR_DAY_OFF" idType="INTEGER" cardinality="2"
 							listRendering="Days off" detailRendering="Day off" createEnabled="true"
 							updateEnabled="true" deleteEnabled="true">
 							<columns>
@@ -101,7 +99,7 @@
 		</package>
 		<package name="ORGANIZATIONS">
 			<tables>
-				<table cardinality="1" name="ORGANIZATION" listRendering="Organizations"
+				<table cardinality="1" idType="INTEGER" name="ORGANIZATION" listRendering="Organizations"
 					detailRendering="Organization">
 					<selectionBehavior selectionMode="AUTO_COMPLETE" />
 					<columns>
@@ -122,7 +120,7 @@
 						</column>
 					</columns>
 				</table>
-				<table cardinality="1" name="ORGANIZATION_CERTIFICATION"
+				<table cardinality="1" idType="STRING" name="ORGANIZATION_CERTIFICATION"
 					listRendering="Certifications" detailRendering="Certification">
 					<columns>
 						<column name="ORGANIZATION_ID" dataType="LONG" nullable="true"
@@ -138,7 +136,7 @@
 		</package>
 		<package name="DUMMY">
 			<tables>
-				<table name="FOOL" cardinality="1" listRendering="Fools"
+				<table name="FOOL" idType="STRING" idGeneratorType="UUID" cardinality="1" listRendering="Fools"
 					detailRendering="Fool details" createEnabled="true" updateEnabled="true"
 					deleteEnabled="true">
 					<selectionBehavior selectionMode="AUTO_COMPLETE" />
@@ -177,7 +175,7 @@
 							editable="true" rendering="Code">
 						</column>
 						<column name="FOOL_ID" dataType="LONG" nullable="false"
-							referenceTableName="FOOL" editable="true" rendering="Fool">
+							referenceTableName="FOOL" referenceTableRelation="MANY_TO_ONE" editable="true" rendering="Fool">
 						</column>
 					</columns>
 				</table>

@@ -47,7 +47,7 @@ return criteria.list();
  */
 @Override
 @SuppressWarnings("unchecked")
-public List<City> loadListFromRegion(Long regionId) {
+public List<City> loadListFromRegion(Integer regionId) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class);
 if (regionId == null){
 criteria.add(Restrictions.isNull("region.id"));
@@ -62,7 +62,7 @@ return criteria.list();
  */
 @Override
 @SuppressWarnings("unchecked")
-public List<City> loadListEagerlyFromRegion(Long regionId) {
+public List<City> loadListEagerlyFromRegion(Integer regionId) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class);
 if (regionId == null){
 criteria.add(Restrictions.isNull("region.id"));
@@ -92,7 +92,7 @@ return (Long) criteria.uniqueResult();
 /**
  * count object list from region
  */
-public Long countFromRegion(Long regionId) {
+public Long countFromRegion(Integer regionId) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class).setProjection(Projections.rowCount());
 if (regionId == null){
 criteria.add(Restrictions.isNull("region.id"));
@@ -105,7 +105,7 @@ return (Long) criteria.uniqueResult();
 /**
  * count filtered object list from region
  */
-public Long countFromRegion(Long regionId, CityFilter filter) {
+public Long countFromRegion(Integer regionId, CityFilter filter) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class).setProjection(Projections.rowCount());
 if (regionId == null){
 criteria.add(Restrictions.isNull("region.id"));
@@ -152,7 +152,7 @@ return criteria.list();
  */
 @Override
 @SuppressWarnings("unchecked")
-public List<City> scrollFromRegion(Long regionId, CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults) {
+public List<City> scrollFromRegion(Integer regionId, CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class);
 if (regionId == null){
 criteria.add(Restrictions.isNull("region.id"));

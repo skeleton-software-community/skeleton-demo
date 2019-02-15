@@ -10,7 +10,7 @@ import org.sklsft.demo.model.reference.localization.Region;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class RegionBaseRightsManager implements RightsManager<Region, Long> {
+public class RegionBaseRightsManager implements RightsManager<Region, Integer> {
 
 /**
  * can access all

@@ -93,7 +93,7 @@ redirect("/sections/reference/localization/region/details.jsf?id=" + result);
 /**
  * edit object
  */
-public void editRegion(Long id) {
+public void editRegion(Integer id) {
 this.commonController.loadCountryOptions();
 regionListView.setSelectedRegion(regionService.load(id));
 }
@@ -111,7 +111,7 @@ this.refresh();
  * delete object
  */
 @AjaxMethod("Region.delete")
-public void delete(Long id) {
+public void delete(Integer id) {
 regionService.delete(id);
 this.refresh();
 }
@@ -121,7 +121,7 @@ this.refresh();
  */
 @AjaxMethod("Region.deleteList")
 public void deleteList() {
-List<Long> ids = new ArrayList<>();
+List<Integer> ids = new ArrayList<>();
 for (RegionBasicView region:regionListView.getScrollView().getElements()) {
 if (region.getSelected()) {
 ids.add(region.getId());

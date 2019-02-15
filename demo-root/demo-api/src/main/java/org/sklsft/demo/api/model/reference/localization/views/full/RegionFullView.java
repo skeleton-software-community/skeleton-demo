@@ -9,7 +9,7 @@ import org.sklsft.demo.api.model.reference.localization.forms.RegionForm;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-public class RegionFullView extends FullView<Long, RegionForm> {
+public class RegionFullView extends FullView<Integer, RegionForm> {
 
 private static final long serialVersionUID = 1L;
 

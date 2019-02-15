@@ -16,5 +16,11 @@ xmlns:h="http://java.sun.com/jsf/html">
 #{i18n.foolDetails}
 </h:link>
 </li>
+<li role="presentation" id="stupid-list-menu">
+<h:link outcome="/sections/dummy/fool/stupid/list.jsf">
+<f:param name="id" value="#{foolDetailView.selectedFool.id}" />
+#{i18n.stupidList}
+</h:link>
+</li>
 </ul>
 </ui:composition>

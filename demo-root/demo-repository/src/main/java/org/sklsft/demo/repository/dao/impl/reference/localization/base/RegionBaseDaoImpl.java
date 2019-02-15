@@ -22,7 +22,7 @@ import org.sklsft.demo.repository.dao.interfaces.reference.localization.base.Reg
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class RegionBaseDaoImpl extends BaseDaoImpl<Region, Long> implements RegionBaseDao {
+public class RegionBaseDaoImpl extends BaseDaoImpl<Region, Integer> implements RegionBaseDao {
 
 /**
  * constructor
@@ -46,7 +46,7 @@ return criteria.list();
  */
 @Override
 @SuppressWarnings("unchecked")
-public List<Region> loadListFromCountry(Long countryId) {
+public List<Region> loadListFromCountry(Short countryId) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
 if (countryId == null){
 criteria.add(Restrictions.isNull("country.id"));
@@ -61,7 +61,7 @@ return criteria.list();
  */
 @Override
 @SuppressWarnings("unchecked")
-public List<Region> loadListEagerlyFromCountry(Long countryId) {
+public List<Region> loadListEagerlyFromCountry(Short countryId) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
 if (countryId == null){
 criteria.add(Restrictions.isNull("country.id"));
@@ -88,7 +88,7 @@ return (Long) criteria.uniqueResult();
 /**
  * count object list from country
  */
-public Long countFromCountry(Long countryId) {
+public Long countFromCountry(Short countryId) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class).setProjection(Projections.rowCount());
 if (countryId == null){
 criteria.add(Restrictions.isNull("country.id"));
@@ -101,7 +101,7 @@ return (Long) criteria.uniqueResult();
 /**
  * count filtered object list from country
  */
-public Long countFromCountry(Long countryId, RegionFilter filter) {
+public Long countFromCountry(Short countryId, RegionFilter filter) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class).setProjection(Projections.rowCount());
 if (countryId == null){
 criteria.add(Restrictions.isNull("country.id"));
@@ -143,7 +143,7 @@ return criteria.list();
  */
 @Override
 @SuppressWarnings("unchecked")
-public List<Region> scrollFromCountry(Long countryId, RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults) {
+public List<Region> scrollFromCountry(Short countryId, RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults) {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
 if (countryId == null){
 criteria.add(Restrictions.isNull("country.id"));

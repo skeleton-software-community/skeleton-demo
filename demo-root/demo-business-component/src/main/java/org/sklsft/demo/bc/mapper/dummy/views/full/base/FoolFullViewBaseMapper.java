@@ -15,7 +15,7 @@ import org.sklsft.demo.model.dummy.Fool;
  * <br/>processed by skeleton-generator
  */
 
-public class FoolFullViewBaseMapper extends FullViewMapper<FoolFullView, Long, FoolForm, Fool> {
+public class FoolFullViewBaseMapper extends FullViewMapper<FoolFullView, String, FoolForm, Fool> {
 
 @Inject
 protected FoolRightsManager foolRightsManager;

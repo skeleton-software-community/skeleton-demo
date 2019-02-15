@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.sklsft.commons.api.exception.rights.OperationDeniedException;
 import org.sklsft.commons.api.model.ScrollForm;
+import org.sklsft.commons.mvc.ajax.AjaxMethodTemplate;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
 import org.sklsft.demo.api.interfaces.dummy.FoolService;
 import org.sklsft.demo.api.model.dummy.filters.FoolFilter;
@@ -76,16 +77,22 @@ displayError(e.getMessage());
 /**
  * save object
  */
-@AjaxMethod("Fool.save")
 public void save() {
-foolService.save(this.foolListView.getSelectedFool().getForm());
-this.refresh();
+executeAjaxMethod("Fool.save", new AjaxMethodTemplate() {
+@Override
+public Object execute() {
+return foolService.save(foolListView.getSelectedFool().getForm());
 }
-
+@Override
+public void redirectOnComplete(Object result) {
+redirect("/sections/dummy/fool/details.jsf?id=" + result);
+}
+});
+}
 /**
  * edit object
  */
-public void editFool(Long id) {
+public void editFool(String id) {
 foolListView.setSelectedFool(foolService.load(id));
 }
 
@@ -102,7 +109,7 @@ this.refresh();
  * delete object
  */
 @AjaxMethod("Fool.delete")
-public void delete(Long id) {
+public void delete(String id) {
 foolService.delete(id);
 this.refresh();
 }
@@ -112,7 +119,7 @@ this.refresh();
  */
 @AjaxMethod("Fool.deleteList")
 public void deleteList() {
-List<Long> ids = new ArrayList<>();
+List<String> ids = new ArrayList<>();
 for (FoolBasicView fool:foolListView.getScrollView().getElements()) {
 if (fool.getSelected()) {
 ids.add(fool.getId());

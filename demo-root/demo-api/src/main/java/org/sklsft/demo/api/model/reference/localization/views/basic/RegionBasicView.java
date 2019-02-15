@@ -15,7 +15,7 @@ private static final long serialVersionUID = 1L;
 /*
  * properties
  */
-private Long id;
+private Integer id;
 private boolean selected;
 private boolean canDelete;
 private String countryCode;
@@ -25,11 +25,11 @@ private String label;
 /*
  * getters and setters
  */
-public Long getId() {
+public Integer getId() {
 return this.id;
 }
 
-public void setId(Long id) {
+public void setId(Integer id) {
 this.id = id;
 }
 

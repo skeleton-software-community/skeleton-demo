@@ -92,7 +92,7 @@ redirect("/sections/organizations/organization/details.jsf?id=" + result);
 /**
  * edit object
  */
-public void editOrganization(Long id) {
+public void editOrganization(Integer id) {
 organizationListView.setSelectedOrganization(organizationService.load(id));
 }
 
@@ -109,7 +109,7 @@ this.refresh();
  * delete object
  */
 @AjaxMethod("Organization.delete")
-public void delete(Long id) {
+public void delete(Integer id) {
 organizationService.delete(id);
 this.refresh();
 }
@@ -119,7 +119,7 @@ this.refresh();
  */
 @AjaxMethod("Organization.deleteList")
 public void deleteList() {
-List<Long> ids = new ArrayList<>();
+List<Integer> ids = new ArrayList<>();
 for (OrganizationBasicView organization:organizationListView.getScrollView().getElements()) {
 if (organization.getSelected()) {
 ids.add(organization.getId());

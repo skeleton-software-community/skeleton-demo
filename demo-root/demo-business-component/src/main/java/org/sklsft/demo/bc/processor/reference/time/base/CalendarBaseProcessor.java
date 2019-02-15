@@ -12,7 +12,7 @@ import org.sklsft.demo.repository.dao.interfaces.reference.time.CalendarDao;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CalendarBaseProcessor implements Processor<Calendar, Long> {
+public class CalendarBaseProcessor implements Processor<Calendar, Integer> {
 
 /*
  * properties injected by spring
@@ -23,7 +23,7 @@ protected CalendarDao calendarDao;
 /**
  * process save
  */
-public Long save(Calendar calendar) {
+public Integer save(Calendar calendar) {
 return calendarDao.save(calendar);
 }
 

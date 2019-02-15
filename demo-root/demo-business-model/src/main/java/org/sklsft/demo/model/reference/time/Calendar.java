@@ -23,7 +23,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name="CALENDAR"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})
-public class Calendar implements org.sklsft.commons.model.interfaces.Entity<Long> {
+public class Calendar implements org.sklsft.commons.model.interfaces.Entity<Integer> {
 
 private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,7 @@ public Calendar(){
 @Column(name = "id", nullable = false)
 @SequenceGenerator(name = "generator", sequenceName = "CALENDAR_id_seq", allocationSize=1)
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-private Long id;
+private Integer id;
 
 @Column(name = "CODE", nullable = false)
 private String code;
@@ -55,11 +55,11 @@ private Set <CalendarDayOff> calendarDayOffCollection;
 /*
  * getters and setters
  */
-public Long getId() {
+public Integer getId() {
 return this.id;
 }
 
-public void setId(Long id) {
+public void setId(Integer id) {
 this.id = id;
 }
 

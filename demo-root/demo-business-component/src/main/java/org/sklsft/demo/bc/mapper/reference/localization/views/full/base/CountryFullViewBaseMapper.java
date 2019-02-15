@@ -15,7 +15,7 @@ import org.sklsft.demo.model.reference.localization.Country;
  * <br/>processed by skeleton-generator
  */
 
-public class CountryFullViewBaseMapper extends FullViewMapper<CountryFullView, Long, CountryForm, Country> {
+public class CountryFullViewBaseMapper extends FullViewMapper<CountryFullView, Short, CountryForm, Country> {
 
 @Inject
 protected CountryRightsManager countryRightsManager;

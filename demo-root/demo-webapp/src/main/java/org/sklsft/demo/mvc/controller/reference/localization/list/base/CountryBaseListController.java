@@ -92,7 +92,7 @@ redirect("/sections/reference/localization/country/details.jsf?id=" + result);
 /**
  * edit object
  */
-public void editCountry(Long id) {
+public void editCountry(Short id) {
 countryListView.setSelectedCountry(countryService.load(id));
 }
 
@@ -109,7 +109,7 @@ this.refresh();
  * delete object
  */
 @AjaxMethod("Country.delete")
-public void delete(Long id) {
+public void delete(Short id) {
 countryService.delete(id);
 this.refresh();
 }
@@ -119,7 +119,7 @@ this.refresh();
  */
 @AjaxMethod("Country.deleteList")
 public void deleteList() {
-List<Long> ids = new ArrayList<>();
+List<Short> ids = new ArrayList<>();
 for (CountryBasicView country:countryListView.getScrollView().getElements()) {
 if (country.getSelected()) {
 ids.add(country.getId());

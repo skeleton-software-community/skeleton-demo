@@ -22,7 +22,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name="COUNTRY"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})
-public class Country implements org.sklsft.commons.model.interfaces.Entity<Long> {
+public class Country implements org.sklsft.commons.model.interfaces.Entity<Short> {
 
 private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,7 @@ public Country(){
 @Column(name = "id", nullable = false)
 @SequenceGenerator(name = "generator", sequenceName = "COUNTRY_id_seq", allocationSize=1)
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-private Long id;
+private Short id;
 
 @Column(name = "CODE", nullable = false)
 private String code;
@@ -54,11 +54,11 @@ private Set <Region> regionCollection;
 /*
  * getters and setters
  */
-public Long getId() {
+public Short getId() {
 return this.id;
 }
 
-public void setId(Long id) {
+public void setId(Short id) {
 this.id = id;
 }
 

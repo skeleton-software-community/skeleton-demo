@@ -92,7 +92,7 @@ load();
 /**
  * edit one to many component calendarDayOff
  */
-public void editCalendarDayOff(Long id) {
+public void editCalendarDayOff(Integer id) {
 calendarDetailView.setSelectedCalendarDayOff(calendarService.loadCalendarDayOff(id));
 }
 
@@ -109,7 +109,7 @@ loadCalendarDayOffList();
  * delete one to many component calendarDayOff
  */
 @AjaxMethod("CalendarDayOff.delete")
-public void deleteCalendarDayOff(Long id) {
+public void deleteCalendarDayOff(Integer id) {
 calendarService.deleteCalendarDayOff(id);
 loadCalendarDayOffList();
 }
@@ -119,7 +119,7 @@ loadCalendarDayOffList();
  */
 @AjaxMethod("CalendarDayOff.deleteList")
 public void deleteCalendarDayOffList() {
-List<Long> ids = new ArrayList<>();
+List<Integer> ids = new ArrayList<>();
 for (CalendarDayOffBasicView calendarDayOff:calendarDetailView.getCalendarDayOffScrollView().getElements()) {
 if (calendarDayOff.getSelected()) {
 ids.add(calendarDayOff.getId());

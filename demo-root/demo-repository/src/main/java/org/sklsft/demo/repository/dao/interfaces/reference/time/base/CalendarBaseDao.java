@@ -13,7 +13,7 @@ import org.sklsft.demo.model.reference.time.CalendarDayOff;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public interface CalendarBaseDao extends BaseDao<Calendar, Long> {
+public interface CalendarBaseDao extends BaseDao<Calendar, Integer> {
 
 /**
  * count filtered object list
@@ -28,27 +28,27 @@ List<Calendar> scroll(CalendarFilter filter, CalendarSorting sorting, Long first
 /**
  * load one to many component CalendarDayOff list
  */
-List<CalendarDayOff> loadCalendarDayOffList(Long calendarId);
+List<CalendarDayOff> loadCalendarDayOffList(Integer calendarId);
 
 /**
  * count one to many component CalendarDayOff
  */
-Long countCalendarDayOff(Long calendarId);
+Long countCalendarDayOff(Integer calendarId);
 
 /**
  * count filtered one to many component CalendarDayOff
  */
-Long countCalendarDayOff(Long calendarId, CalendarDayOffFilter filter);
+Long countCalendarDayOff(Integer calendarId, CalendarDayOffFilter filter);
 
 /**
  * scroll filtered one to many component CalendarDayOff
  */
-List<CalendarDayOff> scrollCalendarDayOff(Long calendarId, CalendarDayOffFilter filter, CalendarDayOffSorting sorting, Long firstResult, Long maxResults);
+List<CalendarDayOff> scrollCalendarDayOff(Integer calendarId, CalendarDayOffFilter filter, CalendarDayOffSorting sorting, Long firstResult, Long maxResults);
 
 /**
  * load one to many component CalendarDayOff
  */
-CalendarDayOff loadCalendarDayOff(Long id);
+CalendarDayOff loadCalendarDayOff(Integer id);
 
 /**
  * exists object

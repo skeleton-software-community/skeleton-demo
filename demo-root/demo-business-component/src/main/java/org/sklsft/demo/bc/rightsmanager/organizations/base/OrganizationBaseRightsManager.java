@@ -11,7 +11,7 @@ import org.sklsft.demo.model.organizations.OrganizationCertification;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class OrganizationBaseRightsManager implements RightsManager<Organization, Long> {
+public class OrganizationBaseRightsManager implements RightsManager<Organization, Integer> {
 
 /**
  * can access all

@@ -15,12 +15,12 @@ public interface CityBaseDao extends BaseDao<City, Long> {
 /**
  * load object list from region
  */
-List<City> loadListFromRegion(Long regionId);
+List<City> loadListFromRegion(Integer regionId);
 
 /**
  * load object list eagerly from region
  */
-List<City> loadListEagerlyFromRegion(Long regionId);
+List<City> loadListEagerlyFromRegion(Integer regionId);
 
 /**
  * count filtered object list
@@ -30,12 +30,12 @@ Long count(CityFilter filter);
 /**
  * count object list from region
  */
-Long countFromRegion(Long regionId);
+Long countFromRegion(Integer regionId);
 
 /**
  * count filtered object list from region
  */
-Long countFromRegion(Long regionId, CityFilter filter);
+Long countFromRegion(Integer regionId, CityFilter filter);
 
 /**
  * scroll filtered object list
@@ -45,7 +45,7 @@ List<City> scroll(CityFilter filter, CitySorting sorting, Long firstResult, Long
 /**
  * scroll filtered object from region
  */
-List<City> scrollFromRegion(Long regionId, CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults);
+List<City> scrollFromRegion(Integer regionId, CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults);
 
 /**
  * exists object

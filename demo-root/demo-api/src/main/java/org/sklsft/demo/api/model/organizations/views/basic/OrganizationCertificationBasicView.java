@@ -15,7 +15,7 @@ private static final long serialVersionUID = 1L;
 /*
  * properties
  */
-private Long id;
+private String id;
 private boolean selected;
 private boolean canDelete;
 private Boolean certified;
@@ -23,11 +23,11 @@ private Boolean certified;
 /*
  * getters and setters
  */
-public Long getId() {
+public String getId() {
 return this.id;
 }
 
-public void setId(Long id) {
+public void setId(String id) {
 this.id = id;
 }
 

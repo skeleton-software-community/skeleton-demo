@@ -10,7 +10,7 @@ import org.sklsft.demo.model.reference.localization.Country;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CountryBaseRightsManager implements RightsManager<Country, Long> {
+public class CountryBaseRightsManager implements RightsManager<Country, Short> {
 
 /**
  * can access all

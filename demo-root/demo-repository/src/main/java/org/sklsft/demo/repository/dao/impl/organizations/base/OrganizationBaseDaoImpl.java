@@ -23,7 +23,7 @@ import org.sklsft.demo.repository.dao.interfaces.organizations.base.Organization
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class OrganizationBaseDaoImpl extends BaseDaoImpl<Organization, Long> implements OrganizationBaseDao {
+public class OrganizationBaseDaoImpl extends BaseDaoImpl<Organization, Integer> implements OrganizationBaseDao {
 
 /**
  * constructor

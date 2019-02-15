@@ -92,7 +92,7 @@ redirect("/sections/reference/time/calendar/details.jsf?id=" + result);
 /**
  * edit object
  */
-public void editCalendar(Long id) {
+public void editCalendar(Integer id) {
 calendarListView.setSelectedCalendar(calendarService.load(id));
 }
 
@@ -109,7 +109,7 @@ this.refresh();
  * delete object
  */
 @AjaxMethod("Calendar.delete")
-public void delete(Long id) {
+public void delete(Integer id) {
 calendarService.delete(id);
 this.refresh();
 }
@@ -119,7 +119,7 @@ this.refresh();
  */
 @AjaxMethod("Calendar.deleteList")
 public void deleteList() {
-List<Long> ids = new ArrayList<>();
+List<Integer> ids = new ArrayList<>();
 for (CalendarBasicView calendar:calendarListView.getScrollView().getElements()) {
 if (calendar.getSelected()) {
 ids.add(calendar.getId());

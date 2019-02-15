@@ -9,7 +9,7 @@ import org.sklsft.demo.api.model.reference.time.forms.CalendarForm;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-public class CalendarFullView extends FullView<Long, CalendarForm> {
+public class CalendarFullView extends FullView<Integer, CalendarForm> {
 
 private static final long serialVersionUID = 1L;
 

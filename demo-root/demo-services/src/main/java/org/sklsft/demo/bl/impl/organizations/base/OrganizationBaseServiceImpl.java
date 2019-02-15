@@ -113,7 +113,7 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public OrganizationFullView load(Long id) {
+public OrganizationFullView load(Integer id) {
 Organization organization = organizationDao.load(id);
 organizationRightsManager.checkCanAccess(organization);
 return this.organizationFullViewMapper.mapFrom(new OrganizationFullView(),organization);
@@ -135,7 +135,7 @@ return this.organizationFullViewMapper.mapFrom(new OrganizationFullView(), organ
  */
 @Override
 @Transactional(readOnly=true)
-public OrganizationCertificationFullView loadOrganizationCertification(Long id) {
+public OrganizationCertificationFullView loadOrganizationCertification(Integer id) {
 Organization organization = organizationDao.load(id);
 organizationRightsManager.checkCanAccessOrganizationCertification(organization);
 OrganizationCertification organizationCertification = organization.getOrganizationCertification();
@@ -160,7 +160,7 @@ return new OrganizationFullView();
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public Long save(OrganizationForm organizationForm) {
+public Integer save(OrganizationForm organizationForm) {
 Organization organization = this.organizationFormMapper.mapTo(organizationForm, new Organization());
 organizationRightsManager.checkCanSave(organization);
 organizationStateManager.checkCanSave(organization);
@@ -172,7 +172,7 @@ return organizationProcessor.save(organization);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void saveOrganizationCertification(Long id, OrganizationCertificationForm organizationCertificationForm) {
+public void saveOrganizationCertification(Integer id, OrganizationCertificationForm organizationCertificationForm) {
 Organization organization = this.organizationDao.load(id);
 OrganizationCertification organizationCertification = this.organizationCertificationFormMapper.mapTo(organizationCertificationForm, new OrganizationCertification());
 organizationRightsManager.checkCanSaveOrganizationCertification(organizationCertification,organization);
@@ -185,7 +185,7 @@ organizationProcessor.saveOrganizationCertification(organizationCertification, o
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void update(Long id, OrganizationForm organizationForm) {
+public void update(Integer id, OrganizationForm organizationForm) {
 Organization organization = this.organizationDao.load(id);
 organizationRightsManager.checkCanUpdate(organization);
 organizationStateManager.checkCanUpdate(organization);
@@ -198,7 +198,7 @@ organizationProcessor.update(organization);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void updateOrganizationCertification(Long id, OrganizationCertificationForm organizationCertificationForm) {
+public void updateOrganizationCertification(Integer id, OrganizationCertificationForm organizationCertificationForm) {
 Organization organization = this.organizationDao.load(id);
 OrganizationCertification organizationCertification = organization.getOrganizationCertification();
 organizationRightsManager.checkCanUpdateOrganizationCertification(organizationCertification);
@@ -212,7 +212,7 @@ organizationProcessor.updateOrganizationCertification(organizationCertification)
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void delete(Long id) {
+public void delete(Integer id) {
 Organization organization = organizationDao.load(id);
 organizationRightsManager.checkCanDelete(organization);
 organizationStateManager.checkCanDelete(organization);
@@ -224,7 +224,7 @@ organizationProcessor.delete(organization);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void deleteOrganizationCertification(Long id) {
+public void deleteOrganizationCertification(Integer id) {
 Organization organization = this.organizationDao.load(id);
 OrganizationCertification organizationCertification = organization.getOrganizationCertification();
 organizationRightsManager.checkCanDeleteOrganizationCertification(organizationCertification);
@@ -237,10 +237,10 @@ this.organizationProcessor.deleteOrganizationCertification(organizationCertifica
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void deleteList(List<Long> idList) {
+public void deleteList(List<Integer> idList) {
 Organization organization;
 if (idList != null){
-for (Long id:idList){
+for (Integer id:idList){
 organization = organizationDao.load(id);
 organizationRightsManager.checkCanDelete(organization);
 organizationStateManager.checkCanDelete(organization);

@@ -9,7 +9,7 @@ import org.sklsft.demo.api.model.organizations.forms.OrganizationCertificationFo
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-public class OrganizationCertificationFullView extends FullView<Long, OrganizationCertificationForm> {
+public class OrganizationCertificationFullView extends FullView<String, OrganizationCertificationForm> {
 
 private static final long serialVersionUID = 1L;
 

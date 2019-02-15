@@ -102,7 +102,7 @@ load();
 /**
  * edit one to many region
  */
-public void editRegion(Long id) {
+public void editRegion(Integer id) {
 countryDetailView.setSelectedRegion(regionService.load(id));
 }
 
@@ -119,7 +119,7 @@ refreshRegionList();
  * delete one to many region
  */
 @AjaxMethod("Region.delete")
-public void deleteRegion(Long id) {
+public void deleteRegion(Integer id) {
 regionService.delete(id);
 refreshRegionList();
 }
@@ -129,7 +129,7 @@ refreshRegionList();
  */
 @AjaxMethod("Region.deleteList")
 public void deleteRegionList() {
-List<Long> ids = new ArrayList<>();
+List<Integer> ids = new ArrayList<>();
 for (RegionBasicView region:countryDetailView.getRegionScrollView().getElements()) {
 if (region.getSelected()) {
 ids.add(region.getId());

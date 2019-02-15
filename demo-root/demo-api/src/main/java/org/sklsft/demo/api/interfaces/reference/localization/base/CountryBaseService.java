@@ -39,7 +39,7 @@ public static final String SCROLL_URL = "/country/scroll";
 /**
  * load object
  */
-CountryFullView load(Long id);
+CountryFullView load(Short id);
 public static final String GET_URL = "/country/{id}";
 
 /**
@@ -57,25 +57,25 @@ public static final String GET_NEW_URL = "/country/new";
 /**
  * save object
  */
-Long save(CountryForm countryForm);
+Short save(CountryForm countryForm);
 public static final String SAVE_URL = "/country";
 
 /**
  * update object
  */
-void update(Long id, CountryForm countryForm);
+void update(Short id, CountryForm countryForm);
 public static final String UPDATE_URL = "/country/{id}";
 
 /**
  * delete object
  */
-void delete(Long id);
+void delete(Short id);
 public static final String DELETE_URL = "/country/{id}";
 
 /**
  * delete object list
  */
-void deleteList(List<Long> idList);
+void deleteList(List<Short> idList);
 public static final String DELETE_LIST_URL = "/country/delete";
 
 }

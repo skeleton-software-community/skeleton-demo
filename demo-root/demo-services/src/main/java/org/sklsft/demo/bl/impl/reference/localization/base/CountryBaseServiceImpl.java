@@ -104,7 +104,7 @@ return result;
  */
 @Override
 @Transactional(readOnly=true)
-public CountryFullView load(Long id) {
+public CountryFullView load(Short id) {
 Country country = countryDao.load(id);
 countryRightsManager.checkCanAccess(country);
 return this.countryFullViewMapper.mapFrom(new CountryFullView(),country);
@@ -135,7 +135,7 @@ return new CountryFullView();
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public Long save(CountryForm countryForm) {
+public Short save(CountryForm countryForm) {
 Country country = this.countryFormMapper.mapTo(countryForm, new Country());
 countryRightsManager.checkCanSave(country);
 countryStateManager.checkCanSave(country);
@@ -147,7 +147,7 @@ return countryProcessor.save(country);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void update(Long id, CountryForm countryForm) {
+public void update(Short id, CountryForm countryForm) {
 Country country = this.countryDao.load(id);
 countryRightsManager.checkCanUpdate(country);
 countryStateManager.checkCanUpdate(country);
@@ -160,7 +160,7 @@ countryProcessor.update(country);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void delete(Long id) {
+public void delete(Short id) {
 Country country = countryDao.load(id);
 countryRightsManager.checkCanDelete(country);
 countryStateManager.checkCanDelete(country);
@@ -172,10 +172,10 @@ countryProcessor.delete(country);
  */
 @Override
 @Transactional(rollbackFor=Exception.class)
-public void deleteList(List<Long> idList) {
+public void deleteList(List<Short> idList) {
 Country country;
 if (idList != null){
-for (Long id:idList){
+for (Short id:idList){
 country = countryDao.load(id);
 countryRightsManager.checkCanDelete(country);
 countryStateManager.checkCanDelete(country);

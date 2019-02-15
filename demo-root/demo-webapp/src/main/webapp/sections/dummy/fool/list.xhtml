@@ -159,9 +159,10 @@ onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" process="
 </div>
 </f:facet>
 <h:panelGrid styleClass="actions-grid" columns="2">
-<p:commandLink action="#{foolListController.editFool(fool.id)}" oncomplete="$('#foolModal').modal('show')" process="@this" update="@form:foolDetailPanelGroup">
+<h:link outcome="/sections/dummy/fool/details.jsf">
 <h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
-</p:commandLink>
+<f:param name="id" value="#{fool.id}" />
+</h:link>
 <p:commandLink rendered="#{fool.canDelete}" action="#{foolListController.delete(fool.id)}"
 onclick="if (!confirm('#{i18n.confirmDelete}')) return false" process="@this" update=":messages, @form:foolPanelGroup">
 <h:graphicImage url="/resources/images/icons/delete.png" styleClass="imageIcon" title="#{i18n.delete}"/>
