@@ -4,13 +4,8 @@
     <projectName>demo</projectName>
     <skeleton>SPRING_HIBERNATE_PRIMEFACES</skeleton>
     <databaseEngine>POSTGRESQL</databaseEngine>
-    <databaseName>demo</databaseName>
-    <databaseDNS>localhost</databaseDNS>
-    <databasePort>5432</databasePort>
-    <databaseUserName>postgres</databaseUserName>
-    <databasePassword>postgres</databasePassword>
     <audited>false</audited>
-	<packages>
+    <packages>
 		<package name="REFERENCE">
 			<packages>
 				<package name="LOCALIZATION">
@@ -148,16 +143,16 @@
 							editable="true" rendering="Description">
 						</column>
 						<column name="LONG_FIELD" dataType="LONG" nullable="true"
-							editable="true" rendering="Long">
+							editable="true" filterable="false" rendering="Long">
 						</column>
 						<column name="BOOLEAN_FIELD" dataType="BOOLEAN" nullable="true"
 							editable="true" rendering="Boolean">
 						</column>
 						<column name="DOUBLE_FIELD" dataType="DOUBLE" nullable="true"
-							editable="true" rendering="Double">
+							editable="true" filterable="false" rendering="Double">
 						</column>
 						<column name="DECIMAL_FIELD" dataType="BIG_DECIMAL"
-							nullable="true" editable="true" rendering="Decimal">
+							nullable="true" editable="true" filterable="false" rendering="Decimal">
 						</column>
 						<column name="DATE_FIELD" dataType="DATE" nullable="true"
 							editable="true" rendering="Date">

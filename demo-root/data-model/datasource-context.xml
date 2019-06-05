@@ -19,7 +19,7 @@ http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 	<bean id="projectDataSourceProvider" class="org.sklsft.generator.repository.backup.datasource.impl.OutputDataSourceProviderImpl">
 		<constructor-arg name="dataSources">
 	  		<map>
-				<entry key="demo" value-ref="demo"/>
+				<entry key="local" value-ref="local"/>
 	  		</map>
   		</constructor-arg>
 	</bean>
@@ -29,14 +29,14 @@ http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 	<bean id="inputDataSourceProvider" class="org.sklsft.generator.repository.backup.datasource.impl.InputDataSourceProviderImpl">
 		<constructor-arg name="dataSources">
 	  		<map>
-				<entry key="demo" value-ref="demo"/>
+				
 	  		</map>
   		</constructor-arg>
 	</bean>
 	
 	
 	<!-- here is the list of all sources used by or to populate your project database -->
-	<bean name="demo"
+	<bean name="local"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://localhost:5432/demo" />
