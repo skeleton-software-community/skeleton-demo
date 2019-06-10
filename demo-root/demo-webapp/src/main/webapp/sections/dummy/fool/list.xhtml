@@ -50,20 +50,6 @@ styleClass="form-control">
 </div>
 
 <div class="col-xs-3">
-<label>#{i18n.foolLongField}</label>
-<h:inputText value="#{foolListView.scrollForm.filter.longFieldMinValue}"
-styleClass="form-control">
-<f:convertNumber integerOnly="true" pattern="#,##0"/>
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
-</h:inputText>
-<h:inputText value="#{foolListView.scrollForm.filter.longFieldMaxValue}"
-styleClass="form-control">
-<f:convertNumber integerOnly="true" pattern="#,##0"/>
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
-</h:inputText>
-</div>
-
-<div class="col-xs-3">
 <label>#{i18n.foolBooleanField}</label>
 <h:selectOneMenu value="#{foolListView.scrollForm.filter.booleanField}" styleClass="form-control">
 <f:selectItem itemLabel="" itemValue="#{null}"></f:selectItem>
@@ -71,30 +57,6 @@ styleClass="form-control">
 <f:selectItem itemLabel="#{i18n.falseLabel}" itemValue="#{false}"></f:selectItem>
 <p:ajax event="change" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
 </h:selectOneMenu>
-</div>
-
-<div class="col-xs-3">
-<label>#{i18n.foolDoubleField}</label>
-<h:inputText value="#{foolListView.scrollForm.filter.doubleFieldMinValue}"
-styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
-</h:inputText>
-<h:inputText value="#{foolListView.scrollForm.filter.doubleFieldMaxValue}"
-styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
-</h:inputText>
-</div>
-
-<div class="col-xs-3">
-<label>#{i18n.foolDecimalField}</label>
-<h:inputText value="#{foolListView.scrollForm.filter.decimalFieldMinValue}"
-styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
-</h:inputText>
-<h:inputText value="#{foolListView.scrollForm.filter.decimalFieldMaxValue}"
-styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
-</h:inputText>
 </div>
 
 <div class="col-xs-3">
