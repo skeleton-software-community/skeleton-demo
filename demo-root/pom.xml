@@ -18,6 +18,8 @@
 		<module>demo-repository</module>
 		<module>demo-business-component</module>
 		<module>demo-services</module>
+		<module>demo-rest</module>
+		<module>demo-rest-client</module>
 		<module>demo-webapp</module>
 		<module>demo-populator</module>
 		<module>demo-test</module>
@@ -49,6 +51,9 @@
 		
 		<servlet.version>3.1.0</servlet.version>
 		<javax.el.version>3.0.1-b08</javax.el.version>
+		
+		<jackson.version>2.6.0</jackson.version>
+		
 		<jsf.version>2.2.13</jsf.version>
 		<primefaces.version>5.1</primefaces.version>
 		<primefaces.theme.version>1.0.10</primefaces.theme.version>
@@ -87,6 +92,12 @@
 			<dependency>
 				<groupId>org.sklsft.demo</groupId>
 				<artifactId>demo-services</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.sklsft.demo</groupId>
+				<artifactId>demo-rest-client</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
@@ -131,6 +142,12 @@
 			
 			<dependency>
 				<groupId>org.sklsft.commons</groupId>
+				<artifactId>commons-rest</artifactId>
+				<version>${skeleton.commons.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.sklsft.commons</groupId>
 				<artifactId>commons-mvc</artifactId>
 				<version>${skeleton.commons.version}</version>
 				<exclusions>
@@ -139,6 +156,12 @@
 						<artifactId>primefaces</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.sklsft.commons</groupId>
+				<artifactId>commons-rest-client</artifactId>
+				<version>${skeleton.commons.version}</version>
 			</dependency>
 			
 			
@@ -234,6 +257,12 @@
 				<artifactId>spring-web</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -302,6 +331,27 @@
 				<artifactId>javax.el</artifactId>
 				<version>${javax.el.version}</version>
 			</dependency>
+			
+			
+			<!-- json mapping -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			
 
 			
 			<!-- JSF -->

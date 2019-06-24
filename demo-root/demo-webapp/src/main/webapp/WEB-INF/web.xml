@@ -32,10 +32,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:applicationContext-demo-repository.xml
-			classpath:applicationContext-demo-business-component.xml
-			classpath:applicationContext-demo-services.xml
 			classpath:applicationContext-demo-webapp.xml
+			classpath:applicationContext-demo-rest-client.xml
 		</param-value>
 	</context-param>
 
