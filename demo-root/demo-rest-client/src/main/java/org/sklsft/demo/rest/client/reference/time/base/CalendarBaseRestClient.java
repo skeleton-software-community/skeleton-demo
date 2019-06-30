@@ -1,14 +1,14 @@
 package org.sklsft.demo.rest.client.reference.time.base;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.commons.api.model.SelectItem;
+import org.sklsft.commons.rest.client.RestClient;
 import org.sklsft.demo.api.interfaces.reference.time.base.CalendarBaseService;
 import org.sklsft.demo.api.model.reference.time.filters.CalendarDayOffFilter;
 import org.sklsft.demo.api.model.reference.time.filters.CalendarFilter;
@@ -20,7 +20,6 @@ import org.sklsft.demo.api.model.reference.time.views.basic.CalendarBasicView;
 import org.sklsft.demo.api.model.reference.time.views.basic.CalendarDayOffBasicView;
 import org.sklsft.demo.api.model.reference.time.views.full.CalendarDayOffFullView;
 import org.sklsft.demo.api.model.reference.time.views.full.CalendarFullView;
-import org.sklsft.demo.model.reference.time.Calendar;
 
 /**
  * auto generated base rest client class file
@@ -39,7 +38,7 @@ private RestClient restClient;
  */
 @Override
 public List<SelectItem> getOptions() {
-return null;
+return Arrays.asList(restClient.getForObject(GET_OPTIONS_URL, SelectItem[].class));
 }
 
 /**
@@ -47,7 +46,7 @@ return null;
  */
 @Override
 public List<CalendarBasicView> loadList() {
-return null;
+return Arrays.asList(restClient.getForObject(GET_LIST_URL, CalendarBasicView[].class));
 }
 
 /**
@@ -70,7 +69,8 @@ return null;
  * find object
  */
 @Override
-public CalendarFullView find(return null;
+public CalendarFullView find(String code) {
+return null;
 }
 
 /**
@@ -162,7 +162,6 @@ public void deleteCalendarDayOff(Integer id) {
  */
 @Override
 public void deleteList(List<Integer> idList) {
-Calendar calendar;
 }
 
 /**

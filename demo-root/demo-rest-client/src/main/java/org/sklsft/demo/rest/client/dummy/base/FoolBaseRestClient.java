@@ -1,11 +1,10 @@
 package org.sklsft.demo.rest.client.dummy.base;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.commons.api.model.SelectItem;
@@ -16,7 +15,6 @@ import org.sklsft.demo.api.model.dummy.forms.FoolForm;
 import org.sklsft.demo.api.model.dummy.sortings.FoolSorting;
 import org.sklsft.demo.api.model.dummy.views.basic.FoolBasicView;
 import org.sklsft.demo.api.model.dummy.views.full.FoolFullView;
-import org.sklsft.demo.model.dummy.Fool;
 
 /**
  * auto generated base rest client class file
@@ -35,7 +33,7 @@ private RestClient restClient;
  */
 @Override
 public List<SelectItem> searchOptions(String arg) {
-return null;
+return Arrays.asList(restClient.postForObject(SEARCH_OPTIONS_URL, arg, SelectItem[].class));
 }
 
 /**
@@ -43,7 +41,7 @@ return null;
  */
 @Override
 public List<FoolBasicView> loadList() {
-return null;
+return Arrays.asList(restClient.getForObject(GET_LIST_URL, FoolBasicView[].class));
 }
 
 /**
@@ -66,7 +64,8 @@ return null;
  * find object
  */
 @Override
-public FoolFullView find(return null;
+public FoolFullView find(String code) {
+return null;
 }
 
 /**
@@ -104,7 +103,6 @@ public void delete(String id) {
  */
 @Override
 public void deleteList(List<String> idList) {
-Fool fool;
 }
 
 }

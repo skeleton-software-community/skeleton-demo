@@ -1,21 +1,21 @@
 package org.sklsft.demo.rest.client.reference.localization.base;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
+
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
-import org.sklsft.commons.api.model.SelectItem;
+import org.sklsft.commons.rest.client.RestClient;
 import org.sklsft.demo.api.interfaces.reference.localization.base.CityBaseService;
 import org.sklsft.demo.api.model.reference.localization.filters.CityFilter;
 import org.sklsft.demo.api.model.reference.localization.forms.CityForm;
 import org.sklsft.demo.api.model.reference.localization.sortings.CitySorting;
 import org.sklsft.demo.api.model.reference.localization.views.basic.CityBasicView;
 import org.sklsft.demo.api.model.reference.localization.views.full.CityFullView;
-import org.sklsft.demo.model.reference.localization.City;
 
 /**
  * auto generated base rest client class file
@@ -34,7 +34,7 @@ private RestClient restClient;
  */
 @Override
 public List<CityBasicView> loadList() {
-return null;
+return Arrays.asList(restClient.getForObject(GET_LIST_URL, CityBasicView[].class));
 }
 
 /**
@@ -42,7 +42,9 @@ return null;
  */
 @Override
 public List<CityBasicView> loadListFromRegion (Integer regionId) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("regionId", regionId);
+return Arrays.asList(restClient.getForObject(GET_CITY_LIST_fROM_REGION_URL, CityBasicView[].class, vars));
 }
 
 /**
@@ -73,7 +75,8 @@ return null;
  * find object
  */
 @Override
-public CityFullView find(return null;
+public CityFullView find(String regionCountryCode, String regionCode, String code) {
+return null;
 }
 
 /**
@@ -119,7 +122,6 @@ public void delete(Long id) {
  */
 @Override
 public void deleteList(List<Long> idList) {
-City city;
 }
 
 }

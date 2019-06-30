@@ -1,21 +1,21 @@
 package org.sklsft.demo.rest.client.dummy.base;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
+
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
-import org.sklsft.commons.api.model.SelectItem;
+import org.sklsft.commons.rest.client.RestClient;
 import org.sklsft.demo.api.interfaces.dummy.base.StupidBaseService;
 import org.sklsft.demo.api.model.dummy.filters.StupidFilter;
 import org.sklsft.demo.api.model.dummy.forms.StupidForm;
 import org.sklsft.demo.api.model.dummy.sortings.StupidSorting;
 import org.sklsft.demo.api.model.dummy.views.basic.StupidBasicView;
 import org.sklsft.demo.api.model.dummy.views.full.StupidFullView;
-import org.sklsft.demo.model.dummy.Stupid;
 
 /**
  * auto generated base rest client class file
@@ -34,7 +34,7 @@ private RestClient restClient;
  */
 @Override
 public List<StupidBasicView> loadList() {
-return null;
+return Arrays.asList(restClient.getForObject(GET_LIST_URL, StupidBasicView[].class));
 }
 
 /**
@@ -42,7 +42,9 @@ return null;
  */
 @Override
 public List<StupidBasicView> loadListFromFool (String foolId) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("foolId", foolId);
+return Arrays.asList(restClient.getForObject(GET_STUPID_LIST_fROM_FOOL_URL, StupidBasicView[].class, vars));
 }
 
 /**
@@ -73,7 +75,8 @@ return null;
  * find object
  */
 @Override
-public StupidFullView find(return null;
+public StupidFullView find(String code) {
+return null;
 }
 
 /**
@@ -119,7 +122,6 @@ public void delete(Long id) {
  */
 @Override
 public void deleteList(List<Long> idList) {
-Stupid stupid;
 }
 
 }

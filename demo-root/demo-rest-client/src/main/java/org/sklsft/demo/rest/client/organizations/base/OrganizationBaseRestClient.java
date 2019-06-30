@@ -1,14 +1,14 @@
 package org.sklsft.demo.rest.client.organizations.base;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
 import org.sklsft.commons.api.model.SelectItem;
+import org.sklsft.commons.rest.client.RestClient;
 import org.sklsft.demo.api.interfaces.organizations.base.OrganizationBaseService;
 import org.sklsft.demo.api.model.organizations.filters.OrganizationFilter;
 import org.sklsft.demo.api.model.organizations.forms.OrganizationCertificationForm;
@@ -17,7 +17,6 @@ import org.sklsft.demo.api.model.organizations.sortings.OrganizationSorting;
 import org.sklsft.demo.api.model.organizations.views.basic.OrganizationBasicView;
 import org.sklsft.demo.api.model.organizations.views.full.OrganizationCertificationFullView;
 import org.sklsft.demo.api.model.organizations.views.full.OrganizationFullView;
-import org.sklsft.demo.model.organizations.Organization;
 
 /**
  * auto generated base rest client class file
@@ -36,7 +35,7 @@ private RestClient restClient;
  */
 @Override
 public List<SelectItem> searchOptions(String arg) {
-return null;
+return Arrays.asList(restClient.postForObject(SEARCH_OPTIONS_URL, arg, SelectItem[].class));
 }
 
 /**
@@ -44,7 +43,7 @@ return null;
  */
 @Override
 public List<OrganizationBasicView> loadList() {
-return null;
+return Arrays.asList(restClient.getForObject(GET_LIST_URL, OrganizationBasicView[].class));
 }
 
 /**
@@ -67,7 +66,8 @@ return null;
  * find object
  */
 @Override
-public OrganizationFullView find(return null;
+public OrganizationFullView find(String code) {
+return null;
 }
 
 /**
@@ -134,7 +134,6 @@ public void deleteOrganizationCertification(Integer id) {
  */
 @Override
 public void deleteList(List<Integer> idList) {
-Organization organization;
 }
 
 }
