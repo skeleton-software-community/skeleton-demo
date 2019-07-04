@@ -16,6 +16,7 @@ import org.sklsft.demo.api.model.reference.localization.forms.RegionForm;
 import org.sklsft.demo.api.model.reference.localization.sortings.RegionSorting;
 import org.sklsft.demo.api.model.reference.localization.views.basic.RegionBasicView;
 import org.sklsft.demo.api.model.reference.localization.views.full.RegionFullView;
+import org.springframework.core.ParameterizedTypeReference;
 
 /**
  * auto generated base rest client class file
@@ -44,7 +45,7 @@ return Arrays.asList(restClient.getForObject(GET_LIST_URL, RegionBasicView[].cla
 public List<RegionBasicView> loadListFromCountry (Short countryId) {
 Map<String, Object> vars = new HashMap<String, Object>();
 vars.put("countryId", countryId);
-return Arrays.asList(restClient.getForObject(GET_REGION_LIST_fROM_COUNTRY_URL, RegionBasicView[].class, vars));
+return Arrays.asList(restClient.getForObject(GET_REGION_LIST_FROM_COUNTRY_URL, RegionBasicView[].class, vars));
 }
 
 /**
@@ -52,7 +53,7 @@ return Arrays.asList(restClient.getForObject(GET_REGION_LIST_fROM_COUNTRY_URL, R
  */
 @Override
 public ScrollView<RegionBasicView> scroll(ScrollForm<RegionFilter, RegionSorting> form) {
-return null;
+return restClient.postForObject(SCROLL_URL, form, new ParameterizedTypeReference<ScrollView<RegionBasicView>>(){});
 }
 
 /**
@@ -60,7 +61,9 @@ return null;
  */
 @Override
 public ScrollView<RegionBasicView> scrollFromCountry (Short countryId, ScrollForm<RegionFilter, RegionSorting> form) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("countryId", countryId);
+return restClient.postForObject(SCROLL_REGION_FROM_COUNTRY_URL, form, new ParameterizedTypeReference<ScrollView<RegionBasicView>>(){}, vars);
 }
 
 /**
@@ -68,7 +71,9 @@ return null;
  */
 @Override
 public RegionFullView load(Integer id) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return restClient.getForObject(GET_URL, RegionFullView.class, vars);
 }
 
 /**
@@ -84,7 +89,7 @@ return null;
  */
 @Override
 public RegionFullView create() {
-return null;
+return restClient.getForObject(GET_NEW_URL, RegionFullView.class);
 }
 
 /**
@@ -92,7 +97,7 @@ return null;
  */
 @Override
 public Integer save(RegionForm regionForm) {
-return null;
+return restClient.postForObject(SAVE_URL, regionForm, Integer.class);
 }
 
 /**
@@ -100,7 +105,9 @@ return null;
  */
 @Override
 public Integer saveFromCountry(Short countryId, RegionForm regionForm) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("countryId", countryId);
+return restClient.postForObject(SAVE_FROM_COUNTRY_URL, regionForm, Integer.class, vars);
 }
 
 /**
@@ -108,6 +115,9 @@ return null;
  */
 @Override
 public void update(Integer id, RegionForm regionForm) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.put(UPDATE_URL, regionForm, vars);
 }
 
 /**
@@ -115,6 +125,9 @@ public void update(Integer id, RegionForm regionForm) {
  */
 @Override
 public void delete(Integer id) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.delete(DELETE_URL, vars);
 }
 
 /**

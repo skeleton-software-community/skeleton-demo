@@ -16,6 +16,7 @@ import org.sklsft.demo.api.model.reference.localization.forms.CityForm;
 import org.sklsft.demo.api.model.reference.localization.sortings.CitySorting;
 import org.sklsft.demo.api.model.reference.localization.views.basic.CityBasicView;
 import org.sklsft.demo.api.model.reference.localization.views.full.CityFullView;
+import org.springframework.core.ParameterizedTypeReference;
 
 /**
  * auto generated base rest client class file
@@ -44,7 +45,7 @@ return Arrays.asList(restClient.getForObject(GET_LIST_URL, CityBasicView[].class
 public List<CityBasicView> loadListFromRegion (Integer regionId) {
 Map<String, Object> vars = new HashMap<String, Object>();
 vars.put("regionId", regionId);
-return Arrays.asList(restClient.getForObject(GET_CITY_LIST_fROM_REGION_URL, CityBasicView[].class, vars));
+return Arrays.asList(restClient.getForObject(GET_CITY_LIST_FROM_REGION_URL, CityBasicView[].class, vars));
 }
 
 /**
@@ -52,7 +53,7 @@ return Arrays.asList(restClient.getForObject(GET_CITY_LIST_fROM_REGION_URL, City
  */
 @Override
 public ScrollView<CityBasicView> scroll(ScrollForm<CityFilter, CitySorting> form) {
-return null;
+return restClient.postForObject(SCROLL_URL, form, new ParameterizedTypeReference<ScrollView<CityBasicView>>(){});
 }
 
 /**
@@ -60,7 +61,9 @@ return null;
  */
 @Override
 public ScrollView<CityBasicView> scrollFromRegion (Integer regionId, ScrollForm<CityFilter, CitySorting> form) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("regionId", regionId);
+return restClient.postForObject(SCROLL_CITY_FROM_REGION_URL, form, new ParameterizedTypeReference<ScrollView<CityBasicView>>(){}, vars);
 }
 
 /**
@@ -68,7 +71,9 @@ return null;
  */
 @Override
 public CityFullView load(Long id) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return restClient.getForObject(GET_URL, CityFullView.class, vars);
 }
 
 /**
@@ -84,7 +89,7 @@ return null;
  */
 @Override
 public CityFullView create() {
-return null;
+return restClient.getForObject(GET_NEW_URL, CityFullView.class);
 }
 
 /**
@@ -92,7 +97,7 @@ return null;
  */
 @Override
 public Long save(CityForm cityForm) {
-return null;
+return restClient.postForObject(SAVE_URL, cityForm, Long.class);
 }
 
 /**
@@ -100,7 +105,9 @@ return null;
  */
 @Override
 public Long saveFromRegion(Integer regionId, CityForm cityForm) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("regionId", regionId);
+return restClient.postForObject(SAVE_FROM_REGION_URL, cityForm, Long.class, vars);
 }
 
 /**
@@ -108,6 +115,9 @@ return null;
  */
 @Override
 public void update(Long id, CityForm cityForm) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.put(UPDATE_URL, cityForm, vars);
 }
 
 /**
@@ -115,6 +125,9 @@ public void update(Long id, CityForm cityForm) {
  */
 @Override
 public void delete(Long id) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.delete(DELETE_URL, vars);
 }
 
 /**

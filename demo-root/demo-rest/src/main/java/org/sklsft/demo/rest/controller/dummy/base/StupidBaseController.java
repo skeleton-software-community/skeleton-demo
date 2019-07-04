@@ -44,7 +44,7 @@ return stupidService.loadList();
 /**
  * load object list from fool
  */
-@RequestMapping(value = {StupidService.GET_STUPID_LIST_fROM_FOOL_URL}, method = RequestMethod.GET)
+@RequestMapping(value = {StupidService.GET_STUPID_LIST_FROM_FOOL_URL}, method = RequestMethod.GET)
 public @ResponseBody List<StupidBasicView> loadListFromFool (@PathVariable("foolId") String foolId) {
 return stupidService.loadListFromFool(foolId);
 }
@@ -59,7 +59,7 @@ return stupidService.scroll(form);
 /**
  * scroll object list from fool
  */
-@RequestMapping(value = {StupidService.SCROLL_STUPID_fROM_FOOL_URL}, method = RequestMethod.POST)
+@RequestMapping(value = {StupidService.SCROLL_STUPID_FROM_FOOL_URL}, method = RequestMethod.POST)
 public @ResponseBody ScrollView<StupidBasicView> scrollFromFool (@PathVariable("foolId") String foolId, @RequestBody ScrollForm<StupidFilter, StupidSorting> form) {
 return stupidService.scrollFromFool(foolId, form);
 }
@@ -106,7 +106,7 @@ return stupidService.saveFromFool(foolId, form);
  * update object
  */
 @RequestMapping(value = {StupidService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @Valid @RequestBody StupidForm form) {
+public @ResponseBody void update(@PathVariable("id") Long id, @Valid @RequestBody StupidForm form) {
 stupidService.update(id, form);
 }
 
@@ -114,7 +114,7 @@ stupidService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {StupidService.DELETE_URL}, method = RequestMethod.DELETE)
-public void delete(@PathVariable("id") Long id) {
+public @ResponseBody void delete(@PathVariable("id") Long id) {
 stupidService.delete(id);
 }
 

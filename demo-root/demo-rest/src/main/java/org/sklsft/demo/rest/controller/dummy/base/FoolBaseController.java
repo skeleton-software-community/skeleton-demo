@@ -93,7 +93,7 @@ return foolService.save(form);
  * update object
  */
 @RequestMapping(value = {FoolService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") String id, @Valid @RequestBody FoolForm form) {
+public @ResponseBody void update(@PathVariable("id") String id, @Valid @RequestBody FoolForm form) {
 foolService.update(id, form);
 }
 
@@ -101,7 +101,7 @@ foolService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {FoolService.DELETE_URL}, method = RequestMethod.DELETE)
-public void delete(@PathVariable("id") String id) {
+public @ResponseBody void delete(@PathVariable("id") String id) {
 foolService.delete(id);
 }
 

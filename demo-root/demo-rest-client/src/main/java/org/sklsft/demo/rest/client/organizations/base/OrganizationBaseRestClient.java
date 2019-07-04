@@ -1,7 +1,9 @@
 package org.sklsft.demo.rest.client.organizations.base;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,6 +19,7 @@ import org.sklsft.demo.api.model.organizations.sortings.OrganizationSorting;
 import org.sklsft.demo.api.model.organizations.views.basic.OrganizationBasicView;
 import org.sklsft.demo.api.model.organizations.views.full.OrganizationCertificationFullView;
 import org.sklsft.demo.api.model.organizations.views.full.OrganizationFullView;
+import org.springframework.core.ParameterizedTypeReference;
 
 /**
  * auto generated base rest client class file
@@ -51,7 +54,7 @@ return Arrays.asList(restClient.getForObject(GET_LIST_URL, OrganizationBasicView
  */
 @Override
 public ScrollView<OrganizationBasicView> scroll(ScrollForm<OrganizationFilter, OrganizationSorting> form) {
-return null;
+return restClient.postForObject(SCROLL_URL, form, new ParameterizedTypeReference<ScrollView<OrganizationBasicView>>(){});
 }
 
 /**
@@ -59,7 +62,9 @@ return null;
  */
 @Override
 public OrganizationFullView load(Integer id) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return restClient.getForObject(GET_URL, OrganizationFullView.class, vars);
 }
 
 /**
@@ -75,7 +80,9 @@ return null;
  */
 @Override
 public OrganizationCertificationFullView loadOrganizationCertification(Integer id) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return restClient.getForObject(GET_ORGANIZATION_CERTIFICATION_URL, OrganizationCertificationFullView.class, vars);
 }
 
 /**
@@ -83,7 +90,7 @@ return null;
  */
 @Override
 public OrganizationFullView create() {
-return null;
+return restClient.getForObject(GET_NEW_URL, OrganizationFullView.class);
 }
 
 /**
@@ -91,7 +98,7 @@ return null;
  */
 @Override
 public Integer save(OrganizationForm organizationForm) {
-return null;
+return restClient.postForObject(SAVE_URL, organizationForm, Integer.class);
 }
 
 /**
@@ -99,6 +106,9 @@ return null;
  */
 @Override
 public void saveOrganizationCertification(Integer id, OrganizationCertificationForm organizationCertificationForm) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.postForObject(SAVE_ORGANIZATION_CERTIFICATION_URL, organizationCertificationForm, Void.class, vars);
 }
 
 /**
@@ -106,6 +116,9 @@ public void saveOrganizationCertification(Integer id, OrganizationCertificationF
  */
 @Override
 public void update(Integer id, OrganizationForm organizationForm) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.put(UPDATE_URL, organizationForm, vars);
 }
 
 /**
@@ -113,6 +126,9 @@ public void update(Integer id, OrganizationForm organizationForm) {
  */
 @Override
 public void updateOrganizationCertification(Integer id, OrganizationCertificationForm organizationCertificationForm) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.put(UPDATE_ORGANIZATION_CERTIFICATION_URL, organizationCertificationForm, vars);
 }
 
 /**
@@ -120,6 +136,9 @@ public void updateOrganizationCertification(Integer id, OrganizationCertificatio
  */
 @Override
 public void delete(Integer id) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.delete(DELETE_URL, vars);
 }
 
 /**
@@ -127,6 +146,9 @@ public void delete(Integer id) {
  */
 @Override
 public void deleteOrganizationCertification(Integer id) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.delete(DELETE_ORGANIZATION_CERTIFICATION_URL, vars);
 }
 
 /**

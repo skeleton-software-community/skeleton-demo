@@ -44,7 +44,7 @@ return cityService.loadList();
 /**
  * load object list from region
  */
-@RequestMapping(value = {CityService.GET_CITY_LIST_fROM_REGION_URL}, method = RequestMethod.GET)
+@RequestMapping(value = {CityService.GET_CITY_LIST_FROM_REGION_URL}, method = RequestMethod.GET)
 public @ResponseBody List<CityBasicView> loadListFromRegion (@PathVariable("regionId") Integer regionId) {
 return cityService.loadListFromRegion(regionId);
 }
@@ -59,7 +59,7 @@ return cityService.scroll(form);
 /**
  * scroll object list from region
  */
-@RequestMapping(value = {CityService.SCROLL_CITY_fROM_REGION_URL}, method = RequestMethod.POST)
+@RequestMapping(value = {CityService.SCROLL_CITY_FROM_REGION_URL}, method = RequestMethod.POST)
 public @ResponseBody ScrollView<CityBasicView> scrollFromRegion (@PathVariable("regionId") Integer regionId, @RequestBody ScrollForm<CityFilter, CitySorting> form) {
 return cityService.scrollFromRegion(regionId, form);
 }
@@ -106,7 +106,7 @@ return cityService.saveFromRegion(regionId, form);
  * update object
  */
 @RequestMapping(value = {CityService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Long id, @Valid @RequestBody CityForm form) {
+public @ResponseBody void update(@PathVariable("id") Long id, @Valid @RequestBody CityForm form) {
 cityService.update(id, form);
 }
 
@@ -114,7 +114,7 @@ cityService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {CityService.DELETE_URL}, method = RequestMethod.DELETE)
-public void delete(@PathVariable("id") Long id) {
+public @ResponseBody void delete(@PathVariable("id") Long id) {
 cityService.delete(id);
 }
 

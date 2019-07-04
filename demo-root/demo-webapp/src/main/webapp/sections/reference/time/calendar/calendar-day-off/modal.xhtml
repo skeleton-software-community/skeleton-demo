@@ -40,7 +40,7 @@ xmlns:p="http://primefaces.org/ui">
 </div>
 
 <p:commandButton value="#{i18n.save}" action="#{calendarDetailController.saveCalendarDayOff}" rendered="#{empty view.id}" styleClass="btn btn-success" process="@form:calendarDayOffDetailPanelGroup" update=":messages, @form:calendarDayOffPanelGroup, @form:calendarDayOffDetailPanelGroup" oncomplete="onSuccess(args, function(){$('#calendarDayOffModal').modal('hide')});"/>
-<p:commandButton value="#{i18n.update}" action="#{calendarDetailController.updateCalendarDayOff}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" process="@form:calendarDayOffDetailPanelGroup + " update=":messages, @form:calendarDayOffPanelGroup, @form:calendarDayOffDetailPanelGroup" oncomplete="onSuccess(args, function(){$('#calendarDayOffModal').modal('hide')});"/>
+<p:commandButton value="#{i18n.update}" action="#{calendarDetailController.updateCalendarDayOff}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" styleClass="btn btn-success" process="@form:calendarDayOffDetailPanelGroup" update=":messages, @form:calendarDayOffPanelGroup, @form:calendarDayOffDetailPanelGroup" oncomplete="onSuccess(args, function(){$('#calendarDayOffModal').modal('hide')});"/>
 <p:commandButton value="#{i18n.cancel}" actionListener="#{calendarListController.resetForm}" styleClass="btn btn-info" immediate="true" process="@this" update=":messages, @form:calendarDayOffPanelGroup" oncomplete="$('#calendarDayOffModal').modal('hide')"/>
 
 <!-- Specific Code Start -->

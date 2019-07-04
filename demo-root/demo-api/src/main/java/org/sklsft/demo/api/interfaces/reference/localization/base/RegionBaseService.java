@@ -27,7 +27,7 @@ public static final String GET_LIST_URL = "/region/list";
  * load object list from country
  */
 List<RegionBasicView> loadListFromCountry (Short countryId);
-public static final String GET_REGION_LIST_fROM_COUNTRY_URL = "/country/{countryId}/region/list";
+public static final String GET_REGION_LIST_FROM_COUNTRY_URL = "/country/{countryId}/region/list";
 
 /**
  * scroll object list
@@ -39,7 +39,7 @@ public static final String SCROLL_URL = "/region/scroll";
  * scroll object list from country
  */
 ScrollView<RegionBasicView> scrollFromCountry (Short countryId, ScrollForm<RegionFilter, RegionSorting> form);
-public static final String SCROLL_REGION_fROM_COUNTRY_URL = "/country/{countryId}/region/scroll";
+public static final String SCROLL_REGION_FROM_COUNTRY_URL = "/country/{countryId}/region/scroll";
 
 /**
  * load object

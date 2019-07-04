@@ -90,8 +90,8 @@ return calendarService.loadCalendarDayOffList(id);
  * scroll one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.SCROLL_CALENDAR_DAY_OFF_URL}, method = RequestMethod.POST)
-public @ResponseBody ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (@PathVariable("calendarId") Integer calendarId, @RequestBody ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
-return calendarService.scrollCalendarDayOff(calendarId, form);
+public @ResponseBody ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (@PathVariable("id") Integer id, @RequestBody ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
+return calendarService.scrollCalendarDayOff(id, form);
 }
 
 /**
@@ -138,7 +138,7 @@ calendarService.saveCalendarDayOff(id, form);
  * update object
  */
 @RequestMapping(value = {CalendarService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Integer id, @Valid @RequestBody CalendarForm form) {
+public @ResponseBody void update(@PathVariable("id") Integer id, @Valid @RequestBody CalendarForm form) {
 calendarService.update(id, form);
 }
 
@@ -146,7 +146,7 @@ calendarService.update(id, form);
  * update one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.UPDATE_CALENDAR_DAY_OFF_URL}, method = RequestMethod.PUT)
-public void updateCalendarDayOff(Integer id, @Valid @RequestBody CalendarDayOffForm form) {
+public @ResponseBody void updateCalendarDayOff(@PathVariable("id") Integer id, @Valid @RequestBody CalendarDayOffForm form) {
 calendarService.updateCalendarDayOff(id, form);
 }
 
@@ -154,7 +154,7 @@ calendarService.updateCalendarDayOff(id, form);
  * delete object
  */
 @RequestMapping(value = {CalendarService.DELETE_URL}, method = RequestMethod.DELETE)
-public void delete(@PathVariable("id") Integer id) {
+public @ResponseBody void delete(@PathVariable("id") Integer id) {
 calendarService.delete(id);
 }
 
@@ -162,7 +162,7 @@ calendarService.delete(id);
  * delete one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.DELETE_CALENDAR_DAY_OFF_URL}, method = RequestMethod.DELETE)
-public void deleteCalendarDayOff(@PathVariable("id")Integer id) {
+public @ResponseBody void deleteCalendarDayOff(@PathVariable("id")Integer id) {
 calendarService.deleteCalendarDayOff(id);
 }
 

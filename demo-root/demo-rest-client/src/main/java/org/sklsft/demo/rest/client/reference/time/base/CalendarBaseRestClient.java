@@ -1,7 +1,9 @@
 package org.sklsft.demo.rest.client.reference.time.base;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,6 +22,7 @@ import org.sklsft.demo.api.model.reference.time.views.basic.CalendarBasicView;
 import org.sklsft.demo.api.model.reference.time.views.basic.CalendarDayOffBasicView;
 import org.sklsft.demo.api.model.reference.time.views.full.CalendarDayOffFullView;
 import org.sklsft.demo.api.model.reference.time.views.full.CalendarFullView;
+import org.springframework.core.ParameterizedTypeReference;
 
 /**
  * auto generated base rest client class file
@@ -54,7 +57,7 @@ return Arrays.asList(restClient.getForObject(GET_LIST_URL, CalendarBasicView[].c
  */
 @Override
 public ScrollView<CalendarBasicView> scroll(ScrollForm<CalendarFilter, CalendarSorting> form) {
-return null;
+return restClient.postForObject(SCROLL_URL, form, new ParameterizedTypeReference<ScrollView<CalendarBasicView>>(){});
 }
 
 /**
@@ -62,7 +65,9 @@ return null;
  */
 @Override
 public CalendarFullView load(Integer id) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return restClient.getForObject(GET_URL, CalendarFullView.class, vars);
 }
 
 /**
@@ -78,15 +83,19 @@ return null;
  */
 @Override
 public List<CalendarDayOffBasicView> loadCalendarDayOffList(Integer id) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return Arrays.asList(restClient.getForObject(GET_CALENDAR_DAY_OFF_LIST_URL, CalendarDayOffBasicView[].class, vars));
 }
 
 /**
  * scroll one to many component calendarDayOff
  */
 @Override
-public ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (Integer calendarId, ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
-return null;
+public ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (Integer id, ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return restClient.postForObject(SCROLL_CALENDAR_DAY_OFF_URL, form, new ParameterizedTypeReference<ScrollView<CalendarDayOffBasicView>>(){}, vars);
 }
 
 /**
@@ -94,7 +103,9 @@ return null;
  */
 @Override
 public CalendarDayOffFullView loadCalendarDayOff(Integer id) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return restClient.getForObject(GET_CALENDAR_DAY_OFF_URL, CalendarDayOffFullView.class, vars);
 }
 
 /**
@@ -102,7 +113,7 @@ return null;
  */
 @Override
 public CalendarFullView create() {
-return null;
+return restClient.getForObject(GET_NEW_URL, CalendarFullView.class);
 }
 
 /**
@@ -110,7 +121,9 @@ return null;
  */
 @Override
 public CalendarDayOffFullView createCalendarDayOff(Integer id) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return restClient.getForObject(GET_NEW_CALENDAR_DAY_OFF_URL, CalendarDayOffFullView.class, vars);
 }
 
 /**
@@ -118,7 +131,7 @@ return null;
  */
 @Override
 public Integer save(CalendarForm calendarForm) {
-return null;
+return restClient.postForObject(SAVE_URL, calendarForm, Integer.class);
 }
 
 /**
@@ -126,6 +139,9 @@ return null;
  */
 @Override
 public void saveCalendarDayOff(Integer id, CalendarDayOffForm calendarDayOffForm) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.postForObject(SAVE_CALENDAR_DAY_OFF_URL, calendarDayOffForm, Void.class, vars);
 }
 
 /**
@@ -133,6 +149,9 @@ public void saveCalendarDayOff(Integer id, CalendarDayOffForm calendarDayOffForm
  */
 @Override
 public void update(Integer id, CalendarForm calendarForm) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.put(UPDATE_URL, calendarForm, vars);
 }
 
 /**
@@ -140,6 +159,9 @@ public void update(Integer id, CalendarForm calendarForm) {
  */
 @Override
 public void updateCalendarDayOff(Integer id, CalendarDayOffForm calendarDayOffForm) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.put(UPDATE_CALENDAR_DAY_OFF_URL, calendarDayOffForm, vars);
 }
 
 
@@ -148,6 +170,9 @@ public void updateCalendarDayOff(Integer id, CalendarDayOffForm calendarDayOffFo
  */
 @Override
 public void delete(Integer id) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.delete(DELETE_URL, vars);
 }
 
 /**
@@ -155,6 +180,9 @@ public void delete(Integer id) {
  */
 @Override
 public void deleteCalendarDayOff(Integer id) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.delete(DELETE_CALENDAR_DAY_OFF_URL, vars);
 }
 
 /**

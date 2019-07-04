@@ -95,7 +95,7 @@ onclick="if (!confirm('#{i18n.confirmDeleteSelection}')) return false" process="
 
 </f:facet>
 <h:panelGrid styleClass="actions-grid" columns="2">
-<p:commandLink action="#{calendarDetailController.editCalendarDayOff(calendarDayOff.id)}" oncomplete="$('#calendarDayOffModal').modal('show')" update="@form:calendarDayOffDetailPanelGroup">
+<p:commandLink action="#{calendarDetailController.editCalendarDayOff(calendarDayOff.id)}" oncomplete="$('#calendarDayOffModal').modal('show')" process="@this" update="@form:calendarDayOffDetailPanelGroup">
 <h:graphicImage url="/resources/images/icons/edit.png" styleClass="imageIcon" title="#{i18n.edit}"/>
 </p:commandLink>
 <p:commandLink action="#{calendarDetailController.deleteCalendarDayOff(calendarDayOff.id)}"

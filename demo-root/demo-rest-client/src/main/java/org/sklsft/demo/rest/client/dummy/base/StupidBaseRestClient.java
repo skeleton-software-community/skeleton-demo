@@ -16,6 +16,7 @@ import org.sklsft.demo.api.model.dummy.forms.StupidForm;
 import org.sklsft.demo.api.model.dummy.sortings.StupidSorting;
 import org.sklsft.demo.api.model.dummy.views.basic.StupidBasicView;
 import org.sklsft.demo.api.model.dummy.views.full.StupidFullView;
+import org.springframework.core.ParameterizedTypeReference;
 
 /**
  * auto generated base rest client class file
@@ -44,7 +45,7 @@ return Arrays.asList(restClient.getForObject(GET_LIST_URL, StupidBasicView[].cla
 public List<StupidBasicView> loadListFromFool (String foolId) {
 Map<String, Object> vars = new HashMap<String, Object>();
 vars.put("foolId", foolId);
-return Arrays.asList(restClient.getForObject(GET_STUPID_LIST_fROM_FOOL_URL, StupidBasicView[].class, vars));
+return Arrays.asList(restClient.getForObject(GET_STUPID_LIST_FROM_FOOL_URL, StupidBasicView[].class, vars));
 }
 
 /**
@@ -52,7 +53,7 @@ return Arrays.asList(restClient.getForObject(GET_STUPID_LIST_fROM_FOOL_URL, Stup
  */
 @Override
 public ScrollView<StupidBasicView> scroll(ScrollForm<StupidFilter, StupidSorting> form) {
-return null;
+return restClient.postForObject(SCROLL_URL, form, new ParameterizedTypeReference<ScrollView<StupidBasicView>>(){});
 }
 
 /**
@@ -60,7 +61,9 @@ return null;
  */
 @Override
 public ScrollView<StupidBasicView> scrollFromFool (String foolId, ScrollForm<StupidFilter, StupidSorting> form) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("foolId", foolId);
+return restClient.postForObject(SCROLL_STUPID_FROM_FOOL_URL, form, new ParameterizedTypeReference<ScrollView<StupidBasicView>>(){}, vars);
 }
 
 /**
@@ -68,7 +71,9 @@ return null;
  */
 @Override
 public StupidFullView load(Long id) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return restClient.getForObject(GET_URL, StupidFullView.class, vars);
 }
 
 /**
@@ -84,7 +89,7 @@ return null;
  */
 @Override
 public StupidFullView create() {
-return null;
+return restClient.getForObject(GET_NEW_URL, StupidFullView.class);
 }
 
 /**
@@ -92,7 +97,7 @@ return null;
  */
 @Override
 public Long save(StupidForm stupidForm) {
-return null;
+return restClient.postForObject(SAVE_URL, stupidForm, Long.class);
 }
 
 /**
@@ -100,7 +105,9 @@ return null;
  */
 @Override
 public Long saveFromFool(String foolId, StupidForm stupidForm) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("foolId", foolId);
+return restClient.postForObject(SAVE_FROM_FOOL_URL, stupidForm, Long.class, vars);
 }
 
 /**
@@ -108,6 +115,9 @@ return null;
  */
 @Override
 public void update(Long id, StupidForm stupidForm) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.put(UPDATE_URL, stupidForm, vars);
 }
 
 /**
@@ -115,6 +125,9 @@ public void update(Long id, StupidForm stupidForm) {
  */
 @Override
 public void delete(Long id) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.delete(DELETE_URL, vars);
 }
 
 /**

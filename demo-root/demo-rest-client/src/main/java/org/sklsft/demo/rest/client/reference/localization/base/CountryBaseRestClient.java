@@ -1,7 +1,9 @@
 package org.sklsft.demo.rest.client.reference.localization.base;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -15,6 +17,7 @@ import org.sklsft.demo.api.model.reference.localization.forms.CountryForm;
 import org.sklsft.demo.api.model.reference.localization.sortings.CountrySorting;
 import org.sklsft.demo.api.model.reference.localization.views.basic.CountryBasicView;
 import org.sklsft.demo.api.model.reference.localization.views.full.CountryFullView;
+import org.springframework.core.ParameterizedTypeReference;
 
 /**
  * auto generated base rest client class file
@@ -49,7 +52,7 @@ return Arrays.asList(restClient.getForObject(GET_LIST_URL, CountryBasicView[].cl
  */
 @Override
 public ScrollView<CountryBasicView> scroll(ScrollForm<CountryFilter, CountrySorting> form) {
-return null;
+return restClient.postForObject(SCROLL_URL, form, new ParameterizedTypeReference<ScrollView<CountryBasicView>>(){});
 }
 
 /**
@@ -57,7 +60,9 @@ return null;
  */
 @Override
 public CountryFullView load(Short id) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return restClient.getForObject(GET_URL, CountryFullView.class, vars);
 }
 
 /**
@@ -73,7 +78,7 @@ return null;
  */
 @Override
 public CountryFullView create() {
-return null;
+return restClient.getForObject(GET_NEW_URL, CountryFullView.class);
 }
 
 /**
@@ -81,7 +86,7 @@ return null;
  */
 @Override
 public Short save(CountryForm countryForm) {
-return null;
+return restClient.postForObject(SAVE_URL, countryForm, Short.class);
 }
 
 /**
@@ -89,6 +94,9 @@ return null;
  */
 @Override
 public void update(Short id, CountryForm countryForm) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.put(UPDATE_URL, countryForm, vars);
 }
 
 /**
@@ -96,6 +104,9 @@ public void update(Short id, CountryForm countryForm) {
  */
 @Override
 public void delete(Short id) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.delete(DELETE_URL, vars);
 }
 
 /**

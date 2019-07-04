@@ -93,7 +93,7 @@ return countryService.save(form);
  * update object
  */
 @RequestMapping(value = {CountryService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Short id, @Valid @RequestBody CountryForm form) {
+public @ResponseBody void update(@PathVariable("id") Short id, @Valid @RequestBody CountryForm form) {
 countryService.update(id, form);
 }
 
@@ -101,7 +101,7 @@ countryService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {CountryService.DELETE_URL}, method = RequestMethod.DELETE)
-public void delete(@PathVariable("id") Short id) {
+public @ResponseBody void delete(@PathVariable("id") Short id) {
 countryService.delete(id);
 }
 

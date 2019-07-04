@@ -111,7 +111,7 @@ organizationService.saveOrganizationCertification(id, form);
  * update object
  */
 @RequestMapping(value = {OrganizationService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Integer id, @Valid @RequestBody OrganizationForm form) {
+public @ResponseBody void update(@PathVariable("id") Integer id, @Valid @RequestBody OrganizationForm form) {
 organizationService.update(id, form);
 }
 
@@ -119,7 +119,7 @@ organizationService.update(id, form);
  * update one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.UPDATE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.PUT)
-public void updateOrganizationCertification(Integer id, @Valid @RequestBody OrganizationCertificationForm form) {
+public @ResponseBody void updateOrganizationCertification(@PathVariable("id") Integer id, @Valid @RequestBody OrganizationCertificationForm form) {
 organizationService.updateOrganizationCertification(id, form);
 }
 
@@ -127,7 +127,7 @@ organizationService.updateOrganizationCertification(id, form);
  * delete object
  */
 @RequestMapping(value = {OrganizationService.DELETE_URL}, method = RequestMethod.DELETE)
-public void delete(@PathVariable("id") Integer id) {
+public @ResponseBody void delete(@PathVariable("id") Integer id) {
 organizationService.delete(id);
 }
 
@@ -135,7 +135,7 @@ organizationService.delete(id);
  * delete one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.DELETE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.DELETE)
-public void deleteOrganizationCertification(@PathVariable("id")Integer id) {
+public @ResponseBody void deleteOrganizationCertification(@PathVariable("id")Integer id) {
 organizationService.deleteOrganizationCertification(id);
 }
 

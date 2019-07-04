@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-@Service("bean.myPackage.model.project.projectName.toLowerCase() + this.bean.restClientClassName")
+@Service("demoCalendarRestClient")
 public class CalendarRestClient extends CalendarBaseRestClient implements CalendarService{
 
 /* Specific Code Start */

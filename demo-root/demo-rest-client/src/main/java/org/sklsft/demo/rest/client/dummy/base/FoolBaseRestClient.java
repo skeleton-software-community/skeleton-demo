@@ -1,7 +1,9 @@
 package org.sklsft.demo.rest.client.dummy.base;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -15,6 +17,7 @@ import org.sklsft.demo.api.model.dummy.forms.FoolForm;
 import org.sklsft.demo.api.model.dummy.sortings.FoolSorting;
 import org.sklsft.demo.api.model.dummy.views.basic.FoolBasicView;
 import org.sklsft.demo.api.model.dummy.views.full.FoolFullView;
+import org.springframework.core.ParameterizedTypeReference;
 
 /**
  * auto generated base rest client class file
@@ -49,7 +52,7 @@ return Arrays.asList(restClient.getForObject(GET_LIST_URL, FoolBasicView[].class
  */
 @Override
 public ScrollView<FoolBasicView> scroll(ScrollForm<FoolFilter, FoolSorting> form) {
-return null;
+return restClient.postForObject(SCROLL_URL, form, new ParameterizedTypeReference<ScrollView<FoolBasicView>>(){});
 }
 
 /**
@@ -57,7 +60,9 @@ return null;
  */
 @Override
 public FoolFullView load(String id) {
-return null;
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+return restClient.getForObject(GET_URL, FoolFullView.class, vars);
 }
 
 /**
@@ -73,7 +78,7 @@ return null;
  */
 @Override
 public FoolFullView create() {
-return null;
+return restClient.getForObject(GET_NEW_URL, FoolFullView.class);
 }
 
 /**
@@ -81,7 +86,7 @@ return null;
  */
 @Override
 public String save(FoolForm foolForm) {
-return null;
+return restClient.postForObject(SAVE_URL, foolForm, String.class);
 }
 
 /**
@@ -89,6 +94,9 @@ return null;
  */
 @Override
 public void update(String id, FoolForm foolForm) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.put(UPDATE_URL, foolForm, vars);
 }
 
 /**
@@ -96,6 +104,9 @@ public void update(String id, FoolForm foolForm) {
  */
 @Override
 public void delete(String id) {
+Map<String, Object> vars = new HashMap<String, Object>();
+vars.put("id", id);
+restClient.delete(DELETE_URL, vars);
 }
 
 /**
