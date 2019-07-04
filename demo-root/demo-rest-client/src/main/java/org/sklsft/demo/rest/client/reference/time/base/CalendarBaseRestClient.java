@@ -190,6 +190,7 @@ restClient.delete(DELETE_CALENDAR_DAY_OFF_URL, vars);
  */
 @Override
 public void deleteList(List<Integer> idList) {
+restClient.postForObject(DELETE_LIST_URL, idList, Void.class);
 }
 
 /**
@@ -197,6 +198,7 @@ public void deleteList(List<Integer> idList) {
  */
 @Override
 public void deleteCalendarDayOffList(List<Integer> idList) {
+restClient.postForObject(DELETE_CALENDAR_DAY_OFF_LIST_URL, idList, Void.class);
 }
 
 }

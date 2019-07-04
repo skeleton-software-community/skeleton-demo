@@ -135,6 +135,7 @@ restClient.delete(DELETE_URL, vars);
  */
 @Override
 public void deleteList(List<Integer> idList) {
+restClient.postForObject(DELETE_LIST_URL, idList, Void.class);
 }
 
 }

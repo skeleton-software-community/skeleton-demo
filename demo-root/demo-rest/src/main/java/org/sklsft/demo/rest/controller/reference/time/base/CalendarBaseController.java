@@ -178,7 +178,7 @@ calendarService.deleteList(idList);
  * delete one to many component calendarDayOff list
  */
 @RequestMapping(value = {CalendarService.DELETE_CALENDAR_DAY_OFF_LIST_URL}, method = RequestMethod.POST)
-public @ResponseBody void deleteCalendarDayOffList(List<Integer> idList) {
+public @ResponseBody void deleteCalendarDayOffList(@RequestBody List<Integer> idList) {
 calendarService.deleteCalendarDayOffList(idList);
 }
 
