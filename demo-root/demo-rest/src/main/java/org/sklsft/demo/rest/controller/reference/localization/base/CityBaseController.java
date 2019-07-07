@@ -95,14 +95,6 @@ return cityService.save(form);
 }
 
 /**
- * save object from parent Region
- */
-@RequestMapping(value = {CityService.SAVE_FROM_REGION_URL}, method = RequestMethod.POST)
-public @ResponseBody Long saveFromRegion(@PathVariable("regionId") Integer regionId, @Valid @RequestBody CityForm form) {
-return cityService.saveFromRegion(regionId, form);
-}
-
-/**
  * update object
  */
 @RequestMapping(value = {CityService.UPDATE_URL}, method = RequestMethod.PUT)

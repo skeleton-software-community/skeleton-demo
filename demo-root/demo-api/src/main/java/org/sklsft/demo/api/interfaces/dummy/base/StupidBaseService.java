@@ -66,12 +66,6 @@ Long save(StupidForm stupidForm);
 public static final String SAVE_URL = "/stupid";
 
 /**
- * save object from parent Fool
- */
-Long saveFromFool(String foolId, StupidForm stupidForm);
-public static final String SAVE_FROM_FOOL_URL = "/fool/{foolId}/stupid";
-
-/**
  * update object
  */
 void update(Long id, StupidForm stupidForm);

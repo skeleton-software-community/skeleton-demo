@@ -19,7 +19,6 @@ import org.sklsft.demo.bc.mapper.reference.localization.views.full.RegionFullVie
 import org.sklsft.demo.bc.processor.reference.localization.RegionProcessor;
 import org.sklsft.demo.bc.rightsmanager.reference.localization.RegionRightsManager;
 import org.sklsft.demo.bc.statemanager.reference.localization.RegionStateManager;
-import org.sklsft.demo.model.reference.localization.Country;
 import org.sklsft.demo.model.reference.localization.Region;
 import org.sklsft.demo.repository.dao.interfaces.reference.localization.CountryDao;
 import org.sklsft.demo.repository.dao.interfaces.reference.localization.RegionDao;
@@ -162,20 +161,6 @@ return new RegionFullView();
 @Transactional(rollbackFor=Exception.class)
 public Integer save(RegionForm regionForm) {
 Region region = this.regionFormMapper.mapTo(regionForm, new Region());
-regionRightsManager.checkCanSave(region);
-regionStateManager.checkCanSave(region);
-return regionProcessor.save(region);
-}
-
-/**
- * save object from parent Country
- */
-@Override
-@Transactional(rollbackFor=Exception.class)
-public Integer saveFromCountry(Short countryId, RegionForm regionForm) {
-Region region = this.regionFormMapper.mapTo(regionForm, new Region());
-Country country = this.countryDao.load(countryId);
-region.setCountry(country);
 regionRightsManager.checkCanSave(region);
 regionStateManager.checkCanSave(region);
 return regionProcessor.save(region);

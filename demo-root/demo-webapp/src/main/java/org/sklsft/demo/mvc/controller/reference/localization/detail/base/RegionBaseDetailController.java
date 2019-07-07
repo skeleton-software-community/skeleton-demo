@@ -80,7 +80,7 @@ displayError(e.getMessage());
  */
 @AjaxMethod("City.save")
 public void saveCity() {
-cityService.saveFromRegion(this.regionDetailView.getSelectedRegion().getId(), regionDetailView.getSelectedCity().getForm());
+cityService.save(regionDetailView.getSelectedCity().getForm());
 refreshCityList();
 }
 

@@ -19,7 +19,6 @@ import org.sklsft.demo.bc.mapper.dummy.views.full.StupidFullViewMapper;
 import org.sklsft.demo.bc.processor.dummy.StupidProcessor;
 import org.sklsft.demo.bc.rightsmanager.dummy.StupidRightsManager;
 import org.sklsft.demo.bc.statemanager.dummy.StupidStateManager;
-import org.sklsft.demo.model.dummy.Fool;
 import org.sklsft.demo.model.dummy.Stupid;
 import org.sklsft.demo.repository.dao.interfaces.dummy.FoolDao;
 import org.sklsft.demo.repository.dao.interfaces.dummy.StupidDao;
@@ -162,20 +161,6 @@ return new StupidFullView();
 @Transactional(rollbackFor=Exception.class)
 public Long save(StupidForm stupidForm) {
 Stupid stupid = this.stupidFormMapper.mapTo(stupidForm, new Stupid());
-stupidRightsManager.checkCanSave(stupid);
-stupidStateManager.checkCanSave(stupid);
-return stupidProcessor.save(stupid);
-}
-
-/**
- * save object from parent Fool
- */
-@Override
-@Transactional(rollbackFor=Exception.class)
-public Long saveFromFool(String foolId, StupidForm stupidForm) {
-Stupid stupid = this.stupidFormMapper.mapTo(stupidForm, new Stupid());
-Fool fool = this.foolDao.load(foolId);
-stupid.setFool(fool);
 stupidRightsManager.checkCanSave(stupid);
 stupidStateManager.checkCanSave(stupid);
 return stupidProcessor.save(stupid);

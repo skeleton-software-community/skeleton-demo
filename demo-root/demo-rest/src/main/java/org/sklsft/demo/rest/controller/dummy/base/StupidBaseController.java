@@ -95,14 +95,6 @@ return stupidService.save(form);
 }
 
 /**
- * save object from parent Fool
- */
-@RequestMapping(value = {StupidService.SAVE_FROM_FOOL_URL}, method = RequestMethod.POST)
-public @ResponseBody Long saveFromFool(@PathVariable("foolId") String foolId, @Valid @RequestBody StupidForm form) {
-return stupidService.saveFromFool(foolId, form);
-}
-
-/**
  * update object
  */
 @RequestMapping(value = {StupidService.UPDATE_URL}, method = RequestMethod.PUT)

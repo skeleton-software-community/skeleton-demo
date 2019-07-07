@@ -95,14 +95,6 @@ return regionService.save(form);
 }
 
 /**
- * save object from parent Country
- */
-@RequestMapping(value = {RegionService.SAVE_FROM_COUNTRY_URL}, method = RequestMethod.POST)
-public @ResponseBody Integer saveFromCountry(@PathVariable("countryId") Short countryId, @Valid @RequestBody RegionForm form) {
-return regionService.saveFromCountry(countryId, form);
-}
-
-/**
  * update object
  */
 @RequestMapping(value = {RegionService.UPDATE_URL}, method = RequestMethod.PUT)

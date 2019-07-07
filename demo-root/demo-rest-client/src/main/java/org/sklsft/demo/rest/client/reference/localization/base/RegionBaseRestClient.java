@@ -101,16 +101,6 @@ return restClient.postForObject(SAVE_URL, regionForm, Integer.class);
 }
 
 /**
- * save object from parent Country
- */
-@Override
-public Integer saveFromCountry(Short countryId, RegionForm regionForm) {
-Map<String, Object> vars = new HashMap<String, Object>();
-vars.put("countryId", countryId);
-return restClient.postForObject(SAVE_FROM_COUNTRY_URL, regionForm, Integer.class, vars);
-}
-
-/**
  * update object
  */
 @Override

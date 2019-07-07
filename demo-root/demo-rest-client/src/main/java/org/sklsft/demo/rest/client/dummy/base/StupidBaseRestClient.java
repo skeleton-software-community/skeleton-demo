@@ -101,16 +101,6 @@ return restClient.postForObject(SAVE_URL, stupidForm, Long.class);
 }
 
 /**
- * save object from parent Fool
- */
-@Override
-public Long saveFromFool(String foolId, StupidForm stupidForm) {
-Map<String, Object> vars = new HashMap<String, Object>();
-vars.put("foolId", foolId);
-return restClient.postForObject(SAVE_FROM_FOOL_URL, stupidForm, Long.class, vars);
-}
-
-/**
  * update object
  */
 @Override

@@ -66,12 +66,6 @@ Integer save(RegionForm regionForm);
 public static final String SAVE_URL = "/region";
 
 /**
- * save object from parent Country
- */
-Integer saveFromCountry(Short countryId, RegionForm regionForm);
-public static final String SAVE_FROM_COUNTRY_URL = "/country/{countryId}/region";
-
-/**
  * update object
  */
 void update(Integer id, RegionForm regionForm);

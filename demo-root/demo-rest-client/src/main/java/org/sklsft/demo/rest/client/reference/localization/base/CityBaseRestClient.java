@@ -101,16 +101,6 @@ return restClient.postForObject(SAVE_URL, cityForm, Long.class);
 }
 
 /**
- * save object from parent Region
- */
-@Override
-public Long saveFromRegion(Integer regionId, CityForm cityForm) {
-Map<String, Object> vars = new HashMap<String, Object>();
-vars.put("regionId", regionId);
-return restClient.postForObject(SAVE_FROM_REGION_URL, cityForm, Long.class, vars);
-}
-
-/**
  * update object
  */
 @Override

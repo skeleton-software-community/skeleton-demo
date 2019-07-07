@@ -66,12 +66,6 @@ Long save(CityForm cityForm);
 public static final String SAVE_URL = "/city";
 
 /**
- * save object from parent Region
- */
-Long saveFromRegion(Integer regionId, CityForm cityForm);
-public static final String SAVE_FROM_REGION_URL = "/region/{regionId}/city";
-
-/**
  * update object
  */
 void update(Long id, CityForm cityForm);

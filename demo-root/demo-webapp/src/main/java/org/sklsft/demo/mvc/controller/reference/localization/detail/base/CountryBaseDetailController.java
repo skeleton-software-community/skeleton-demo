@@ -82,7 +82,7 @@ public void saveRegion() {
 executeAjaxMethod("Region.save", new AjaxMethodTemplate() {
 @Override
 public Object execute() {
-return regionService.saveFromCountry( countryDetailView.getSelectedCountry().getId(), countryDetailView.getSelectedRegion().getForm());
+return regionService.save(countryDetailView.getSelectedRegion().getForm());
 }
 @Override
 public void redirectOnComplete(Object result) {
