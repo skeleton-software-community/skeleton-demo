@@ -27,7 +27,7 @@ public static final String GET_LIST_URL = "/city/list";
  * load object list from region
  */
 List<CityBasicView> loadListFromRegion (Integer regionId);
-public static final String GET_CITY_LIST_fROM_REGION_URL = "/region/{regionId}/city/list";
+public static final String GET_CITY_LIST_FROM_REGION_URL = "/region/{regionId}/city/list";
 
 /**
  * scroll object list
@@ -39,7 +39,7 @@ public static final String SCROLL_URL = "/city/scroll";
  * scroll object list from region
  */
 ScrollView<CityBasicView> scrollFromRegion (Integer regionId, ScrollForm<CityFilter, CitySorting> form);
-public static final String SCROLL_CITY_fROM_REGION_URL = "/region/{regionId}/city/scroll";
+public static final String SCROLL_CITY_FROM_REGION_URL = "/region/{regionId}/city/scroll";
 
 /**
  * load object
@@ -64,12 +64,6 @@ public static final String GET_NEW_URL = "/city/new";
  */
 Long save(CityForm cityForm);
 public static final String SAVE_URL = "/city";
-
-/**
- * save object from parent Region
- */
-Long saveFromRegion(Integer regionId, CityForm cityForm);
-public static final String SAVE_FROM_REGION_URL = "/region/{regionId}/city";
 
 /**
  * update object

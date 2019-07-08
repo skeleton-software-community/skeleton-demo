@@ -3,6 +3,7 @@ package org.sklsft.demo.rest.controller.organizations.base;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
@@ -94,7 +95,7 @@ return organizationService.create();
  * save object
  */
 @RequestMapping(value = {OrganizationService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Integer save(@RequestBody OrganizationForm form) {
+public @ResponseBody Integer save(@Valid @RequestBody OrganizationForm form) {
 return organizationService.save(form);
 }
 
@@ -102,7 +103,7 @@ return organizationService.save(form);
  * save one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.SAVE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.POST)
-public @ResponseBody void saveOrganizationCertification(@PathVariable("id") Integer id, @RequestBody OrganizationCertificationForm form) {
+public @ResponseBody void saveOrganizationCertification(@PathVariable("id") Integer id, @Valid @RequestBody OrganizationCertificationForm form) {
 organizationService.saveOrganizationCertification(id, form);
 }
 
@@ -110,7 +111,7 @@ organizationService.saveOrganizationCertification(id, form);
  * update object
  */
 @RequestMapping(value = {OrganizationService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Integer id, @RequestBody OrganizationForm form) {
+public @ResponseBody void update(@PathVariable("id") Integer id, @Valid @RequestBody OrganizationForm form) {
 organizationService.update(id, form);
 }
 
@@ -118,7 +119,7 @@ organizationService.update(id, form);
  * update one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.UPDATE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.PUT)
-public void updateOrganizationCertification(Integer id, OrganizationCertificationForm form) {
+public @ResponseBody void updateOrganizationCertification(@PathVariable("id") Integer id, @Valid @RequestBody OrganizationCertificationForm form) {
 organizationService.updateOrganizationCertification(id, form);
 }
 
@@ -126,7 +127,7 @@ organizationService.updateOrganizationCertification(id, form);
  * delete object
  */
 @RequestMapping(value = {OrganizationService.DELETE_URL}, method = RequestMethod.DELETE)
-public void delete(@PathVariable("id") Integer id) {
+public @ResponseBody void delete(@PathVariable("id") Integer id) {
 organizationService.delete(id);
 }
 
@@ -134,7 +135,7 @@ organizationService.delete(id);
  * delete one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.DELETE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.DELETE)
-public void deleteOrganizationCertification(@PathVariable("id")Integer id) {
+public @ResponseBody void deleteOrganizationCertification(@PathVariable("id")Integer id) {
 organizationService.deleteOrganizationCertification(id);
 }
 

@@ -11,6 +11,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
+import org.sklsft.commons.api.model.OrderType;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.reference.localization.filters.CityFilter;
 import org.sklsft.demo.api.model.reference.localization.sortings.CitySorting;
@@ -39,6 +40,7 @@ public List<City> loadListEagerly() {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(City.class);
 criteria.setFetchMode("region",FetchMode.JOIN);
 criteria.setFetchMode("region.country",FetchMode.JOIN);
+addOrder(criteria, "id", OrderType.DESC);
 return criteria.list();
 }
 
@@ -54,6 +56,7 @@ criteria.add(Restrictions.isNull("region.id"));
 } else {
 criteria.add(Restrictions.eq("region.id", regionId));
 }
+addOrder(criteria, "id", OrderType.DESC);
 return criteria.list();
 }
 
@@ -71,6 +74,7 @@ criteria.add(Restrictions.eq("region.id", regionId));
 }
 criteria.setFetchMode("region",FetchMode.JOIN);
 criteria.setFetchMode("region.country",FetchMode.JOIN);
+addOrder(criteria, "id", OrderType.DESC);
 return criteria.list();
 }
 
@@ -144,6 +148,7 @@ criteria.setFirstResult(firstResult.intValue());
 if (maxResults != null){
 criteria.setMaxResults(maxResults.intValue());
 }
+addOrder(criteria, "id", OrderType.DESC);
 return criteria.list();
 }
 
@@ -175,6 +180,7 @@ criteria.setFirstResult(firstResult.intValue());
 if (maxResults != null){
 criteria.setMaxResults(maxResults.intValue());
 }
+addOrder(criteria, "id", OrderType.DESC);
 return criteria.list();
 }
 

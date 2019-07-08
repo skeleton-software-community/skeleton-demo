@@ -11,6 +11,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
+import org.sklsft.commons.api.model.OrderType;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.organizations.filters.OrganizationFilter;
 import org.sklsft.demo.api.model.organizations.sortings.OrganizationSorting;
@@ -39,6 +40,7 @@ super(Organization.class);
 public List<Organization> loadListEagerly() {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Organization.class);
 criteria.setFetchMode("organizationDescription",FetchMode.JOIN);
+addOrder(criteria, "id", OrderType.DESC);
 return criteria.list();
 }
 
@@ -72,6 +74,7 @@ criteria.setFirstResult(firstResult.intValue());
 if (maxResults != null){
 criteria.setMaxResults(maxResults.intValue());
 }
+addOrder(criteria, "id", OrderType.DESC);
 return criteria.list();
 }
 

@@ -3,6 +3,7 @@ package org.sklsft.demo.rest.controller.reference.localization.base;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
@@ -43,7 +44,7 @@ return regionService.loadList();
 /**
  * load object list from country
  */
-@RequestMapping(value = {RegionService.GET_REGION_LIST_fROM_COUNTRY_URL}, method = RequestMethod.GET)
+@RequestMapping(value = {RegionService.GET_REGION_LIST_FROM_COUNTRY_URL}, method = RequestMethod.GET)
 public @ResponseBody List<RegionBasicView> loadListFromCountry (@PathVariable("countryId") Short countryId) {
 return regionService.loadListFromCountry(countryId);
 }
@@ -58,7 +59,7 @@ return regionService.scroll(form);
 /**
  * scroll object list from country
  */
-@RequestMapping(value = {RegionService.SCROLL_REGION_fROM_COUNTRY_URL}, method = RequestMethod.POST)
+@RequestMapping(value = {RegionService.SCROLL_REGION_FROM_COUNTRY_URL}, method = RequestMethod.POST)
 public @ResponseBody ScrollView<RegionBasicView> scrollFromCountry (@PathVariable("countryId") Short countryId, @RequestBody ScrollForm<RegionFilter, RegionSorting> form) {
 return regionService.scrollFromCountry(countryId, form);
 }
@@ -89,23 +90,15 @@ return regionService.create();
  * save object
  */
 @RequestMapping(value = {RegionService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody Integer save(@RequestBody RegionForm form) {
+public @ResponseBody Integer save(@Valid @RequestBody RegionForm form) {
 return regionService.save(form);
-}
-
-/**
- * save object from parent Country
- */
-@RequestMapping(value = {RegionService.SAVE_FROM_COUNTRY_URL}, method = RequestMethod.POST)
-public @ResponseBody Integer saveFromCountry(@PathVariable("countryId") Short countryId, @RequestBody RegionForm form) {
-return regionService.saveFromCountry(countryId, form);
 }
 
 /**
  * update object
  */
 @RequestMapping(value = {RegionService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") Integer id, @RequestBody RegionForm form) {
+public @ResponseBody void update(@PathVariable("id") Integer id, @Valid @RequestBody RegionForm form) {
 regionService.update(id, form);
 }
 
@@ -113,7 +106,7 @@ regionService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {RegionService.DELETE_URL}, method = RequestMethod.DELETE)
-public void delete(@PathVariable("id") Integer id) {
+public @ResponseBody void delete(@PathVariable("id") Integer id) {
 regionService.delete(id);
 }
 

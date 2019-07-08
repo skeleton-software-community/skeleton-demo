@@ -3,6 +3,7 @@ package org.sklsft.demo.rest.controller.dummy.base;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
@@ -84,7 +85,7 @@ return foolService.create();
  * save object
  */
 @RequestMapping(value = {FoolService.SAVE_URL}, method = RequestMethod.POST)
-public @ResponseBody String save(@RequestBody FoolForm form) {
+public @ResponseBody String save(@Valid @RequestBody FoolForm form) {
 return foolService.save(form);
 }
 
@@ -92,7 +93,7 @@ return foolService.save(form);
  * update object
  */
 @RequestMapping(value = {FoolService.UPDATE_URL}, method = RequestMethod.PUT)
-public void update(@PathVariable("id") String id, @RequestBody FoolForm form) {
+public @ResponseBody void update(@PathVariable("id") String id, @Valid @RequestBody FoolForm form) {
 foolService.update(id, form);
 }
 
@@ -100,7 +101,7 @@ foolService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {FoolService.DELETE_URL}, method = RequestMethod.DELETE)
-public void delete(@PathVariable("id") String id) {
+public @ResponseBody void delete(@PathVariable("id") String id) {
 foolService.delete(id);
 }
 

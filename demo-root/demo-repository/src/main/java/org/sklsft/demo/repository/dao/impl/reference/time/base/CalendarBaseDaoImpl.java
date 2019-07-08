@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
+import org.sklsft.commons.api.model.OrderType;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.reference.time.filters.CalendarDayOffFilter;
 import org.sklsft.demo.api.model.reference.time.filters.CalendarFilter;
@@ -39,6 +40,7 @@ super(Calendar.class);
 @SuppressWarnings("unchecked")
 public List<Calendar> loadListEagerly() {
 Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Calendar.class);
+addOrder(criteria, "id", OrderType.DESC);
 return criteria.list();
 }
 
@@ -70,6 +72,7 @@ criteria.setFirstResult(firstResult.intValue());
 if (maxResults != null){
 criteria.setMaxResults(maxResults.intValue());
 }
+addOrder(criteria, "id", OrderType.DESC);
 return criteria.list();
 }
 
@@ -85,6 +88,7 @@ criteria.add(Restrictions.isNull("calendar.id"));
 } else {
 criteria.add(Restrictions.eq("calendar.id", calendarId));
 }
+addOrder(criteria, "id", OrderType.DESC);
 return criteria.list();
 }
 
@@ -140,6 +144,7 @@ criteria.setFirstResult(firstResult.intValue());
 if (maxResults != null){
 criteria.setMaxResults(maxResults.intValue());
 }
+addOrder(criteria, "id", OrderType.DESC);
 return criteria.list();
 }
 
