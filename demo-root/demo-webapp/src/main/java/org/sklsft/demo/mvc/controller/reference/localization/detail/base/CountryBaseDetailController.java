@@ -12,6 +12,8 @@ import org.sklsft.commons.mvc.annotations.AjaxMethod;
 import org.sklsft.demo.api.interfaces.reference.localization.CountryService;
 import org.sklsft.demo.api.interfaces.reference.localization.RegionService;
 import org.sklsft.demo.api.model.reference.localization.filters.RegionFilter;
+import org.sklsft.demo.api.model.reference.localization.forms.CountryForm;
+import org.sklsft.demo.api.model.reference.localization.forms.RegionForm;
 import org.sklsft.demo.api.model.reference.localization.sortings.RegionSorting;
 import org.sklsft.demo.api.model.reference.localization.views.basic.RegionBasicView;
 import org.sklsft.demo.mvc.controller.BaseController;
@@ -82,7 +84,11 @@ public void saveRegion() {
 executeAjaxMethod("Region.save", new AjaxMethodTemplate() {
 @Override
 public Object execute() {
-return regionService.save(countryDetailView.getSelectedRegion().getForm());
+load();
+RegionForm form = countryDetailView.getSelectedRegion().getForm();
+CountryForm countryForm = countryDetailView.getSelectedCountry().getForm();
+form.setCountryCode(countryForm.getCode());
+return regionService.save(form);
 }
 @Override
 public void redirectOnComplete(Object result) {

@@ -64,12 +64,12 @@ styleClass="form-control">
 <p:calendar value="#{foolListView.scrollForm.filter.dateFieldMinValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd" mask="true">
-<p:ajax event="change" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 <p:calendar value="#{foolListView.scrollForm.filter.dateFieldMaxValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd" mask="true">
-<p:ajax event="change" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 </div>
 
@@ -78,12 +78,12 @@ pattern="yyyy-MM-dd" mask="true">
 <p:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMinValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd HH:mm:ss" mask="true">
-<p:ajax event="change" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 <p:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMaxValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd HH:mm:ss" mask="true">
-<p:ajax event="change" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 </div>
 

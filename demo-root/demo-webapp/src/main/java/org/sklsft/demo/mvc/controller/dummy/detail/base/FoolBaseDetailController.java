@@ -81,12 +81,10 @@ displayError(e.getMessage());
  */
 @AjaxMethod("Stupid.save")
 public void saveStupid() {
-
-	StupidForm form = foolDetailView.getSelectedStupid().getForm();
-	FoolForm foolForm = foolDetailView.getSelectedFool().getForm();
-	
-	form.setFoolCode(foolForm.getCode());
-
+load();
+StupidForm form = foolDetailView.getSelectedStupid().getForm();
+FoolForm foolForm = foolDetailView.getSelectedFool().getForm();
+form.setFoolCode(foolForm.getCode());
 stupidService.save(form);
 refreshStupidList();
 }

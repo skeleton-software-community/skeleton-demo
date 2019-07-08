@@ -41,12 +41,12 @@ template="/templates/template.xhtml">
 <p:calendar value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffDateMinValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd HH:mm:ss" mask="true">
-<p:ajax event="change" update="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
 </p:calendar>
 <p:calendar value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffDateMaxValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd HH:mm:ss" mask="true">
-<p:ajax event="change" update="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
 </p:calendar>
 </div>
 
