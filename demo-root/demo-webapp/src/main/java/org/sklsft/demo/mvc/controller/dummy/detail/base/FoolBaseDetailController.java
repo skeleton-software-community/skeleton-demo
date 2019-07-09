@@ -11,6 +11,8 @@ import org.sklsft.commons.mvc.annotations.AjaxMethod;
 import org.sklsft.demo.api.interfaces.dummy.FoolService;
 import org.sklsft.demo.api.interfaces.dummy.StupidService;
 import org.sklsft.demo.api.model.dummy.filters.StupidFilter;
+import org.sklsft.demo.api.model.dummy.forms.FoolForm;
+import org.sklsft.demo.api.model.dummy.forms.StupidForm;
 import org.sklsft.demo.api.model.dummy.sortings.StupidSorting;
 import org.sklsft.demo.api.model.dummy.views.basic.StupidBasicView;
 import org.sklsft.demo.mvc.controller.BaseController;
@@ -79,7 +81,11 @@ displayError(e.getMessage());
  */
 @AjaxMethod("Stupid.save")
 public void saveStupid() {
-stupidService.saveFromFool(this.foolDetailView.getSelectedFool().getId(), foolDetailView.getSelectedStupid().getForm());
+load();
+StupidForm form = foolDetailView.getSelectedStupid().getForm();
+FoolForm foolForm = foolDetailView.getSelectedFool().getForm();
+form.setFoolCode(foolForm.getCode());
+stupidService.save(form);
 refreshStupidList();
 }
 

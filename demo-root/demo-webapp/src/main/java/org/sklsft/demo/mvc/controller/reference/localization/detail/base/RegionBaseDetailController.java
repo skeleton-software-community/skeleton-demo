@@ -11,6 +11,8 @@ import org.sklsft.commons.mvc.annotations.AjaxMethod;
 import org.sklsft.demo.api.interfaces.reference.localization.CityService;
 import org.sklsft.demo.api.interfaces.reference.localization.RegionService;
 import org.sklsft.demo.api.model.reference.localization.filters.CityFilter;
+import org.sklsft.demo.api.model.reference.localization.forms.CityForm;
+import org.sklsft.demo.api.model.reference.localization.forms.RegionForm;
 import org.sklsft.demo.api.model.reference.localization.sortings.CitySorting;
 import org.sklsft.demo.api.model.reference.localization.views.basic.CityBasicView;
 import org.sklsft.demo.mvc.controller.BaseController;
@@ -80,7 +82,12 @@ displayError(e.getMessage());
  */
 @AjaxMethod("City.save")
 public void saveCity() {
-cityService.saveFromRegion(this.regionDetailView.getSelectedRegion().getId(), regionDetailView.getSelectedCity().getForm());
+load();
+CityForm form = regionDetailView.getSelectedCity().getForm();
+RegionForm regionForm = regionDetailView.getSelectedRegion().getForm();
+form.setRegionCountryCode(regionForm.getCountryCode());
+form.setRegionCode(regionForm.getCode());
+cityService.save(form);
 refreshCityList();
 }
 

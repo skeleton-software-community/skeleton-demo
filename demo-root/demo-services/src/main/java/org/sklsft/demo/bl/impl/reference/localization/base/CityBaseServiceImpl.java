@@ -20,7 +20,6 @@ import org.sklsft.demo.bc.processor.reference.localization.CityProcessor;
 import org.sklsft.demo.bc.rightsmanager.reference.localization.CityRightsManager;
 import org.sklsft.demo.bc.statemanager.reference.localization.CityStateManager;
 import org.sklsft.demo.model.reference.localization.City;
-import org.sklsft.demo.model.reference.localization.Region;
 import org.sklsft.demo.repository.dao.interfaces.reference.localization.CityDao;
 import org.sklsft.demo.repository.dao.interfaces.reference.localization.RegionDao;
 import org.springframework.transaction.annotation.Transactional;
@@ -162,20 +161,6 @@ return new CityFullView();
 @Transactional(rollbackFor=Exception.class)
 public Long save(CityForm cityForm) {
 City city = this.cityFormMapper.mapTo(cityForm, new City());
-cityRightsManager.checkCanSave(city);
-cityStateManager.checkCanSave(city);
-return cityProcessor.save(city);
-}
-
-/**
- * save object from parent Region
- */
-@Override
-@Transactional(rollbackFor=Exception.class)
-public Long saveFromRegion(Integer regionId, CityForm cityForm) {
-City city = this.cityFormMapper.mapTo(cityForm, new City());
-Region region = this.regionDao.load(regionId);
-city.setRegion(region);
 cityRightsManager.checkCanSave(city);
 cityStateManager.checkCanSave(city);
 return cityProcessor.save(city);
