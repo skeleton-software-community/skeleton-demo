@@ -25,9 +25,11 @@ template="/templates/template.xhtml">
 
 <h:panelGroup id="cityPanelGroup">
 
+<h:panelGroup id="sizePanelGroup">
 <h2>
-#{i18n.cityList} (#{regionDetailView.cityScrollView.size})
+#{i18n.cityList} (#{regionDetailView.cityScrollView.count} / #{regionDetailView.cityScrollView.size})
 </h2>
+</h:panelGroup>
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
@@ -41,7 +43,7 @@ template="/templates/template.xhtml">
 <h:inputText
 value="#{regionDetailView.cityScrollForm.filter.code}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionDetailController.refreshCityList}"/>
+<p:ajax event="keyup" update="resultsPanelGroup, sizePanelGroup" listener="#{regionDetailController.refreshCityList}"/>
 </h:inputText>
 </div>
 
@@ -50,7 +52,7 @@ styleClass="form-control">
 <h:inputText
 value="#{regionDetailView.cityScrollForm.filter.label}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionDetailController.refreshCityList}"/>
+<p:ajax event="keyup" update="resultsPanelGroup, sizePanelGroup" listener="#{regionDetailController.refreshCityList}"/>
 </h:inputText>
 </div>
 

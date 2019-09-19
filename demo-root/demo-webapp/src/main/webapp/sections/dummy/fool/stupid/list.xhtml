@@ -25,9 +25,11 @@ template="/templates/template.xhtml">
 
 <h:panelGroup id="stupidPanelGroup">
 
+<h:panelGroup id="sizePanelGroup">
 <h2>
-#{i18n.stupidList} (#{foolDetailView.stupidScrollView.size})
+#{i18n.stupidList} (#{foolDetailView.stupidScrollView.count} / #{foolDetailView.stupidScrollView.size})
 </h2>
+</h:panelGroup>
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
@@ -41,7 +43,7 @@ template="/templates/template.xhtml">
 <h:inputText
 value="#{foolDetailView.stupidScrollForm.filter.code}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolDetailController.refreshStupidList}"/>
+<p:ajax event="keyup" update="resultsPanelGroup, sizePanelGroup" listener="#{foolDetailController.refreshStupidList}"/>
 </h:inputText>
 </div>
 

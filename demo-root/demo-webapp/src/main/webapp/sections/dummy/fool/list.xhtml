@@ -20,9 +20,11 @@ template="/templates/template.xhtml">
 
 <h:form id="foolListForm">
 <h:panelGroup id="foolPanelGroup">
+<h:panelGroup id="sizePanelGroup">
 <h2>
-#{i18n.foolList} (#{foolListView.scrollView.size})
+#{i18n.foolList} (#{foolListView.scrollView.count} / #{foolListView.scrollView.size})
 </h2>
+</h:panelGroup>
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
@@ -36,7 +38,7 @@ template="/templates/template.xhtml">
 <h:inputText
 value="#{foolListView.scrollForm.filter.code}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<p:ajax event="keyup" update="resultsPanelGroup, sizePanelGroup" listener="#{foolListController.refresh}"/>
 </h:inputText>
 </div>
 
@@ -45,7 +47,7 @@ styleClass="form-control">
 <h:inputText
 value="#{foolListView.scrollForm.filter.description}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<p:ajax event="keyup" update="resultsPanelGroup, sizePanelGroup" listener="#{foolListController.refresh}"/>
 </h:inputText>
 </div>
 
@@ -55,7 +57,7 @@ styleClass="form-control">
 <f:selectItem itemLabel="" itemValue="#{null}"></f:selectItem>
 <f:selectItem itemLabel="#{i18n.trueLabel}" itemValue="#{true}"></f:selectItem>
 <f:selectItem itemLabel="#{i18n.falseLabel}" itemValue="#{false}"></f:selectItem>
-<p:ajax event="change" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<p:ajax event="change" update="resultsPanelGroup, sizePanelGroup" listener="#{foolListController.refresh}"/>
 </h:selectOneMenu>
 </div>
 
@@ -64,12 +66,12 @@ styleClass="form-control">
 <p:calendar value="#{foolListView.scrollForm.filter.dateFieldMinValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd" mask="true">
-<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 <p:calendar value="#{foolListView.scrollForm.filter.dateFieldMaxValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd" mask="true">
-<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 </div>
 
@@ -78,12 +80,12 @@ pattern="yyyy-MM-dd" mask="true">
 <p:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMinValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd HH:mm:ss" mask="true">
-<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 <p:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMaxValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd HH:mm:ss" mask="true">
-<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{foolListController.refresh}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 </div>
 

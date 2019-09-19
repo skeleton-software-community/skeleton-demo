@@ -97,6 +97,7 @@ organizationRightsManager.checkCanAccess();
 ScrollView<OrganizationBasicView> result = new ScrollView<>();
 result.setSize(organizationDao.count());
 Long count = organizationDao.count(form.getFilter());
+result.setCount(count);
 result.setNumberOfPages(count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L));
 result.setCurrentPage(Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, result.getNumberOfPages())));
 List<Organization> list = organizationDao.scroll(form.getFilter(), form.getSorting(),(result.getCurrentPage()-1)*form.getElementsPerPage(), form.getElementsPerPage());

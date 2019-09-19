@@ -25,9 +25,11 @@ template="/templates/template.xhtml">
 
 <h:panelGroup id="calendarDayOffPanelGroup">
 
+<h:panelGroup id="sizePanelGroup">
 <h2>
-#{i18n.calendarDayOffList} (#{calendarDetailView.calendarDayOffScrollView.size})
+#{i18n.calendarDayOffList} (#{calendarDetailView.calendarDayOffScrollView.count} / #{calendarDetailView.calendarDayOffScrollView.size})
 </h2>
+</h:panelGroup>
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
@@ -41,12 +43,12 @@ template="/templates/template.xhtml">
 <p:calendar value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffDateMinValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd HH:mm:ss" mask="true">
-<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
 </p:calendar>
 <p:calendar value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffDateMaxValue}"
 class="form-control date-picker"
 pattern="yyyy-MM-dd HH:mm:ss" mask="true">
-<p:ajax event="dateSelect" update="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
+<p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
 </p:calendar>
 </div>
 
@@ -55,7 +57,7 @@ pattern="yyyy-MM-dd HH:mm:ss" mask="true">
 <h:inputText
 value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffLabel}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
+<p:ajax event="keyup" update="resultsPanelGroup, sizePanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
 </h:inputText>
 </div>
 

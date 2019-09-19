@@ -88,6 +88,7 @@ foolRightsManager.checkCanAccess();
 ScrollView<FoolBasicView> result = new ScrollView<>();
 result.setSize(foolDao.count());
 Long count = foolDao.count(form.getFilter());
+result.setCount(count);
 result.setNumberOfPages(count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L));
 result.setCurrentPage(Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, result.getNumberOfPages())));
 List<Fool> list = foolDao.scroll(form.getFilter(), form.getSorting(),(result.getCurrentPage()-1)*form.getElementsPerPage(), form.getElementsPerPage());

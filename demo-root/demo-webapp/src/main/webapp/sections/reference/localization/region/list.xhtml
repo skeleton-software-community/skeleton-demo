@@ -20,9 +20,11 @@ template="/templates/template.xhtml">
 
 <h:form id="regionListForm">
 <h:panelGroup id="regionPanelGroup">
+<h:panelGroup id="sizePanelGroup">
 <h2>
-#{i18n.regionList} (#{regionListView.scrollView.size})
+#{i18n.regionList} (#{regionListView.scrollView.count} / #{regionListView.scrollView.size})
 </h2>
+</h:panelGroup>
 <div class="filter-panel">
 <h3>
 #{i18n.filters}
@@ -36,7 +38,7 @@ template="/templates/template.xhtml">
 <h:inputText
 value="#{regionListView.scrollForm.filter.countryCode}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionListController.refresh}"/>
+<p:ajax event="keyup" update="resultsPanelGroup, sizePanelGroup" listener="#{regionListController.refresh}"/>
 </h:inputText>
 </div>
 
@@ -45,7 +47,7 @@ styleClass="form-control">
 <h:inputText
 value="#{regionListView.scrollForm.filter.code}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionListController.refresh}"/>
+<p:ajax event="keyup" update="resultsPanelGroup, sizePanelGroup" listener="#{regionListController.refresh}"/>
 </h:inputText>
 </div>
 
@@ -54,7 +56,7 @@ styleClass="form-control">
 <h:inputText
 value="#{regionListView.scrollForm.filter.label}"
 styleClass="form-control">
-<p:ajax event="keyup" update="resultsPanelGroup" listener="#{regionListController.refresh}"/>
+<p:ajax event="keyup" update="resultsPanelGroup, sizePanelGroup" listener="#{regionListController.refresh}"/>
 </h:inputText>
 </div>
 
