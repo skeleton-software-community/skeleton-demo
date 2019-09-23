@@ -1,6 +1,7 @@
-package org.sklsft.demo.rest.client.reference.time.base;
+package org.sklsft.demo.rest.client.reference.time;
 
 import org.sklsft.demo.api.interfaces.reference.time.CalendarService;
+import org.sklsft.demo.rest.client.reference.time.base.CalendarBaseRestClient;
 import org.springframework.stereotype.Service;
 
 /**

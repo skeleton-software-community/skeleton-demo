@@ -1,6 +1,7 @@
-package org.sklsft.demo.rest.client.reference.localization.base;
+package org.sklsft.demo.rest.client.reference.localization;
 
 import org.sklsft.demo.api.interfaces.reference.localization.CountryService;
+import org.sklsft.demo.rest.client.reference.localization.base.CountryBaseRestClient;
 import org.springframework.stereotype.Service;
 
 /**

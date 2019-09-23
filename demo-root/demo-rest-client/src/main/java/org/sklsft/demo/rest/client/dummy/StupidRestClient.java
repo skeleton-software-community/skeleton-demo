@@ -1,6 +1,7 @@
-package org.sklsft.demo.rest.client.dummy.base;
+package org.sklsft.demo.rest.client.dummy;
 
 import org.sklsft.demo.api.interfaces.dummy.StupidService;
+import org.sklsft.demo.rest.client.dummy.base.StupidBaseRestClient;
 import org.springframework.stereotype.Service;
 
 /**

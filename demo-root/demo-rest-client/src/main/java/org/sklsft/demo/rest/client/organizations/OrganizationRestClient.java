@@ -1,6 +1,7 @@
-package org.sklsft.demo.rest.client.organizations.base;
+package org.sklsft.demo.rest.client.organizations;
 
 import org.sklsft.demo.api.interfaces.organizations.OrganizationService;
+import org.sklsft.demo.rest.client.organizations.base.OrganizationBaseRestClient;
 import org.springframework.stereotype.Service;
 
 /**
