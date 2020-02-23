@@ -23,7 +23,9 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<mvc:annotation-driven>
 		<mvc:message-converters>
 			<bean
-				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper" ref="objectMapper"/>
+			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
@@ -34,13 +36,22 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<!-- Aspects -->
 	<aop:aspectj-autoproxy />
 
-	<bean name="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
+	<!-- Aspects -->
+	<aop:aspectj-autoproxy />
+
+	<!-- Aspects > Rest Request Aspect -->
+	<bean class="org.sklsft.commons.rest.aspect.correlation.RestRequestAspect">
+	</bean>
 
 	<!-- Aspects > Logging Aspect -->
-	<bean class="org.sklsft.commons.rest.aspect.LoggingAspect">
-		<property name="traceRequestHeaders" value="${log.traceRequestHeaders}"/>
+	<bean class="org.sklsft.commons.rest.aspect.logging.RestLoggingAspect">
+
+		<property name="accessLogger" ref="accessLogger"/>
+		<property name="errorLogger" ref="errorLogger"/>
+		
 		<property name="traceRequestBody" value="${log.traceRequestBody}"/>
-		<property name="objectMapper" ref="objectMapper"/>
+		<property name="traceResponseBody" value="${log.traceResponseBody}"/>
+		
 	</bean>
 
 </beans>
