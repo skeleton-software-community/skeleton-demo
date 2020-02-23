@@ -45,7 +45,7 @@
 		<hibernate.version>5.0.7.Final</hibernate.version>
 		
 		<spring.version>4.3.5.RELEASE</spring.version>
-		<spring.security.version>4.2.1.RELEASE</spring.security.version>
+		<spring.security.version>5.2.2.RELEASE</spring.security.version>
 		<aspectj.version>1.7.3</aspectj.version>
 		<javax.inject.version>1</javax.inject.version>
 		
