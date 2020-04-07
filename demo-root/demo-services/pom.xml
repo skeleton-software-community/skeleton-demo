@@ -25,7 +25,13 @@
 	
 		<dependency>
 			<groupId>org.sklsft.demo</groupId>
-			<artifactId>demo-business-component</artifactId>
+			<artifactId>demo-components</artifactId>
+		</dependency>
+		
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
 		</dependency>
 		
 	</dependencies>

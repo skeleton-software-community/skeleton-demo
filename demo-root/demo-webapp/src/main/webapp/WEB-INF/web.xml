@@ -77,12 +77,12 @@
 
 	<!-- Jsf configuration -->
 	<servlet>
-		<servlet-name>JSF</servlet-name>
+		<servlet-name>demo-webapp</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>JSF</servlet-name>
+		<servlet-name>demo-webapp</servlet-name>
 		<url-pattern>*.jsf</url-pattern>
 	</servlet-mapping>
 

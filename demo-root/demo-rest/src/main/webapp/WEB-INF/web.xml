@@ -4,24 +4,23 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-	<!-- Processes application requests -->
 	<servlet>
-		<servlet-name>restServlet</servlet-name>
+		<servlet-name>demo-rest</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
-			<param-name>contextConfigLocation</param-name>
+			<param-name>contextClass</param-name>
 			<param-value>
-			classpath:applicationContext-demo-repository.xml
-			classpath:applicationContext-demo-business-component.xml
-			classpath:applicationContext-demo-services.xml
-			classpath:applicationContext-demo-rest.xml
-        	</param-value>
+                org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+            </param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>org.sklsft.demo.rest.controller.ApplicationConfig</param-value>
+		</init-param>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>restServlet</servlet-name>
+		<servlet-name>demo-rest</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	

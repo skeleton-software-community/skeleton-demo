@@ -53,8 +53,6 @@ public class PopulatorLauncher {
 		Set<String> tables = extractTables(args);
 		
 		try(FileSystemXmlApplicationContext appContext = new FileSystemXmlApplicationContext("classpath:applicationContext-demo-populator.xml",
-																								"classpath:applicationContext-demo-services.xml",
-																								"classpath:applicationContext-demo-business-component.xml",
 																								"classpath:applicationContext-demo-repository.xml",
 																								"file:" + sourcePath + File.separator + DATASOURCE_CONTEXT_FILE);){
 			logger.info("Context loaded");

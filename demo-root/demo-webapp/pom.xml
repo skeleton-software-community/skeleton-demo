@@ -27,6 +27,11 @@
 		<!-- skeleton commons -->
 		<dependency>
 			<groupId>org.sklsft.commons</groupId>
+			<artifactId>commons-text</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.sklsft.commons</groupId>
 			<artifactId>commons-mvc</artifactId>
 		</dependency>
 		
