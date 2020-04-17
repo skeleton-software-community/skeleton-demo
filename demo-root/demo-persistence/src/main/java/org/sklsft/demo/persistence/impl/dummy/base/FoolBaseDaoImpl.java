@@ -1,15 +1,23 @@
 package org.sklsft.demo.persistence.impl.dummy.base;
 
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addBetweenRestriction;
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addBooleanRestriction;
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addOrder;
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addBetweenRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addBooleanRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addOrder;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.getStringContainsRestriction;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.api.model.OrderType;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
@@ -35,11 +43,20 @@ super(Fool.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings("unchecked")
+@SuppressWarnings("unused")
 public List<Fool> loadListEagerly() {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Fool.class);
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
+
+Root<Fool> root = criteria.from(Fool.class);
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+return session.createQuery(criteria).getResultList();
 }
 
 /**
@@ -47,63 +64,71 @@ return criteria.list();
  */
 @Override
 public Long count(FoolFilter filter) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Fool.class).setProjection(Projections.rowCount());
-addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.DESCRIPTION", filter.getDescription());
-addBetweenRestriction(criteria, "longField", filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
-addBooleanRestriction(criteria, "booleanField", filter.getBooleanField());
-addBetweenRestriction(criteria, "doubleField", filter.getDoubleFieldMinValue(), filter.getDoubleFieldMaxValue());
-addBetweenRestriction(criteria, "decimalField", filter.getDecimalFieldMinValue(), filter.getDecimalFieldMaxValue());
-addBetweenRestriction(criteria, "dateField", filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
-addBetweenRestriction(criteria, "datetimeField", filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
-return (Long) criteria.uniqueResult();
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+
+Root<Fool> root = criteria.from(Fool.class);
+
+List<Predicate> predicates = new ArrayList<>();
+addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get("description"), filter.getDescription());
+addBetweenRestriction(builder, predicates, root.get("longField"), filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
+addBooleanRestriction(builder, predicates, root.get("booleanField"), filter.getBooleanField());
+addBetweenRestriction(builder, predicates, root.get("doubleField"), filter.getDoubleFieldMinValue(), filter.getDoubleFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get("decimalField"), filter.getDecimalFieldMinValue(), filter.getDecimalFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get("dateField"), filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get("datetimeField"), filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(builder.count(root));
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unchecked")
+@SuppressWarnings("unused")
 public List<Fool> scroll(FoolFilter filter, FoolSorting sorting, Long firstResult, Long maxResults) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Fool.class);
-addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.DESCRIPTION", filter.getDescription());
-addBetweenRestriction(criteria, "longField", filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
-addBooleanRestriction(criteria, "booleanField", filter.getBooleanField());
-addBetweenRestriction(criteria, "doubleField", filter.getDoubleFieldMinValue(), filter.getDoubleFieldMaxValue());
-addBetweenRestriction(criteria, "decimalField", filter.getDecimalFieldMinValue(), filter.getDecimalFieldMaxValue());
-addBetweenRestriction(criteria, "dateField", filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
-addBetweenRestriction(criteria, "datetimeField", filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
-addOrder(criteria, "code", sorting.getCodeOrderType());
-addOrder(criteria, "description", sorting.getDescriptionOrderType());
-addOrder(criteria, "longField", sorting.getLongFieldOrderType());
-addOrder(criteria, "booleanField", sorting.getBooleanFieldOrderType());
-addOrder(criteria, "doubleField", sorting.getDoubleFieldOrderType());
-addOrder(criteria, "decimalField", sorting.getDecimalFieldOrderType());
-addOrder(criteria, "dateField", sorting.getDateFieldOrderType());
-addOrder(criteria, "datetimeField", sorting.getDatetimeFieldOrderType());
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
+
+Root<Fool> root = criteria.from(Fool.class);
+
+List<Predicate> predicates = new ArrayList<>();
+addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get("description"), filter.getDescription());
+addBetweenRestriction(builder, predicates, root.get("longField"), filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
+addBooleanRestriction(builder, predicates, root.get("booleanField"), filter.getBooleanField());
+addBetweenRestriction(builder, predicates, root.get("doubleField"), filter.getDoubleFieldMinValue(), filter.getDoubleFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get("decimalField"), filter.getDecimalFieldMinValue(), filter.getDecimalFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get("dateField"), filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get("datetimeField"), filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
+addOrder(builder, orders, root.get("description"), sorting.getDescriptionOrderType());
+addOrder(builder, orders, root.get("longField"), sorting.getLongFieldOrderType());
+addOrder(builder, orders, root.get("booleanField"), sorting.getBooleanFieldOrderType());
+addOrder(builder, orders, root.get("doubleField"), sorting.getDoubleFieldOrderType());
+addOrder(builder, orders, root.get("decimalField"), sorting.getDecimalFieldOrderType());
+addOrder(builder, orders, root.get("dateField"), sorting.getDateFieldOrderType());
+addOrder(builder, orders, root.get("datetimeField"), sorting.getDatetimeFieldOrderType());
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+Query<Fool> query = session.createQuery(criteria);
 if (firstResult != null){
-criteria.setFirstResult(firstResult.intValue());
+query.setFirstResult(firstResult.intValue());
 }
 if (maxResults != null){
-criteria.setMaxResults(maxResults.intValue());
+query.setMaxResults(maxResults.intValue());
 }
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
-}
-
-/**
- * exists object
- */
-@Override
-public boolean exists(String code) {
-if (code == null) {
-return false;
-}
-Fool fool = (Fool)this.sessionFactory.getCurrentSession().createCriteria(Fool.class)
-.add(Restrictions.eq("code",code))
-.uniqueResult();
-return fool != null;
+return query.getResultList();
 }
 
 /**
@@ -111,10 +136,19 @@ return fool != null;
  */
 @Override
 public Fool findOrNull(String code) {
-Fool fool = (Fool)this.sessionFactory.getCurrentSession().createCriteria(Fool.class)
-.add(Restrictions.eq("code",code))
-.uniqueResult();
-return fool;
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
+
+Root<Fool> root = criteria.from(Fool.class);
+
+List<Predicate> predicates = new ArrayList<>();
+addEqualsRestriction(builder, predicates, root.get("code"), code);
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(root);
+
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
@@ -134,15 +168,38 @@ return fool;
 }
 
 /**
+ * exists object
+ */
+@Override
+public boolean exists(String code) {
+if (code == null) {
+return false;
+}
+Fool fool = findOrNull(code);
+return fool != null;
+}
+
+/**
  * search
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<Fool> search(String arg) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Fool.class);
-addStringContainsRestriction(criteria, "{alias}.CODE", arg);
-criteria.setMaxResults(20);
-return criteria.list();
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
+
+Root<Fool> root = criteria.from(Fool.class);
+
+Predicate predicate = getStringContainsRestriction(builder, root.get("code"), arg);
+if (predicate!=null){
+criteria.where(predicate);
+}
+
+criteria.select(root);
+
+Query<Fool> query = session.createQuery(criteria);
+query.setMaxResults(20);
+return query.getResultList();
 }
 
 }

@@ -1,13 +1,20 @@
 package org.sklsft.demo.persistence.impl.reference.localization.base;
 
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addOrder;
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addOrder;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringContainsRestriction;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.api.model.OrderType;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
@@ -33,11 +40,20 @@ super(Country.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings("unchecked")
+@SuppressWarnings("unused")
 public List<Country> loadListEagerly() {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Country.class);
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Country> criteria = builder.createQuery(Country.class);
+
+Root<Country> root = criteria.from(Country.class);
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+return session.createQuery(criteria).getResultList();
 }
 
 /**
@@ -45,45 +61,53 @@ return criteria.list();
  */
 @Override
 public Long count(CountryFilter filter) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Country.class).setProjection(Projections.rowCount());
-addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
-return (Long) criteria.uniqueResult();
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+
+Root<Country> root = criteria.from(Country.class);
+
+List<Predicate> predicates = new ArrayList<>();
+addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(builder.count(root));
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unchecked")
+@SuppressWarnings("unused")
 public List<Country> scroll(CountryFilter filter, CountrySorting sorting, Long firstResult, Long maxResults) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Country.class);
-addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
-addOrder(criteria, "code", sorting.getCodeOrderType());
-addOrder(criteria, "label", sorting.getLabelOrderType());
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Country> criteria = builder.createQuery(Country.class);
+
+Root<Country> root = criteria.from(Country.class);
+
+List<Predicate> predicates = new ArrayList<>();
+addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
+addOrder(builder, orders, root.get("label"), sorting.getLabelOrderType());
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+Query<Country> query = session.createQuery(criteria);
 if (firstResult != null){
-criteria.setFirstResult(firstResult.intValue());
+query.setFirstResult(firstResult.intValue());
 }
 if (maxResults != null){
-criteria.setMaxResults(maxResults.intValue());
+query.setMaxResults(maxResults.intValue());
 }
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
-}
-
-/**
- * exists object
- */
-@Override
-public boolean exists(String code) {
-if (code == null) {
-return false;
-}
-Country country = (Country)this.sessionFactory.getCurrentSession().createCriteria(Country.class)
-.add(Restrictions.eq("code",code))
-.uniqueResult();
-return country != null;
+return query.getResultList();
 }
 
 /**
@@ -91,10 +115,19 @@ return country != null;
  */
 @Override
 public Country findOrNull(String code) {
-Country country = (Country)this.sessionFactory.getCurrentSession().createCriteria(Country.class)
-.add(Restrictions.eq("code",code))
-.uniqueResult();
-return country;
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Country> criteria = builder.createQuery(Country.class);
+
+Root<Country> root = criteria.from(Country.class);
+
+List<Predicate> predicates = new ArrayList<>();
+addEqualsRestriction(builder, predicates, root.get("code"), code);
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(root);
+
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
@@ -111,6 +144,18 @@ throw new ObjectNotFoundException("Country.notFound");
 } else {
 return country;
 }
+}
+
+/**
+ * exists object
+ */
+@Override
+public boolean exists(String code) {
+if (code == null) {
+return false;
+}
+Country country = findOrNull(code);
+return country != null;
 }
 
 }

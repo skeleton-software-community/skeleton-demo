@@ -1,20 +1,27 @@
 package org.sklsft.demo.persistence.impl.reference.localization.base;
 
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addOrder;
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addOrder;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringContainsRestriction;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.api.model.OrderType;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.reference.localization.filters.RegionFilter;
 import org.sklsft.demo.api.model.reference.localization.sortings.RegionSorting;
+import org.sklsft.demo.model.reference.localization.Country;
 import org.sklsft.demo.model.reference.localization.Region;
 import org.sklsft.demo.persistence.interfaces.reference.localization.base.RegionBaseDao;
 
@@ -35,45 +42,76 @@ super(Region.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings("unchecked")
+@SuppressWarnings("unused")
 public List<Region> loadListEagerly() {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
-criteria.setFetchMode("country",FetchMode.JOIN);
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
+
+Root<Region> root = criteria.from(Region.class);
+Join<Country, Region> country = root.join("country");
+root.fetch("country");
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+return session.createQuery(criteria).getResultList();
 }
 
 /**
  * load object list from country
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<Region> loadListFromCountry(Short countryId) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
+
+Root<Region> root = criteria.from(Region.class);
+Join<Country, Region> country = root.join("country");
+
 if (countryId == null){
-criteria.add(Restrictions.isNull("country.id"));
+criteria.where(builder.isNull(country.get("id")));
 } else {
-criteria.add(Restrictions.eq("country.id", countryId));
+criteria.where(builder.equal(country.get("id"), countryId));
 }
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+return session.createQuery(criteria).getResultList();
 }
 
 /**
  * load object list eagerly from country
  */
 @Override
-@SuppressWarnings("unchecked")
+@SuppressWarnings("unused")
 public List<Region> loadListEagerlyFromCountry(Short countryId) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
+
+Root<Region> root = criteria.from(Region.class);
+Join<Country, Region> country = root.join("country");
+root.fetch("country");
+
 if (countryId == null){
-criteria.add(Restrictions.isNull("country.id"));
+criteria.where(builder.isNull(country.get("id")));
 } else {
-criteria.add(Restrictions.eq("country.id", countryId));
+criteria.where(builder.equal(country.get("id"), countryId));
 }
-criteria.setFetchMode("country",FetchMode.JOIN);
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+return session.createQuery(criteria).getResultList();
 }
 
 /**
@@ -81,111 +119,149 @@ return criteria.list();
  */
 @Override
 public Long count(RegionFilter filter) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class).setProjection(Projections.rowCount());
-Criteria countryCriteria = criteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
-addStringContainsRestriction(countryCriteria, "{alias}.CODE", filter.getCountryCode());
-addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
-return (Long) criteria.uniqueResult();
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+
+Root<Region> root = criteria.from(Region.class);
+Join<Country, Region> country = root.join("country");
+
+List<Predicate> predicates = new ArrayList<>();
+addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());
+addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(builder.count(root));
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
  * count object list from country
  */
 public Long countFromCountry(Short countryId) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class).setProjection(Projections.rowCount());
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+
+Root<Region> root = criteria.from(Region.class);
+Join<Country, Region> country = root.join("country");
+
 if (countryId == null){
-criteria.add(Restrictions.isNull("country.id"));
+criteria.where(builder.isNull(country.get("id")));
 } else {
-criteria.add(Restrictions.eq("country.id", countryId));
+criteria.where(builder.equal(country.get("id"), countryId));
 }
-return (Long) criteria.uniqueResult();
+
+criteria.select(builder.count(root));
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
  * count filtered object list from country
  */
 public Long countFromCountry(Short countryId, RegionFilter filter) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class).setProjection(Projections.rowCount());
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+
+Root<Region> root = criteria.from(Region.class);
+Join<Country, Region> country = root.join("country");
+
+List<Predicate> predicates = new ArrayList<>();
+addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());
+addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
 if (countryId == null){
-criteria.add(Restrictions.isNull("country.id"));
+predicates.add(builder.isNull(country.get("id")));
 } else {
-criteria.add(Restrictions.eq("country.id", countryId));
+predicates.add(builder.equal(country.get("id"), countryId));
 }
-Criteria countryCriteria = criteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
-addStringContainsRestriction(countryCriteria, "{alias}.CODE", filter.getCountryCode());
-addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
-return (Long) criteria.uniqueResult();
+
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(builder.count(root));
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unchecked")
+@SuppressWarnings("unused")
 public List<Region> scroll(RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
-Criteria countryCriteria = criteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
-addStringContainsRestriction(countryCriteria, "{alias}.CODE", filter.getCountryCode());
-addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
-addOrder(countryCriteria, "code", sorting.getCountryCodeOrderType());
-addOrder(criteria, "code", sorting.getCodeOrderType());
-addOrder(criteria, "label", sorting.getLabelOrderType());
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
+
+Root<Region> root = criteria.from(Region.class);
+Join<Country, Region> country = root.join("country");
+root.fetch("country");
+
+List<Predicate> predicates = new ArrayList<>();
+addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());
+addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, country.get("code"), sorting.getCountryCodeOrderType());
+addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
+addOrder(builder, orders, root.get("label"), sorting.getLabelOrderType());
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+Query<Region> query = session.createQuery(criteria);
 if (firstResult != null){
-criteria.setFirstResult(firstResult.intValue());
+query.setFirstResult(firstResult.intValue());
 }
 if (maxResults != null){
-criteria.setMaxResults(maxResults.intValue());
+query.setMaxResults(maxResults.intValue());
 }
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
+return query.getResultList();
 }
 
 /**
  * scroll filtered object list from country
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<Region> scrollFromCountry(Short countryId, RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Region.class);
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
+
+Root<Region> root = criteria.from(Region.class);
+Join<Country, Region> country = root.join("country");
+root.fetch("country");
+
+List<Predicate> predicates = new ArrayList<>();
+addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());
+addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
 if (countryId == null){
-criteria.add(Restrictions.isNull("country.id"));
+predicates.add(builder.isNull(country.get("id")));
 } else {
-criteria.add(Restrictions.eq("country.id", countryId));
+predicates.add(builder.equal(country.get("id"), countryId));
 }
-Criteria countryCriteria = criteria.createCriteria("country", JoinType.LEFT_OUTER_JOIN);
-addStringContainsRestriction(countryCriteria, "{alias}.CODE", filter.getCountryCode());
-addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
-addOrder(countryCriteria, "code", sorting.getCountryCodeOrderType());
-addOrder(criteria, "code", sorting.getCodeOrderType());
-addOrder(criteria, "label", sorting.getLabelOrderType());
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, country.get("code"), sorting.getCountryCodeOrderType());
+addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
+addOrder(builder, orders, root.get("label"), sorting.getLabelOrderType());
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+Query<Region> query = session.createQuery(criteria);
 if (firstResult != null){
-criteria.setFirstResult(firstResult.intValue());
+query.setFirstResult(firstResult.intValue());
 }
 if (maxResults != null){
-criteria.setMaxResults(maxResults.intValue());
+query.setMaxResults(maxResults.intValue());
 }
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
-}
-
-/**
- * exists object
- */
-@Override
-public boolean exists(String countryCode, String code) {
-if (countryCode == null && code == null) {
-return false;
-}
-Region region = (Region)this.sessionFactory.getCurrentSession().createCriteria(Region.class)
-.createAlias("country","country")
-.add(Restrictions.eq("country.code",countryCode))
-.add(Restrictions.eq("code",code))
-.uniqueResult();
-return region != null;
+return query.getResultList();
 }
 
 /**
@@ -193,12 +269,21 @@ return region != null;
  */
 @Override
 public Region findOrNull(String countryCode, String code) {
-Region region = (Region)this.sessionFactory.getCurrentSession().createCriteria(Region.class)
-.createAlias("country","country")
-.add(Restrictions.eq("country.code",countryCode))
-.add(Restrictions.eq("code",code))
-.uniqueResult();
-return region;
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
+
+Root<Region> root = criteria.from(Region.class);
+Join<Country, Region> country = root.join("country");
+
+List<Predicate> predicates = new ArrayList<>();
+addEqualsRestriction(builder, predicates, country.get("code"), countryCode);
+addEqualsRestriction(builder, predicates, root.get("code"), code);
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(root);
+
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
@@ -215,6 +300,18 @@ throw new ObjectNotFoundException("Region.notFound");
 } else {
 return region;
 }
+}
+
+/**
+ * exists object
+ */
+@Override
+public boolean exists(String countryCode, String code) {
+if (countryCode == null && code == null) {
+return false;
+}
+Region region = findOrNull(countryCode, code);
+return region != null;
 }
 
 }

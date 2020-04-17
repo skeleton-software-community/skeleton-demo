@@ -1,14 +1,22 @@
 package org.sklsft.demo.persistence.impl.reference.time.base;
 
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addBetweenRestriction;
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addOrder;
-import static org.sklsft.commons.model.patterns.HibernateCriteriaUtils.addStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addBetweenRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addOrder;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringContainsRestriction;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.sklsft.commons.api.exception.repository.ObjectNotFoundException;
 import org.sklsft.commons.api.model.OrderType;
 import org.sklsft.commons.model.patterns.BaseDaoImpl;
@@ -37,11 +45,20 @@ super(Calendar.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings("unchecked")
+@SuppressWarnings("unused")
 public List<Calendar> loadListEagerly() {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Calendar.class);
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Calendar> criteria = builder.createQuery(Calendar.class);
+
+Root<Calendar> root = criteria.from(Calendar.class);
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+return session.createQuery(criteria).getResultList();
 }
 
 /**
@@ -49,47 +66,79 @@ return criteria.list();
  */
 @Override
 public Long count(CalendarFilter filter) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Calendar.class).setProjection(Projections.rowCount());
-addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
-return (Long) criteria.uniqueResult();
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+
+Root<Calendar> root = criteria.from(Calendar.class);
+
+List<Predicate> predicates = new ArrayList<>();
+addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(builder.count(root));
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unchecked")
+@SuppressWarnings("unused")
 public List<Calendar> scroll(CalendarFilter filter, CalendarSorting sorting, Long firstResult, Long maxResults) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Calendar.class);
-addStringContainsRestriction(criteria, "{alias}.CODE", filter.getCode());
-addStringContainsRestriction(criteria, "{alias}.LABEL", filter.getLabel());
-addOrder(criteria, "code", sorting.getCodeOrderType());
-addOrder(criteria, "label", sorting.getLabelOrderType());
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Calendar> criteria = builder.createQuery(Calendar.class);
+
+Root<Calendar> root = criteria.from(Calendar.class);
+
+List<Predicate> predicates = new ArrayList<>();
+addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
+addOrder(builder, orders, root.get("label"), sorting.getLabelOrderType());
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+Query<Calendar> query = session.createQuery(criteria);
 if (firstResult != null){
-criteria.setFirstResult(firstResult.intValue());
+query.setFirstResult(firstResult.intValue());
 }
 if (maxResults != null){
-criteria.setMaxResults(maxResults.intValue());
+query.setMaxResults(maxResults.intValue());
 }
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
+return query.getResultList();
 }
 
 /**
  * load one to many component CalendarDayOff list
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<CalendarDayOff> loadCalendarDayOffList(Integer calendarId) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(CalendarDayOff.class);
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<CalendarDayOff> criteria = builder.createQuery(CalendarDayOff.class);
+
+Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
+Join<Calendar, CalendarDayOff> calendar = root.join("calendar");
+
 if (calendarId == null){
-criteria.add(Restrictions.isNull("calendar.id"));
+criteria.where(builder.isNull(calendar.get("id")));
 } else {
-criteria.add(Restrictions.eq("calendar.id", calendarId));
+criteria.where(builder.equal(calendar.get("id"), calendarId));
 }
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+return session.createQuery(criteria).getResultList();
 }
 
 /**
@@ -97,13 +146,21 @@ return criteria.list();
  */
 @Override
 public Long countCalendarDayOff(Integer calendarId) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(CalendarDayOff.class).setProjection(Projections.rowCount());
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+
+Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
+Join<Calendar, CalendarDayOff> calendar = root.join("calendar");
+
 if (calendarId == null){
-criteria.add(Restrictions.isNull("calendar.id"));
+criteria.where(builder.isNull(calendar.get("id")));
 } else {
-criteria.add(Restrictions.eq("calendar.id", calendarId));
+criteria.where(builder.equal(calendar.get("id"), calendarId));
 }
-return (Long) criteria.uniqueResult();
+
+criteria.select(builder.count(root));
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
@@ -111,41 +168,65 @@ return (Long) criteria.uniqueResult();
  * count filtered one to many component CalendarDayOff
  */
 public Long countCalendarDayOff(Integer calendarId, CalendarDayOffFilter filter) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(CalendarDayOff.class).setProjection(Projections.rowCount());
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+
+Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
+Join<Calendar, CalendarDayOff> calendar = root.join("calendar");
+
+List<Predicate> predicates = new ArrayList<>();
+addBetweenRestriction(builder, predicates, root.get("dayOffDate"), filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
+addStringContainsRestriction(builder, predicates, root.get("dayOffLabel"), filter.getDayOffLabel());
 if (calendarId == null){
-criteria.add(Restrictions.isNull("calendar.id"));
+predicates.add(builder.isNull(calendar.get("id")));
 } else {
-criteria.add(Restrictions.eq("calendar.id", calendarId));
+predicates.add(builder.equal(calendar.get("id"), calendarId));
 }
-addBetweenRestriction(criteria, "dayOffDate", filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
-addStringContainsRestriction(criteria, "{alias}.DAY_OFF_LABEL", filter.getDayOffLabel());
-return (Long) criteria.uniqueResult();
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(builder.count(root));
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
  * scroll filtered one to many component CalendarDayOff
  */
 @Override
-@SuppressWarnings("unchecked")
+@SuppressWarnings("unused")
 public List<CalendarDayOff> scrollCalendarDayOff(Integer calendarId, CalendarDayOffFilter filter, CalendarDayOffSorting sorting, Long firstResult, Long maxResults) {
-Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(CalendarDayOff.class);
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<CalendarDayOff> criteria = builder.createQuery(CalendarDayOff.class);
+
+Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
+Join<Calendar, CalendarDayOff> calendar = root.join("calendar");
+
+List<Predicate> predicates = new ArrayList<>();
+addBetweenRestriction(builder, predicates, root.get("dayOffDate"), filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
+addStringContainsRestriction(builder, predicates, root.get("dayOffLabel"), filter.getDayOffLabel());
 if (calendarId == null){
-criteria.add(Restrictions.isNull("calendar.id"));
+predicates.add(builder.isNull(calendar.get("id")));
 } else {
-criteria.add(Restrictions.eq("calendar.id", calendarId));
+predicates.add(builder.equal(calendar.get("id"), calendarId));
 }
-addBetweenRestriction(criteria, "dayOffDate", filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
-addStringContainsRestriction(criteria, "{alias}.DAY_OFF_LABEL", filter.getDayOffLabel());
-addOrder(criteria, "dayOffDate", sorting.getDayOffDateOrderType());
-addOrder(criteria, "dayOffLabel", sorting.getDayOffLabelOrderType());
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(root);
+List<Order> orders = new ArrayList<>();
+addOrder(builder, orders, root.get("dayOffDate"), sorting.getDayOffDateOrderType());
+addOrder(builder, orders, root.get("dayOffLabel"), sorting.getDayOffLabelOrderType());
+addOrder(builder, orders, root.get("id"), OrderType.DESC);
+criteria.orderBy(orders);
+
+Query<CalendarDayOff> query = session.createQuery(criteria);
 if (firstResult != null){
-criteria.setFirstResult(firstResult.intValue());
+query.setFirstResult(firstResult.intValue());
 }
 if (maxResults != null){
-criteria.setMaxResults(maxResults.intValue());
+query.setMaxResults(maxResults.intValue());
 }
-addOrder(criteria, "id", OrderType.DESC);
-return criteria.list();
+return query.getResultList();
 }
 
 /**
@@ -162,28 +243,23 @@ return calendarDayOff;
 }
 
 /**
- * exists object
- */
-@Override
-public boolean exists(String code) {
-if (code == null) {
-return false;
-}
-Calendar calendar = (Calendar)this.sessionFactory.getCurrentSession().createCriteria(Calendar.class)
-.add(Restrictions.eq("code",code))
-.uniqueResult();
-return calendar != null;
-}
-
-/**
  * find object or null
  */
 @Override
 public Calendar findOrNull(String code) {
-Calendar calendar = (Calendar)this.sessionFactory.getCurrentSession().createCriteria(Calendar.class)
-.add(Restrictions.eq("code",code))
-.uniqueResult();
-return calendar;
+Session session = this.sessionFactory.getCurrentSession();
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Calendar> criteria = builder.createQuery(Calendar.class);
+
+Root<Calendar> root = criteria.from(Calendar.class);
+
+List<Predicate> predicates = new ArrayList<>();
+addEqualsRestriction(builder, predicates, root.get("code"), code);
+criteria.where(predicates.toArray(new Predicate[predicates.size()]));
+
+criteria.select(root);
+
+return session.createQuery(criteria).getSingleResult();
 }
 
 /**
@@ -200,6 +276,18 @@ throw new ObjectNotFoundException("Calendar.notFound");
 } else {
 return calendar;
 }
+}
+
+/**
+ * exists object
+ */
+@Override
+public boolean exists(String code) {
+if (code == null) {
+return false;
+}
+Calendar calendar = findOrNull(code);
+return calendar != null;
 }
 
 /**
