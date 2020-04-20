@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Fetch;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
@@ -49,8 +50,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country");
-root.fetch("country");
+Fetch<Country, Region> country = root.fetch("country");
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
@@ -90,20 +90,19 @@ return session.createQuery(criteria).getResultList();
  * load object list eagerly from country
  */
 @Override
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused","unchecked"})
 public List<Region> loadListEagerlyFromCountry(Short countryId) {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country");
-root.fetch("country");
+Fetch<Country, Region> country = root.fetch("country");
 
 if (countryId == null){
-criteria.where(builder.isNull(country.get("id")));
+criteria.where(builder.isNull(((Join<Country,Region>)country).get("id")));
 } else {
-criteria.where(builder.equal(country.get("id"), countryId));
+criteria.where(builder.equal(((Join<Country,Region>)country).get("id"), countryId));
 }
 
 criteria.select(root);
@@ -188,15 +187,15 @@ return session.createQuery(criteria).getSingleResult();
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unused")
+@SuppressWarnings("unchecked")
 public List<Region> scroll(RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults) {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country");
-root.fetch("country");
+Fetch<Country, Region> countryFetch = root.fetch("country");
+Join<Country, Region> country = (Join<Country, Region>)countryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());
@@ -226,14 +225,15 @@ return query.getResultList();
  * scroll filtered object list from country
  */
 @Override
+@SuppressWarnings("unchecked")
 public List<Region> scrollFromCountry(Short countryId, RegionFilter filter, RegionSorting sorting, Long firstResult, Long maxResults) {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country");
-root.fetch("country");
+Fetch<Country, Region> countryFetch = root.fetch("country");
+Join<Country, Region> country = (Join<Country, Region>)countryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());

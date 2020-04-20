@@ -89,7 +89,7 @@ return session.createQuery(criteria).getSingleResult();
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unused")
+@SuppressWarnings("unchecked")
 public List<Fool> scroll(FoolFilter filter, FoolSorting sorting, Long firstResult, Long maxResults) {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();

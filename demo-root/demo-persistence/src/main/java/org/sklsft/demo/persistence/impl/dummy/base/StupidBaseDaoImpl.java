@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Fetch;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
@@ -49,8 +50,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Join<Fool, Stupid> fool = root.join("fool");
-root.fetch("fool");
+Fetch<Fool, Stupid> fool = root.fetch("fool");
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
@@ -90,20 +90,19 @@ return session.createQuery(criteria).getResultList();
  * load object list eagerly from fool
  */
 @Override
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused","unchecked"})
 public List<Stupid> loadListEagerlyFromFool(String foolId) {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Join<Fool, Stupid> fool = root.join("fool");
-root.fetch("fool");
+Fetch<Fool, Stupid> fool = root.fetch("fool");
 
 if (foolId == null){
-criteria.where(builder.isNull(fool.get("id")));
+criteria.where(builder.isNull(((Join<Fool,Stupid>)fool).get("id")));
 } else {
-criteria.where(builder.equal(fool.get("id"), foolId));
+criteria.where(builder.equal(((Join<Fool,Stupid>)fool).get("id"), foolId));
 }
 
 criteria.select(root);
@@ -186,15 +185,15 @@ return session.createQuery(criteria).getSingleResult();
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unused")
+@SuppressWarnings("unchecked")
 public List<Stupid> scroll(StupidFilter filter, StupidSorting sorting, Long firstResult, Long maxResults) {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Join<Fool, Stupid> fool = root.join("fool");
-root.fetch("fool");
+Fetch<Fool, Stupid> foolFetch = root.fetch("fool");
+Join<Fool, Stupid> fool = (Join<Fool, Stupid>)foolFetch;
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
@@ -222,14 +221,15 @@ return query.getResultList();
  * scroll filtered object list from fool
  */
 @Override
+@SuppressWarnings("unchecked")
 public List<Stupid> scrollFromFool(String foolId, StupidFilter filter, StupidSorting sorting, Long firstResult, Long maxResults) {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Join<Fool, Stupid> fool = root.join("fool");
-root.fetch("fool");
+Fetch<Fool, Stupid> foolFetch = root.fetch("fool");
+Join<Fool, Stupid> fool = (Join<Fool, Stupid>)foolFetch;
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());

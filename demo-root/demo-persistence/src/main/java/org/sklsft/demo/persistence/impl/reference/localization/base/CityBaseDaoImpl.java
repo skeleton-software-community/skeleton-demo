@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Fetch;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
@@ -50,10 +51,8 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
-Join<Region, City> region = root.join("region");
-root.fetch("region");
-Join<Country, Region> regionCountry = region.join("country");
-region.fetch("country");
+Fetch<Region, City> region = root.fetch("region");
+Fetch<Country, Region> regionCountry = region.fetch("country");
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
@@ -93,22 +92,20 @@ return session.createQuery(criteria).getResultList();
  * load object list eagerly from region
  */
 @Override
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused","unchecked"})
 public List<City> loadListEagerlyFromRegion(Integer regionId) {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
-Join<Region, City> region = root.join("region");
-root.fetch("region");
-Join<Country, Region> regionCountry = region.join("country");
-region.fetch("country");
+Fetch<Region, City> region = root.fetch("region");
+Fetch<Country, Region> regionCountry = region.fetch("country");
 
 if (regionId == null){
-criteria.where(builder.isNull(region.get("id")));
+criteria.where(builder.isNull(((Join<Region,City>)region).get("id")));
 } else {
-criteria.where(builder.equal(region.get("id"), regionId));
+criteria.where(builder.equal(((Join<Region,City>)region).get("id"), regionId));
 }
 
 criteria.select(root);
@@ -197,17 +194,17 @@ return session.createQuery(criteria).getSingleResult();
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unused")
+@SuppressWarnings("unchecked")
 public List<City> scroll(CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults) {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
-Join<Region, City> region = root.join("region");
-root.fetch("region");
-Join<Country, Region> regionCountry = region.join("country");
-region.fetch("country");
+Fetch<Region, City> regionFetch = root.fetch("region");
+Join<Region, City> region = (Join<Region, City>)regionFetch;
+Fetch<Country, Region> regionCountryFetch = region.fetch("country");
+Join<Country, Region> regionCountry = (Join<Country, Region>)regionCountryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, regionCountry.get("code"), filter.getRegionCountryCode());
@@ -239,16 +236,17 @@ return query.getResultList();
  * scroll filtered object list from region
  */
 @Override
+@SuppressWarnings("unchecked")
 public List<City> scrollFromRegion(Integer regionId, CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults) {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
-Join<Region, City> region = root.join("region");
-root.fetch("region");
-Join<Country, Region> regionCountry = region.join("country");
-region.fetch("country");
+Fetch<Region, City> regionFetch = root.fetch("region");
+Join<Region, City> region = (Join<Region, City>)regionFetch;
+Fetch<Country, Region> regionCountryFetch = region.fetch("country");
+Join<Country, Region> regionCountry = (Join<Country, Region>)regionCountryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, regionCountry.get("code"), filter.getRegionCountryCode());
