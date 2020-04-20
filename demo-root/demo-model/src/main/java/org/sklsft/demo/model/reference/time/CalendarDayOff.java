@@ -43,8 +43,8 @@ public CalendarDayOff(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "generator", sequenceName = "CALENDAR_DAY_OFF_id_seq", allocationSize=1)
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+@SequenceGenerator(name = "calendarDayOffIdGenerator", sequenceName = "CALENDAR_DAY_OFF_id_seq", allocationSize=1)
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "calendarDayOffIdGenerator")
 private Integer id;
 
 @ManyToOne(fetch = FetchType.LAZY)

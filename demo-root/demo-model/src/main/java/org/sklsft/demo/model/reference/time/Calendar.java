@@ -38,8 +38,8 @@ public Calendar(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "generator", sequenceName = "CALENDAR_id_seq", allocationSize=1)
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+@SequenceGenerator(name = "calendarIdGenerator", sequenceName = "CALENDAR_id_seq", allocationSize=1)
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "calendarIdGenerator")
 private Integer id;
 
 @Column(name = "CODE", nullable = false)

@@ -34,8 +34,8 @@ public OrganizationDescription(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "generator", sequenceName = "ORGANIZATION_DESCRIPTION_id_seq", allocationSize=1)
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+@SequenceGenerator(name = "organizationDescriptionIdGenerator", sequenceName = "ORGANIZATION_DESCRIPTION_id_seq", allocationSize=1)
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "organizationDescriptionIdGenerator")
 private Long id;
 
 @Lob

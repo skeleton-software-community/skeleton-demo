@@ -39,8 +39,8 @@ public Region(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "generator", sequenceName = "REGION_id_seq", allocationSize=1)
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+@SequenceGenerator(name = "regionIdGenerator", sequenceName = "REGION_id_seq", allocationSize=1)
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "regionIdGenerator")
 private Integer id;
 
 @ManyToOne(fetch = FetchType.LAZY)

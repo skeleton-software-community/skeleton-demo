@@ -41,8 +41,8 @@ public Organization(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "generator", sequenceName = "ORGANIZATION_id_seq", allocationSize=1)
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+@SequenceGenerator(name = "organizationIdGenerator", sequenceName = "ORGANIZATION_id_seq", allocationSize=1)
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "organizationIdGenerator")
 private Integer id;
 
 @Column(name = "CODE", nullable = false)
