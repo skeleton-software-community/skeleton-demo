@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Fetch;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -50,7 +51,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Fetch<Country, Region> country = root.fetch("country");
+Fetch<Country, Region> country = root.fetch("country", JoinType.LEFT);
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
@@ -70,7 +71,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country");
+Join<Country, Region> country = root.join("country", JoinType.LEFT);
 
 if (countryId == null){
 criteria.where(builder.isNull(country.get("id")));
@@ -97,7 +98,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Fetch<Country, Region> country = root.fetch("country");
+Fetch<Country, Region> country = root.fetch("country", JoinType.LEFT);
 
 if (countryId == null){
 criteria.where(builder.isNull(((Join<Country,Region>)country).get("id")));
@@ -123,7 +124,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country");
+Join<Country, Region> country = root.join("country", JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());
@@ -144,7 +145,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country");
+Join<Country, Region> country = root.join("country", JoinType.LEFT);
 
 if (countryId == null){
 criteria.where(builder.isNull(country.get("id")));
@@ -165,7 +166,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country");
+Join<Country, Region> country = root.join("country", JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());
@@ -194,7 +195,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Fetch<Country, Region> countryFetch = root.fetch("country");
+Fetch<Country, Region> countryFetch = root.fetch("country", JoinType.LEFT);
 Join<Country, Region> country = (Join<Country, Region>)countryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
@@ -232,7 +233,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Fetch<Country, Region> countryFetch = root.fetch("country");
+Fetch<Country, Region> countryFetch = root.fetch("country", JoinType.LEFT);
 Join<Country, Region> country = (Join<Country, Region>)countryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
@@ -274,7 +275,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country");
+Join<Country, Region> country = root.join("country", JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addEqualsRestriction(builder, predicates, country.get("code"), countryCode);
@@ -283,7 +284,7 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 
-return session.createQuery(criteria).getSingleResult();
+return session.createQuery(criteria).uniqueResult();
 }
 
 /**

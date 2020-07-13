@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Fetch;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -52,7 +53,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Organization> criteria = builder.createQuery(Organization.class);
 
 Root<Organization> root = criteria.from(Organization.class);
-Fetch<OrganizationDescription, Organization> organizationDescription = root.fetch("organizationDescription");
+Fetch<OrganizationDescription, Organization> organizationDescription = root.fetch("organizationDescription", JoinType.LEFT);
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
@@ -72,7 +73,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Organization> root = criteria.from(Organization.class);
-Join<OrganizationDescription, Organization> organizationDescription = root.join("organizationDescription");
+Join<OrganizationDescription, Organization> organizationDescription = root.join("organizationDescription", JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
@@ -94,7 +95,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Organization> criteria = builder.createQuery(Organization.class);
 
 Root<Organization> root = criteria.from(Organization.class);
-Fetch<OrganizationDescription, Organization> organizationDescriptionFetch = root.fetch("organizationDescription");
+Fetch<OrganizationDescription, Organization> organizationDescriptionFetch = root.fetch("organizationDescription", JoinType.LEFT);
 Join<OrganizationDescription, Organization> organizationDescription = (Join<OrganizationDescription, Organization>)organizationDescriptionFetch;
 
 List<Predicate> predicates = new ArrayList<>();
@@ -136,7 +137,7 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 
-return session.createQuery(criteria).getSingleResult();
+return session.createQuery(criteria).uniqueResult();
 }
 
 /**

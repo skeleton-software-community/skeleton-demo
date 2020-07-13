@@ -30,10 +30,16 @@
 	</context-param>
 	
 	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>
+	        org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+	    </param-value>
+	</context-param>
+	
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:applicationContext-demo-rest-client.xml
-			classpath:applicationContext-demo-webapp.xml
+			org.sklsft.demo.mvc.ApplicationConfig
 		</param-value>
 	</context-param>
 

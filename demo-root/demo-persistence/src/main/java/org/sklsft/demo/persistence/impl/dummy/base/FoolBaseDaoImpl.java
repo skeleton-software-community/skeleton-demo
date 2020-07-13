@@ -148,7 +148,7 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 
-return session.createQuery(criteria).getSingleResult();
+return session.createQuery(criteria).uniqueResult();
 }
 
 /**

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.api.model.ScrollView;
@@ -34,7 +34,7 @@ public class CalendarBaseRestClient implements CalendarBaseService {
 /*
  * properties injected by spring
  */
-@Inject
+@Resource(name="demoRestClient")
 private RestClient restClient;
 /**
  * get options

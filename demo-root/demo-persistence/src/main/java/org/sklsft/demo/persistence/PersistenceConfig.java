@@ -19,10 +19,13 @@ public class PersistenceConfig {
 	
 	@Inject
 	private Environment env;
+	
+	@Inject
+	private JndiTemplate jndiTemplate;
 
 	@Bean
     public DataSource dataSource() throws NamingException {
-        return (DataSource) new JndiTemplate().lookup("java:comp/env/jdbc/demo");
+        return jndiTemplate.lookup("java:comp/env/jdbc/demo", DataSource.class);
     }
 	
 	@Bean
@@ -33,7 +36,7 @@ public class PersistenceConfig {
 		result.setDataSource(dataSource());
 		
 		Properties hibernateProperties = new Properties();
-		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("log.showSql"));
+		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.showSql"));
 		result.setHibernateProperties(hibernateProperties);
 		
 		return result;

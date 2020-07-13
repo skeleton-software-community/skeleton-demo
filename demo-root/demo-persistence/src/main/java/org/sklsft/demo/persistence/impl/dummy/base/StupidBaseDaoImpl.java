@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Fetch;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -50,7 +51,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Fetch<Fool, Stupid> fool = root.fetch("fool");
+Fetch<Fool, Stupid> fool = root.fetch("fool", JoinType.LEFT);
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
@@ -70,7 +71,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Join<Fool, Stupid> fool = root.join("fool");
+Join<Fool, Stupid> fool = root.join("fool", JoinType.LEFT);
 
 if (foolId == null){
 criteria.where(builder.isNull(fool.get("id")));
@@ -97,7 +98,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Fetch<Fool, Stupid> fool = root.fetch("fool");
+Fetch<Fool, Stupid> fool = root.fetch("fool", JoinType.LEFT);
 
 if (foolId == null){
 criteria.where(builder.isNull(((Join<Fool,Stupid>)fool).get("id")));
@@ -123,7 +124,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Join<Fool, Stupid> fool = root.join("fool");
+Join<Fool, Stupid> fool = root.join("fool", JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
@@ -143,7 +144,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Join<Fool, Stupid> fool = root.join("fool");
+Join<Fool, Stupid> fool = root.join("fool", JoinType.LEFT);
 
 if (foolId == null){
 criteria.where(builder.isNull(fool.get("id")));
@@ -164,7 +165,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Join<Fool, Stupid> fool = root.join("fool");
+Join<Fool, Stupid> fool = root.join("fool", JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
@@ -192,7 +193,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Fetch<Fool, Stupid> foolFetch = root.fetch("fool");
+Fetch<Fool, Stupid> foolFetch = root.fetch("fool", JoinType.LEFT);
 Join<Fool, Stupid> fool = (Join<Fool, Stupid>)foolFetch;
 
 List<Predicate> predicates = new ArrayList<>();
@@ -228,7 +229,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Fetch<Fool, Stupid> foolFetch = root.fetch("fool");
+Fetch<Fool, Stupid> foolFetch = root.fetch("fool", JoinType.LEFT);
 Join<Fool, Stupid> fool = (Join<Fool, Stupid>)foolFetch;
 
 List<Predicate> predicates = new ArrayList<>();
@@ -275,7 +276,7 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 
-return session.createQuery(criteria).getSingleResult();
+return session.createQuery(criteria).uniqueResult();
 }
 
 /**

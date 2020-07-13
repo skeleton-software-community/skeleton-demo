@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -125,7 +126,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<CalendarDayOff> criteria = builder.createQuery(CalendarDayOff.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
-Join<Calendar, CalendarDayOff> calendar = root.join("calendar");
+Join<Calendar, CalendarDayOff> calendar = root.join("calendar", JoinType.LEFT);
 
 if (calendarId == null){
 criteria.where(builder.isNull(calendar.get("id")));
@@ -151,7 +152,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
-Join<Calendar, CalendarDayOff> calendar = root.join("calendar");
+Join<Calendar, CalendarDayOff> calendar = root.join("calendar", JoinType.LEFT);
 
 if (calendarId == null){
 criteria.where(builder.isNull(calendar.get("id")));
@@ -173,7 +174,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
-Join<Calendar, CalendarDayOff> calendar = root.join("calendar");
+Join<Calendar, CalendarDayOff> calendar = root.join("calendar", JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addBetweenRestriction(builder, predicates, root.get("dayOffDate"), filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
@@ -193,14 +194,13 @@ return session.createQuery(criteria).getSingleResult();
  * scroll filtered one to many component CalendarDayOff
  */
 @Override
-@SuppressWarnings("unused")
 public List<CalendarDayOff> scrollCalendarDayOff(Integer calendarId, CalendarDayOffFilter filter, CalendarDayOffSorting sorting, Long firstResult, Long maxResults) {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<CalendarDayOff> criteria = builder.createQuery(CalendarDayOff.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
-Join<Calendar, CalendarDayOff> calendar = root.join("calendar");
+Join<Calendar, CalendarDayOff> calendar = root.join("calendar", JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addBetweenRestriction(builder, predicates, root.get("dayOffDate"), filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
@@ -259,7 +259,7 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 
-return session.createQuery(criteria).getSingleResult();
+return session.createQuery(criteria).uniqueResult();
 }
 
 /**
