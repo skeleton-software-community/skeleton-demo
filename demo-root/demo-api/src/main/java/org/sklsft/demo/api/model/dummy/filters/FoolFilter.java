@@ -2,6 +2,7 @@ package org.sklsft.demo.api.model.dummy.filters;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -26,8 +27,8 @@ private Double doubleFieldMinValue;
 private Double doubleFieldMaxValue;
 private BigDecimal decimalFieldMinValue;
 private BigDecimal decimalFieldMaxValue;
-private Date dateFieldMinValue;
-private Date dateFieldMaxValue;
+private LocalDate dateFieldMinValue;
+private LocalDate dateFieldMaxValue;
 private Date datetimeFieldMinValue;
 private Date datetimeFieldMaxValue;
 
@@ -88,16 +89,16 @@ return this.decimalFieldMaxValue;
 public void setDecimalFieldMaxValue(BigDecimal decimalFieldMaxValue) {
 this.decimalFieldMaxValue = decimalFieldMaxValue;
 }
-public Date getDateFieldMinValue() {
+public LocalDate getDateFieldMinValue() {
 return this.dateFieldMinValue;
 }
-public void setDateFieldMinValue(Date dateFieldMinValue) {
+public void setDateFieldMinValue(LocalDate dateFieldMinValue) {
 this.dateFieldMinValue = dateFieldMinValue;
 }
-public Date getDateFieldMaxValue() {
+public LocalDate getDateFieldMaxValue() {
 return this.dateFieldMaxValue;
 }
-public void setDateFieldMaxValue(Date dateFieldMaxValue) {
+public void setDateFieldMaxValue(LocalDate dateFieldMaxValue) {
 this.dateFieldMaxValue = dateFieldMaxValue;
 }
 public Date getDatetimeFieldMinValue() {

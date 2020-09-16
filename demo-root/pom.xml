@@ -31,7 +31,7 @@
 		<maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
 		<java.version>1.8</java.version>
 		
-		<skeleton.commons.version>3.1.0-M3</skeleton.commons.version>
+		<skeleton.commons.version>3.1.0-SNAPSHOT</skeleton.commons.version>
 		<skeleton.generator.version>3.1.0-M2</skeleton.generator.version>
 		
 		<slf4j.version>1.7.30</slf4j.version>
@@ -55,7 +55,7 @@
 		<jackson.version>2.10.3</jackson.version>
 		
 		<jsf.version>2.2.13</jsf.version>
-		<primefaces.version>5.2</primefaces.version>
+		<primefaces.version>8.0</primefaces.version>
 		<primefaces.theme.version>1.0.10</primefaces.theme.version>
 		
 		<commons.dbcp.version>1.4</commons.dbcp.version>
@@ -361,6 +361,12 @@
 				<artifactId>jackson-annotations</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-jsr310</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
 
 			
 			<!-- JSF -->
@@ -386,7 +392,7 @@
 
 			<dependency>
 				<groupId>org.primefaces.themes</groupId>
-				<artifactId>bootstrap</artifactId>
+				<artifactId>all-themes</artifactId>
 				<version>${primefaces.theme.version}</version>
 			</dependency>
 			

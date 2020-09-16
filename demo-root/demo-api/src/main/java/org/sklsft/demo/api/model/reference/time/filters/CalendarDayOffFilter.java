@@ -1,7 +1,7 @@
 package org.sklsft.demo.api.model.reference.time.filters;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * auto generated filter class file
@@ -16,23 +16,23 @@ private static final long serialVersionUID = 1L;
 /*
  * properties
  */
-private Date dayOffDateMinValue;
-private Date dayOffDateMaxValue;
+private LocalDate dayOffDateMinValue;
+private LocalDate dayOffDateMaxValue;
 private String dayOffLabel;
 
 /*
  * getters and setters
  */
-public Date getDayOffDateMinValue() {
+public LocalDate getDayOffDateMinValue() {
 return this.dayOffDateMinValue;
 }
-public void setDayOffDateMinValue(Date dayOffDateMinValue) {
+public void setDayOffDateMinValue(LocalDate dayOffDateMinValue) {
 this.dayOffDateMinValue = dayOffDateMinValue;
 }
-public Date getDayOffDateMaxValue() {
+public LocalDate getDayOffDateMaxValue() {
 return this.dayOffDateMaxValue;
 }
-public void setDayOffDateMaxValue(Date dayOffDateMaxValue) {
+public void setDayOffDateMaxValue(LocalDate dayOffDateMaxValue) {
 this.dayOffDateMaxValue = dayOffDateMaxValue;
 }
 public String getDayOffLabel() {

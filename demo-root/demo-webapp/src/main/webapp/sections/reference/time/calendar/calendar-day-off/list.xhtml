@@ -42,12 +42,12 @@ template="/templates/template.xhtml">
 <label>#{i18n.calendarDayOffDayOffDate}</label>
 <p:calendar value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffDateMinValue}"
 class="form-control date-picker"
-pattern="yyyy-MM-dd HH:mm:ss" mask="true">
+pattern="yyyy-MM-dd" mask="true" navigator="true">
 <p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
 </p:calendar>
 <p:calendar value="#{calendarDetailView.calendarDayOffScrollForm.filter.dayOffDateMaxValue}"
 class="form-control date-picker"
-pattern="yyyy-MM-dd HH:mm:ss" mask="true">
+pattern="yyyy-MM-dd" mask="true" navigator="true">
 <p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{calendarDetailController.refreshCalendarDayOffList}"/>
 </p:calendar>
 </div>
@@ -116,8 +116,7 @@ orderType="#{calendarDetailView.calendarDayOffScrollForm.sorting.dayOffDateOrder
 action="#{calendarDetailController.refreshCalendarDayOffList}"
 render="@form:calendarDayOffPanelGroup"/>
 </f:facet>
-<h:outputText value="#{calendarDayOff.dayOffDate}">
-<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss"/>
+<h:outputText value="#{calendarDayOff.dayOffDate}" converter="localDateConverter">
 </h:outputText>
 </p:column>
 

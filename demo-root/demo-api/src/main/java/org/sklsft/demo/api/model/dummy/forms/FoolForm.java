@@ -2,6 +2,7 @@ package org.sklsft.demo.api.model.dummy.forms;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -26,7 +27,7 @@ private Long longField;
 private Boolean booleanField;
 private Double doubleField;
 private BigDecimal decimalField;
-private Date dateField;
+private LocalDate dateField;
 private Date datetimeField;
 
 /*
@@ -68,10 +69,10 @@ return this.decimalField;
 public void setDecimalField(BigDecimal decimalField) {
 this.decimalField = decimalField;
 }
-public Date getDateField() {
+public LocalDate getDateField() {
 return this.dateField;
 }
-public void setDateField(Date dateField) {
+public void setDateField(LocalDate dateField) {
 this.dateField = dateField;
 }
 public Date getDatetimeField() {

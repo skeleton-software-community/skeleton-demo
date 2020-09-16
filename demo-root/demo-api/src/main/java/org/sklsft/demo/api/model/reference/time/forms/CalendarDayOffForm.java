@@ -1,7 +1,7 @@
 package org.sklsft.demo.api.model.reference.time.forms;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
@@ -19,16 +19,16 @@ private static final long serialVersionUID = 1L;
  * properties
  */
 @NotNull
-private Date dayOffDate;
+private LocalDate dayOffDate;
 private String dayOffLabel;
 
 /*
  * getters and setters
  */
-public Date getDayOffDate() {
+public LocalDate getDayOffDate() {
 return this.dayOffDate;
 }
-public void setDayOffDate(Date dayOffDate) {
+public void setDayOffDate(LocalDate dayOffDate) {
 this.dayOffDate = dayOffDate;
 }
 public String getDayOffLabel() {

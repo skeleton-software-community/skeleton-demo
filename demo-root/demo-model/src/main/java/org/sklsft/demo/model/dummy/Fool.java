@@ -1,6 +1,7 @@
 package org.sklsft.demo.model.dummy;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -67,9 +68,8 @@ private Double doubleField;
 @Column(name = "DECIMAL_FIELD")
 private BigDecimal decimalField;
 
-@Temporal(TemporalType.DATE)
 @Column(name = "DATE_FIELD")
-private Date dateField;
+private LocalDate dateField;
 
 @Temporal(TemporalType.TIMESTAMP)
 @Column(name = "DATETIME_FIELD")
@@ -138,11 +138,11 @@ public void setDecimalField(BigDecimal decimalField) {
 this.decimalField = decimalField;
 }
 
-public Date getDateField() {
+public LocalDate getDateField() {
 return this.dateField;
 }
 
-public void setDateField(Date dateField) {
+public void setDateField(LocalDate dateField) {
 this.dateField = dateField;
 }
 

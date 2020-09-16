@@ -1,6 +1,6 @@
 package org.sklsft.demo.model.reference.time;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
@@ -52,9 +50,8 @@ private Integer id;
 @JoinColumn(name = "CALENDAR_ID", nullable = false)
 private Calendar calendar;
 
-@Temporal(TemporalType.TIMESTAMP)
 @Column(name = "DAY_OFF_DATE", nullable = false)
-private Date dayOffDate;
+private LocalDate dayOffDate;
 
 @Column(name = "DAY_OFF_LABEL")
 private String dayOffLabel;
@@ -79,11 +76,11 @@ public void setCalendar(Calendar calendar) {
 this.calendar = calendar;
 }
 
-public Date getDayOffDate() {
+public LocalDate getDayOffDate() {
 return this.dayOffDate;
 }
 
-public void setDayOffDate(Date dayOffDate) {
+public void setDayOffDate(LocalDate dayOffDate) {
 this.dayOffDate = dayOffDate;
 }
 

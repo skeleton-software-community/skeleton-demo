@@ -1,7 +1,7 @@
 package org.sklsft.demo.api.model.reference.time.views.basic;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * auto generated view bean class file
@@ -19,7 +19,7 @@ private static final long serialVersionUID = 1L;
 private Integer id;
 private boolean selected;
 private boolean canDelete;
-private Date dayOffDate;
+private LocalDate dayOffDate;
 private String dayOffLabel;
 
 /*
@@ -49,11 +49,11 @@ public void setCanDelete(boolean canDelete) {
 this.canDelete = canDelete;
 }
 
-public Date getDayOffDate() {
+public LocalDate getDayOffDate() {
 return this.dayOffDate;
 }
 
-public void setDayOffDate(Date dayOffDate) {
+public void setDayOffDate(LocalDate dayOffDate) {
 this.dayOffDate = dayOffDate;
 }
 

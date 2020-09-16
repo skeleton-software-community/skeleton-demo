@@ -65,12 +65,12 @@ styleClass="form-control">
 <label>#{i18n.foolDateField}</label>
 <p:calendar value="#{foolListView.scrollForm.filter.dateFieldMinValue}"
 class="form-control date-picker"
-pattern="yyyy-MM-dd" mask="true">
+pattern="yyyy-MM-dd" mask="true" navigator="true">
 <p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 <p:calendar value="#{foolListView.scrollForm.filter.dateFieldMaxValue}"
 class="form-control date-picker"
-pattern="yyyy-MM-dd" mask="true">
+pattern="yyyy-MM-dd" mask="true" navigator="true">
 <p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 </div>
@@ -79,12 +79,12 @@ pattern="yyyy-MM-dd" mask="true">
 <label>#{i18n.foolDatetimeField}</label>
 <p:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMinValue}"
 class="form-control date-picker"
-pattern="yyyy-MM-dd HH:mm:ss" mask="true">
+pattern="yyyy-MM-dd HH:mm:ss" mask="true" navigator="true">
 <p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 <p:calendar value="#{foolListView.scrollForm.filter.datetimeFieldMaxValue}"
 class="form-control date-picker"
-pattern="yyyy-MM-dd HH:mm:ss" mask="true">
+pattern="yyyy-MM-dd HH:mm:ss" mask="true" navigator="true">
 <p:ajax event="dateSelect" update="resultsPanelGroup, sizePanelGroup" listener="#{foolListController.refresh}"/>
 </p:calendar>
 </div>
@@ -221,8 +221,7 @@ orderType="#{foolListView.scrollForm.sorting.dateFieldOrderType}"
 action="#{foolListController.refresh}"
 render="@form:foolPanelGroup"/>
 </f:facet>
-<h:outputText value="#{fool.dateField}">
-<f:convertDateTime pattern="yyyy-MM-dd"/>
+<h:outputText value="#{fool.dateField}" converter="localDateConverter">
 </h:outputText>
 </p:column>
 

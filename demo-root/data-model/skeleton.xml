@@ -80,7 +80,7 @@
 									referenceTableName="CALENDAR" referenceTableRelation="MANY_TO_ONE_COMPONENT"
 									editable="true" rendering="User">
 								</column>
-								<column name="DAY_OFF_DATE" dataType="DATETIME" nullable="false"
+								<column name="DAY_OFF_DATE" dataType="DATE" nullable="false"
 									editable="true" rendering="Date">
 								</column>
 								<column name="DAY_OFF_LABEL" dataType="STRING" nullable="true"

@@ -63,10 +63,7 @@ public class RestClientConfig {
 		loggerInterceptor.setTraceSentBody(Boolean.valueOf(env.getProperty("accessLog.traceSentBody")));
 		loggerInterceptor.setTraceReceivedBody(Boolean.valueOf(env.getProperty("accessLog.traceReceivedBody")));
 		interceptors.add(loggerInterceptor);
-		result.setInterceptors(interceptors);		
-		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-		messageConverters.add(new MappingJackson2HttpMessageConverter(objectMapper));		
-		result.setMessageConverters(messageConverters);
+		result.setInterceptors(interceptors);
 		
 		return result;
 	}

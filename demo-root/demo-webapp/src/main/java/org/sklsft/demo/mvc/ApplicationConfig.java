@@ -24,6 +24,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @Configuration
 @ComponentScan(basePackages = "org.sklsft.demo")
@@ -67,6 +69,8 @@ public class ApplicationConfig {
 	public ObjectMapper objectMapper() {
 		ObjectMapper result = new ObjectMapper();
 		result.setSerializationInclusion(Include.NON_NULL);
+		result.registerModule(new JavaTimeModule());
+		result.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		return result;
 	}
 	
