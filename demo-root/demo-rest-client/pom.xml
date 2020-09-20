@@ -63,6 +63,7 @@
 			<artifactId>jackson-core</artifactId>
 		</dependency>
 		
+		<!-- jackson time support -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
