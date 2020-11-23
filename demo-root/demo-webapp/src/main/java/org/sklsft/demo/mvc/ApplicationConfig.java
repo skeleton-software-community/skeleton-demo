@@ -18,7 +18,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.jndi.JndiTemplate;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -31,14 +31,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 @ComponentScan(basePackages = "org.sklsft.demo")
 @EnableWebMvc
 @EnableAspectJAutoProxy
-@PropertySource("classpath:application.properties")
+@PropertySources({
+@PropertySource("classpath:application.properties"),
+@PropertySource("classpath:application-${env}.properties")})
 public class ApplicationConfig {
-	
-	@Bean
-	public JndiTemplate jndiTemplate() {
-		return new JndiTemplate();
-	}
-	
 	
 	@Bean
 	public CustomScopeConfigurer customScopeConfigurer() {

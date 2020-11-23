@@ -24,6 +24,7 @@ import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.dummy.filters.FoolFilter;
 import org.sklsft.demo.api.model.dummy.sortings.FoolSorting;
 import org.sklsft.demo.model.dummy.Fool;
+import org.sklsft.demo.model.dummy.Fool_;
 import org.sklsft.demo.persistence.interfaces.dummy.base.FoolBaseDao;
 
 /**
@@ -71,7 +72,7 @@ CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 Root<Fool> root = criteria.from(Fool.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get(Fool_.code), filter.getCode());
 addStringContainsRestriction(builder, predicates, root.get("description"), filter.getDescription());
 addBetweenRestriction(builder, predicates, root.get("longField"), filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
 addBooleanRestriction(builder, predicates, root.get("booleanField"), filter.getBooleanField());

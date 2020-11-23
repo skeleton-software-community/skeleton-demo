@@ -58,8 +58,8 @@ public class RestClientConfig {
 		interceptors.add(new CorrelationIdInterceptor());
 		RestClientLoggerInterceptor loggerInterceptor = new RestClientLoggerInterceptor();
 		loggerInterceptor.setAccessLogger(accessLogger);
-		loggerInterceptor.setTraceSentBody(Boolean.valueOf(env.getProperty("accessLog.traceSentBody")));
-		loggerInterceptor.setTraceReceivedBody(Boolean.valueOf(env.getProperty("accessLog.traceReceivedBody")));
+		loggerInterceptor.setTraceSentBody(Boolean.valueOf(env.getRequiredProperty("accessLog.traceSentBody", Boolean.class)));
+		loggerInterceptor.setTraceReceivedBody(Boolean.valueOf(env.getRequiredProperty("accessLog.traceReceivedBody", Boolean.class)));
 		interceptors.add(loggerInterceptor);
 		result.setInterceptors(interceptors);		
 				
@@ -69,7 +69,7 @@ public class RestClientConfig {
 	@Bean
 	public RestClient demoRestClient() {
 		RestClient result = new RestClient();
-		result.setRestServerUrl(env.getProperty("restServer.url"));
+		result.setRestServerUrl(env.getRequiredProperty("restServer.url"));
 		result.setRestTemplate(restTemplate());
 		return result;
 	}

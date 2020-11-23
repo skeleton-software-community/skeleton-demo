@@ -12,8 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
-import org.springframework.jndi.JndiTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -21,13 +21,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan(basePackages = "org.sklsft.demo")
 @EnableWebMvc
 @EnableAspectJAutoProxy
-@PropertySource("classpath:application.properties")
+@PropertySources({
+@PropertySource("classpath:application.properties"),
+@PropertySource("classpath:application-${env}.properties")})
 public class ApplicationConfig implements WebMvcConfigurer {
-
-	@Bean
-	public JndiTemplate jndiTemplate() {
-		return new JndiTemplate();
-	}
 	
 	@Inject
 	private Environment env;
@@ -53,8 +50,8 @@ public class ApplicationConfig implements WebMvcConfigurer {
 		RestLoggingAspect result = new RestLoggingAspect();
 		result.setAccessLogger(accessLogger);
 		result.setErrorLogger(errorLogger);
-		result.setTraceRequestBody(Boolean.valueOf(env.getProperty("accessLog.traceRequestBody")));
-		result.setTraceResponseBody(Boolean.valueOf(env.getProperty("accessLog.traceResponseBody")));
+		result.setTraceRequestBody(Boolean.valueOf(env.getRequiredProperty("accessLog.traceRequestBody", Boolean.class)));
+		result.setTraceResponseBody(Boolean.valueOf(env.getRequiredProperty("accessLog.traceResponseBody", Boolean.class)));
 		return result;
 	}
 }
