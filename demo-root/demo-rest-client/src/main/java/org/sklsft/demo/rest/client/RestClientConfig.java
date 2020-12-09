@@ -58,8 +58,8 @@ public class RestClientConfig {
 		interceptors.add(new CorrelationIdInterceptor());
 		RestClientLoggerInterceptor loggerInterceptor = new RestClientLoggerInterceptor();
 		loggerInterceptor.setAccessLogger(accessLogger);
-		loggerInterceptor.setTraceSentBody(Boolean.valueOf(env.getRequiredProperty("accessLog.traceSentBody", Boolean.class)));
-		loggerInterceptor.setTraceReceivedBody(Boolean.valueOf(env.getRequiredProperty("accessLog.traceReceivedBody", Boolean.class)));
+		loggerInterceptor.setTraceSentBody(env.getRequiredProperty("accessLog.traceSentBody", Boolean.class));
+		loggerInterceptor.setTraceReceivedBody(env.getRequiredProperty("accessLog.traceReceivedBody", Boolean.class));
 		interceptors.add(loggerInterceptor);
 		result.setInterceptors(interceptors);		
 				
