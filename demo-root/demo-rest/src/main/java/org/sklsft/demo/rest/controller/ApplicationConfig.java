@@ -37,7 +37,9 @@ public class ApplicationConfig implements WebMvcConfigurer {
 	
 	@Bean
 	public RestExceptionHandler restExceptionHandler() {
-		return new RestExceptionHandler();
+		RestExceptionHandler result = new RestExceptionHandler();
+		result.setPrintErrorStackInRootLogger(env.getRequiredProperty("log.errorLogsInRootLogger", Boolean.class));
+		return result;
 	}
 	
 	@Bean

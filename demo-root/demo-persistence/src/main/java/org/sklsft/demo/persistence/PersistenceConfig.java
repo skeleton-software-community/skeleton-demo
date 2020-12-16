@@ -19,17 +19,16 @@ public class PersistenceConfig {
 	
 	@Inject
 	private Environment env;
-	
+
 	@Bean
     public DataSource dataSource() {
 		BasicDataSource result = new BasicDataSource();
-        result.setDriverClassName(env.getRequiredProperty("db.driverClassName"));
-        result.setUrl(env.getRequiredProperty("db.url"));
-        result.setUsername(env.getRequiredProperty("db.userName"));
-        result.setPassword(env.getRequiredProperty("db.password"));
-        return result;
-    }
-
+		result.setDriverClassName(env.getRequiredProperty("db.driverClassName"));
+		result.setUrl(env.getRequiredProperty("db.url"));
+		result.setUsername(env.getRequiredProperty("db.userName"));
+		result.setPassword(env.getRequiredProperty("db.password"));
+		return result;
+     }
 	
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() throws NamingException {
