@@ -25,7 +25,6 @@ import org.hibernate.annotations.Type;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-
 @Entity
 @Table(name="FOOL"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})

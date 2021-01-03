@@ -22,7 +22,6 @@ import org.hibernate.annotations.FetchMode;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-
 @Entity
 @Table(name="CALENDAR_DAY_OFF"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"CALENDAR_ID", "DAY_OFF_DATE"})})

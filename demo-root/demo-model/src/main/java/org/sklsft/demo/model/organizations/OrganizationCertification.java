@@ -19,7 +19,6 @@ import org.hibernate.annotations.GenericGenerator;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-
 @Entity
 @Table(name="ORGANIZATION_CERTIFICATION"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"ORGANIZATION_ID"})})

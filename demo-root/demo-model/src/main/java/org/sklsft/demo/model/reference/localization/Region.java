@@ -20,7 +20,6 @@ import javax.persistence.UniqueConstraint;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-
 @Entity
 @Table(name="REGION"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"COUNTRY_ID", "CODE"})})

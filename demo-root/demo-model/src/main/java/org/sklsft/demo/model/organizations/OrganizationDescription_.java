@@ -1,0 +1,22 @@
+package org.sklsft.demo.model.organizations;
+
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+
+/**
+ * auto generated entity metamodel class file
+ * <br/>write modifications between specific code marks
+ * <br/>processed by skeleton-generator
+ */
+@StaticMetamodel(OrganizationDescription.class)
+public abstract class OrganizationDescription_ {
+
+public static volatile SingularAttribute<OrganizationDescription, Long> id;
+public static volatile SingularAttribute<OrganizationDescription, String> description;
+
+public static final String ID = "id";
+public static final String DESCRIPTION = "description";
+
+/* Specific Code Start */
+/* Specific Code End */
+}

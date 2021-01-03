@@ -19,7 +19,6 @@ import javax.persistence.UniqueConstraint;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-
 @Entity
 @Table(name="CALENDAR"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})

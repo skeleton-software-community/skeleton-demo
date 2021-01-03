@@ -22,7 +22,6 @@ import org.hibernate.annotations.FetchMode;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-
 @Entity
 @Table(name="ORGANIZATION"
 , uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})

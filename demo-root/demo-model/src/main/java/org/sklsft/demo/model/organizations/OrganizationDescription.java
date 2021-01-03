@@ -16,7 +16,6 @@ import org.hibernate.annotations.Type;
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */
-
 @Entity
 @Table(name="ORGANIZATION_DESCRIPTION")
 public class OrganizationDescription implements org.sklsft.commons.model.interfaces.Entity<Long> {
