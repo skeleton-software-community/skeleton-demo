@@ -21,6 +21,7 @@ import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.reference.localization.filters.CountryFilter;
 import org.sklsft.demo.api.model.reference.localization.sortings.CountrySorting;
 import org.sklsft.demo.model.reference.localization.Country;
+import org.sklsft.demo.model.reference.localization.Country_;
 import org.sklsft.demo.persistence.interfaces.reference.localization.base.CountryBaseDao;
 
 /**
@@ -50,7 +51,7 @@ Root<Country> root = criteria.from(Country.class);
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Country_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 return session.createQuery(criteria).getResultList();
@@ -95,9 +96,9 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
-addOrder(builder, orders, root.get("label"), sorting.getLabelOrderType());
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Country_.code), sorting.getCodeOrderType());
+addOrder(builder, orders, root.get(Country_.label), sorting.getLabelOrderType());
+addOrder(builder, orders, root.get(Country_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 Query<Country> query = session.createQuery(criteria);

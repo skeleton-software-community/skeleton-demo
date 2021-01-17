@@ -27,6 +27,8 @@ import org.sklsft.demo.api.model.organizations.sortings.OrganizationSorting;
 import org.sklsft.demo.model.organizations.Organization;
 import org.sklsft.demo.model.organizations.OrganizationCertification;
 import org.sklsft.demo.model.organizations.OrganizationDescription;
+import org.sklsft.demo.model.organizations.OrganizationDescription_;
+import org.sklsft.demo.model.organizations.Organization_;
 import org.sklsft.demo.persistence.interfaces.organizations.base.OrganizationBaseDao;
 
 /**
@@ -53,11 +55,12 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Organization> criteria = builder.createQuery(Organization.class);
 
 Root<Organization> root = criteria.from(Organization.class);
-Fetch<OrganizationDescription, Organization> organizationDescription = root.fetch("organizationDescription", JoinType.LEFT);
+Fetch<Organization, OrganizationDescription> organizationDescriptionFetch = root.fetch("organizationDescription", JoinType.LEFT);
+Join<Organization, OrganizationDescription> organizationDescription = (Join<Organization, OrganizationDescription>)organizationDescriptionFetch;
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Organization_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 return session.createQuery(criteria).getResultList();
@@ -73,7 +76,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Organization> root = criteria.from(Organization.class);
-Join<OrganizationDescription, Organization> organizationDescription = root.join("organizationDescription", JoinType.LEFT);
+Join<Organization, OrganizationDescription> organizationDescription = root.join(Organization_.organizationDescription, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
@@ -95,8 +98,8 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Organization> criteria = builder.createQuery(Organization.class);
 
 Root<Organization> root = criteria.from(Organization.class);
-Fetch<OrganizationDescription, Organization> organizationDescriptionFetch = root.fetch("organizationDescription", JoinType.LEFT);
-Join<OrganizationDescription, Organization> organizationDescription = (Join<OrganizationDescription, Organization>)organizationDescriptionFetch;
+Fetch<Organization, OrganizationDescription> organizationDescriptionFetch = root.fetch(Organization_.organizationDescription, JoinType.LEFT);
+Join<Organization, OrganizationDescription> organizationDescription = (Join<Organization, OrganizationDescription>)organizationDescriptionFetch;
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
@@ -105,9 +108,9 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
-addOrder(builder, orders, organizationDescription.get("description"), sorting.getDescriptionOrderType());
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Organization_.code), sorting.getCodeOrderType());
+addOrder(builder, orders, organizationDescription.get(OrganizationDescription_.description), sorting.getDescriptionOrderType());
+addOrder(builder, orders, root.get(Organization_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 Query<Organization> query = session.createQuery(criteria);

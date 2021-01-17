@@ -24,6 +24,7 @@ import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.dummy.filters.FoolFilter;
 import org.sklsft.demo.api.model.dummy.sortings.FoolSorting;
 import org.sklsft.demo.model.dummy.Fool;
+import org.sklsft.demo.model.dummy.Fool_;
 import org.sklsft.demo.persistence.interfaces.dummy.base.FoolBaseDao;
 
 /**
@@ -53,7 +54,7 @@ Root<Fool> root = criteria.from(Fool.class);
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Fool_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 return session.createQuery(criteria).getResultList();
@@ -110,15 +111,15 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
-addOrder(builder, orders, root.get("description"), sorting.getDescriptionOrderType());
-addOrder(builder, orders, root.get("longField"), sorting.getLongFieldOrderType());
-addOrder(builder, orders, root.get("booleanField"), sorting.getBooleanFieldOrderType());
-addOrder(builder, orders, root.get("doubleField"), sorting.getDoubleFieldOrderType());
-addOrder(builder, orders, root.get("decimalField"), sorting.getDecimalFieldOrderType());
-addOrder(builder, orders, root.get("dateField"), sorting.getDateFieldOrderType());
-addOrder(builder, orders, root.get("datetimeField"), sorting.getDatetimeFieldOrderType());
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Fool_.code), sorting.getCodeOrderType());
+addOrder(builder, orders, root.get(Fool_.description), sorting.getDescriptionOrderType());
+addOrder(builder, orders, root.get(Fool_.longField), sorting.getLongFieldOrderType());
+addOrder(builder, orders, root.get(Fool_.booleanField), sorting.getBooleanFieldOrderType());
+addOrder(builder, orders, root.get(Fool_.doubleField), sorting.getDoubleFieldOrderType());
+addOrder(builder, orders, root.get(Fool_.decimalField), sorting.getDecimalFieldOrderType());
+addOrder(builder, orders, root.get(Fool_.dateField), sorting.getDateFieldOrderType());
+addOrder(builder, orders, root.get(Fool_.datetimeField), sorting.getDatetimeFieldOrderType());
+addOrder(builder, orders, root.get(Fool_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 Query<Fool> query = session.createQuery(criteria);

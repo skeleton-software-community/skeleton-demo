@@ -24,7 +24,9 @@ import org.sklsft.commons.model.patterns.BaseDaoImpl;
 import org.sklsft.demo.api.model.reference.localization.filters.RegionFilter;
 import org.sklsft.demo.api.model.reference.localization.sortings.RegionSorting;
 import org.sklsft.demo.model.reference.localization.Country;
+import org.sklsft.demo.model.reference.localization.Country_;
 import org.sklsft.demo.model.reference.localization.Region;
+import org.sklsft.demo.model.reference.localization.Region_;
 import org.sklsft.demo.persistence.interfaces.reference.localization.base.RegionBaseDao;
 
 /**
@@ -51,11 +53,12 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Fetch<Country, Region> country = root.fetch("country", JoinType.LEFT);
+Fetch<Region, Country> countryFetch = root.fetch("country", JoinType.LEFT);
+Join<Region, Country> country = (Join<Region, Country>)countryFetch;
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Region_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 return session.createQuery(criteria).getResultList();
@@ -71,17 +74,17 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country", JoinType.LEFT);
+Join<Region, Country> country = root.join(Region_.country, JoinType.LEFT);
 
 if (countryId == null){
-criteria.where(builder.isNull(country.get("id")));
+criteria.where(builder.isNull(country.get(Country_.id)));
 } else {
-criteria.where(builder.equal(country.get("id"), countryId));
+criteria.where(builder.equal(country.get(Country_.id), countryId));
 }
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Region_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 return session.createQuery(criteria).getResultList();
@@ -98,17 +101,18 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Fetch<Country, Region> country = root.fetch("country", JoinType.LEFT);
+Fetch<Region, Country> countryFetch = root.fetch("country", JoinType.LEFT);
+Join<Region, Country> country = (Join<Region, Country>)countryFetch;
 
 if (countryId == null){
-criteria.where(builder.isNull(((Join<Country,Region>)country).get("id")));
+criteria.where(builder.isNull(country.get(Country_.id)));
 } else {
-criteria.where(builder.equal(((Join<Country,Region>)country).get("id"), countryId));
+criteria.where(builder.equal(country.get(Country_.id), countryId));
 }
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Region_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 return session.createQuery(criteria).getResultList();
@@ -124,7 +128,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country", JoinType.LEFT);
+Join<Region, Country> country = root.join(Region_.country, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());
@@ -145,12 +149,12 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country", JoinType.LEFT);
+Join<Region, Country> country = root.join(Region_.country, JoinType.LEFT);
 
 if (countryId == null){
-criteria.where(builder.isNull(country.get("id")));
+criteria.where(builder.isNull(country.get(Country_.id)));
 } else {
-criteria.where(builder.equal(country.get("id"), countryId));
+criteria.where(builder.equal(country.get(Country_.id), countryId));
 }
 
 criteria.select(builder.count(root));
@@ -166,16 +170,16 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Region> root = criteria.from(Region.class);
-Join<Country, Region> country = root.join("country", JoinType.LEFT);
+Join<Region, Country> country = root.join(Region_.country, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());
 addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
 addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
 if (countryId == null){
-predicates.add(builder.isNull(country.get("id")));
+predicates.add(builder.isNull(country.get(Country_.id)));
 } else {
-predicates.add(builder.equal(country.get("id"), countryId));
+predicates.add(builder.equal(country.get(Country_.id), countryId));
 }
 
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
@@ -195,8 +199,8 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Fetch<Country, Region> countryFetch = root.fetch("country", JoinType.LEFT);
-Join<Country, Region> country = (Join<Country, Region>)countryFetch;
+Fetch<Region, Country> countryFetch = root.fetch(Region_.country, JoinType.LEFT);
+Join<Region, Country> country = (Join<Region, Country>)countryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());
@@ -206,10 +210,10 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, country.get("code"), sorting.getCountryCodeOrderType());
-addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
-addOrder(builder, orders, root.get("label"), sorting.getLabelOrderType());
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, country.get(Country_.code), sorting.getCountryCodeOrderType());
+addOrder(builder, orders, root.get(Region_.code), sorting.getCodeOrderType());
+addOrder(builder, orders, root.get(Region_.label), sorting.getLabelOrderType());
+addOrder(builder, orders, root.get(Region_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 Query<Region> query = session.createQuery(criteria);
@@ -233,17 +237,17 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Region> criteria = builder.createQuery(Region.class);
 
 Root<Region> root = criteria.from(Region.class);
-Fetch<Country, Region> countryFetch = root.fetch("country", JoinType.LEFT);
-Join<Country, Region> country = (Join<Country, Region>)countryFetch;
+Fetch<Region, Country> countryFetch = root.fetch(Region_.country, JoinType.LEFT);
+Join<Region, Country> country = (Join<Region, Country>)countryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
 addStringContainsRestriction(builder, predicates, country.get("code"), filter.getCountryCode());
 addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
 addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
 if (countryId == null){
-predicates.add(builder.isNull(country.get("id")));
+predicates.add(builder.isNull(country.get(Country_.id)));
 } else {
-predicates.add(builder.equal(country.get("id"), countryId));
+predicates.add(builder.equal(country.get(Country_.id), countryId));
 }
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
@@ -252,7 +256,7 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, country.get("code"), sorting.getCountryCodeOrderType());
 addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
 addOrder(builder, orders, root.get("label"), sorting.getLabelOrderType());
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Region_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 Query<Region> query = session.createQuery(criteria);

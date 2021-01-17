@@ -27,6 +27,8 @@ import org.sklsft.demo.api.model.reference.time.sortings.CalendarDayOffSorting;
 import org.sklsft.demo.api.model.reference.time.sortings.CalendarSorting;
 import org.sklsft.demo.model.reference.time.Calendar;
 import org.sklsft.demo.model.reference.time.CalendarDayOff;
+import org.sklsft.demo.model.reference.time.CalendarDayOff_;
+import org.sklsft.demo.model.reference.time.Calendar_;
 import org.sklsft.demo.persistence.interfaces.reference.time.base.CalendarBaseDao;
 
 /**
@@ -56,7 +58,7 @@ Root<Calendar> root = criteria.from(Calendar.class);
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Calendar_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 return session.createQuery(criteria).getResultList();
@@ -101,9 +103,9 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
-addOrder(builder, orders, root.get("label"), sorting.getLabelOrderType());
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(Calendar_.code), sorting.getCodeOrderType());
+addOrder(builder, orders, root.get(Calendar_.label), sorting.getLabelOrderType());
+addOrder(builder, orders, root.get(Calendar_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 Query<Calendar> query = session.createQuery(criteria);
@@ -126,17 +128,17 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<CalendarDayOff> criteria = builder.createQuery(CalendarDayOff.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
-Join<Calendar, CalendarDayOff> calendar = root.join("calendar", JoinType.LEFT);
+Join<CalendarDayOff, Calendar> calendar = root.join(CalendarDayOff_.calendar, JoinType.LEFT);
 
 if (calendarId == null){
-criteria.where(builder.isNull(calendar.get("id")));
+criteria.where(builder.isNull(calendar.get(Calendar_.id)));
 } else {
-criteria.where(builder.equal(calendar.get("id"), calendarId));
+criteria.where(builder.equal(calendar.get(Calendar_.id), calendarId));
 }
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(CalendarDayOff_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 return session.createQuery(criteria).getResultList();
@@ -152,12 +154,12 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
-Join<Calendar, CalendarDayOff> calendar = root.join("calendar", JoinType.LEFT);
+Join<CalendarDayOff, Calendar> calendar = root.join(CalendarDayOff_.calendar, JoinType.LEFT);
 
 if (calendarId == null){
-criteria.where(builder.isNull(calendar.get("id")));
+criteria.where(builder.isNull(calendar.get(Calendar_.id)));
 } else {
-criteria.where(builder.equal(calendar.get("id"), calendarId));
+criteria.where(builder.equal(calendar.get(Calendar_.id), calendarId));
 }
 
 criteria.select(builder.count(root));
@@ -174,15 +176,15 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
-Join<Calendar, CalendarDayOff> calendar = root.join("calendar", JoinType.LEFT);
+Join<CalendarDayOff, Calendar> calendar = root.join(CalendarDayOff_.calendar, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addBetweenRestriction(builder, predicates, root.get("dayOffDate"), filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
 addStringContainsRestriction(builder, predicates, root.get("dayOffLabel"), filter.getDayOffLabel());
 if (calendarId == null){
-predicates.add(builder.isNull(calendar.get("id")));
+predicates.add(builder.isNull(calendar.get(Calendar_.id)));
 } else {
-predicates.add(builder.equal(calendar.get("id"), calendarId));
+predicates.add(builder.equal(calendar.get(Calendar_.id), calendarId));
 }
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
@@ -200,15 +202,15 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<CalendarDayOff> criteria = builder.createQuery(CalendarDayOff.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
-Join<Calendar, CalendarDayOff> calendar = root.join("calendar", JoinType.LEFT);
+Join<CalendarDayOff, Calendar> calendar = root.join(CalendarDayOff_.calendar, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
 addBetweenRestriction(builder, predicates, root.get("dayOffDate"), filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
 addStringContainsRestriction(builder, predicates, root.get("dayOffLabel"), filter.getDayOffLabel());
 if (calendarId == null){
-predicates.add(builder.isNull(calendar.get("id")));
+predicates.add(builder.isNull(calendar.get(Calendar_.id)));
 } else {
-predicates.add(builder.equal(calendar.get("id"), calendarId));
+predicates.add(builder.equal(calendar.get(Calendar_.id), calendarId));
 }
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
@@ -216,7 +218,7 @@ criteria.select(root);
 List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get("dayOffDate"), sorting.getDayOffDateOrderType());
 addOrder(builder, orders, root.get("dayOffLabel"), sorting.getDayOffLabelOrderType());
-addOrder(builder, orders, root.get("id"), OrderType.DESC);
+addOrder(builder, orders, root.get(CalendarDayOff_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
 Query<CalendarDayOff> query = session.createQuery(criteria);
