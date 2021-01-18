@@ -44,7 +44,7 @@ super(Fool.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused","unchecked"})
 public List<Fool> loadListEagerly() {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -72,14 +72,14 @@ CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 Root<Fool> root = criteria.from(Fool.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get("description"), filter.getDescription());
-addBetweenRestriction(builder, predicates, root.get("longField"), filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
-addBooleanRestriction(builder, predicates, root.get("booleanField"), filter.getBooleanField());
-addBetweenRestriction(builder, predicates, root.get("doubleField"), filter.getDoubleFieldMinValue(), filter.getDoubleFieldMaxValue());
-addBetweenRestriction(builder, predicates, root.get("decimalField"), filter.getDecimalFieldMinValue(), filter.getDecimalFieldMaxValue());
-addBetweenRestriction(builder, predicates, root.get("dateField"), filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
-addBetweenRestriction(builder, predicates, root.get("datetimeField"), filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
+addStringContainsRestriction(builder, predicates, root.get(Fool_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get(Fool_.description), filter.getDescription());
+addBetweenRestriction(builder, predicates, root.get(Fool_.longField), filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
+addBooleanRestriction(builder, predicates, root.get(Fool_.booleanField), filter.getBooleanField());
+addBetweenRestriction(builder, predicates, root.get(Fool_.doubleField), filter.getDoubleFieldMinValue(), filter.getDoubleFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get(Fool_.decimalField), filter.getDecimalFieldMinValue(), filter.getDecimalFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get(Fool_.dateField), filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get(Fool_.datetimeField), filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
@@ -99,14 +99,14 @@ CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
 Root<Fool> root = criteria.from(Fool.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get("description"), filter.getDescription());
-addBetweenRestriction(builder, predicates, root.get("longField"), filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
-addBooleanRestriction(builder, predicates, root.get("booleanField"), filter.getBooleanField());
-addBetweenRestriction(builder, predicates, root.get("doubleField"), filter.getDoubleFieldMinValue(), filter.getDoubleFieldMaxValue());
-addBetweenRestriction(builder, predicates, root.get("decimalField"), filter.getDecimalFieldMinValue(), filter.getDecimalFieldMaxValue());
-addBetweenRestriction(builder, predicates, root.get("dateField"), filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
-addBetweenRestriction(builder, predicates, root.get("datetimeField"), filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
+addStringContainsRestriction(builder, predicates, root.get(Fool_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get(Fool_.description), filter.getDescription());
+addBetweenRestriction(builder, predicates, root.get(Fool_.longField), filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
+addBooleanRestriction(builder, predicates, root.get(Fool_.booleanField), filter.getBooleanField());
+addBetweenRestriction(builder, predicates, root.get(Fool_.doubleField), filter.getDoubleFieldMinValue(), filter.getDoubleFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get(Fool_.decimalField), filter.getDecimalFieldMinValue(), filter.getDecimalFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get(Fool_.dateField), filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
+addBetweenRestriction(builder, predicates, root.get(Fool_.datetimeField), filter.getDatetimeFieldMinValue(), filter.getDatetimeFieldMaxValue());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
@@ -144,7 +144,7 @@ CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
 Root<Fool> root = criteria.from(Fool.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addEqualsRestriction(builder, predicates, root.get("code"), code);
+addEqualsRestriction(builder, predicates, root.get(Fool_.code), code);
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
@@ -191,7 +191,7 @@ CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
 
 Root<Fool> root = criteria.from(Fool.class);
 
-Predicate predicate = getStringContainsRestriction(builder, root.get("code"), arg);
+Predicate predicate = getStringContainsRestriction(builder, root.get(Fool_.code), arg);
 if (predicate!=null){
 criteria.where(predicate);
 }

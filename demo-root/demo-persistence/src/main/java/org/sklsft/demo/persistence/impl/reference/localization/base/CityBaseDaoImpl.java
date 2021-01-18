@@ -48,16 +48,16 @@ super(City.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused","unchecked"})
 public List<City> loadListEagerly() {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
-Fetch<City, Region> regionFetch = root.fetch("region", JoinType.LEFT);
+Fetch<City, Region> regionFetch = root.fetch(City_.region, JoinType.LEFT);
 Join<City, Region> region = (Join<City, Region>)regionFetch;
-Fetch<Region, Country> regionCountryFetch = region.fetch("country", JoinType.LEFT);
+Fetch<Region, Country> regionCountryFetch = region.fetch(Region_.country, JoinType.LEFT);
 Join<Region, Country> regionCountry = (Join<Region, Country>)regionCountryFetch;
 
 criteria.select(root);
@@ -105,9 +105,9 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
-Fetch<City, Region> regionFetch = root.fetch("region", JoinType.LEFT);
+Fetch<City, Region> regionFetch = root.fetch(City_.region, JoinType.LEFT);
 Join<City, Region> region = (Join<City, Region>)regionFetch;
-Fetch<Region, Country> regionCountryFetch = region.fetch("country", JoinType.LEFT);
+Fetch<Region, Country> regionCountryFetch = region.fetch(Region_.country, JoinType.LEFT);
 Join<Region, Country> regionCountry = (Join<Region, Country>)regionCountryFetch;
 
 if (regionId == null){
@@ -138,10 +138,10 @@ Join<City, Region> region = root.join(City_.region, JoinType.LEFT);
 Join<Region, Country> regionCountry = region.join(Region_.country, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, regionCountry.get("code"), filter.getRegionCountryCode());
-addStringContainsRestriction(builder, predicates, region.get("code"), filter.getRegionCode());
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+addStringContainsRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
+addStringContainsRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
+addStringContainsRestriction(builder, predicates, root.get(City_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
@@ -182,10 +182,10 @@ Join<City, Region> region = root.join(City_.region, JoinType.LEFT);
 Join<Region, Country> regionCountry = region.join(Region_.country, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, regionCountry.get("code"), filter.getRegionCountryCode());
-addStringContainsRestriction(builder, predicates, region.get("code"), filter.getRegionCode());
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+addStringContainsRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
+addStringContainsRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
+addStringContainsRestriction(builder, predicates, root.get(City_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
 if (regionId == null){
 predicates.add(builder.isNull(region.get(Region_.id)));
 } else {
@@ -215,10 +215,10 @@ Fetch<Region, Country> regionCountryFetch = region.fetch(Region_.country, JoinTy
 Join<Region, Country> regionCountry = (Join<Region, Country>)regionCountryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, regionCountry.get("code"), filter.getRegionCountryCode());
-addStringContainsRestriction(builder, predicates, region.get("code"), filter.getRegionCode());
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+addStringContainsRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
+addStringContainsRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
+addStringContainsRestriction(builder, predicates, root.get(City_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
@@ -257,10 +257,10 @@ Fetch<Region, Country> regionCountryFetch = region.fetch(Region_.country, JoinTy
 Join<Region, Country> regionCountry = (Join<Region, Country>)regionCountryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, regionCountry.get("code"), filter.getRegionCountryCode());
-addStringContainsRestriction(builder, predicates, region.get("code"), filter.getRegionCode());
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+addStringContainsRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
+addStringContainsRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
+addStringContainsRestriction(builder, predicates, root.get(City_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
 if (regionId == null){
 predicates.add(builder.isNull(region.get(Region_.id)));
 } else {
@@ -270,10 +270,10 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, regionCountry.get("code"), sorting.getRegionCountryCodeOrderType());
-addOrder(builder, orders, region.get("code"), sorting.getRegionCodeOrderType());
-addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
-addOrder(builder, orders, root.get("label"), sorting.getLabelOrderType());
+addOrder(builder, orders, regionCountry.get(Country_.code), sorting.getRegionCountryCodeOrderType());
+addOrder(builder, orders, region.get(Region_.code), sorting.getRegionCodeOrderType());
+addOrder(builder, orders, root.get(City_.code), sorting.getCodeOrderType());
+addOrder(builder, orders, root.get(City_.label), sorting.getLabelOrderType());
 addOrder(builder, orders, root.get(City_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
@@ -297,13 +297,13 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
-Join<Region, City> region = root.join("region", JoinType.LEFT);
-Join<Country, Region> regionCountry = region.join("country", JoinType.LEFT);
+Join<City, Region> region = root.join(City_.region, JoinType.LEFT);
+Join<Region, Country> regionCountry = region.join(Region_.country, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addEqualsRestriction(builder, predicates, regionCountry.get("code"), regionCountryCode);
-addEqualsRestriction(builder, predicates, region.get("code"), regionCode);
-addEqualsRestriction(builder, predicates, root.get("code"), code);
+addEqualsRestriction(builder, predicates, regionCountry.get(Country_.code), regionCountryCode);
+addEqualsRestriction(builder, predicates, region.get(Region_.code), regionCode);
+addEqualsRestriction(builder, predicates, root.get(City_.code), code);
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);

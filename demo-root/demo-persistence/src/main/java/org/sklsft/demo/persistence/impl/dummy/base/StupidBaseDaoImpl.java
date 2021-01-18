@@ -46,14 +46,14 @@ super(Stupid.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused","unchecked"})
 public List<Stupid> loadListEagerly() {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Fetch<Stupid, Fool> foolFetch = root.fetch("fool", JoinType.LEFT);
+Fetch<Stupid, Fool> foolFetch = root.fetch(Stupid_.fool, JoinType.LEFT);
 Join<Stupid, Fool> fool = (Join<Stupid, Fool>)foolFetch;
 
 criteria.select(root);
@@ -101,7 +101,7 @@ CriteriaBuilder builder = session.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
-Fetch<Stupid, Fool> foolFetch = root.fetch("fool", JoinType.LEFT);
+Fetch<Stupid, Fool> foolFetch = root.fetch(Stupid_.fool, JoinType.LEFT);
 Join<Stupid, Fool> fool = (Join<Stupid, Fool>)foolFetch;
 
 if (foolId == null){
@@ -131,8 +131,8 @@ Root<Stupid> root = criteria.from(Stupid.class);
 Join<Stupid, Fool> fool = root.join(Stupid_.fool, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, fool.get("code"), filter.getFoolCode());
+addStringContainsRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
@@ -172,8 +172,8 @@ Root<Stupid> root = criteria.from(Stupid.class);
 Join<Stupid, Fool> fool = root.join(Stupid_.fool, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, fool.get("code"), filter.getFoolCode());
+addStringContainsRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
 if (foolId == null){
 predicates.add(builder.isNull(fool.get(Fool_.id)));
 } else {
@@ -201,8 +201,8 @@ Fetch<Stupid, Fool> foolFetch = root.fetch(Stupid_.fool, JoinType.LEFT);
 Join<Stupid, Fool> fool = (Join<Stupid, Fool>)foolFetch;
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, fool.get("code"), filter.getFoolCode());
+addStringContainsRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
@@ -237,8 +237,8 @@ Fetch<Stupid, Fool> foolFetch = root.fetch(Stupid_.fool, JoinType.LEFT);
 Join<Stupid, Fool> fool = (Join<Stupid, Fool>)foolFetch;
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, fool.get("code"), filter.getFoolCode());
+addStringContainsRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
 if (foolId == null){
 predicates.add(builder.isNull(fool.get(Fool_.id)));
 } else {
@@ -248,8 +248,8 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 List<Order> orders = new ArrayList<>();
-addOrder(builder, orders, root.get("code"), sorting.getCodeOrderType());
-addOrder(builder, orders, fool.get("code"), sorting.getFoolCodeOrderType());
+addOrder(builder, orders, root.get(Stupid_.code), sorting.getCodeOrderType());
+addOrder(builder, orders, fool.get(Fool_.code), sorting.getFoolCodeOrderType());
 addOrder(builder, orders, root.get(Stupid_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
@@ -275,7 +275,7 @@ CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 Root<Stupid> root = criteria.from(Stupid.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addEqualsRestriction(builder, predicates, root.get("code"), code);
+addEqualsRestriction(builder, predicates, root.get(Stupid_.code), code);
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);

@@ -41,7 +41,7 @@ super(Country.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused","unchecked"})
 public List<Country> loadListEagerly() {
 Session session = this.sessionFactory.getCurrentSession();
 CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -69,8 +69,8 @@ CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 Root<Country> root = criteria.from(Country.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+addStringContainsRestriction(builder, predicates, root.get(Country_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get(Country_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
@@ -90,8 +90,8 @@ CriteriaQuery<Country> criteria = builder.createQuery(Country.class);
 Root<Country> root = criteria.from(Country.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get("code"), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get("label"), filter.getLabel());
+addStringContainsRestriction(builder, predicates, root.get(Country_.code), filter.getCode());
+addStringContainsRestriction(builder, predicates, root.get(Country_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
@@ -123,7 +123,7 @@ CriteriaQuery<Country> criteria = builder.createQuery(Country.class);
 Root<Country> root = criteria.from(Country.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addEqualsRestriction(builder, predicates, root.get("code"), code);
+addEqualsRestriction(builder, predicates, root.get(Country_.code), code);
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
