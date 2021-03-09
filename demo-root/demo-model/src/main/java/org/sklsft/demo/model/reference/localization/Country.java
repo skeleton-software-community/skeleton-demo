@@ -36,7 +36,7 @@ public Country(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "countryIdGenerator", sequenceName = "COUNTRY_id_seq", allocationSize=1)
+@SequenceGenerator(name = "countryIdGenerator", sequenceName = "COUNTRY_SEQ", allocationSize=1)
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "countryIdGenerator")
 private Short id;
 

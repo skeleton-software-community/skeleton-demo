@@ -38,7 +38,7 @@ public Region(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "regionIdGenerator", sequenceName = "REGION_id_seq", allocationSize=1)
+@SequenceGenerator(name = "regionIdGenerator", sequenceName = "REGION_SEQ", allocationSize=1)
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "regionIdGenerator")
 private Integer id;
 

@@ -35,7 +35,7 @@ public Stupid(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "stupidIdGenerator", sequenceName = "STUPID_id_seq", allocationSize=1)
+@SequenceGenerator(name = "stupidIdGenerator", sequenceName = "STUPID_SEQ", allocationSize=1)
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stupidIdGenerator")
 private Long id;
 

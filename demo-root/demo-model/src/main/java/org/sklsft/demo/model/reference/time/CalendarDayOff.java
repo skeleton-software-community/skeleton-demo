@@ -40,7 +40,7 @@ public CalendarDayOff(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "calendarDayOffIdGenerator", sequenceName = "CALENDAR_DAY_OFF_id_seq", allocationSize=1)
+@SequenceGenerator(name = "calendarDayOffIdGenerator", sequenceName = "CALENDAR_DAY_OFF_SEQ", allocationSize=1)
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "calendarDayOffIdGenerator")
 private Integer id;
 

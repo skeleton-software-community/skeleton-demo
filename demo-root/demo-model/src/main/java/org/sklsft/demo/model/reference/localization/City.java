@@ -35,7 +35,7 @@ public City(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@SequenceGenerator(name = "cityIdGenerator", sequenceName = "CITY_id_seq", allocationSize=1)
+@SequenceGenerator(name = "cityIdGenerator", sequenceName = "CITY_SEQ", allocationSize=1)
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cityIdGenerator")
 private Long id;
 
