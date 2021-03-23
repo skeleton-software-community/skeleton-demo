@@ -30,7 +30,7 @@ public class CountryBaseRestClient implements CountryBaseService {
  * properties injected by spring
  */
 @Resource(name="demoRestClient")
-private RestClient restClient;
+protected RestClient restClient;
 /**
  * get options
  */

@@ -32,7 +32,7 @@ public class OrganizationBaseRestClient implements OrganizationBaseService {
  * properties injected by spring
  */
 @Resource(name="demoRestClient")
-private RestClient restClient;
+protected RestClient restClient;
 /**
  * search options
  */

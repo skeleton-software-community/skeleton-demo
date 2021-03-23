@@ -29,7 +29,7 @@ public class CityBaseRestClient implements CityBaseService {
  * properties injected by spring
  */
 @Resource(name="demoRestClient")
-private RestClient restClient;
+protected RestClient restClient;
 /**
  * load object list
  */

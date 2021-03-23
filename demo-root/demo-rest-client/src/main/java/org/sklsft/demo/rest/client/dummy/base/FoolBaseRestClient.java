@@ -30,7 +30,7 @@ public class FoolBaseRestClient implements FoolBaseService {
  * properties injected by spring
  */
 @Resource(name="demoRestClient")
-private RestClient restClient;
+protected RestClient restClient;
 /**
  * search options
  */

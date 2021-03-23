@@ -35,7 +35,7 @@ public class CalendarBaseRestClient implements CalendarBaseService {
  * properties injected by spring
  */
 @Resource(name="demoRestClient")
-private RestClient restClient;
+protected RestClient restClient;
 /**
  * get options
  */
