@@ -62,7 +62,7 @@
 		<commons.digester.version>1.8.1</commons.digester.version>
 		<commons.lang.version>2.5</commons.lang.version>
 
-		<junit.version>4.13</junit.version>
+		<junit.version>4.13.1</junit.version>
 		
 	</properties>
 	
