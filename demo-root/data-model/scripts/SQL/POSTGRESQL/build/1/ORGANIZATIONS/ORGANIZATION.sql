@@ -19,8 +19,5 @@ START 0
 CACHE 1;
 /
 
-ALTER TABLE ORGANIZATION ADD CONSTRAINT UC_ORGANIZATION UNIQUE (CODE);
-/
-
 -- Specific Code Start --
 -- Specific Code End --

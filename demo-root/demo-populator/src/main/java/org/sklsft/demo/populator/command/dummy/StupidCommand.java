@@ -7,8 +7,8 @@ import org.sklsft.commons.mapper.impl.StringArrayToBeanMapperImpl;
 import org.sklsft.commons.mapper.interfaces.ObjectArrayToBeanMapper;
 import org.sklsft.demo.api.interfaces.dummy.StupidService;
 import org.sklsft.demo.api.model.dummy.forms.StupidForm;
-import org.sklsft.generator.repository.backup.command.interfaces.BackupArgumentsCommand;
-import org.sklsft.generator.repository.backup.reader.model.BackupArguments;
+import org.sklsft.generator.persistence.backup.command.interfaces.BackupArgumentsCommand;
+import org.sklsft.generator.persistence.backup.reader.model.BackupArguments;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class StupidCommand implements BackupArgumentsCommand {
 /*
  * logger
  */
-private static final Logger logger = LoggerFactory.getLogger(StupidService.class);
+private static final Logger logger = LoggerFactory.getLogger(StupidCommand.class);
 
 @Inject
 private StupidService stupidService;

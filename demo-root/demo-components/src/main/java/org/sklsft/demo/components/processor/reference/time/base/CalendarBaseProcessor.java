@@ -2,7 +2,6 @@ package org.sklsft.demo.components.processor.reference.time.base;
 
 import javax.inject.Inject;
 
-import org.sklsft.commons.model.patterns.Processor;
 import org.sklsft.demo.model.reference.time.Calendar;
 import org.sklsft.demo.model.reference.time.CalendarDayOff;
 import org.sklsft.demo.persistence.interfaces.reference.time.CalendarDao;
@@ -12,7 +11,7 @@ import org.sklsft.demo.persistence.interfaces.reference.time.CalendarDao;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CalendarBaseProcessor implements Processor<Calendar, Integer> {
+public class CalendarBaseProcessor {
 
 /*
  * properties injected by spring

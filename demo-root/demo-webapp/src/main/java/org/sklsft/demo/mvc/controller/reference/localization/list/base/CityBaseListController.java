@@ -5,9 +5,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.sklsft.commons.api.exception.rights.OperationDeniedException;
+import org.sklsft.commons.api.exception.rights.AccessDeniedException;
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
+import org.sklsft.commons.mvc.annotations.PageLoad;
 import org.sklsft.demo.api.interfaces.reference.localization.CityService;
 import org.sklsft.demo.api.model.reference.localization.filters.CityFilter;
 import org.sklsft.demo.api.model.reference.localization.sortings.CitySorting;
@@ -50,6 +51,7 @@ this.cityListView = cityListView;
 /**
  * load object list
  */
+@PageLoad
 public void load() {
 this.reset();
 }
@@ -69,7 +71,7 @@ public void createCity() {
 this.commonController.loadCountryOptions();
 try {
 this.cityListView.setSelectedCity(this.cityService.create());
-} catch (OperationDeniedException e) {
+} catch (AccessDeniedException e) {
 displayError(e.getMessage());
 }
 }

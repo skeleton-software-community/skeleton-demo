@@ -2,7 +2,6 @@ package org.sklsft.demo.components.processor.dummy.base;
 
 import javax.inject.Inject;
 
-import org.sklsft.commons.model.patterns.Processor;
 import org.sklsft.demo.model.dummy.Fool;
 import org.sklsft.demo.persistence.interfaces.dummy.FoolDao;
 
@@ -11,7 +10,7 @@ import org.sklsft.demo.persistence.interfaces.dummy.FoolDao;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class FoolBaseProcessor implements Processor<Fool, String> {
+public class FoolBaseProcessor {
 
 /*
  * properties injected by spring

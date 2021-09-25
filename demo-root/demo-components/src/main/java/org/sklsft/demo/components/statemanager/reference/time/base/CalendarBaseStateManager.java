@@ -1,7 +1,6 @@
 package org.sklsft.demo.components.statemanager.reference.time.base;
 
 import org.sklsft.commons.api.exception.state.InvalidStateException;
-import org.sklsft.commons.model.patterns.StateManager;
 import org.sklsft.demo.model.reference.time.Calendar;
 import org.sklsft.demo.model.reference.time.CalendarDayOff;
 
@@ -10,7 +9,7 @@ import org.sklsft.demo.model.reference.time.CalendarDayOff;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CalendarBaseStateManager implements StateManager<Calendar, Integer> {
+public class CalendarBaseStateManager {
 
 /**
  * can save

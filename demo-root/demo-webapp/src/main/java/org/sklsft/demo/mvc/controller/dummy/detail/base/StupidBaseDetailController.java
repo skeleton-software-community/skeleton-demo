@@ -3,6 +3,7 @@ package org.sklsft.demo.mvc.controller.dummy.detail.base;
 import javax.inject.Inject;
 
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
+import org.sklsft.commons.mvc.annotations.PageLoad;
 import org.sklsft.demo.api.interfaces.dummy.StupidService;
 import org.sklsft.demo.mvc.controller.BaseController;
 import org.sklsft.demo.mvc.controller.CommonController;
@@ -32,6 +33,7 @@ protected StupidDetailView stupidDetailView;
 /**
  * load object
  */
+@PageLoad
 public void load() {
 stupidDetailView.setSelectedStupid(this.stupidService.load(this.stupidDetailView.getSelectedStupid().getId()));
 }

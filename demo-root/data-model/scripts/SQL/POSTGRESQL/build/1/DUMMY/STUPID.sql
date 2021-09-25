@@ -19,8 +19,5 @@ START 0
 CACHE 1;
 /
 
-ALTER TABLE STUPID ADD CONSTRAINT UC_STUPID UNIQUE (CODE);
-/
-
 -- Specific Code Start --
 -- Specific Code End --

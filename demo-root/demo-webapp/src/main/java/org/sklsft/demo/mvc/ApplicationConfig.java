@@ -8,6 +8,9 @@ import org.sklsft.commons.log.ErrorLogger;
 import org.sklsft.commons.mvc.ajax.AjaxMethodAspect;
 import org.sklsft.commons.mvc.ajax.AjaxMethodExecutor;
 import org.sklsft.commons.mvc.i18n.JsfLocaleManager;
+import org.sklsft.commons.mvc.loading.PageLoadAspect;
+import org.sklsft.commons.mvc.loading.PageLoadExceptionHandler;
+import org.sklsft.commons.mvc.loading.PageLoadExceptionHandlerDefaultJsfImpl;
 import org.sklsft.commons.mvc.messages.JsfMessageHandler;
 import org.sklsft.commons.mvc.redirection.JsfRedirectionHandler;
 import org.sklsft.commons.mvc.scopes.ViewScope;
@@ -102,5 +105,20 @@ public class ApplicationConfig {
 		AjaxMethodAspect result = new AjaxMethodAspect();
 		result.setExecutor(ajaxMethodExecutor());
 		return result;
+	}
+	
+	@Bean
+	public PageLoadExceptionHandler pageLoadExceptionHandler() {
+		PageLoadExceptionHandlerDefaultJsfImpl result = new PageLoadExceptionHandlerDefaultJsfImpl();
+		result.setRedirectionHandler(redirectionHandler());
+		return result;
+	}
+	
+	@Bean
+	public PageLoadAspect pageLoadAspect() {
+		PageLoadAspect result = new PageLoadAspect();
+		result.setExceptionHandler(pageLoadExceptionHandler());
+		return result;
+		
 	}
 }

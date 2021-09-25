@@ -3,6 +3,7 @@ package org.sklsft.demo.mvc.controller.reference.localization.detail.base;
 import javax.inject.Inject;
 
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
+import org.sklsft.commons.mvc.annotations.PageLoad;
 import org.sklsft.demo.api.interfaces.reference.localization.CityService;
 import org.sklsft.demo.mvc.controller.BaseController;
 import org.sklsft.demo.mvc.controller.CommonController;
@@ -32,6 +33,7 @@ protected CityDetailView cityDetailView;
 /**
  * load object
  */
+@PageLoad
 public void load() {
 this.commonController.loadCountryOptions();
 cityDetailView.setSelectedCity(this.cityService.load(this.cityDetailView.getSelectedCity().getId()));

@@ -2,7 +2,6 @@ package org.sklsft.demo.components.processor.organizations.base;
 
 import javax.inject.Inject;
 
-import org.sklsft.commons.model.patterns.Processor;
 import org.sklsft.demo.model.organizations.Organization;
 import org.sklsft.demo.model.organizations.OrganizationCertification;
 import org.sklsft.demo.persistence.interfaces.organizations.OrganizationDao;
@@ -12,7 +11,7 @@ import org.sklsft.demo.persistence.interfaces.organizations.OrganizationDao;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class OrganizationBaseProcessor implements Processor<Organization, Integer> {
+public class OrganizationBaseProcessor {
 
 /*
  * properties injected by spring

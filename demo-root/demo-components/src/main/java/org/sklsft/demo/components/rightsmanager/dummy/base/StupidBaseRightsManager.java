@@ -1,8 +1,6 @@
 package org.sklsft.demo.components.rightsmanager.dummy.base;
 
 import org.sklsft.commons.api.exception.rights.AccessDeniedException;
-import org.sklsft.commons.api.exception.rights.OperationDeniedException;
-import org.sklsft.commons.model.patterns.RightsManager;
 import org.sklsft.demo.model.dummy.Stupid;
 
 /**
@@ -10,7 +8,7 @@ import org.sklsft.demo.model.dummy.Stupid;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class StupidBaseRightsManager implements RightsManager<Stupid, Long> {
+public class StupidBaseRightsManager {
 
 /**
  * can access all
@@ -56,7 +54,7 @@ return true;
  */
 public void checkCanCreate() {
 if (!canCreate()) {
-throw new OperationDeniedException("Stupid.create.operationDenied");
+throw new AccessDeniedException("Stupid.create.operationDenied");
 }
 }
 
@@ -72,7 +70,7 @@ return true;
  */
 public void checkCanSave(Stupid stupid) {
 if (!canSave(stupid)) {
-throw new OperationDeniedException("Stupid.save.operationDenied");
+throw new AccessDeniedException("Stupid.save.operationDenied");
 }
 }
 
@@ -88,7 +86,7 @@ return true;
  */
 public void checkCanUpdate(Stupid stupid) {
 if (!canUpdate(stupid)) {
-throw new OperationDeniedException("Stupid.update.operationDenied");
+throw new AccessDeniedException("Stupid.update.operationDenied");
 }
 }
 
@@ -104,7 +102,7 @@ return true;
  */
 public void checkCanDelete(Stupid stupid) {
 if (!canDelete(stupid)) {
-throw new OperationDeniedException("Stupid.delete.operationDenied");
+throw new AccessDeniedException("Stupid.delete.operationDenied");
 }
 }
 

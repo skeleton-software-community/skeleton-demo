@@ -1,7 +1,6 @@
 package org.sklsft.demo.components.statemanager.organizations.base;
 
 import org.sklsft.commons.api.exception.state.InvalidStateException;
-import org.sklsft.commons.model.patterns.StateManager;
 import org.sklsft.demo.model.organizations.Organization;
 import org.sklsft.demo.model.organizations.OrganizationCertification;
 
@@ -10,7 +9,7 @@ import org.sklsft.demo.model.organizations.OrganizationCertification;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class OrganizationBaseStateManager implements StateManager<Organization, Integer> {
+public class OrganizationBaseStateManager {
 
 /**
  * can save

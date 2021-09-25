@@ -5,9 +5,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.sklsft.commons.api.exception.rights.OperationDeniedException;
+import org.sklsft.commons.api.exception.rights.AccessDeniedException;
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
+import org.sklsft.commons.mvc.annotations.PageLoad;
 import org.sklsft.demo.api.interfaces.dummy.FoolService;
 import org.sklsft.demo.api.interfaces.dummy.StupidService;
 import org.sklsft.demo.api.model.dummy.filters.StupidFilter;
@@ -45,6 +46,7 @@ protected FoolDetailView foolDetailView;
 /**
  * load object
  */
+@PageLoad
 public void load() {
 foolDetailView.setSelectedFool(this.foolService.load(this.foolDetailView.getSelectedFool().getId()));
 }
@@ -53,6 +55,7 @@ foolDetailView.setSelectedFool(this.foolService.load(this.foolDetailView.getSele
 /**
  * load one to many stupid list
  */
+@PageLoad
 public void loadStupidList() {
 this.resetStupidFilter();
 }
@@ -71,7 +74,7 @@ foolDetailView.getStupidScrollForm().setPage(foolDetailView.getStupidScrollView(
 public void createStupid() {
 try {
 foolDetailView.setSelectedStupid(this.stupidService.create());
-} catch (OperationDeniedException e) {
+} catch (AccessDeniedException e) {
 displayError(e.getMessage());
 }
 }

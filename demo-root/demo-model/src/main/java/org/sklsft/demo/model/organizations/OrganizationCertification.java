@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,7 +22,14 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name="ORGANIZATION_CERTIFICATION"
-, uniqueConstraints = {@UniqueConstraint(columnNames = {"ORGANIZATION_ID"})})
+, uniqueConstraints = {
+@UniqueConstraint(name = "UC_ORGANIZATION_CERTIFICATION", columnNames = {"ORGANIZATION_ID"})
+, @UniqueConstraint(name = "UC_ORGANIZATION_CERTIFICATION_C0", columnNames = {"ORGANIZATION_ID"})
+}
+, indexes = {
+@Index(name = "IDX_ORGANIZATION_CERTIFICATION_UC", columnList = "ORGANIZATION_ID")
+, @Index(name = "IDX_ORGANIZATION_CERTIFICATION_C0", columnList = "ORGANIZATION_ID")
+})
 public class OrganizationCertification implements org.sklsft.commons.model.interfaces.Entity<String> {
 
 private static final long serialVersionUID = 1L;
@@ -43,7 +51,7 @@ private String id;
 
 @ManyToOne(fetch = FetchType.LAZY)
 @Fetch(FetchMode.JOIN)
-@JoinColumn(name = "ORGANIZATION_ID", unique = true)
+@JoinColumn(name = "ORGANIZATION_ID")
 private Organization organization;
 
 @Column(name = "CERTIFIED", nullable = false)

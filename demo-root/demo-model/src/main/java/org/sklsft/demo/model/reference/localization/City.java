@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -19,7 +20,13 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name="CITY"
-, uniqueConstraints = {@UniqueConstraint(columnNames = {"REGION_ID", "CODE"})})
+, uniqueConstraints = {
+@UniqueConstraint(name = "UC_CITY", columnNames = {"REGION_ID", "CODE"})
+}
+, indexes = {
+@Index(name = "IDX_CITY_UC", columnList = "REGION_ID, CODE")
+, @Index(name = "IDX_CITY_C0", columnList = "REGION_ID")
+})
 public class City implements org.sklsft.commons.model.interfaces.Entity<Long> {
 
 private static final long serialVersionUID = 1L;

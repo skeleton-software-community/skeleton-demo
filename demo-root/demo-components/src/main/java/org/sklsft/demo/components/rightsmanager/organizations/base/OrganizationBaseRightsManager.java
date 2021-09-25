@@ -1,8 +1,6 @@
 package org.sklsft.demo.components.rightsmanager.organizations.base;
 
 import org.sklsft.commons.api.exception.rights.AccessDeniedException;
-import org.sklsft.commons.api.exception.rights.OperationDeniedException;
-import org.sklsft.commons.model.patterns.RightsManager;
 import org.sklsft.demo.model.organizations.Organization;
 import org.sklsft.demo.model.organizations.OrganizationCertification;
 
@@ -11,7 +9,7 @@ import org.sklsft.demo.model.organizations.OrganizationCertification;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class OrganizationBaseRightsManager implements RightsManager<Organization, Integer> {
+public class OrganizationBaseRightsManager {
 
 /**
  * can access all
@@ -73,7 +71,7 @@ return true;
  */
 public void checkCanCreate() {
 if (!canCreate()) {
-throw new OperationDeniedException("Organization.create.operationDenied");
+throw new AccessDeniedException("Organization.create.operationDenied");
 }
 }
 
@@ -89,7 +87,7 @@ return canUpdate(organization);
  */
 public void checkCanCreateOrganizationCertification(Organization organization) {
 if (!canCreateOrganizationCertification(organization)) {
-throw new OperationDeniedException("OrganizationCertification.create.operationDenied");
+throw new AccessDeniedException("OrganizationCertification.create.operationDenied");
 }
 }
 
@@ -105,7 +103,7 @@ return true;
  */
 public void checkCanSave(Organization organization) {
 if (!canSave(organization)) {
-throw new OperationDeniedException("Organization.save.operationDenied");
+throw new AccessDeniedException("Organization.save.operationDenied");
 }
 }
 
@@ -121,7 +119,7 @@ return canUpdate(organization);
  */
 public void checkCanSaveOrganizationCertification(OrganizationCertification organizationCertification,Organization organization) {
 if (!canSaveOrganizationCertification(organizationCertification, organization)) {
-throw new OperationDeniedException("OrganizationCertification.save.operationDenied");
+throw new AccessDeniedException("OrganizationCertification.save.operationDenied");
 }
 }
 
@@ -137,7 +135,7 @@ return true;
  */
 public void checkCanUpdate(Organization organization) {
 if (!canUpdate(organization)) {
-throw new OperationDeniedException("Organization.update.operationDenied");
+throw new AccessDeniedException("Organization.update.operationDenied");
 }
 }
 
@@ -153,7 +151,7 @@ return canUpdate(organizationCertification.getOrganization());
  */
 public void checkCanUpdateOrganizationCertification(OrganizationCertification organizationCertification) {
 if (!canUpdateOrganizationCertification(organizationCertification)) {
-throw new OperationDeniedException("OrganizationCertification.update.operationDenied");
+throw new AccessDeniedException("OrganizationCertification.update.operationDenied");
 }
 }
 
@@ -169,7 +167,7 @@ return true;
  */
 public void checkCanDelete(Organization organization) {
 if (!canDelete(organization)) {
-throw new OperationDeniedException("Organization.delete.operationDenied");
+throw new AccessDeniedException("Organization.delete.operationDenied");
 }
 }
 
@@ -185,7 +183,7 @@ return canUpdate(organizationCertification.getOrganization());
  */
 public void checkCanDeleteOrganizationCertification(OrganizationCertification organizationCertification) {
 if (!canDeleteOrganizationCertification(organizationCertification)) {
-throw new OperationDeniedException("OrganizationCertification.delete.operationDenied");
+throw new AccessDeniedException("OrganizationCertification.delete.operationDenied");
 }
 }
 

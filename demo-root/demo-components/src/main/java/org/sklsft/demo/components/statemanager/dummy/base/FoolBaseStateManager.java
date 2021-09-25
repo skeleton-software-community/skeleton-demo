@@ -1,7 +1,6 @@
 package org.sklsft.demo.components.statemanager.dummy.base;
 
 import org.sklsft.commons.api.exception.state.InvalidStateException;
-import org.sklsft.commons.model.patterns.StateManager;
 import org.sklsft.demo.model.dummy.Fool;
 
 /**
@@ -9,7 +8,7 @@ import org.sklsft.demo.model.dummy.Fool;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class FoolBaseStateManager implements StateManager<Fool, String> {
+public class FoolBaseStateManager {
 
 /**
  * can save

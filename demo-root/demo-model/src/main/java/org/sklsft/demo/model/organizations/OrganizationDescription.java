@@ -17,7 +17,11 @@ import org.hibernate.annotations.Type;
  * <br/>processed by skeleton-generator
  */
 @Entity
-@Table(name="ORGANIZATION_DESCRIPTION")
+@Table(name="ORGANIZATION_DESCRIPTION"
+, uniqueConstraints = {
+}
+, indexes = {
+})
 public class OrganizationDescription implements org.sklsft.commons.model.interfaces.Entity<Long> {
 
 private static final long serialVersionUID = 1L;

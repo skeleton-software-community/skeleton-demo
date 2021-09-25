@@ -20,8 +20,5 @@ START 0
 CACHE 1;
 /
 
-ALTER TABLE REGION ADD CONSTRAINT UC_REGION UNIQUE (COUNTRY_ID,CODE);
-/
-
 -- Specific Code Start --
 -- Specific Code End --

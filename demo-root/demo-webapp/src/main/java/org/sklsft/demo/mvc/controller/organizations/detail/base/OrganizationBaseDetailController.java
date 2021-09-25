@@ -3,6 +3,7 @@ package org.sklsft.demo.mvc.controller.organizations.detail.base;
 import javax.inject.Inject;
 
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
+import org.sklsft.commons.mvc.annotations.PageLoad;
 import org.sklsft.demo.api.interfaces.organizations.OrganizationService;
 import org.sklsft.demo.mvc.controller.BaseController;
 import org.sklsft.demo.mvc.controller.CommonController;
@@ -32,6 +33,7 @@ protected OrganizationDetailView organizationDetailView;
 /**
  * load object
  */
+@PageLoad
 public void load() {
 organizationDetailView.setSelectedOrganization(this.organizationService.load(this.organizationDetailView.getSelectedOrganization().getId()));
 }
@@ -40,6 +42,7 @@ organizationDetailView.setSelectedOrganization(this.organizationService.load(thi
 /**
  * load one to one component organizationCertification
  */
+@PageLoad
 public void loadOrganizationCertification() {
 organizationDetailView.setSelectedOrganizationCertification(this.organizationService.loadOrganizationCertification(this.organizationDetailView.getSelectedOrganization().getId()));
 }

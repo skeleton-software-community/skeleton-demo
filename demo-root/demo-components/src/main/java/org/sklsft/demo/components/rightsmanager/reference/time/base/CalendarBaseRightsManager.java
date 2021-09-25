@@ -1,8 +1,6 @@
 package org.sklsft.demo.components.rightsmanager.reference.time.base;
 
 import org.sklsft.commons.api.exception.rights.AccessDeniedException;
-import org.sklsft.commons.api.exception.rights.OperationDeniedException;
-import org.sklsft.commons.model.patterns.RightsManager;
 import org.sklsft.demo.model.reference.time.Calendar;
 import org.sklsft.demo.model.reference.time.CalendarDayOff;
 
@@ -11,7 +9,7 @@ import org.sklsft.demo.model.reference.time.CalendarDayOff;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CalendarBaseRightsManager implements RightsManager<Calendar, Integer> {
+public class CalendarBaseRightsManager {
 
 /**
  * can access all
@@ -73,7 +71,7 @@ return true;
  */
 public void checkCanCreate() {
 if (!canCreate()) {
-throw new OperationDeniedException("Calendar.create.operationDenied");
+throw new AccessDeniedException("Calendar.create.operationDenied");
 }
 }
 
@@ -89,7 +87,7 @@ return canUpdate(calendar);
  */
 public void checkCanCreateCalendarDayOff(Calendar calendar) {
 if (!canCreateCalendarDayOff(calendar)) {
-throw new OperationDeniedException("CalendarDayOff.create.operationDenied");
+throw new AccessDeniedException("CalendarDayOff.create.operationDenied");
 }
 }
 
@@ -105,7 +103,7 @@ return true;
  */
 public void checkCanSave(Calendar calendar) {
 if (!canSave(calendar)) {
-throw new OperationDeniedException("Calendar.save.operationDenied");
+throw new AccessDeniedException("Calendar.save.operationDenied");
 }
 }
 
@@ -121,7 +119,7 @@ return canUpdate(calendar);
  */
 public void checkCanSaveCalendarDayOff(CalendarDayOff calendarDayOff,Calendar calendar) {
 if (!canSaveCalendarDayOff(calendarDayOff, calendar)) {
-throw new OperationDeniedException("CalendarDayOff.save.operationDenied");
+throw new AccessDeniedException("CalendarDayOff.save.operationDenied");
 }
 }
 
@@ -137,7 +135,7 @@ return true;
  */
 public void checkCanUpdate(Calendar calendar) {
 if (!canUpdate(calendar)) {
-throw new OperationDeniedException("Calendar.update.operationDenied");
+throw new AccessDeniedException("Calendar.update.operationDenied");
 }
 }
 
@@ -153,7 +151,7 @@ return canUpdate(calendarDayOff.getCalendar());
  */
 public void checkCanUpdateCalendarDayOff(CalendarDayOff calendarDayOff) {
 if (!canUpdateCalendarDayOff(calendarDayOff)) {
-throw new OperationDeniedException("CalendarDayOff.update.operationDenied");
+throw new AccessDeniedException("CalendarDayOff.update.operationDenied");
 }
 }
 
@@ -169,7 +167,7 @@ return true;
  */
 public void checkCanDelete(Calendar calendar) {
 if (!canDelete(calendar)) {
-throw new OperationDeniedException("Calendar.delete.operationDenied");
+throw new AccessDeniedException("Calendar.delete.operationDenied");
 }
 }
 
@@ -185,7 +183,7 @@ return canUpdate(calendarDayOff.getCalendar());
  */
 public void checkCanDeleteCalendarDayOff(CalendarDayOff calendarDayOff) {
 if (!canDeleteCalendarDayOff(calendarDayOff)) {
-throw new OperationDeniedException("CalendarDayOff.delete.operationDenied");
+throw new AccessDeniedException("CalendarDayOff.delete.operationDenied");
 }
 }
 

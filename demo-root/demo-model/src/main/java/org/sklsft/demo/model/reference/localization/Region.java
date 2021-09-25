@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -22,7 +23,13 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name="REGION"
-, uniqueConstraints = {@UniqueConstraint(columnNames = {"COUNTRY_ID", "CODE"})})
+, uniqueConstraints = {
+@UniqueConstraint(name = "UC_REGION", columnNames = {"COUNTRY_ID", "CODE"})
+}
+, indexes = {
+@Index(name = "IDX_REGION_UC", columnList = "COUNTRY_ID, CODE")
+, @Index(name = "IDX_REGION_C0", columnList = "COUNTRY_ID")
+})
 public class Region implements org.sklsft.commons.model.interfaces.Entity<Integer> {
 
 private static final long serialVersionUID = 1L;

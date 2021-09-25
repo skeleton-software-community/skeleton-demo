@@ -2,7 +2,6 @@ package org.sklsft.demo.components.processor.dummy.base;
 
 import javax.inject.Inject;
 
-import org.sklsft.commons.model.patterns.Processor;
 import org.sklsft.demo.model.dummy.Stupid;
 import org.sklsft.demo.persistence.interfaces.dummy.StupidDao;
 
@@ -11,7 +10,7 @@ import org.sklsft.demo.persistence.interfaces.dummy.StupidDao;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class StupidBaseProcessor implements Processor<Stupid, Long> {
+public class StupidBaseProcessor {
 
 /*
  * properties injected by spring

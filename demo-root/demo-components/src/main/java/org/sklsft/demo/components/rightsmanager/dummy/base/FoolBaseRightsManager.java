@@ -1,8 +1,6 @@
 package org.sklsft.demo.components.rightsmanager.dummy.base;
 
 import org.sklsft.commons.api.exception.rights.AccessDeniedException;
-import org.sklsft.commons.api.exception.rights.OperationDeniedException;
-import org.sklsft.commons.model.patterns.RightsManager;
 import org.sklsft.demo.model.dummy.Fool;
 
 /**
@@ -10,7 +8,7 @@ import org.sklsft.demo.model.dummy.Fool;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class FoolBaseRightsManager implements RightsManager<Fool, String> {
+public class FoolBaseRightsManager {
 
 /**
  * can access all
@@ -56,7 +54,7 @@ return true;
  */
 public void checkCanCreate() {
 if (!canCreate()) {
-throw new OperationDeniedException("Fool.create.operationDenied");
+throw new AccessDeniedException("Fool.create.operationDenied");
 }
 }
 
@@ -72,7 +70,7 @@ return true;
  */
 public void checkCanSave(Fool fool) {
 if (!canSave(fool)) {
-throw new OperationDeniedException("Fool.save.operationDenied");
+throw new AccessDeniedException("Fool.save.operationDenied");
 }
 }
 
@@ -88,7 +86,7 @@ return true;
  */
 public void checkCanUpdate(Fool fool) {
 if (!canUpdate(fool)) {
-throw new OperationDeniedException("Fool.update.operationDenied");
+throw new AccessDeniedException("Fool.update.operationDenied");
 }
 }
 
@@ -104,7 +102,7 @@ return true;
  */
 public void checkCanDelete(Fool fool) {
 if (!canDelete(fool)) {
-throw new OperationDeniedException("Fool.delete.operationDenied");
+throw new AccessDeniedException("Fool.delete.operationDenied");
 }
 }
 

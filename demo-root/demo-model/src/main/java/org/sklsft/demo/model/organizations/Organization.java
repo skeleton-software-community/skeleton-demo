@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -24,7 +25,14 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Table(name="ORGANIZATION"
-, uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})
+, uniqueConstraints = {
+@UniqueConstraint(name = "UC_ORGANIZATION", columnNames = {"CODE"})
+, @UniqueConstraint(name = "UC_ORGANIZATION_C1", columnNames = {"ORGANIZATION_DESCRIPTION_ID"})
+}
+, indexes = {
+@Index(name = "IDX_ORGANIZATION_UC", columnList = "CODE")
+, @Index(name = "IDX_ORGANIZATION_C1", columnList = "ORGANIZATION_DESCRIPTION_ID")
+})
 public class Organization implements org.sklsft.commons.model.interfaces.Entity<Integer> {
 
 private static final long serialVersionUID = 1L;
@@ -48,7 +56,7 @@ private Integer id;
 private String code;
 
 @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-@JoinColumn(name = "ORGANIZATION_DESCRIPTION_ID", unique = true, nullable = false)
+@JoinColumn(name = "ORGANIZATION_DESCRIPTION_ID", nullable = false)
 private OrganizationDescription organizationDescription;
 
 @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "organization")

@@ -20,8 +20,5 @@ START 0
 CACHE 1;
 /
 
-ALTER TABLE CITY ADD CONSTRAINT UC_CITY UNIQUE (REGION_ID,CODE);
-/
-
 -- Specific Code Start --
 -- Specific Code End --

@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -20,7 +21,12 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name="COUNTRY"
-, uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})
+, uniqueConstraints = {
+@UniqueConstraint(name = "UC_COUNTRY", columnNames = {"CODE"})
+}
+, indexes = {
+@Index(name = "IDX_COUNTRY_UC", columnList = "CODE")
+})
 public class Country implements org.sklsft.commons.model.interfaces.Entity<Short> {
 
 private static final long serialVersionUID = 1L;

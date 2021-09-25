@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -21,7 +22,12 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name="CALENDAR"
-, uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})
+, uniqueConstraints = {
+@UniqueConstraint(name = "UC_CALENDAR", columnNames = {"CODE"})
+}
+, indexes = {
+@Index(name = "IDX_CALENDAR_UC", columnList = "CODE")
+})
 public class Calendar implements org.sklsft.commons.model.interfaces.Entity<Integer> {
 
 private static final long serialVersionUID = 1L;

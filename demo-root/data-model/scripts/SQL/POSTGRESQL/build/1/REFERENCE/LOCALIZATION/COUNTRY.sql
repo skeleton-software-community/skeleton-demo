@@ -19,8 +19,5 @@ START 0
 CACHE 1;
 /
 
-ALTER TABLE COUNTRY ADD CONSTRAINT UC_COUNTRY UNIQUE (CODE);
-/
-
 -- Specific Code Start --
 -- Specific Code End --

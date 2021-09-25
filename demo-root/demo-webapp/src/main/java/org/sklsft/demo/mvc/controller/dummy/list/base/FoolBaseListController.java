@@ -5,10 +5,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.sklsft.commons.api.exception.rights.OperationDeniedException;
+import org.sklsft.commons.api.exception.rights.AccessDeniedException;
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.mvc.ajax.AjaxMethodTemplate;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
+import org.sklsft.commons.mvc.annotations.PageLoad;
 import org.sklsft.demo.api.interfaces.dummy.FoolService;
 import org.sklsft.demo.api.model.dummy.filters.FoolFilter;
 import org.sklsft.demo.api.model.dummy.sortings.FoolSorting;
@@ -51,6 +52,7 @@ this.foolListView = foolListView;
 /**
  * load object list
  */
+@PageLoad
 public void load() {
 this.reset();
 }
@@ -69,7 +71,7 @@ foolListView.getScrollForm().setPage(foolListView.getScrollView().getCurrentPage
 public void createFool() {
 try {
 this.foolListView.setSelectedFool(this.foolService.create());
-} catch (OperationDeniedException e) {
+} catch (AccessDeniedException e) {
 displayError(e.getMessage());
 }
 }

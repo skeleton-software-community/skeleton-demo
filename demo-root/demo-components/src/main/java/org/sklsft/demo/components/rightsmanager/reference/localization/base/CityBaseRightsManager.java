@@ -1,8 +1,6 @@
 package org.sklsft.demo.components.rightsmanager.reference.localization.base;
 
 import org.sklsft.commons.api.exception.rights.AccessDeniedException;
-import org.sklsft.commons.api.exception.rights.OperationDeniedException;
-import org.sklsft.commons.model.patterns.RightsManager;
 import org.sklsft.demo.model.reference.localization.City;
 
 /**
@@ -10,7 +8,7 @@ import org.sklsft.demo.model.reference.localization.City;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CityBaseRightsManager implements RightsManager<City, Long> {
+public class CityBaseRightsManager {
 
 /**
  * can access all
@@ -56,7 +54,7 @@ return true;
  */
 public void checkCanCreate() {
 if (!canCreate()) {
-throw new OperationDeniedException("City.create.operationDenied");
+throw new AccessDeniedException("City.create.operationDenied");
 }
 }
 
@@ -72,7 +70,7 @@ return true;
  */
 public void checkCanSave(City city) {
 if (!canSave(city)) {
-throw new OperationDeniedException("City.save.operationDenied");
+throw new AccessDeniedException("City.save.operationDenied");
 }
 }
 
@@ -88,7 +86,7 @@ return true;
  */
 public void checkCanUpdate(City city) {
 if (!canUpdate(city)) {
-throw new OperationDeniedException("City.update.operationDenied");
+throw new AccessDeniedException("City.update.operationDenied");
 }
 }
 
@@ -104,7 +102,7 @@ return true;
  */
 public void checkCanDelete(City city) {
 if (!canDelete(city)) {
-throw new OperationDeniedException("City.delete.operationDenied");
+throw new AccessDeniedException("City.delete.operationDenied");
 }
 }
 

@@ -5,9 +5,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.sklsft.commons.api.exception.rights.OperationDeniedException;
+import org.sklsft.commons.api.exception.rights.AccessDeniedException;
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
+import org.sklsft.commons.mvc.annotations.PageLoad;
 import org.sklsft.demo.api.interfaces.reference.time.CalendarService;
 import org.sklsft.demo.api.model.reference.time.filters.CalendarDayOffFilter;
 import org.sklsft.demo.api.model.reference.time.sortings.CalendarDayOffSorting;
@@ -40,6 +41,7 @@ protected CalendarDetailView calendarDetailView;
 /**
  * load object
  */
+@PageLoad
 public void load() {
 calendarDetailView.setSelectedCalendar(this.calendarService.load(this.calendarDetailView.getSelectedCalendar().getId()));
 }
@@ -48,6 +50,7 @@ calendarDetailView.setSelectedCalendar(this.calendarService.load(this.calendarDe
 /**
  * load one to many component calendarDayOff list
  */
+@PageLoad
 public void loadCalendarDayOffList() {
 this.resetCalendarDayOffFilter();
 }
@@ -66,7 +69,7 @@ calendarDetailView.getCalendarDayOffScrollForm().setPage(calendarDetailView.getC
 public void createCalendarDayOff() {
 try {
 calendarDetailView.setSelectedCalendarDayOff(this.calendarService.createCalendarDayOff(this.calendarDetailView.getSelectedCalendar().getId()));
-} catch (OperationDeniedException e) {
+} catch (AccessDeniedException e) {
 displayError(e.getMessage());
 }
 }

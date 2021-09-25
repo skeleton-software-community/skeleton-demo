@@ -2,7 +2,6 @@ package org.sklsft.demo.components.processor.reference.localization.base;
 
 import javax.inject.Inject;
 
-import org.sklsft.commons.model.patterns.Processor;
 import org.sklsft.demo.model.reference.localization.City;
 import org.sklsft.demo.persistence.interfaces.reference.localization.CityDao;
 
@@ -11,7 +10,7 @@ import org.sklsft.demo.persistence.interfaces.reference.localization.CityDao;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CityBaseProcessor implements Processor<City, Long> {
+public class CityBaseProcessor {
 
 /*
  * properties injected by spring

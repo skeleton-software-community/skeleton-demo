@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -24,7 +25,13 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Table(name="CALENDAR_DAY_OFF"
-, uniqueConstraints = {@UniqueConstraint(columnNames = {"CALENDAR_ID", "DAY_OFF_DATE"})})
+, uniqueConstraints = {
+@UniqueConstraint(name = "UC_CALENDAR_DAY_OFF", columnNames = {"CALENDAR_ID", "DAY_OFF_DATE"})
+}
+, indexes = {
+@Index(name = "IDX_CALENDAR_DAY_OFF_UC", columnList = "CALENDAR_ID, DAY_OFF_DATE")
+, @Index(name = "IDX_CALENDAR_DAY_OFF_C0", columnList = "CALENDAR_ID")
+})
 public class CalendarDayOff implements org.sklsft.commons.model.interfaces.Entity<Integer> {
 
 private static final long serialVersionUID = 1L;

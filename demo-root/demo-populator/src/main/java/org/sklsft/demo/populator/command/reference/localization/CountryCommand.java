@@ -7,8 +7,8 @@ import org.sklsft.commons.mapper.impl.StringArrayToBeanMapperImpl;
 import org.sklsft.commons.mapper.interfaces.ObjectArrayToBeanMapper;
 import org.sklsft.demo.api.interfaces.reference.localization.CountryService;
 import org.sklsft.demo.api.model.reference.localization.forms.CountryForm;
-import org.sklsft.generator.repository.backup.command.interfaces.BackupArgumentsCommand;
-import org.sklsft.generator.repository.backup.reader.model.BackupArguments;
+import org.sklsft.generator.persistence.backup.command.interfaces.BackupArgumentsCommand;
+import org.sklsft.generator.persistence.backup.reader.model.BackupArguments;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class CountryCommand implements BackupArgumentsCommand {
 /*
  * logger
  */
-private static final Logger logger = LoggerFactory.getLogger(CountryService.class);
+private static final Logger logger = LoggerFactory.getLogger(CountryCommand.class);
 
 @Inject
 private CountryService countryService;

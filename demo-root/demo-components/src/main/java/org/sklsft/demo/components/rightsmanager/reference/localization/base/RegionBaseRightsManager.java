@@ -1,8 +1,6 @@
 package org.sklsft.demo.components.rightsmanager.reference.localization.base;
 
 import org.sklsft.commons.api.exception.rights.AccessDeniedException;
-import org.sklsft.commons.api.exception.rights.OperationDeniedException;
-import org.sklsft.commons.model.patterns.RightsManager;
 import org.sklsft.demo.model.reference.localization.Region;
 
 /**
@@ -10,7 +8,7 @@ import org.sklsft.demo.model.reference.localization.Region;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class RegionBaseRightsManager implements RightsManager<Region, Integer> {
+public class RegionBaseRightsManager {
 
 /**
  * can access all
@@ -56,7 +54,7 @@ return true;
  */
 public void checkCanCreate() {
 if (!canCreate()) {
-throw new OperationDeniedException("Region.create.operationDenied");
+throw new AccessDeniedException("Region.create.operationDenied");
 }
 }
 
@@ -72,7 +70,7 @@ return true;
  */
 public void checkCanSave(Region region) {
 if (!canSave(region)) {
-throw new OperationDeniedException("Region.save.operationDenied");
+throw new AccessDeniedException("Region.save.operationDenied");
 }
 }
 
@@ -88,7 +86,7 @@ return true;
  */
 public void checkCanUpdate(Region region) {
 if (!canUpdate(region)) {
-throw new OperationDeniedException("Region.update.operationDenied");
+throw new AccessDeniedException("Region.update.operationDenied");
 }
 }
 
@@ -104,7 +102,7 @@ return true;
  */
 public void checkCanDelete(Region region) {
 if (!canDelete(region)) {
-throw new OperationDeniedException("Region.delete.operationDenied");
+throw new AccessDeniedException("Region.delete.operationDenied");
 }
 }
 

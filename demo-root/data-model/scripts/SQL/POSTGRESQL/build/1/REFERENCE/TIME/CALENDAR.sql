@@ -19,8 +19,5 @@ START 0
 CACHE 1;
 /
 
-ALTER TABLE CALENDAR ADD CONSTRAINT UC_CALENDAR UNIQUE (CODE);
-/
-
 -- Specific Code Start --
 -- Specific Code End --

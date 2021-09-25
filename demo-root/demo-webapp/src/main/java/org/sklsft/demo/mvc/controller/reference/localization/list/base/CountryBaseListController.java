@@ -5,10 +5,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.sklsft.commons.api.exception.rights.OperationDeniedException;
+import org.sklsft.commons.api.exception.rights.AccessDeniedException;
 import org.sklsft.commons.api.model.ScrollForm;
 import org.sklsft.commons.mvc.ajax.AjaxMethodTemplate;
 import org.sklsft.commons.mvc.annotations.AjaxMethod;
+import org.sklsft.commons.mvc.annotations.PageLoad;
 import org.sklsft.demo.api.interfaces.reference.localization.CountryService;
 import org.sklsft.demo.api.model.reference.localization.filters.CountryFilter;
 import org.sklsft.demo.api.model.reference.localization.sortings.CountrySorting;
@@ -51,6 +52,7 @@ this.countryListView = countryListView;
 /**
  * load object list
  */
+@PageLoad
 public void load() {
 this.reset();
 }
@@ -69,7 +71,7 @@ countryListView.getScrollForm().setPage(countryListView.getScrollView().getCurre
 public void createCountry() {
 try {
 this.countryListView.setSelectedCountry(this.countryService.create());
-} catch (OperationDeniedException e) {
+} catch (AccessDeniedException e) {
 displayError(e.getMessage());
 }
 }

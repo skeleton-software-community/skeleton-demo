@@ -1,7 +1,6 @@
 package org.sklsft.demo.components.statemanager.reference.localization.base;
 
 import org.sklsft.commons.api.exception.state.InvalidStateException;
-import org.sklsft.commons.model.patterns.StateManager;
 import org.sklsft.demo.model.reference.localization.City;
 
 /**
@@ -9,7 +8,7 @@ import org.sklsft.demo.model.reference.localization.City;
  * <br/>no modification should be done to this file
  * <br/>processed by skeleton-generator
  */
-public class CityBaseStateManager implements StateManager<City, Long> {
+public class CityBaseStateManager {
 
 /**
  * can save
