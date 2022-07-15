@@ -3,7 +3,7 @@ package org.sklsft.demo.persistence.impl.reference.time.base;
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addBetweenRestriction;
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addOrder;
-import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,8 +76,8 @@ CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 Root<Calendar> root = criteria.from(Calendar.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Calendar_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(Calendar_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, root.get(Calendar_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Calendar_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
@@ -97,8 +97,8 @@ CriteriaQuery<Calendar> criteria = builder.createQuery(Calendar.class);
 Root<Calendar> root = criteria.from(Calendar.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Calendar_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(Calendar_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, root.get(Calendar_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Calendar_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
@@ -180,7 +180,7 @@ Join<CalendarDayOff, Calendar> calendar = root.join(CalendarDayOff_.calendar, Jo
 
 List<Predicate> predicates = new ArrayList<>();
 addBetweenRestriction(builder, predicates, root.get(CalendarDayOff_.dayOffDate), filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
-addStringContainsRestriction(builder, predicates, root.get(CalendarDayOff_.dayOffLabel), filter.getDayOffLabel());
+addStringStartsWithRestriction(builder, predicates, root.get(CalendarDayOff_.dayOffLabel), filter.getDayOffLabel());
 if (calendarId == null){
 predicates.add(builder.isNull(calendar.get(Calendar_.id)));
 } else {
@@ -206,7 +206,7 @@ Join<CalendarDayOff, Calendar> calendar = root.join(CalendarDayOff_.calendar, Jo
 
 List<Predicate> predicates = new ArrayList<>();
 addBetweenRestriction(builder, predicates, root.get(CalendarDayOff_.dayOffDate), filter.getDayOffDateMinValue(), filter.getDayOffDateMaxValue());
-addStringContainsRestriction(builder, predicates, root.get(CalendarDayOff_.dayOffLabel), filter.getDayOffLabel());
+addStringStartsWithRestriction(builder, predicates, root.get(CalendarDayOff_.dayOffLabel), filter.getDayOffLabel());
 if (calendarId == null){
 predicates.add(builder.isNull(calendar.get(Calendar_.id)));
 } else {

@@ -2,8 +2,8 @@ package org.sklsft.demo.persistence.impl.organizations.base;
 
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addOrder;
-import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringContainsRestriction;
-import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.getStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.getStringStartsWithRestriction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,8 +79,8 @@ Root<Organization> root = criteria.from(Organization.class);
 Join<Organization, OrganizationDescription> organizationDescription = root.join(Organization_.organizationDescription, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Organization_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, organizationDescription.get(OrganizationDescription_.description), filter.getDescription());
+addStringStartsWithRestriction(builder, predicates, root.get(Organization_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, organizationDescription.get(OrganizationDescription_.description), filter.getDescription());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
@@ -102,8 +102,8 @@ Fetch<Organization, OrganizationDescription> organizationDescriptionFetch = root
 Join<Organization, OrganizationDescription> organizationDescription = (Join<Organization, OrganizationDescription>)organizationDescriptionFetch;
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Organization_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, organizationDescription.get(OrganizationDescription_.description), filter.getDescription());
+addStringStartsWithRestriction(builder, predicates, root.get(Organization_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, organizationDescription.get(OrganizationDescription_.description), filter.getDescription());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
@@ -182,7 +182,7 @@ CriteriaQuery<Organization> criteria = builder.createQuery(Organization.class);
 
 Root<Organization> root = criteria.from(Organization.class);
 
-Predicate predicate = getStringContainsRestriction(builder, root.get(Organization_.code), arg);
+Predicate predicate = getStringStartsWithRestriction(builder, root.get(Organization_.code), arg);
 if (predicate!=null){
 criteria.where(predicate);
 }

@@ -2,7 +2,7 @@ package org.sklsft.demo.persistence.impl.reference.localization.base;
 
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addOrder;
-import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,9 +131,9 @@ Root<Region> root = criteria.from(Region.class);
 Join<Region, Country> country = root.join(Region_.country, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, country.get(Country_.code), filter.getCountryCode());
-addStringContainsRestriction(builder, predicates, root.get(Region_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(Region_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, country.get(Country_.code), filter.getCountryCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Region_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Region_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
@@ -173,9 +173,9 @@ Root<Region> root = criteria.from(Region.class);
 Join<Region, Country> country = root.join(Region_.country, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, country.get(Country_.code), filter.getCountryCode());
-addStringContainsRestriction(builder, predicates, root.get(Region_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(Region_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, country.get(Country_.code), filter.getCountryCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Region_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Region_.label), filter.getLabel());
 if (countryId == null){
 predicates.add(builder.isNull(country.get(Country_.id)));
 } else {
@@ -203,9 +203,9 @@ Fetch<Region, Country> countryFetch = root.fetch(Region_.country, JoinType.LEFT)
 Join<Region, Country> country = (Join<Region, Country>)countryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, country.get(Country_.code), filter.getCountryCode());
-addStringContainsRestriction(builder, predicates, root.get(Region_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(Region_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, country.get(Country_.code), filter.getCountryCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Region_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Region_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
@@ -241,9 +241,9 @@ Fetch<Region, Country> countryFetch = root.fetch(Region_.country, JoinType.LEFT)
 Join<Region, Country> country = (Join<Region, Country>)countryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, country.get(Country_.code), filter.getCountryCode());
-addStringContainsRestriction(builder, predicates, root.get(Region_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(Region_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, country.get(Country_.code), filter.getCountryCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Region_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Region_.label), filter.getLabel());
 if (countryId == null){
 predicates.add(builder.isNull(country.get(Country_.id)));
 } else {

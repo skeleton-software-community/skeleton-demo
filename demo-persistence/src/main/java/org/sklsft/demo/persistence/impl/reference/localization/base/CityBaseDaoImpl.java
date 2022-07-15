@@ -2,7 +2,7 @@ package org.sklsft.demo.persistence.impl.reference.localization.base;
 
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addOrder;
-import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,10 +138,10 @@ Join<City, Region> region = root.join(City_.region, JoinType.LEFT);
 Join<Region, Country> regionCountry = region.join(Region_.country, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
-addStringContainsRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
-addStringContainsRestriction(builder, predicates, root.get(City_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
+addStringStartsWithRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
+addStringStartsWithRestriction(builder, predicates, root.get(City_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
@@ -182,10 +182,10 @@ Join<City, Region> region = root.join(City_.region, JoinType.LEFT);
 Join<Region, Country> regionCountry = region.join(Region_.country, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
-addStringContainsRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
-addStringContainsRestriction(builder, predicates, root.get(City_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
+addStringStartsWithRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
+addStringStartsWithRestriction(builder, predicates, root.get(City_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
 if (regionId == null){
 predicates.add(builder.isNull(region.get(Region_.id)));
 } else {
@@ -215,10 +215,10 @@ Fetch<Region, Country> regionCountryFetch = region.fetch(Region_.country, JoinTy
 Join<Region, Country> regionCountry = (Join<Region, Country>)regionCountryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
-addStringContainsRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
-addStringContainsRestriction(builder, predicates, root.get(City_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
+addStringStartsWithRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
+addStringStartsWithRestriction(builder, predicates, root.get(City_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
@@ -257,10 +257,10 @@ Fetch<Region, Country> regionCountryFetch = region.fetch(Region_.country, JoinTy
 Join<Region, Country> regionCountry = (Join<Region, Country>)regionCountryFetch;
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
-addStringContainsRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
-addStringContainsRestriction(builder, predicates, root.get(City_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, regionCountry.get(Country_.code), filter.getRegionCountryCode());
+addStringStartsWithRestriction(builder, predicates, region.get(Region_.code), filter.getRegionCode());
+addStringStartsWithRestriction(builder, predicates, root.get(City_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(City_.label), filter.getLabel());
 if (regionId == null){
 predicates.add(builder.isNull(region.get(Region_.id)));
 } else {

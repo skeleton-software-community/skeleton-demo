@@ -4,8 +4,8 @@ import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addBetweenRestr
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addBooleanRestriction;
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addOrder;
-import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringContainsRestriction;
-import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.getStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.getStringStartsWithRestriction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,8 +72,8 @@ CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 Root<Fool> root = criteria.from(Fool.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Fool_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(Fool_.description), filter.getDescription());
+addStringStartsWithRestriction(builder, predicates, root.get(Fool_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Fool_.description), filter.getDescription());
 addBetweenRestriction(builder, predicates, root.get(Fool_.longField), filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
 addBooleanRestriction(builder, predicates, root.get(Fool_.booleanField), filter.getBooleanField());
 addBetweenRestriction(builder, predicates, root.get(Fool_.doubleField), filter.getDoubleFieldMinValue(), filter.getDoubleFieldMaxValue());
@@ -99,8 +99,8 @@ CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
 Root<Fool> root = criteria.from(Fool.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Fool_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(Fool_.description), filter.getDescription());
+addStringStartsWithRestriction(builder, predicates, root.get(Fool_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Fool_.description), filter.getDescription());
 addBetweenRestriction(builder, predicates, root.get(Fool_.longField), filter.getLongFieldMinValue(), filter.getLongFieldMaxValue());
 addBooleanRestriction(builder, predicates, root.get(Fool_.booleanField), filter.getBooleanField());
 addBetweenRestriction(builder, predicates, root.get(Fool_.doubleField), filter.getDoubleFieldMinValue(), filter.getDoubleFieldMaxValue());
@@ -191,7 +191,7 @@ CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
 
 Root<Fool> root = criteria.from(Fool.class);
 
-Predicate predicate = getStringContainsRestriction(builder, root.get(Fool_.code), arg);
+Predicate predicate = getStringStartsWithRestriction(builder, root.get(Fool_.code), arg);
 if (predicate!=null){
 criteria.where(predicate);
 }

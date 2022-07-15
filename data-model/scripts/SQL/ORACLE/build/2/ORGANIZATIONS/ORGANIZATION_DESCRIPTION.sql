@@ -1,5 +1,6 @@
 -- table unique constraints --
--- table foreign keys and indexes --
+-- table foreign keys --
+-- table indexes --
 -- Specific Code Start --
 -- Specific Code End --
 

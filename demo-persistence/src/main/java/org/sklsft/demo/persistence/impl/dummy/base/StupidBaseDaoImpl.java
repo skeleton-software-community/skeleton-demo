@@ -2,7 +2,7 @@ package org.sklsft.demo.persistence.impl.dummy.base;
 
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addOrder;
-import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,8 +131,8 @@ Root<Stupid> root = criteria.from(Stupid.class);
 Join<Stupid, Fool> fool = root.join(Stupid_.fool, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
@@ -172,8 +172,8 @@ Root<Stupid> root = criteria.from(Stupid.class);
 Join<Stupid, Fool> fool = root.join(Stupid_.fool, JoinType.LEFT);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
 if (foolId == null){
 predicates.add(builder.isNull(fool.get(Fool_.id)));
 } else {
@@ -201,8 +201,8 @@ Fetch<Stupid, Fool> foolFetch = root.fetch(Stupid_.fool, JoinType.LEFT);
 Join<Stupid, Fool> fool = (Join<Stupid, Fool>)foolFetch;
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
@@ -237,8 +237,8 @@ Fetch<Stupid, Fool> foolFetch = root.fetch(Stupid_.fool, JoinType.LEFT);
 Join<Stupid, Fool> fool = (Join<Stupid, Fool>)foolFetch;
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Stupid_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, fool.get(Fool_.code), filter.getFoolCode());
 if (foolId == null){
 predicates.add(builder.isNull(fool.get(Fool_.id)));
 } else {

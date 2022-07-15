@@ -2,7 +2,7 @@ package org.sklsft.demo.persistence.impl.reference.localization.base;
 
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
 import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addOrder;
-import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringContainsRestriction;
+import static org.sklsft.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +69,8 @@ CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 Root<Country> root = criteria.from(Country.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Country_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(Country_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, root.get(Country_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Country_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
@@ -90,8 +90,8 @@ CriteriaQuery<Country> criteria = builder.createQuery(Country.class);
 Root<Country> root = criteria.from(Country.class);
 
 List<Predicate> predicates = new ArrayList<>();
-addStringContainsRestriction(builder, predicates, root.get(Country_.code), filter.getCode());
-addStringContainsRestriction(builder, predicates, root.get(Country_.label), filter.getLabel());
+addStringStartsWithRestriction(builder, predicates, root.get(Country_.code), filter.getCode());
+addStringStartsWithRestriction(builder, predicates, root.get(Country_.label), filter.getLabel());
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
