@@ -10,11 +10,11 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.eclipse.core.internal.resources.Project;
 import org.sklsft.commons.api.exception.TechnicalError;
 import org.sklsft.generator.bl.services.impl.JunitPopulator;
 import org.sklsft.generator.bl.services.interfaces.ProjectLoader;
 import org.sklsft.generator.bl.services.interfaces.ProjectMetaDataService;
-import org.sklsft.generator.model.domain.Project;
 import org.sklsft.generator.model.metadata.ProjectMetaData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

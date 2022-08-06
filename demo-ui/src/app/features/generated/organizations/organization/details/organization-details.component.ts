@@ -1,0 +1,65 @@
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavLink } from 'src/app/core/models/nav-link';
+import { NotificationService } from 'src/app/core/services/NotificationService';
+import { Observable } from 'rxjs';
+import { OrganizationFullView } from '../models/OrganizationFullView';
+import { OrganizationRestClient } from '../services/OrganizationRestClient';
+import { SelectItem } from 'src/app/core/models/SelectItem';
+import { StringUtils } from 'src/app/core/services/StringUtils';
+/**
+ * auto generated details component ts file
+ * <br/>write modifications between specific code marks
+ * <br/>processed by skeleton-generator
+ */
+
+@Component({
+selector: 'app-organization-details',
+templateUrl: './organization-details.component.html',
+styleUrls: ['./organization-details.component.scss']
+})
+export class OrganizationDetailsComponent implements OnInit {
+
+id:number;
+links:NavLink[];
+activePath:string;
+view: OrganizationFullView = new OrganizationFullView();
+form: FormGroup;
+
+constructor(private service:OrganizationRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
+this.id = parseInt(this.route.snapshot.paramMap.get('id'));
+this.activePath = '/organization/' + this.id.toString();
+this.links=[{text:'Details',path:'/organization/' + this.id.toString()}];
+}
+
+ngOnInit(): void {
+this.form = this.formBuilder.group({
+code:[null, Validators.required],
+description:[null]})
+this.load();
+}
+restoreForm(): void {
+this.form.patchValue({
+code: this.view.form.code,
+description: this.view.form.description
+})
+}
+
+applyForm(): void {
+this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
+this.view.form.description = StringUtils.emptyToNull(this.form.get('description').value);
+}
+
+load(): void {
+this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();});
+}
+
+update(): void {
+this.applyForm();
+this.service.update(this.id, this.view.form).subscribe(success => this.notifications.info("Operation completed"), error => {this.notifications.error("Operation failed")});
+this.load();
+}
+/* Specific Code Start */
+/* Specific Code End */
+}

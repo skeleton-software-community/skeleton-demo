@@ -21,8 +21,6 @@
 		<module>demo-rest</module>
 		<module>demo-populator</module>
 		<module>demo-tests</module>
-		<module>demo-rest-client</module>
-		<module>demo-webapp</module>
 	</modules>
 	
 	<properties>
@@ -53,10 +51,6 @@
 		<javax.el.version>3.0.1-b08</javax.el.version>
 		
 		<jackson.version>2.10.3</jackson.version>
-		
-		<jsf.version>2.2.13</jsf.version>
-		<primefaces.version>8.0</primefaces.version>
-		<primefaces.theme.version>1.0.10</primefaces.theme.version>
 		
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<commons.digester.version>1.8.1</commons.digester.version>
@@ -101,12 +95,6 @@
 			
 			<dependency>
 				<groupId>org.sklsft.demo</groupId>
-				<artifactId>demo-rest-client</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.sklsft.demo</groupId>
 				<artifactId>demo-populator</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -140,13 +128,13 @@
 			
 			<dependency>
 				<groupId>org.sklsft.commons</groupId>
-				<artifactId>commons-log</artifactId>
+				<artifactId>commons-mapper</artifactId>
 				<version>${skeleton.commons.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>org.sklsft.commons</groupId>
-				<artifactId>commons-mapper</artifactId>
+				<artifactId>commons-log</artifactId>
 				<version>${skeleton.commons.version}</version>
 			</dependency>
 			
@@ -154,24 +142,6 @@
 				<groupId>org.sklsft.commons</groupId>
 				<artifactId>commons-rest</artifactId>
 				<version>${skeleton.commons.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.sklsft.commons</groupId>
-				<artifactId>commons-rest-client</artifactId>
-				<version>${skeleton.commons.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.sklsft.commons</groupId>
-				<artifactId>commons-mvc</artifactId>
-				<version>${skeleton.commons.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.primefaces</groupId>
-						<artifactId>primefaces</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 			
 			
@@ -280,23 +250,10 @@
 				<version>${spring.version}</version>
 			</dependency>
 			
-			
 			<!-- Spring security -->
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-core</artifactId>
-				<version>${spring.security.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-web</artifactId>
-				<version>${spring.security.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-config</artifactId>
 				<version>${spring.security.version}</version>
 			</dependency>
 			
@@ -335,7 +292,7 @@
 				<artifactId>javax.servlet-api</artifactId>
 				<version>${servlet.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.glassfish</groupId>
 				<artifactId>javax.el</artifactId>
@@ -369,34 +326,6 @@
 			</dependency>
 
 			
-			<!-- JSF -->
-			<dependency>
-				<groupId>com.sun.faces</groupId>
-				<artifactId>jsf-api</artifactId>
-				<version>${jsf.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.sun.faces</groupId>
-				<artifactId>jsf-impl</artifactId>
-				<version>${jsf.version}</version>
-			</dependency>
-			
-			
-			<!-- Prime Faces -->
-			<dependency>
-				<groupId>org.primefaces</groupId>
-				<artifactId>primefaces</artifactId>
-				<version>${primefaces.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.primefaces.themes</groupId>
-				<artifactId>bootstrap</artifactId>
-				<version>${primefaces.theme.version}</version>
-			</dependency>
-			
-			
 			<!-- apache commons -->
 			<dependency>
 				<groupId>commons-dbcp</groupId>
@@ -428,16 +357,7 @@
 		</dependencies>
 	</dependencyManagement>
 	
-	<repositories>
-		<repository>
-			<id>primefaces</id>
-			<name>PrimeFaces Maven Repository</name>
-			<url>https://repository.primefaces.org</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
-	
-	<build>	
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -451,7 +371,7 @@
 					<encoding>${encoding}</encoding>
 				</configuration>
 			</plugin>
-		</plugins>
+		</plugins>		
 	</build>
 	
 </project>

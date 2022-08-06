@@ -1,0 +1,37 @@
+<!-- -->
+<!-- auto generated details component html file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton generator -->
+<!-- -->
+
+<nav mat-tab-nav-bar>
+<a mat-tab-link *ngFor="let link of links"
+[active]="activePath == link.path" [routerLink]="link.path"> {{link.text}} </a>
+</nav>
+<h2>
+Organization
+</h2>
+
+<div class="details-form" >
+<form [formGroup]="form" (ngSubmit)="update()">
+<p>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Code</mat-label>
+<input matInput placeholder="Code" formControlName="code"/>
+</mat-form-field>
+</p>
+
+<p>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Description</mat-label>
+<textarea matInput placeholder="Description" formControlName="description" cdkTextareaAutosize></textarea>
+</mat-form-field>
+</p>
+
+<p>
+<button *ngIf="view.canUpdate" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+</p>
+</form>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+</div>
