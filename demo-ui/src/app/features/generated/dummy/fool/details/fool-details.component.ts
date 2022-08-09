@@ -28,7 +28,7 @@ view: FoolFullView = new FoolFullView();
 form: FormGroup;
 
 constructor(private service:FoolRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
-this.id = parseInt(this.route.snapshot.paramMap.get('id'));
+this.id = this.route.snapshot.paramMap.get('id');
 this.activePath = '/fool/' + this.id.toString();
 this.links=[{text:'Details',path:'/fool/' + this.id.toString()}];
 }

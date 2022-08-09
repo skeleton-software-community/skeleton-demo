@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OrganizationBasicView } from '../models/OrganizationBasicView';
+import { OrganizationCertificationForm } from '../../organization-certification/models/OrganizationCertificationForm';
+import { OrganizationCertificationFullView } from '../../organization-certification/models/OrganizationCertificationFullView';
 import { OrganizationFilter } from '../models/OrganizationFilter';
 import { OrganizationForm } from '../models/OrganizationForm';
 import { OrganizationFullView } from '../models/OrganizationFullView';
