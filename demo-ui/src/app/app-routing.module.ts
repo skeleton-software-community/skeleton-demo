@@ -7,13 +7,13 @@ import { RouterModule, Routes } from '@angular/router';
  */
 
 const routes: Routes = [
-{path:'country', loadChildren:()=>import('src/app/features/generated/reference/localization/country/country.module').then(m=>m.CountryModule) }
-,{path:'region', loadChildren:()=>import('src/app/features/generated/reference/localization/region/region.module').then(m=>m.RegionModule) }
-,{path:'city', loadChildren:()=>import('src/app/features/generated/reference/localization/city/city.module').then(m=>m.CityModule) }
-,{path:'calendar', loadChildren:()=>import('src/app/features/generated/reference/time/calendar/calendar.module').then(m=>m.CalendarModule) }
-,{path:'organization', loadChildren:()=>import('src/app/features/generated/organizations/organization/organization.module').then(m=>m.OrganizationModule) }
-,{path:'fool', loadChildren:()=>import('src/app/features/generated/dummy/fool/fool.module').then(m=>m.FoolModule) }
-,{path:'stupid', loadChildren:()=>import('src/app/features/generated/dummy/stupid/stupid.module').then(m=>m.StupidModule) }
+{path:'country', loadChildren:()=>import('src/app/features/components/reference/localization/country/country.module').then(m=>m.CountryModule) }
+,{path:'region', loadChildren:()=>import('src/app/features/components/reference/localization/region/region.module').then(m=>m.RegionModule) }
+,{path:'city', loadChildren:()=>import('src/app/features/components/reference/localization/city/city.module').then(m=>m.CityModule) }
+,{path:'calendar', loadChildren:()=>import('src/app/features/components/reference/time/calendar/calendar.module').then(m=>m.CalendarModule) }
+,{path:'organization', loadChildren:()=>import('src/app/features/components/organizations/organization/organization.module').then(m=>m.OrganizationModule) }
+,{path:'fool', loadChildren:()=>import('src/app/features/components/dummy/fool/fool.module').then(m=>m.FoolModule) }
+,{path:'stupid', loadChildren:()=>import('src/app/features/components/dummy/stupid/stupid.module').then(m=>m.StupidModule) }
 /* Specific Code Start */
 
 /* Specific Code End */

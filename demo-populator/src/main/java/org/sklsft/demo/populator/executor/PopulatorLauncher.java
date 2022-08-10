@@ -7,7 +7,6 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
-import org.eclipse.core.internal.resources.Project;
 import org.sklsft.generator.bash.prompt.PopulatorPrompter;
 import org.sklsft.generator.bl.services.impl.Populator;
 import org.sklsft.generator.bl.services.interfaces.ProjectLoader;
@@ -16,6 +15,7 @@ import org.sklsft.generator.components.checker.BackupPostExecutionChecker;
 import org.sklsft.generator.components.checker.BackupPreExecutionChecker;
 import org.sklsft.generator.model.backup.check.BackupPlanPostExecutionWarning;
 import org.sklsft.generator.model.backup.check.BackupPlanPreExecutionWarning;
+import org.sklsft.generator.model.domain.Project;
 import org.sklsft.generator.model.metadata.ProjectMetaData;
 import org.sklsft.generator.persistence.backup.datasource.interfaces.InputDataSourceProvider;
 import org.sklsft.generator.persistence.metadata.interfaces.ProjectMetaDataDao;
