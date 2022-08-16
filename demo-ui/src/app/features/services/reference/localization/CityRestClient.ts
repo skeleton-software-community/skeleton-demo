@@ -32,7 +32,7 @@ return this.http.get<CityBasicView[]>(environment.restApiUrl + '/city/list');
  * load object list from region
  */
 public loadListFromRegion (regionId: number) {
-return this.http.get<CityBasicView[]>(environment.restApiUrl + '/city/' + regionId + '/region/list');
+return this.http.get<CityBasicView[]>(environment.restApiUrl + '/region/' + regionId + '/city/list');
 }
 
 /**
@@ -46,7 +46,7 @@ return this.http.post<ScrollView<CityBasicView>>(environment.restApiUrl + '/city
  * scroll object list from region
  */
 public scrollFromRegion (regionId: number, form: ScrollForm<CityFilter, CitySorting>) {
-return this.http.post<ScrollView<CityBasicView>>(environment.restApiUrl + '/city/' + regionId + '/region/scroll', form, this.httpOptions);
+return this.http.post<ScrollView<CityBasicView>>(environment.restApiUrl + '/region/' + regionId + '/city/scroll', form, this.httpOptions);
 }
 
 /**
@@ -68,6 +68,13 @@ return this.http.get<CityFullView>(environment.restApiUrl + '/city/new');
  */
 public save(form: CityForm) {
 return this.http.post<number>(environment.restApiUrl + '/city', form, this.httpOptions);
+}
+
+/**
+ * save object from region
+ */
+public saveFromRegion (regionId: number, form: CityForm) {
+return this.http.post<number>(environment.restApiUrl + '/region/' + regionId + '/city', form, this.httpOptions);
 }
 
 /**

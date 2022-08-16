@@ -22,7 +22,6 @@ styleUrls: ['./calendar-details.component.scss']
 export class CalendarDetailsComponent implements OnInit {
 
 id:number;
-links:NavLink[];
 activePath:string;
 view: CalendarFullView = new CalendarFullView();
 form: FormGroup;
@@ -30,7 +29,6 @@ form: FormGroup;
 constructor(private service:CalendarRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/calendar/' + this.id.toString();
-this.links=[{text:'Details',path:'/calendar/' + this.id.toString()},{text:'Days off',path:'/calendar/' + this.id.toString() + '/calendar-day-off/list'}];
 }
 
 ngOnInit(): void {

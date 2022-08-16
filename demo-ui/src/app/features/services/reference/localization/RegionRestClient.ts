@@ -32,7 +32,7 @@ return this.http.get<RegionBasicView[]>(environment.restApiUrl + '/region/list')
  * load object list from country
  */
 public loadListFromCountry (countryId: number) {
-return this.http.get<RegionBasicView[]>(environment.restApiUrl + '/region/' + countryId + '/country/list');
+return this.http.get<RegionBasicView[]>(environment.restApiUrl + '/country/' + countryId + '/region/list');
 }
 
 /**
@@ -46,7 +46,7 @@ return this.http.post<ScrollView<RegionBasicView>>(environment.restApiUrl + '/re
  * scroll object list from country
  */
 public scrollFromCountry (countryId: number, form: ScrollForm<RegionFilter, RegionSorting>) {
-return this.http.post<ScrollView<RegionBasicView>>(environment.restApiUrl + '/region/' + countryId + '/country/scroll', form, this.httpOptions);
+return this.http.post<ScrollView<RegionBasicView>>(environment.restApiUrl + '/country/' + countryId + '/region/scroll', form, this.httpOptions);
 }
 
 /**
@@ -68,6 +68,13 @@ return this.http.get<RegionFullView>(environment.restApiUrl + '/region/new');
  */
 public save(form: RegionForm) {
 return this.http.post<number>(environment.restApiUrl + '/region', form, this.httpOptions);
+}
+
+/**
+ * save object from country
+ */
+public saveFromCountry (countryId: number, form: RegionForm) {
+return this.http.post<number>(environment.restApiUrl + '/country/' + countryId + '/region', form, this.httpOptions);
 }
 
 /**

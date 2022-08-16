@@ -23,7 +23,6 @@ styleUrls: ['./region-details.component.scss']
 export class RegionDetailsComponent implements OnInit {
 
 id:number;
-links:NavLink[];
 activePath:string;
 view: RegionFullView = new RegionFullView();
 form: FormGroup;
@@ -32,7 +31,6 @@ countryCodeOptions: SelectItem[];
 constructor(private service:RegionRestClient, private countryService:CountryRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/region/' + this.id.toString();
-this.links=[{text:'Details',path:'/region/' + this.id.toString()}];
 }
 
 ngOnInit(): void {

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StupidDetailsComponent } from './details/stupid-details.component';
 import { StupidListComponent } from './list/stupid-list.component';
+import { StupidMenuComponent } from './menu/stupid-menu.component';
 import { StupidModalComponent } from './list/modal/stupid-modal.component';
 import { StupidRoutingModule } from './stupid-routing.module';
 /**
@@ -12,7 +13,7 @@ import { StupidRoutingModule } from './stupid-routing.module';
  */
 
 @NgModule({
-declarations: [StupidListComponent,StupidDetailsComponent, StupidModalComponent],
+declarations: [StupidListComponent,StupidDetailsComponent, StupidModalComponent, StupidMenuComponent],
 imports: [CommonModule, SharedModule, StupidRoutingModule]
 })
 export class StupidModule { }

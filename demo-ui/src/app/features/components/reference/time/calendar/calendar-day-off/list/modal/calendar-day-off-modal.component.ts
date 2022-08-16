@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { SelectItem } from 'src/app/core/models/SelectItem';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
- * auto generated modal component ts file
+ * auto generated one to many component modal component ts file
  * <br/>write modifications between specific code marks
  * <br/>processed by skeleton-generator
  */

@@ -1,5 +1,6 @@
 import { CityDetailsComponent } from './details/city-details.component';
 import { CityListComponent } from './list/city-list.component';
+import { CityMenuComponent } from './menu/city-menu.component';
 import { CityModalComponent } from './list/modal/city-modal.component';
 import { CityRoutingModule } from './city-routing.module';
 import { CommonModule } from '@angular/common';
@@ -12,7 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
  */
 
 @NgModule({
-declarations: [CityListComponent,CityDetailsComponent, CityModalComponent],
+declarations: [CityListComponent,CityDetailsComponent, CityModalComponent, CityMenuComponent],
 imports: [CommonModule, SharedModule, CityRoutingModule]
 })
 export class CityModule { }

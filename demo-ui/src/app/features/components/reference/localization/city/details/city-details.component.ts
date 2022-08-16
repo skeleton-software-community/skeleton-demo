@@ -23,7 +23,6 @@ styleUrls: ['./city-details.component.scss']
 export class CityDetailsComponent implements OnInit {
 
 id:number;
-links:NavLink[];
 activePath:string;
 view: CityFullView = new CityFullView();
 form: FormGroup;
@@ -32,7 +31,6 @@ regionCountryCodeOptions: SelectItem[];
 constructor(private service:CityRestClient, private countryService:CountryRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/city/' + this.id.toString();
-this.links=[{text:'Details',path:'/city/' + this.id.toString()}];
 }
 
 ngOnInit(): void {

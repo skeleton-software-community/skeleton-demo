@@ -1,3 +1,4 @@
+import { CityListComponent } from './city/list/city-list.component';
 import { NgModule } from '@angular/core';
 import { RegionDetailsComponent } from './details/region-details.component';
 import { RegionListComponent } from './list/region-list.component';
@@ -11,6 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 {path: 'list', component: RegionListComponent }
 ,{path: ':id', component: RegionDetailsComponent }
+,{path: ':id/city/list', component: CityListComponent }
 ];
 
 @NgModule({

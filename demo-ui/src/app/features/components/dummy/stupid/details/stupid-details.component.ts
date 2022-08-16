@@ -23,7 +23,6 @@ styleUrls: ['./stupid-details.component.scss']
 export class StupidDetailsComponent implements OnInit {
 
 id:number;
-links:NavLink[];
 activePath:string;
 view: StupidFullView = new StupidFullView();
 form: FormGroup;
@@ -32,7 +31,6 @@ foolCodeOptions: Observable<SelectItem[]>;
 constructor(private service:StupidRestClient, private foolService:FoolRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/stupid/' + this.id.toString();
-this.links=[{text:'Details',path:'/stupid/' + this.id.toString()}];
 }
 
 ngOnInit(): void {

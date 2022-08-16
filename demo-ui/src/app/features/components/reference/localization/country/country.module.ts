@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { CountryDetailsComponent } from './details/country-details.component';
 import { CountryListComponent } from './list/country-list.component';
+import { CountryMenuComponent } from './menu/country-menu.component';
 import { CountryModalComponent } from './list/modal/country-modal.component';
 import { CountryRoutingModule } from './country-routing.module';
 import { NgModule } from '@angular/core';
+import { RegionListComponent } from './region/list/region-list.component';
+import { RegionModalComponent } from './region/list/modal/region-modal.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 /**
  * auto generated list module ts file
@@ -12,7 +15,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
  */
 
 @NgModule({
-declarations: [CountryListComponent,CountryDetailsComponent, CountryModalComponent],
+declarations: [CountryListComponent,CountryDetailsComponent, CountryModalComponent, CountryMenuComponent, RegionListComponent, RegionModalComponent],
 imports: [CommonModule, SharedModule, CountryRoutingModule]
 })
 export class CountryModule { }

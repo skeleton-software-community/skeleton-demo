@@ -4,10 +4,8 @@
 <!-- processed by skeleton generator -->
 <!-- -->
 
-<nav mat-tab-nav-bar>
-<a mat-tab-link *ngFor="let link of links"
-[active]="activePath == link.path" [routerLink]="link.path"> {{link.text}} </a>
-</nav>
+<app-fool-menu  #menu [activePath]="activePath" [id]="id"></app-fool-menu>
+
 <h2>
 Fool details
 </h2>

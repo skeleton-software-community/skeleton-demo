@@ -22,7 +22,6 @@ styleUrls: ['./fool-details.component.scss']
 export class FoolDetailsComponent implements OnInit {
 
 id:string;
-links:NavLink[];
 activePath:string;
 view: FoolFullView = new FoolFullView();
 form: FormGroup;
@@ -30,7 +29,6 @@ form: FormGroup;
 constructor(private service:FoolRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
 this.id = this.route.snapshot.paramMap.get('id');
 this.activePath = '/fool/' + this.id.toString();
-this.links=[{text:'Details',path:'/fool/' + this.id.toString()}];
 }
 
 ngOnInit(): void {

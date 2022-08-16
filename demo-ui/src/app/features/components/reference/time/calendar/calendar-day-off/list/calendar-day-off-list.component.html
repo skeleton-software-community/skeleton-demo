@@ -4,10 +4,8 @@
 <!-- processed by skeleton generator -->
 <!-- -->
 
-<nav mat-tab-nav-bar>
-<a mat-tab-link *ngFor="let link of links"
-[active]="activePath == link.path" [routerLink]="link.path"> {{link.text}} </a>
-</nav>
+<app-calendar-menu  #menu [activePath]="activePath" [id]="id"></app-calendar-menu>
+
 <h2>
 Days off: {{scrollView.count}} / {{scrollView.size}}
 </h2>

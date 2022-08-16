@@ -32,7 +32,7 @@ return this.http.get<StupidBasicView[]>(environment.restApiUrl + '/stupid/list')
  * load object list from fool
  */
 public loadListFromFool (foolId: string) {
-return this.http.get<StupidBasicView[]>(environment.restApiUrl + '/stupid/' + foolId + '/fool/list');
+return this.http.get<StupidBasicView[]>(environment.restApiUrl + '/fool/' + foolId + '/stupid/list');
 }
 
 /**
@@ -46,7 +46,7 @@ return this.http.post<ScrollView<StupidBasicView>>(environment.restApiUrl + '/st
  * scroll object list from fool
  */
 public scrollFromFool (foolId: string, form: ScrollForm<StupidFilter, StupidSorting>) {
-return this.http.post<ScrollView<StupidBasicView>>(environment.restApiUrl + '/stupid/' + foolId + '/fool/scroll', form, this.httpOptions);
+return this.http.post<ScrollView<StupidBasicView>>(environment.restApiUrl + '/fool/' + foolId + '/stupid/scroll', form, this.httpOptions);
 }
 
 /**
@@ -68,6 +68,13 @@ return this.http.get<StupidFullView>(environment.restApiUrl + '/stupid/new');
  */
 public save(form: StupidForm) {
 return this.http.post<number>(environment.restApiUrl + '/stupid', form, this.httpOptions);
+}
+
+/**
+ * save object from fool
+ */
+public saveFromFool (foolId: string, form: StupidForm) {
+return this.http.post<number>(environment.restApiUrl + '/fool/' + foolId + '/stupid', form, this.httpOptions);
 }
 
 /**

@@ -22,7 +22,6 @@ styleUrls: ['./country-details.component.scss']
 export class CountryDetailsComponent implements OnInit {
 
 id:number;
-links:NavLink[];
 activePath:string;
 view: CountryFullView = new CountryFullView();
 form: FormGroup;
@@ -30,7 +29,6 @@ form: FormGroup;
 constructor(private service:CountryRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/country/' + this.id.toString();
-this.links=[{text:'Details',path:'/country/' + this.id.toString()}];
 }
 
 ngOnInit(): void {

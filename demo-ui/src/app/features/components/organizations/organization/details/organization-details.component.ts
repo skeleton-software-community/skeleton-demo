@@ -22,7 +22,6 @@ styleUrls: ['./organization-details.component.scss']
 export class OrganizationDetailsComponent implements OnInit {
 
 id:number;
-links:NavLink[];
 activePath:string;
 view: OrganizationFullView = new OrganizationFullView();
 form: FormGroup;
@@ -30,7 +29,6 @@ form: FormGroup;
 constructor(private service:OrganizationRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/organization/' + this.id.toString();
-this.links=[{text:'Details',path:'/organization/' + this.id.toString()}];
 }
 
 ngOnInit(): void {

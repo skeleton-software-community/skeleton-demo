@@ -33,7 +33,6 @@ styleUrls: ['./calendar-day-off-list.component.scss']
 export class CalendarDayOffListComponent implements OnInit, AfterViewInit {
 
 id:number;
-links:NavLink[];
 activePath:string;
 scrollForm: ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> = new ScrollForm();
 scrollView: ScrollView<CalendarDayOffBasicView> = new ScrollView();
@@ -47,7 +46,6 @@ filter: FormGroup;
 constructor(private service:CalendarRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private dialog: MatDialog, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/calendar/' + this.id.toString() + '/calendar-day-off/list';
-this.links=[{text:'Details',path:'/calendar/' + this.id.toString()},{text:'Days off',path:'/calendar/' + this.id.toString() + '/calendar-day-off/list'}];
 }
 ngOnInit(): void {
 this.filter = this.formBuilder.group({
