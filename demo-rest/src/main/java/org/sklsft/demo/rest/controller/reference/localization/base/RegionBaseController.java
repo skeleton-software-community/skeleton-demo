@@ -44,7 +44,7 @@ return regionService.loadList();
 /**
  * load object list from country
  */
-@RequestMapping(value = {RegionService.GET_REGION_LIST_FROM_COUNTRY_URL}, method = RequestMethod.GET)
+@RequestMapping(value = {RegionService.GET_LIST_FROM_COUNTRY_URL}, method = RequestMethod.GET)
 public @ResponseBody List<RegionBasicView> loadListFromCountry (@PathVariable("countryId") Short countryId) {
 return regionService.loadListFromCountry(countryId);
 }
@@ -59,7 +59,7 @@ return regionService.scroll(form);
 /**
  * scroll object list from country
  */
-@RequestMapping(value = {RegionService.SCROLL_REGION_FROM_COUNTRY_URL}, method = RequestMethod.POST)
+@RequestMapping(value = {RegionService.SCROLL_FROM_COUNTRY_URL}, method = RequestMethod.POST)
 public @ResponseBody ScrollView<RegionBasicView> scrollFromCountry (@PathVariable("countryId") Short countryId, @RequestBody ScrollForm<RegionFilter, RegionSorting> form) {
 return regionService.scrollFromCountry(countryId, form);
 }

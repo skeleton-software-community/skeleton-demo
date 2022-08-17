@@ -45,7 +45,7 @@ return Arrays.asList(restClient.getForObject(GET_LIST_URL, CityBasicView[].class
 public List<CityBasicView> loadListFromRegion (Integer regionId) {
 Map<String, Object> vars = new HashMap<String, Object>();
 vars.put("regionId", regionId);
-return Arrays.asList(restClient.getForObject(GET_CITY_LIST_FROM_REGION_URL, CityBasicView[].class, vars));
+return Arrays.asList(restClient.getForObject(GET_LIST_FROM_REGION_URL, CityBasicView[].class, vars));
 }
 
 /**
@@ -63,7 +63,7 @@ return restClient.postForObject(SCROLL_URL, form, new ParameterizedTypeReference
 public ScrollView<CityBasicView> scrollFromRegion (Integer regionId, ScrollForm<CityFilter, CitySorting> form) {
 Map<String, Object> vars = new HashMap<String, Object>();
 vars.put("regionId", regionId);
-return restClient.postForObject(SCROLL_CITY_FROM_REGION_URL, form, new ParameterizedTypeReference<ScrollView<CityBasicView>>(){}, vars);
+return restClient.postForObject(SCROLL_FROM_REGION_URL, form, new ParameterizedTypeReference<ScrollView<CityBasicView>>(){}, vars);
 }
 
 /**

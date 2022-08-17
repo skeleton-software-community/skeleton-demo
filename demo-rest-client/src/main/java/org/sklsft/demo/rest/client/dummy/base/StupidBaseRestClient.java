@@ -45,7 +45,7 @@ return Arrays.asList(restClient.getForObject(GET_LIST_URL, StupidBasicView[].cla
 public List<StupidBasicView> loadListFromFool (String foolId) {
 Map<String, Object> vars = new HashMap<String, Object>();
 vars.put("foolId", foolId);
-return Arrays.asList(restClient.getForObject(GET_STUPID_LIST_FROM_FOOL_URL, StupidBasicView[].class, vars));
+return Arrays.asList(restClient.getForObject(GET_LIST_FROM_FOOL_URL, StupidBasicView[].class, vars));
 }
 
 /**
@@ -63,7 +63,7 @@ return restClient.postForObject(SCROLL_URL, form, new ParameterizedTypeReference
 public ScrollView<StupidBasicView> scrollFromFool (String foolId, ScrollForm<StupidFilter, StupidSorting> form) {
 Map<String, Object> vars = new HashMap<String, Object>();
 vars.put("foolId", foolId);
-return restClient.postForObject(SCROLL_STUPID_FROM_FOOL_URL, form, new ParameterizedTypeReference<ScrollView<StupidBasicView>>(){}, vars);
+return restClient.postForObject(SCROLL_FROM_FOOL_URL, form, new ParameterizedTypeReference<ScrollView<StupidBasicView>>(){}, vars);
 }
 
 /**
