@@ -11,7 +11,7 @@ import { RegionBasicView } from 'src/app/features/models/reference/localization/
 import { RegionFilter } from 'src/app/features/models/reference/localization/filters/RegionFilter';
 import { RegionForm } from 'src/app/features/models/reference/localization/forms/RegionForm';
 import { RegionFullView } from 'src/app/features/models/reference/localization/views/full/RegionFullView';
-import { RegionModalComponent } from './modal/region-modal.component';
+import { RegionModalComponent } from './../modal/region-modal.component';
 import { RegionRestClient } from 'src/app/features/services/reference/localization/RegionRestClient';
 import { RegionSorting } from 'src/app/features/models/reference/localization/sortings/RegionSorting';
 import { ScrollForm } from "src/app/core/models/ScrollForm";

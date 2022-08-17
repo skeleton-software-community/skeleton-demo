@@ -4,7 +4,7 @@ import { FoolBasicView } from 'src/app/features/models/dummy/views/basic/FoolBas
 import { FoolFilter } from 'src/app/features/models/dummy/filters/FoolFilter';
 import { FoolForm } from 'src/app/features/models/dummy/forms/FoolForm';
 import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
-import { FoolModalComponent } from './modal/fool-modal.component';
+import { FoolModalComponent } from './../modal/fool-modal.component';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
 import { FoolSorting } from 'src/app/features/models/dummy/sortings/FoolSorting';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

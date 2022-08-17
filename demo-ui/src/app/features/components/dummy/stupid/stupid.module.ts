@@ -4,7 +4,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { StupidDetailsComponent } from './details/stupid-details.component';
 import { StupidListComponent } from './list/stupid-list.component';
 import { StupidMenuComponent } from './menu/stupid-menu.component';
-import { StupidModalComponent } from './list/modal/stupid-modal.component';
+import { StupidModalComponent } from './modal/stupid-modal.component';
 import { StupidRoutingModule } from './stupid-routing.module';
 /**
  * auto generated list module ts file

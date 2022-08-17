@@ -4,7 +4,7 @@ import { CountryBasicView } from 'src/app/features/models/reference/localization
 import { CountryFilter } from 'src/app/features/models/reference/localization/filters/CountryFilter';
 import { CountryForm } from 'src/app/features/models/reference/localization/forms/CountryForm';
 import { CountryFullView } from 'src/app/features/models/reference/localization/views/full/CountryFullView';
-import { CountryModalComponent } from './modal/country-modal.component';
+import { CountryModalComponent } from './../modal/country-modal.component';
 import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
 import { CountrySorting } from 'src/app/features/models/reference/localization/sortings/CountrySorting';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

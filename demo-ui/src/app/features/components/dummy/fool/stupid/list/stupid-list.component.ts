@@ -15,7 +15,7 @@ import { StupidBasicView } from 'src/app/features/models/dummy/views/basic/Stupi
 import { StupidFilter } from 'src/app/features/models/dummy/filters/StupidFilter';
 import { StupidForm } from 'src/app/features/models/dummy/forms/StupidForm';
 import { StupidFullView } from 'src/app/features/models/dummy/views/full/StupidFullView';
-import { StupidModalComponent } from './modal/stupid-modal.component';
+import { StupidModalComponent } from './../modal/stupid-modal.component';
 import { StupidRestClient } from 'src/app/features/services/dummy/StupidRestClient';
 import { StupidSorting } from 'src/app/features/models/dummy/sortings/StupidSorting';
 /**

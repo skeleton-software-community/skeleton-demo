@@ -10,7 +10,7 @@ import { OrganizationBasicView } from 'src/app/features/models/organizations/vie
 import { OrganizationFilter } from 'src/app/features/models/organizations/filters/OrganizationFilter';
 import { OrganizationForm } from 'src/app/features/models/organizations/forms/OrganizationForm';
 import { OrganizationFullView } from 'src/app/features/models/organizations/views/full/OrganizationFullView';
-import { OrganizationModalComponent } from './modal/organization-modal.component';
+import { OrganizationModalComponent } from './../modal/organization-modal.component';
 import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
 import { OrganizationSorting } from 'src/app/features/models/organizations/sortings/OrganizationSorting';
 import { ScrollForm } from "src/app/core/models/ScrollForm";

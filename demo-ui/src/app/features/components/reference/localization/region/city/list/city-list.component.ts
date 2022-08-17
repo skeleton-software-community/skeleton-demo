@@ -3,7 +3,7 @@ import { CityBasicView } from 'src/app/features/models/reference/localization/vi
 import { CityFilter } from 'src/app/features/models/reference/localization/filters/CityFilter';
 import { CityForm } from 'src/app/features/models/reference/localization/forms/CityForm';
 import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
-import { CityModalComponent } from './modal/city-modal.component';
+import { CityModalComponent } from './../modal/city-modal.component';
 import { CityRestClient } from 'src/app/features/services/reference/localization/CityRestClient';
 import { CitySorting } from 'src/app/features/models/reference/localization/sortings/CitySorting';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';

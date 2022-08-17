@@ -2,7 +2,7 @@ import { CalendarBasicView } from 'src/app/features/models/reference/time/views/
 import { CalendarFilter } from 'src/app/features/models/reference/time/filters/CalendarFilter';
 import { CalendarForm } from 'src/app/features/models/reference/time/forms/CalendarForm';
 import { CalendarFullView } from 'src/app/features/models/reference/time/views/full/CalendarFullView';
-import { CalendarModalComponent } from './modal/calendar-modal.component';
+import { CalendarModalComponent } from './../modal/calendar-modal.component';
 import { CalendarRestClient } from 'src/app/features/services/reference/time/CalendarRestClient';
 import { CalendarSorting } from 'src/app/features/models/reference/time/sortings/CalendarSorting';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';

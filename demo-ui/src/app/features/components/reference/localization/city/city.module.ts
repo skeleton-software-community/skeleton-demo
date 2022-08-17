@@ -1,7 +1,7 @@
 import { CityDetailsComponent } from './details/city-details.component';
 import { CityListComponent } from './list/city-list.component';
 import { CityMenuComponent } from './menu/city-menu.component';
-import { CityModalComponent } from './list/modal/city-modal.component';
+import { CityModalComponent } from './modal/city-modal.component';
 import { CityRoutingModule } from './city-routing.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';

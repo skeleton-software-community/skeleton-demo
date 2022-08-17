@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { OrganizationDetailsComponent } from './details/organization-details.component';
 import { OrganizationListComponent } from './list/organization-list.component';
 import { OrganizationMenuComponent } from './menu/organization-menu.component';
-import { OrganizationModalComponent } from './list/modal/organization-modal.component';
+import { OrganizationModalComponent } from './modal/organization-modal.component';
 import { OrganizationRoutingModule } from './organization-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 /**

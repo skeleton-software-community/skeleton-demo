@@ -3,7 +3,7 @@ import { CalendarDayOffBasicView } from 'src/app/features/models/reference/time/
 import { CalendarDayOffFilter } from 'src/app/features/models/reference/time/filters/CalendarDayOffFilter';
 import { CalendarDayOffForm } from 'src/app/features/models/reference/time/forms/CalendarDayOffForm';
 import { CalendarDayOffFullView } from 'src/app/features/models/reference/time/views/full/CalendarDayOffFullView';
-import { CalendarDayOffModalComponent } from './modal/calendar-day-off-modal.component';
+import { CalendarDayOffModalComponent } from './../modal/calendar-day-off-modal.component';
 import { CalendarDayOffSorting } from 'src/app/features/models/reference/time/sortings/CalendarDayOffSorting';
 import { CalendarRestClient } from 'src/app/features/services/reference/time/CalendarRestClient';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
