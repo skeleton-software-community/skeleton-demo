@@ -18,6 +18,6 @@ links:NavLink[];
 @Input() activePath:string;
 
 ngOnInit(): void {
-this.links=[{text:'Details',path:'/organization/' + this.id.toString()}];
+this.links=[{text:'Details',path:'/organization/' + this.id.toString()},{text:'Certification',path:'/organization/' + this.id.toString() + '/organization-certification'}];
 }
 }

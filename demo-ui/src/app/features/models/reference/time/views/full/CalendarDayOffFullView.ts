@@ -9,6 +9,7 @@ export class CalendarDayOffFullView {
 id: number;
 form: CalendarDayOffForm;
 canUpdate: boolean;
+canDelete: boolean;
 
 /* Specific Code Start */
 /* Specific Code End */

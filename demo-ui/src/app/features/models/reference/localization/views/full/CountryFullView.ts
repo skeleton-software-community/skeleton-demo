@@ -9,6 +9,7 @@ export class CountryFullView {
 id: number;
 form: CountryForm;
 canUpdate: boolean;
+canDelete: boolean;
 
 /* Specific Code Start */
 /* Specific Code End */

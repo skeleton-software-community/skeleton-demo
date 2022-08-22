@@ -32,6 +32,7 @@ this.form = this.formBuilder.group({
 countryCode:[null, Validators.required],
 code:[null, Validators.required],
 label:[null, Validators.required]});
+this.loadOptionsForCountryCode();
 this.restoreForm();
 }
 restoreForm(): void {

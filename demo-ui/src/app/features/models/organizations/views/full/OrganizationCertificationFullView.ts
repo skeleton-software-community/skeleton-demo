@@ -9,6 +9,7 @@ export class OrganizationCertificationFullView {
 id: string;
 form: OrganizationCertificationForm;
 canUpdate: boolean;
+canDelete: boolean;
 
 /* Specific Code Start */
 /* Specific Code End */

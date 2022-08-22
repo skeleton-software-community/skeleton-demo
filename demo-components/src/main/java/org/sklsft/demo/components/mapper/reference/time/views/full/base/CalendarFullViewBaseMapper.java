@@ -30,6 +30,7 @@ super(CalendarFullView.class, Calendar.class);
 public CalendarFullView mapFrom(CalendarFullView calendarFullView, Calendar calendar) {
 calendarFullView = super.mapFrom(calendarFullView, calendar);
 calendarFullView.setCanUpdate(calendarRightsManager.canUpdate(calendar) && calendarStateManager.canUpdate(calendar));
+calendarFullView.setCanDelete(calendarRightsManager.canDelete(calendar) && calendarStateManager.canDelete(calendar));
 return calendarFullView;
 }
 

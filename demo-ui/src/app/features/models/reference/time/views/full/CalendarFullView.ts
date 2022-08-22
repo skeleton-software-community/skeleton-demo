@@ -9,6 +9,7 @@ export class CalendarFullView {
 id: number;
 form: CalendarForm;
 canUpdate: boolean;
+canDelete: boolean;
 
 /* Specific Code Start */
 /* Specific Code End */

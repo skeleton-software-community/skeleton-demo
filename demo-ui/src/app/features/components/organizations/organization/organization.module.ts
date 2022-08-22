@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { OrganizationCertificationDetailsComponent } from './organization-certification/details/organization-certification-details.component';
 import { OrganizationDetailsComponent } from './details/organization-details.component';
 import { OrganizationListComponent } from './list/organization-list.component';
 import { OrganizationMenuComponent } from './menu/organization-menu.component';
@@ -13,7 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
  */
 
 @NgModule({
-declarations: [OrganizationListComponent,OrganizationDetailsComponent, OrganizationModalComponent, OrganizationMenuComponent],
+declarations: [OrganizationListComponent,OrganizationDetailsComponent, OrganizationModalComponent, OrganizationMenuComponent, OrganizationCertificationDetailsComponent],
 imports: [CommonModule, SharedModule, OrganizationRoutingModule]
 })
 export class OrganizationModule { }

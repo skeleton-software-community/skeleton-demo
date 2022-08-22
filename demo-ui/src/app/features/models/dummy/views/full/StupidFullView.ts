@@ -9,6 +9,7 @@ export class StupidFullView {
 id: number;
 form: StupidForm;
 canUpdate: boolean;
+canDelete: boolean;
 
 /* Specific Code Start */
 /* Specific Code End */

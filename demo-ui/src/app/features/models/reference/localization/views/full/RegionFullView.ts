@@ -9,6 +9,7 @@ export class RegionFullView {
 id: number;
 form: RegionForm;
 canUpdate: boolean;
+canDelete: boolean;
 
 /* Specific Code Start */
 /* Specific Code End */

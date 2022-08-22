@@ -9,6 +9,7 @@ export class CityFullView {
 id: number;
 form: CityForm;
 canUpdate: boolean;
+canDelete: boolean;
 
 /* Specific Code Start */
 /* Specific Code End */

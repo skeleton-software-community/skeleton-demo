@@ -33,6 +33,7 @@ regionCountryCode:[null, Validators.required],
 regionCode:[null, Validators.required],
 code:[null, Validators.required],
 label:[null, Validators.required]});
+this.loadOptionsForRegionCountryCode();
 this.restoreForm();
 }
 restoreForm(): void {

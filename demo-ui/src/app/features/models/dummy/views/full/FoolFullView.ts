@@ -9,6 +9,7 @@ export class FoolFullView {
 id: string;
 form: FoolForm;
 canUpdate: boolean;
+canDelete: boolean;
 
 /* Specific Code Start */
 /* Specific Code End */

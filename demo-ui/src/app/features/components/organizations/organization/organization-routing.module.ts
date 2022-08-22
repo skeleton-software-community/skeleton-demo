@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { OrganizationCertificationDetailsComponent } from './organization-certification/details/organization-certification-details.component';
 import { OrganizationDetailsComponent } from './details/organization-details.component';
 import { OrganizationListComponent } from './list/organization-list.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,6 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 {path: 'list', component: OrganizationListComponent }
 ,{path: ':id', component: OrganizationDetailsComponent }
+,{path: ':id/organization-certification', component: OrganizationCertificationDetailsComponent }
 ];
 
 @NgModule({

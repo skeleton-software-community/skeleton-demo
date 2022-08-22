@@ -55,7 +55,7 @@ return this.http.get<OrganizationFullView>(environment.restApiUrl + '/organizati
  * load one to one component organizationCertification
  */
 public loadOrganizationCertification(id: number) {
-return this.http.get<OrganizationCertificationFullView>(environment.restApiUrl + '/organization-certification/' + id, this.httpOptions);
+return this.http.get<OrganizationCertificationFullView>(environment.restApiUrl + '/organization/' + id + '/organization-certification', this.httpOptions);
 }
 
 /**
@@ -89,8 +89,8 @@ return this.http.put(environment.restApiUrl + '/organization/' + id, form, this.
 /**
  * update one to one component organizationCertification
  */
-public updateOrganizationCertification(id: string, form: OrganizationCertificationForm) {
-return this.http.put(environment.restApiUrl + '/organization-certification/' + id, form, this.httpOptions);
+public updateOrganizationCertification(id: number, form: OrganizationCertificationForm) {
+return this.http.put(environment.restApiUrl + '/organization/' + id + '/organization-certification', form, this.httpOptions);
 }
 
 /**
@@ -103,8 +103,8 @@ return this.http.delete(environment.restApiUrl + '/organization/' + id);
 /**
  * delete one to one component organizationCertification
  */
-public deleteOrganizationCertification(id: string) {
-return this.http.delete(environment.restApiUrl + '/organization-certification/' + id);
+public deleteOrganizationCertification(id: number) {
+return this.http.delete(environment.restApiUrl + '/organization/' + id + '/organization-certification');
 }
 
 

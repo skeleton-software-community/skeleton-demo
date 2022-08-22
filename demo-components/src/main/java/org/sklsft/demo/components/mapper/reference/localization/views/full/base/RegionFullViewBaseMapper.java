@@ -30,6 +30,7 @@ super(RegionFullView.class, Region.class);
 public RegionFullView mapFrom(RegionFullView regionFullView, Region region) {
 regionFullView = super.mapFrom(regionFullView, region);
 regionFullView.setCanUpdate(regionRightsManager.canUpdate(region) && regionStateManager.canUpdate(region));
+regionFullView.setCanDelete(regionRightsManager.canDelete(region) && regionStateManager.canDelete(region));
 return regionFullView;
 }
 

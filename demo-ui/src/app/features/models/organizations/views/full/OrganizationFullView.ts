@@ -9,6 +9,7 @@ export class OrganizationFullView {
 id: number;
 form: OrganizationForm;
 canUpdate: boolean;
+canDelete: boolean;
 
 /* Specific Code Start */
 /* Specific Code End */
