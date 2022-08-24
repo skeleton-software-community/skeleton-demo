@@ -30,6 +30,7 @@ super(CalendarDayOffFullView.class, CalendarDayOff.class);
 public CalendarDayOffFullView mapFrom(CalendarDayOffFullView calendarDayOffFullView, CalendarDayOff calendarDayOff) {
 calendarDayOffFullView = super.mapFrom(calendarDayOffFullView, calendarDayOff);
 calendarDayOffFullView.setCanUpdate(calendarRightsManager.canUpdateCalendarDayOff(calendarDayOff) && calendarStateManager.canUpdateCalendarDayOff(calendarDayOff));
+calendarDayOffFullView.setCanDelete(calendarRightsManager.canDeleteCalendarDayOff(calendarDayOff) && calendarStateManager.canDeleteCalendarDayOff(calendarDayOff));
 return calendarDayOffFullView;
 }
 

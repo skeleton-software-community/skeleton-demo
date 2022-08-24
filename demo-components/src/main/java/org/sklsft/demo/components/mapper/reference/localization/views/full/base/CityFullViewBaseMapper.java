@@ -30,6 +30,7 @@ super(CityFullView.class, City.class);
 public CityFullView mapFrom(CityFullView cityFullView, City city) {
 cityFullView = super.mapFrom(cityFullView, city);
 cityFullView.setCanUpdate(cityRightsManager.canUpdate(city) && cityStateManager.canUpdate(city));
+cityFullView.setCanDelete(cityRightsManager.canDelete(city) && cityStateManager.canDelete(city));
 return cityFullView;
 }
 

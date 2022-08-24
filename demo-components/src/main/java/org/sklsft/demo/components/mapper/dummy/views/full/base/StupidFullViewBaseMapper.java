@@ -30,6 +30,7 @@ super(StupidFullView.class, Stupid.class);
 public StupidFullView mapFrom(StupidFullView stupidFullView, Stupid stupid) {
 stupidFullView = super.mapFrom(stupidFullView, stupid);
 stupidFullView.setCanUpdate(stupidRightsManager.canUpdate(stupid) && stupidStateManager.canUpdate(stupid));
+stupidFullView.setCanDelete(stupidRightsManager.canDelete(stupid) && stupidStateManager.canDelete(stupid));
 return stupidFullView;
 }
 

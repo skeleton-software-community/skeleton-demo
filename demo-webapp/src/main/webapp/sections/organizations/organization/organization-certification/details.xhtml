@@ -43,7 +43,7 @@ readonly="false" disabled="false"/>
 </div>
 
 <p:commandButton value="#{i18n.update}" rendered="#{not empty view.id}" disabled="#{not view.canUpdate}" action="#{organizationDetailController.updateOrganizationCertification}" styleClass="btn btn-success" process="@form" update=":messages, @form:organizationCertificationDetailPanelGroup"/>
-<p:commandButton value="#{i18n.delete}" rendered="#{not empty view.id}" action="#{organizationDetailController.deleteOrganizationCertification}" styleClass="btn btn-warning" process="@this" update=":messages, @form:organizationCertificationDetailPanelGroup"/>
+<p:commandButton value="#{i18n.delete}" rendered="#{not empty view.id}" disabled="#{not view.canDelete}" action="#{organizationDetailController.deleteOrganizationCertification}" styleClass="btn btn-warning" process="@this" update=":messages, @form:organizationCertificationDetailPanelGroup"/>
 <p:commandButton value="#{i18n.save}" rendered="#{empty view.id}" action="#{organizationDetailController.saveOrganizationCertification}" styleClass="btn btn-success" process="@form" update=":messages, @form:organizationCertificationDetailPanelGroup"/>
 
 <!-- Specific Code Start -->

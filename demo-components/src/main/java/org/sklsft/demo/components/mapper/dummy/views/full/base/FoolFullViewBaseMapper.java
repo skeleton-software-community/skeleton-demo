@@ -30,6 +30,7 @@ super(FoolFullView.class, Fool.class);
 public FoolFullView mapFrom(FoolFullView foolFullView, Fool fool) {
 foolFullView = super.mapFrom(foolFullView, fool);
 foolFullView.setCanUpdate(foolRightsManager.canUpdate(fool) && foolStateManager.canUpdate(fool));
+foolFullView.setCanDelete(foolRightsManager.canDelete(fool) && foolStateManager.canDelete(fool));
 return foolFullView;
 }
 

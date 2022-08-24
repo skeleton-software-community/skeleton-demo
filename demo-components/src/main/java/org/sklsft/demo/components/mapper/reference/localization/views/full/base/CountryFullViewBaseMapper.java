@@ -30,6 +30,7 @@ super(CountryFullView.class, Country.class);
 public CountryFullView mapFrom(CountryFullView countryFullView, Country country) {
 countryFullView = super.mapFrom(countryFullView, country);
 countryFullView.setCanUpdate(countryRightsManager.canUpdate(country) && countryStateManager.canUpdate(country));
+countryFullView.setCanDelete(countryRightsManager.canDelete(country) && countryStateManager.canDelete(country));
 return countryFullView;
 }
 

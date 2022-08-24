@@ -30,6 +30,7 @@ super(OrganizationFullView.class, Organization.class);
 public OrganizationFullView mapFrom(OrganizationFullView organizationFullView, Organization organization) {
 organizationFullView = super.mapFrom(organizationFullView, organization);
 organizationFullView.setCanUpdate(organizationRightsManager.canUpdate(organization) && organizationStateManager.canUpdate(organization));
+organizationFullView.setCanDelete(organizationRightsManager.canDelete(organization) && organizationStateManager.canDelete(organization));
 return organizationFullView;
 }
 
