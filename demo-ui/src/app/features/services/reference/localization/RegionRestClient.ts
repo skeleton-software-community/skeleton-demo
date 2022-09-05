@@ -71,13 +71,6 @@ return this.http.post<number>(environment.restApiUrl + '/region', form, this.htt
 }
 
 /**
- * save object from country
- */
-public saveFromCountry (countryId: number, form: RegionForm) {
-return this.http.post<number>(environment.restApiUrl + '/country/' + countryId + '/region', form, this.httpOptions);
-}
-
-/**
  * update object
  */
 public update(id: number, form: RegionForm) {

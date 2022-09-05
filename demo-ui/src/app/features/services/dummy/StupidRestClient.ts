@@ -71,13 +71,6 @@ return this.http.post<number>(environment.restApiUrl + '/stupid', form, this.htt
 }
 
 /**
- * save object from fool
- */
-public saveFromFool (foolId: string, form: StupidForm) {
-return this.http.post<number>(environment.restApiUrl + '/fool/' + foolId + '/stupid', form, this.httpOptions);
-}
-
-/**
  * update object
  */
 public update(id: number, form: StupidForm) {
