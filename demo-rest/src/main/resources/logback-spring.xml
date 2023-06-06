@@ -2,7 +2,7 @@
 <!DOCTYPE xml>
 <configuration>
 
-	<property resource="application.properties" />
+	<property resource="application-${spring.profiles.active}.properties" />
 
 	<!--Console appender -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
