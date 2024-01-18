@@ -1,3 +1,4 @@
+import { AuthGuard } from './core/services/AuthGuard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 /**
@@ -7,7 +8,13 @@ import { RouterModule, Routes } from '@angular/router';
  */
 
 const routes: Routes = [
-
+{path:'country', loadChildren:()=>import('src/app/features/components/reference/localization/country/country.module').then(m=>m.CountryModule), canActivate: [AuthGuard] }
+,{path:'region', loadChildren:()=>import('src/app/features/components/reference/localization/region/region.module').then(m=>m.RegionModule), canActivate: [AuthGuard] }
+,{path:'city', loadChildren:()=>import('src/app/features/components/reference/localization/city/city.module').then(m=>m.CityModule), canActivate: [AuthGuard] }
+,{path:'calendar', loadChildren:()=>import('src/app/features/components/reference/time/calendar/calendar.module').then(m=>m.CalendarModule), canActivate: [AuthGuard] }
+,{path:'organization', loadChildren:()=>import('src/app/features/components/organizations/organization/organization.module').then(m=>m.OrganizationModule), canActivate: [AuthGuard] }
+,{path:'fool', loadChildren:()=>import('src/app/features/components/dummy/fool/fool.module').then(m=>m.FoolModule), canActivate: [AuthGuard] }
+,{path:'stupid', loadChildren:()=>import('src/app/features/components/dummy/stupid/stupid.module').then(m=>m.StupidModule), canActivate: [AuthGuard] }
 /* Specific Code Start */
 
 /* Specific Code End */

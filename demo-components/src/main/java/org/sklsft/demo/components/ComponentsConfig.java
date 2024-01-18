@@ -1,10 +1,9 @@
 package org.sklsft.demo.components;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.sklsft.commons.log.AccessLogger;
 import org.sklsft.commons.log.ErrorLogger;
 import org.sklsft.commons.text.serialization.JsonSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;

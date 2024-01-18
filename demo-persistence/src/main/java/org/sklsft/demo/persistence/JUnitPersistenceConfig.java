@@ -26,7 +26,7 @@ public class JUnitPersistenceConfig {
         result.setDriverClassName("org.hsqldb.jdbcDriver");
         result.setUrl("jdbc:hsqldb:mem:demo");
         result.setUsername("sa");
-        result.setPassword("");
+        result.setPassword("sa");
         return result;
     }
 	
@@ -39,7 +39,6 @@ public class JUnitPersistenceConfig {
 		
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.showSql"));
-		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		result.setHibernateProperties(hibernateProperties);
 		
