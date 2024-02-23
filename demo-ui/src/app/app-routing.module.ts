@@ -16,7 +16,10 @@ const routes: Routes = [
 ,{path:'fool', loadChildren:()=>import('src/app/features/components/dummy/fool/fool.module').then(m=>m.FoolModule), canActivate: [AuthGuard] }
 ,{path:'stupid', loadChildren:()=>import('src/app/features/components/dummy/stupid/stupid.module').then(m=>m.StupidModule), canActivate: [AuthGuard] }
 /* Specific Code Start */
-
+,{path: '', redirectTo: '/index', pathMatch:'full'}
+,{path:'', loadChildren:()=>import('src/app/features/components/index/index.module').then(m=>m.IndexModule), canActivate: [AuthGuard]}
+,{path:'', loadChildren:()=>import('src/app/features/components/auth/auth.module').then(m=>m.AuthModule)}
+,{path:'**', redirectTo: '/index'}
 /* Specific Code End */
 ];
 

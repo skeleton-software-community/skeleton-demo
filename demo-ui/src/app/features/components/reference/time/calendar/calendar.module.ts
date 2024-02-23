@@ -7,6 +7,7 @@ import { CalendarModalComponent } from './modal/calendar-modal.component';
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 /**
  * auto generated list module ts file
@@ -16,6 +17,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 declarations: [CalendarListComponent,CalendarDetailsComponent, CalendarModalComponent, CalendarMenuComponent, CalendarDayOffListComponent, CalendarDayOffModalComponent],
-imports: [CommonModule, SharedModule, CalendarRoutingModule]
+imports: [CommonModule, SharedModule, CalendarRoutingModule, PrivateTemplatesModule]
 })
 export class CalendarModule { }

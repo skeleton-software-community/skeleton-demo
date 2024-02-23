@@ -5,6 +5,7 @@ import { FoolMenuComponent } from './menu/fool-menu.component';
 import { FoolModalComponent } from './modal/fool-modal.component';
 import { FoolRoutingModule } from './fool-routing.module';
 import { NgModule } from '@angular/core';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StupidListComponent } from './stupid/list/stupid-list.component';
 import { StupidModalComponent } from './stupid/modal/stupid-modal.component';
@@ -16,6 +17,6 @@ import { StupidModalComponent } from './stupid/modal/stupid-modal.component';
 
 @NgModule({
 declarations: [FoolListComponent,FoolDetailsComponent, FoolModalComponent, FoolMenuComponent, StupidListComponent, StupidModalComponent],
-imports: [CommonModule, SharedModule, FoolRoutingModule]
+imports: [CommonModule, SharedModule, FoolRoutingModule, PrivateTemplatesModule]
 })
 export class FoolModule { }

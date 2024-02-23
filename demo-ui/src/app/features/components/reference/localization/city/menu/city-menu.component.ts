@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavLink } from 'src/app/core/models/nav-link';
+import { NavLink } from 'src/app/templates/private/models/nav-link';
 /**
  * auto generated menu component ts file
  * <br/>write modifications between specific code marks

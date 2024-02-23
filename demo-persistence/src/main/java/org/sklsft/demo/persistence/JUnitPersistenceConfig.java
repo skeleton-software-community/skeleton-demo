@@ -26,7 +26,7 @@ public class JUnitPersistenceConfig {
         result.setDriverClassName("org.hsqldb.jdbcDriver");
         result.setUrl("jdbc:hsqldb:mem:demo");
         result.setUsername("sa");
-        result.setPassword("sa");
+        result.setPassword("");
         return result;
     }
 	

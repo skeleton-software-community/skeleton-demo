@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavLink } from 'src/app/core/models/nav-link';
+import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
 import { SelectItem } from 'src/app/core/models/SelectItem';

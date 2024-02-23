@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { NavLink } from 'src/app/core/models/nav-link';
+import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { ScrollForm } from "src/app/core/models/ScrollForm";
 import { ScrollView } from "src/app/core/models/ScrollView";
